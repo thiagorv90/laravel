@@ -1,0 +1,58 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+* {font-family: 'Roboto';}
+body{
+    min-height: 100vh;
+    padding-bottom: 100px;
+    position: relative;
+}
+header{
+    background-color: #08877d;
+    border-color: 1px solid #ccc;
+}
+
+
+
+
+
+#navbar{
+    justify-content: space-between;
+    background-color: white;
+    padding: 5px 0;
+}
+#navbar a{
+    font-size: 14px;
+    color: #08877d;
+}
+#navbar a:hover{
+  
+    color: #08877d;
+}
+footer{
+    text-align: center;
+    background-color:#08877d ;
+    color: white;
+    padding: 30px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+footer p {
+    margin-bottom: 0;
+}
+ 
+.dashboard-title-container{
+
+    margin-bottom: 30px;
+    margin-top: 30px;
+
+}
+
+.dashboard-title-container th{
+    width: 25%;
+}
+
+.dashboard-events-container form {
+    display: inline-block;
+}

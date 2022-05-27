@@ -1,0 +1,73 @@
+.cabecalho {
+    background-image: linear-gradient(160deg, #743190 0%, #B67FB9 100%);
+}
+
+.navbar {
+    width: 100%;
+    position: static;
+}
+
+.navbar-toggler {
+    background-color: white;
+    border: none;
+}
+
+.navbar-nav li.nav-item a.nav-link {
+    color: black;
+}
+
+.container-fluid.funcionalidades{
+    bottom: 10%;
+    position: absolute;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+body {
+    min-height: 100vh;
+}
+
+
+.btn {
+    border: none;
+    color: white;
+}
+
+.btn.btn-info {
+    background-color: #61338B;
+}
+
+.btn.btn-danger {
+    background-color: #d9534f;
+}
+
+footer {
+    display: flex;
+
+    position: sticky;
+    top: 100%;
+
+    margin-top: 20px;
+    width:100%;
+    height:60px;  
+    background-image: linear-gradient(160deg, #743190 0%, #B67FB9 100%);
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.alterar-deletar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.btn.btn-primary {
+    background-color: #61338B;
+}
+.form-group {
+
+    margin-top: 17px;
+
+}
