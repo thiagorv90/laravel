@@ -10,8 +10,7 @@
     <form action="tipoinsta" method="POST">
         @csrf
         <div class="input-group mb-3">
-            <input placeholder="Criar Tipo_instancia..." type="text" class="form-control" id="dsTipoInstancia"
-                name="dsTipoInstancia">
+            <input placeholder="Criar Tipo_instancia..." type="text" class="form-control" id="dsTipoInstancia" name="dsTipoInstancia" required />
             <input type="submit" class="btn btn-primary" value="Criar Tipo_instancia">
 
         </div>
@@ -38,9 +37,5 @@
     </table>
 
 </div>
-
-
-
-
 
 @endsection
