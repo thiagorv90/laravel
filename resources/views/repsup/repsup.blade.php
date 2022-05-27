@@ -4,45 +4,6 @@
 
 @section('content')
 
-<div class="col-md-10 offset-md-1 dashboard-events-container">
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Opções</th>
-
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($events as $event)
-            <tr>
-                <td scropt="row">{{$event->cdRepSup}}</td>
-                <td><a>{{ $event->nmRepresentanteSuplente }}</a></td>
-
-                <td> <a href="/repsup/edit/{{$event->cdRepSup}}" class="btn btn-info edit-btn">
-                        <ion-icon name="create-outline"></ion-icon>
-                    </a>
-                    <a href="/telrepsup/{{$event->cdRepSup}}" class="btn btn-info edit-btn">
-                        <ion-icon name="call-outline"></ion-icon>
-                    </a>
-
-
-
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-
-</div>
-
-<br>
-<br>
-<br>
-
-
-
 <h1>Crie Representante</h1>
 
 <div id="event-create-container" class="col-md-10 offset-md-1">
@@ -50,19 +11,19 @@
         @csrf
         <div class="form-group">
             <label for="title">Nome:</label>
-            <input placeholder="Nome..." type="text" class="form-control" id="nmRepresentanteSuplente" name="nmRepresentanteSuplente">
+            <input placeholder="Nome..." type="text" class="form-control" id="nmRepresentanteSuplente" name="nmRepresentanteSuplente" required />
         </div>
         <div class="form-group">
             <label for="title">dsEmail:</label>
-            <input placeholder="Email..." type="text" class="form-control" id="dsEmail" name="dsEmail">
+            <input placeholder="Email..." type="text" class="form-control" id="dsEmail" name="dsEmail" required />
         </div>
         <div class="form-group">
             <label for="title"> dsEmailAlternativo</label>
-            <input placeholder="Email Alternativo..." type="text" class="form-control" id="dsEmailAlternativo" name="dsEmailAlternativo">
+            <input placeholder="Email Alternativo..." type="text" class="form-control" id="dsEmailAlternativo" name="dsEmailAlternativo" required />
         </div>
         <div class="form-group">
             <label for="title">dsProfissao:</label>
-            <input placeholder="Profissão..." type="text" class="form-control" id="dsProfissao" name="dsProfissao">
+            <input placeholder="Profissão..." type="text" class="form-control" id="dsProfissao" name="dsProfissao" required />
         </div>
         <div class="form-group">
             <label for="title">stAtivo</label>
@@ -92,7 +53,7 @@
         </div>
         <div class="form-group">
             <label for="title"> dsEndereco</label>
-            <textarea placeholder="Endereço..." name="dsEndereco" id="dsEndereco" class="form-control"></textarea>
+            <textarea placeholder="Endereço..." name="dsEndereco" id="dsEndereco" class="form-control" required></textarea>
         </div>
 
         <div class="form-group">
@@ -104,8 +65,33 @@
     </form>
 </div>
 
+<div class="col-md-10 offset-md-1 dashboard-events-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Opções</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($events as $event)
+            <tr>
+                <td scropt="row">{{$event->cdRepSup}}</td>
+                <td><a>{{ $event->nmRepresentanteSuplente }}</a></td>
 
+                <td> <a href="/repsup/edit/{{$event->cdRepSup}}" class="btn btn-info edit-btn">
+                        <ion-icon name="create-outline"></ion-icon>
+                    </a>
+                    <a href="/telrepsup/{{$event->cdRepSup}}" class="btn btn-info edit-btn">
+                        <ion-icon name="call-outline"></ion-icon>
+                    </a>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 
-
+</div>
 
 @endsection
