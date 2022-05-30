@@ -26,10 +26,9 @@ class RepresentacoesExport implements FromView, ShouldAutoSize
         //Falta terminar a querry
         return view('exports.representacoes', [
             'representacoes' => Representacoe::join('instancias', 'representacoes.cdInstancia', '=', 'instancias.cdInstancia')
-                ->leftjoin('representante_suplentes', 'representante_suplente.cdRepSup', '=', 'representacoes.cdTitular')
+                ->leftjoin('representante_suplentes', 'representante_suplentes.cdRepSup', '=', 'representacoes.cdTitular')
+                ->get()
 
-
-
-        ]);
+            ]);
     }
 }

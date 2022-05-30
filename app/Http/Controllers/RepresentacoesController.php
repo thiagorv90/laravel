@@ -107,6 +107,6 @@ class RepresentacoesController extends Controller
 
    public function export() 
     {
-        return (new RepresentacoesExport)->download('representacoes.pdf');
+        return (new RepresentacoesExport)->download('representacoes.xlsx');
     }
 }
