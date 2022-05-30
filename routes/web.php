@@ -27,6 +27,7 @@ use App\Http\Controllers\TipoInstanciaController;
 use App\Http\Controllers\authrepController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\Admin\UserController;
+
 require_once __DIR__ . '/jetstream.php';
 Route::get('/', function () {
     return view('auth/login');
@@ -64,6 +65,7 @@ Route::get('empresas/edit/{emp}', [EventController::class, 'editEmp']);
 Route::post('inicial/',[InstaciaController::class,'searchinst']);
 Route::post('instancias/{id}',[InstaciaController::class,'storeinst']);
 Route::get('instancias/{id}', [InstaciaController::class, 'instacreate'])->name('instancias');
+Route::get('dashboard/export/', [InstaciaController::class, 'export'])->name('excel');
 
 Route::get('contatos/search',[ContatoController::class,'search'])->name('searchco');
 Route::post('contatos/listacontato/{id}',[ContatoController::class,'contastore']);
@@ -130,7 +132,7 @@ Route::get('autenrep',[authrepController::class,'authindex']);
 Route::get('autenrep',[authrepController::class,'authcreate']);
 
 
-
+Route::get('users/export/', [UsersController::class, 'export'])->name('teste');
 Route::view('auth/register','auth/register');
 });
 });

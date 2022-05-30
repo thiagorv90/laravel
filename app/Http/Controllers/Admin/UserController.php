@@ -5,6 +5,8 @@ use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
 class UserController extends Controller
 {
     /**
@@ -12,7 +14,14 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function export() 
+    {
+        return Excel::download(new UsersExport, 'users.xlsx');
+    }
+
+    
+    
+     public function index()
     {
         
         return view('admin.users.index');

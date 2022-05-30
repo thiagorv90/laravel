@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Agenda;
 use DB;
 use App\Models\Representacoe;
+use App\Exports\InstaciasExport;
 
 class agendasController extends Controller
 {

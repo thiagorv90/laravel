@@ -8,10 +8,8 @@ use App\Models\Representacoe;
 use App\Models\Tema_representacoe;
 use App\Models\Instituicoe;
 use App\Models\Representante_suplente;
-
-
-
-
+use App\Exports\InstanciasExport;
+use Maatwebsite\Excel\Facades\Excel;
 use DB;
 
 class InstaciaController extends Controller
@@ -45,16 +43,19 @@ class InstaciaController extends Controller
  
      public function instacreate($id){
 
-        $instituicaos = DB::table('instituicoes')->where('instituicoes.cdInstituicao','=', $id)->get();
-        $temas = DB::table('tema_representacoes')->get();
-        $insta = Instancia::join('tema_representacoes', 'instancias.cdTema', '=','tema_representacoes.cdTema')
-        ->join('instituicoes', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
-        ->leftjoin('representacoes','instancias.cdInstancia', '=','representacoes.cdInstancia')
-        ->leftjoin('representante_suplentes','representacoes.cdTitular','=','cdRepsup')
-        ->leftjoin('contatos','contatos.cdInstancia','=','instancias.cdInstancia')
-        ->where('instancias.cdInstituicao','=', $id)->get(['instancias.cdInstancia', 'nmInstancia','nmTema','nmRepresentanteSuplente','nmContato']);
-        
-        return view('instancias/instancias',['instancias'=>$insta,'temas'=>$temas,'instituicaos'=>$instituicaos]);
+      
+      $instituicaos = DB::table('instituicoes')->where('instituicoes.cdInstituicao','=', $id)->get();
+      $temas = DB::table('tema_representacoes')->get();
+      $insta = Instancia::join('tema_representacoes', 'instancias.cdTema', '=','tema_representacoes.cdTema')
+      ->join('instituicoes', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
+      ->leftjoin('representacoes','instancias.cdInstancia', '=','representacoes.cdInstancia')
+      ->leftjoin('representante_suplentes','representacoes.cdTitular','=','cdRepsup')
+      ->leftjoin('contatos','contatos.cdInstancia','=','instancias.cdInstancia')
+      ->where('instancias.cdInstituicao','=', $id)->get(['instancias.cdInstancia', 'nmInstancia','nmTema','nmRepresentanteSuplente','nmContato']);
+      
+      
+      return view('instancias.instancias',['instancias'=>$insta,'temas'=>$temas,'instituicaos'=>$instituicaos]);
+
 
       }
 
@@ -116,7 +117,12 @@ class InstaciaController extends Controller
 
         return redirect()->route('instancias', ['id'=>$cd]);
     }
-    
+
+    public function export() 
+    {
+      return (new InstanciasExport)->download('instancias.xlsx'); 
+    }
+
 
      }
 
