@@ -19,18 +19,16 @@ class InstanciasExport implements FromView, ShouldAutoSize
 {
     use Exportable;
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * @return \Illuminate\Support\Collection
+     */
     public function view(): view
     {
-        return view('exports.instancias',['instancias' => Instancia::join('tema_representacoes', 'instancias.cdTema', '=','tema_representacoes.cdTema')
-        ->leftjoin('instituicoes', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
-        ->leftjoin('representacoes','instancias.cdInstancia', '=','representacoes.cdInstancia')
-        ->leftjoin('representante_suplentes','representacoes.cdTitular','=','cdRepsup')
-        ->leftjoin('contatos','contatos.cdInstancia','=','instancias.cdInstancia')
-        
-        ->get()]) ;
-    }
-   
+        return view('exports.instancias', ['instancias' => Instancia::join('tema_representacoes', 'instancias.cdTema', '=', 'tema_representacoes.cdTema')
+            ->leftjoin('instituicoes', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
+            ->leftjoin('representacoes', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
+            ->leftjoin('representante_suplentes', 'representacoes.cdTitular', '=', 'cdRepsup')
+            ->leftjoin('contatos', 'contatos.cdInstancia', '=', 'instancias.cdInstancia')
 
+            ->get()]);
+    }
 }
