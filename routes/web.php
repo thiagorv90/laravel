@@ -133,6 +133,9 @@ Route::group(['middleware' => 'auth'], function () {
 
 
         Route::get('users/export/', [UsersController::class, 'export'])->name('teste');
+
+        Route::get('dashboard/export/representacoes/', [RepresentacoesController::class, 'export'])->name('superRepresentacao');
+
         Route::view('auth/register', 'auth/register');
     });
 });
