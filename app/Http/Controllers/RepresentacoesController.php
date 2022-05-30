@@ -8,6 +8,9 @@ use DB;
 use App\Models\Representante_suplente;
 use App\Models\instancia;
 
+use App\Exports\RepresentacoesExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 class RepresentacoesController extends Controller
 {
 
@@ -83,6 +86,7 @@ class RepresentacoesController extends Controller
 
       return redirect()->route('repre', ['id' => $cd]);
    }
+
    public function instareprescreate($id)
    {
 
@@ -100,4 +104,9 @@ class RepresentacoesController extends Controller
 
       return view('representacoes/repinsta', ['selecionado' => $selecionado, 'instancias' => $instancias, 'events' => $events, 'representantes' => $representantes]);
    }
+
+   public function export() 
+    {
+        return (new RepresentacoesExport)->download('representacoes.pdf');
+    }
 }
