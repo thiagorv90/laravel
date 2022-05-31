@@ -4,7 +4,7 @@
 
 @section('content')
 
-@if (is_countable($selecionado) && count($selecionado) == 0) 
+@if (is_countable($selecionado) && count($selecionado) == 0)
 <h3>Não ha telefones para esse contato</h3>
 @foreach ($telefones as $telefone)
 
@@ -25,10 +25,10 @@
         <div class="form-group">
             <label for="title">cdContatoTelefone </label>
             <select name="cdContatoTelefone" id="cdContatoTelefone" class="form-select">
-                
+
                 <option value="{{$telefone->cdContato}}"> {{$telefone->nmContato}}</option>
 
-                
+
             </select>
         </div>
 
@@ -40,7 +40,7 @@
 @else
 @foreach ($telefones as $telefone)
 <h1>Telefone Do(a){{$telefone->nmContato}}</h1>
- @endforeach
+@endforeach
 
 <div class="col-md-10 offset-md-1 dashboard-events-container">
     <table class="table">
@@ -53,13 +53,12 @@
             </tr>
         </thead>
         <tbody>
-        @foreach ($selecionado as $event)
+            @foreach ($selecionado as $event)
             <tr>
                 <td scropt="row">{{$event->cdTelefone}}</td>
                 <td><a>{{ $event->nuTelefone }}</a></td>
 
-                <td class="alterar-deletar"> <a href="/telcon/edit/{{$event->cdTelefone}}"
-                        class="btn btn-info edit-btn">
+                <td class="alterar-deletar"> <a href="/telcon/edit/{{$event->cdTelefone}}" class="btn btn-info edit-btn">
                         <ion-icon name="create-outline"></ion-icon>
                     </a>
 
@@ -74,7 +73,7 @@
             @endforeach
         </tbody>
     </table>
- 
+
 </div>
 <br>
 <br>

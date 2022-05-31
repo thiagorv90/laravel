@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
 use App\Exports\UsersExport;
 use Maatwebsite\Excel\Facades\Excel;
+
 class UserController extends Controller
 {
     /**
@@ -14,16 +16,16 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function export() 
+    public function export()
     {
         return Excel::download(new UsersExport, 'users.xlsx');
     }
 
-    
-    
-     public function index()
+
+
+    public function index()
     {
-        
+
         return view('admin.users.index');
     }
 
@@ -68,10 +70,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $users  = DB::table('users')->where('id','=', $id)->get(); 
+        $users  = DB::table('users')->where('id', '=', $id)->get();
         $sele  = DB::table('users')->get();
-        
-        return view('users.edit',['users'=>$users,'sele'=>$sele]);
+
+        return view('users.edit', ['users' => $users, 'sele' => $sele]);
     }
 
     /**
@@ -83,17 +85,17 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-     
+
         $name = $request->input('name');
         $email = $request->input('email');
         $adm = $request->input('statusadm');
-     
-       
+
+
         DB::update('update users set name = ?, email = ?, statusadm = ?
-        where id = ?',[$name,$email,$adm,$id]);
-   
-   
-        return redirect('/usuarios')->with('msg','evento alterado com sucesso');
+        where id = ?', [$name, $email, $adm, $id]);
+
+
+        return redirect('/usuarios')->with('msg', 'evento alterado com sucesso');
     }
 
     /**
@@ -102,16 +104,16 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function search(Request $request){
-        $request ->validate([
-            'query'=>'required',
+    public function search(Request $request)
+    {
+        $request->validate([
+            'query' => 'required',
         ]);
-        
-    $query = $request->input('query');
-    
-    $users = DB::table('users')->where('name','like',"%$query%")->orWhere('email','like',"%$query%")->paginate(6);
-    dd($users);
-    return view('/usuarios/search-resultados');
-    }
 
+        $query = $request->input('query');
+
+        $users = DB::table('users')->where('name', 'like', "%$query%")->orWhere('email', 'like', "%$query%")->paginate(6);
+        dd($users);
+        return view('/usuarios/search-resultados');
+    }
 }
