@@ -11,10 +11,12 @@ class Instituicoe extends Model
     use HasFactory;
     public $timestamps = false;
 
-    public function tipoinsta(){
+    public function tipoinsta()
+    {
         return $this->hasOne('App\Models\Tipo_instancia');
     }
-    public function instancia(){
+    public function instancia()
+    {
         return $this->hasMany('App\Models\Instancia');
     }
 }

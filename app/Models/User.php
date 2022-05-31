@@ -61,7 +61,8 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function representante(){
+    public function representante()
+    {
         return $this->hasOne('App\Models\Representante_suplente');
     }
 }

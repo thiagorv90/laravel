@@ -3,7 +3,7 @@
 @section('title', 'Agendas')
 
 @section('content')
-@if (is_countable($selecionado) && count($selecionado) == 0) 
+@if (is_countable($selecionado) && count($selecionado) == 0)
 
 @foreach ($agendas as $agenda)
 <h3>Não ha Agenda para esta Representação(pensar em algo):</h3>
@@ -19,7 +19,7 @@
         <div class="form-group">
             <label for="title">cdRepresentacao </label>
             <select name="cdRepresentacao" id="cdRepresentacao" class="form-select">
-                
+
                 <option value="{{$agenda->cdRepresentacao}}"> {{$agenda->cdTitular}}</option>
 
                 @endforeach
@@ -69,7 +69,7 @@
 
 <h1>Agendas da representação:{{$event->nmRepresentanteSuplente}}</h1>
 <div class="col-md-10 offset-md-1 dashboard-events-container">
-  
+
     <table class="table">
         <thead>
             <tr>
@@ -86,7 +86,9 @@
                 <td><a>{{ $event->dtAgenda }}</a></td>
 
                 <td class="opcoes-agenda">
-                  <a href="/agendas/edit/{{$event->cdAgenda}}" class="btn btn-info edit-btn"><ion-icon name="create-outline"></ion-icon></a>
+                    <a href="/agendas/edit/{{$event->cdAgenda}}" class="btn btn-info edit-btn">
+                        <ion-icon name="create-outline"></ion-icon>
+                    </a>
 
                     <form action="/agendas/edit/{{ $event->cdAgenda }}" method="POST">
                         @csrf

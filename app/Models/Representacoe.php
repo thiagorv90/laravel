@@ -11,17 +11,21 @@ class Representacoe extends Model
     use HasFactory;
     public $timestamps = false;
     protected $dates = ['dtInicioVigencia'];
-    public function agenda(){
+    public function agenda()
+    {
         return $this->hasMany('App\Models\Agenda');
     }
 
-    public function representante(){
+    public function representante()
+    {
         return $this->hasOne('App\Models\Representante_suplente', 'id', 'cdTitular');
     }
-    public function suplente(){
+    public function suplente()
+    {
         return $this->hasOne('App\Models\Representante_suplente', 'id', 'cdSuplente');
     }
-    public function instancia(){
+    public function instancia()
+    {
         return $this->hasOne('App\Models\Instancia');
     }
 }

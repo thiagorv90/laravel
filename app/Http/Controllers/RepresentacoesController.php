@@ -105,8 +105,8 @@ class RepresentacoesController extends Controller
       return view('representacoes/repinsta', ['selecionado' => $selecionado, 'instancias' => $instancias, 'events' => $events, 'representantes' => $representantes]);
    }
 
-   public function export() 
-    {
-        return (new RepresentacoesExport)->download('representacoes.xlsx');
-    }
+   public function export()
+   {
+      return (new RepresentacoesExport)->download('representacoes.xlsx');
+   }
 }
