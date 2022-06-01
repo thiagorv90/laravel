@@ -10,8 +10,9 @@ class Escolaridade extends Model
     protected $primaryKey = 'cdEscolaridade';
     use HasFactory;
     public $timestamps = false;
-    
-    public function Escolaridade(){
+
+    public function Escolaridade()
+    {
         return $this->hasMany('App\Models\Escolaridade');
     }
 }

@@ -12,7 +12,8 @@ class agenda extends Model
     public $timestamps = false;
     protected $dates = ['dtAgenda'];
 
-    public function representacoe(){
+    public function representacoe()
+    {
         return $this->hasMany('App\Models\Representacoe');
     }
 }

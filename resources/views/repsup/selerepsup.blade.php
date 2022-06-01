@@ -17,7 +17,7 @@
             </tr>
         </thead>
         <tbody>
-            
+
             <tr>
                 <td scropt="row">{{$event->cdRepSup}}</td>
                 <td><a>{{ $event->nmRepresentanteSuplente }}</a></td>

@@ -8,44 +8,43 @@ use DB;
 
 class TemaRepresentacoesController extends Controller
 {
-    public function temarepindex(){
-        
-        $events = Tema_representacoe::all();
-        
-  
-        return view('temarep/temarep',['tema_representacoe'=>$events]);
-     
-     }
-  
-  public function temarepstore(Request $request){
-  
-          $event = new Tema_representacoe;
-  
-          $event->nmTema=$request->nmTema;
-         
-          
-          
-          $event->save();
-  
-          return redirect('/temarep');
-  
-  
-       }
+   public function temarepindex()
+   {
 
-       public function updateTem (Request $request,$id) {
-         $name = $request->input('nmTema');
-         DB::update('update tema_representacoes set nmTema = ? where cdTema = ?',[$name,$id]);
-        
- 
-         return redirect('/temarep')->with('msg','evento alterado com sucesso');
-      }
+      $events = Tema_representacoe::all();
 
-      public function editTem($id){
-         $events=Tema_representacoe::find($id);
-         //$events = DB::table('contatos')->gets();
-   
-         return view('temarep.edit',['temarep'=>$events]);
-      
-      }
 
+      return view('temarep/temarep', ['tema_representacoe' => $events]);
+   }
+
+   public function temarepstore(Request $request)
+   {
+
+      $event = new Tema_representacoe;
+
+      $event->nmTema = $request->nmTema;
+
+
+
+      $event->save();
+
+      return redirect('/temarep');
+   }
+
+   public function updateTem(Request $request, $id)
+   {
+      $name = $request->input('nmTema');
+      DB::update('update tema_representacoes set nmTema = ? where cdTema = ?', [$name, $id]);
+
+
+      return redirect('/temarep')->with('msg', 'evento alterado com sucesso');
+   }
+
+   public function editTem($id)
+   {
+      $events = Tema_representacoe::find($id);
+      //$events = DB::table('contatos')->gets();
+
+      return view('temarep.edit', ['temarep' => $events]);
+   }
 }

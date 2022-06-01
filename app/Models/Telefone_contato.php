@@ -11,7 +11,8 @@ class Telefone_contato extends Model
     use HasFactory;
     public $timestamps = false;
 
-    public function contatos(){
+    public function contatos()
+    {
         return $this->hasOne('App\Models\Contato');
     }
 }

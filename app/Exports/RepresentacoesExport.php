@@ -29,6 +29,6 @@ class RepresentacoesExport implements FromView, ShouldAutoSize
                 ->leftjoin('representante_suplentes', 'representante_suplentes.cdRepSup', '=', 'representacoes.cdTitular')
                 ->get()
 
-            ]);
+        ]);
     }
 }

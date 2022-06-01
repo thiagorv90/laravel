@@ -9,7 +9,7 @@
   <h1>Editar</h1>
   @foreach ($edit as $instituicao)
   <form action="/instancias/update/{{ $instituicao->cdInstancia}}" method="POST">
-    
+
     @csrf
     @method('PUT')
     <div class="form-group">
@@ -17,26 +17,26 @@
       <input type="text" class="form-control" id="nmInstancia" name="nmInstancia" value="{{$instituicao->nmInstancia}}"></input>
     </div>
     <div class="form-group">
-      <label for="title">cdInstituicao	</label>
+      <label for="title">cdInstituicao </label>
       <select name="cdInstituicao" id="cdInstituicao" class="form-control">
-      
-      <option value="{{$instituicao->cdInstituicao}}" > {{$instituicao->nmInstituicao}}</option>
-   
-      
+
+        <option value="{{$instituicao->cdInstituicao}}"> {{$instituicao->nmInstituicao}}</option>
+
+
       </select>
     </div>
     <div class="form-group">
-      <label for="title">cdTema	</label>
+      <label for="title">cdTema </label>
       <select name="cdTema" id="cdTema" class="form-control">
-      
-      <option value="{{$instituicao->cdTema}}" > {{$instituicao->nmTema}}</option>
-   
-      
+
+        <option value="{{$instituicao->cdTema}}"> {{$instituicao->nmTema}}</option>
+
+
       </select>
     </div>
     <div class="form-group">
       <label for="title">Mandato:</label>
-      <input type="text" class="form-control" id="dsMandato" name="dsMandato" value="{{$instituicao->dsMandato}}" >
+      <input type="text" class="form-control" id="dsMandato" name="dsMandato" value="{{$instituicao->dsMandato}}">
     </div>
     <div class="form-group">
       <label for="title">Federal Distrital?</label>
@@ -63,7 +63,7 @@
       <label for="title">Descrição Objetivo:</label>
       <input name="dsObjetivo" id="dsObjetivo" class="form-control" value="{{$instituicao->dsObjetivo}}"></input>
     </div>
-   
+
     <div class="form-group">
       <label for="title">atribuições:</label>
       <input type="text" class="form-control" id="tpAtribuicoes" name="tpAtribuicoes" value="{{$instituicao->tpAtribuicoes}}">
