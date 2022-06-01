@@ -121,8 +121,8 @@ class InstaciaController extends Controller
     return redirect()->route('instancias', ['id' => $cd]);
   }
 
-  public function export()
+  public function export(Request $request)
   {
-    return (new InstanciasExport)->download('instancias.xlsx');
+    return (new InstanciasExport9($request->id))->download('instancias.xlsx');
   }
 }

@@ -65,7 +65,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('inicial/', [InstaciaController::class, 'searchinst']);
         Route::post('instancias/{id}', [InstaciaController::class, 'storeinst']);
         Route::get('instancias/{id}', [InstaciaController::class, 'instacreate'])->name('instancias');
-        Route::get('dashboard/export/', [InstaciaController::class, 'export'])->name('excel');
+        Route::get('/dashboard/export/{id}', [InstaciaController::class, 'export'])->name('excel');
 
         Route::get('contatos/search', [ContatoController::class, 'search'])->name('searchco');
         Route::post('contatos/listacontato/{id}', [ContatoController::class, 'contastore']);

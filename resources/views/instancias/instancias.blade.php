@@ -18,7 +18,7 @@
         <div class="form-group">
             <label for="title">cdInstituicao </label>
             <select name="cdInstituicao" id="cdInstituicao" class="form-select">
-                               <option value="{{$instituicao->cdInstituicao}}"> {{$instituicao->nmInstituicao}}</option>
+                             <option value="{{$instituicao->cdInstituicao}}"> {{$instituicao->nmInstituicao}}</option>
                         </select>
         </div>
         <div class="form-group">
@@ -113,6 +113,7 @@
                      <a href="/instancias/edit/{{$instancia->cdInstancia}}"  class="btn btn-info edit-btn"><ion-icon name="create-outline"></ion-icon> </a> 
                      <a href="/contatos/listacontato/{{$instancia->cdInstancia}}"  class="btn btn-info edit-btn"><ion-icon name="person-outline"></ion-icon> </a> 
                      <a href="/repinsta/{{$instancia->cdInstancia}}"  class="btn btn-info edit-btn"><ion-icon name="reader-outline"></ion-icon> </a> 
+                     <a href="/dashboard/export/{{$instancia->cdInstancia}}"  class="btn btn-info edit-btn"><ion-icon name="download-outline"></ion-icon> </a>
 
                    
                 </tr>

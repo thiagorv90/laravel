@@ -1,3 +1,14 @@
+<html>
+    <body>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    
+
+
+
 <table class="table">
     <thead>
         <tr>
@@ -18,3 +29,5 @@
         @endforeach
     </tbody>
 </table>
+</body>
+</html>
