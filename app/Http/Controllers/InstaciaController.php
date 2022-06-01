@@ -123,6 +123,6 @@ class InstaciaController extends Controller
 
   public function export(Request $request)
   {
-    return (new InstanciasExport9($request->id))->download('instancias.xlsx');
+    return (new InstanciasExport($request->id))->download('instancias.xlsx');
   }
 }

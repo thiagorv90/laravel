@@ -88,7 +88,7 @@
 @else
 <h1>Instâncias</h1>
 <div>
-<a href="{{route('excel')}}">excell</a>
+
 <table class="table">
         <thead>
             <tr>

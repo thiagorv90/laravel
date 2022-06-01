@@ -43,7 +43,7 @@ class InstanciasExport implements FromView, ShouldAutoSize, WithDrawings
         $drawing = new Drawing();
         $drawing->setName('Logo');
         $drawing->setDescription('Fibra');
-        $drawing->setPath(public_path('/image/fibralogo.jpg'));
+        $drawing->setPath(public_path('/image/fibralogo.png'));
         $drawing->setHeight(90);
         $drawing->setCoordinates('A2');
 

@@ -74,16 +74,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::PUT('contatos/update/{id}', [ContatoController::class, 'updateCon']);
         Route::get('contatos/listacontato/{id}', [ContatoController::class, 'contalista'])->name('contatos');
 
-
-
         Route::delete('/agendas/edit/{id}', [AgendasController::class, 'deleteAgen']);
-
 
         Route::post('escolaridade', [EscolaridadeController::class, 'escolaridadestore']);
         Route::get('escolaridade', [EscolaridadeController::class, 'escolaridadeindex']);
         Route::PUT('escolaridade/update/{id}', [EscolaridadeController::class, 'updateEsc']);
         Route::get('escolaridade/edit/{id}', [EscolaridadeController::class, 'editEsc']);
-
 
         Route::post('instituicoes', [InstituicoesController::class, 'instituicoesstore']);
         Route::get('instituicoes', [InstituicoesController::class, 'instituicoesindex']);
@@ -108,7 +104,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::PUT('/telcon/update/{id}', [TelefoneContatosController::class, 'updateTel']);
         Route::get('/telcon/edit/{id}', [TelefoneContatosController::class, 'editTel']);
         Route::delete('/telcon/edit/{id}', [TelefoneContatosController::class, 'deleteTel']);
-
 
         Route::post('telrepsup', [TelefoneRepresentanteSuplenteController::class, 'telrepsupstore']);
         Route::get('telrepsup/{id}', [TelefoneRepresentanteSuplenteController::class, 'telrepsupcreate']);
