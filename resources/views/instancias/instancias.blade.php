@@ -18,11 +18,8 @@
         <div class="form-group">
             <label for="title">cdInstituicao </label>
             <select name="cdInstituicao" id="cdInstituicao" class="form-select">
-               
-                <option value="{{$instituicao->cdInstituicao}}"> {{$instituicao->nmInstituicao}}</option>
-
-              
-            </select>
+                               <option value="{{$instituicao->cdInstituicao}}"> {{$instituicao->nmInstituicao}}</option>
+                        </select>
         </div>
         <div class="form-group">
             <label for="title">cdTema </label>
