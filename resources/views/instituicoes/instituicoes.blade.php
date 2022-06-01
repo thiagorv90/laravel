@@ -4,31 +4,6 @@
 
 @section('content')
 
-<h1>Crie sua Instituição</h1>
-
-<div id="event-create-container" class="col-md-10 offset-md-1">
-    <form action="instituicoes" method="POST">
-        @csrf
-        <div class="form-group">
-            <label for="title">cdTipoInstituicao</label>
-            <select name="cdTipoInstituicao" id="cdTipoInstituicao" class="form-select">
-                @foreach ($instituicoes as $instituicoe)
-                <option value="{{$instituicoe->cdTipoInstancia}}"> {{$instituicoe->dsTipoInstancia}}</option>
-
-                @endforeach
-            </select>
-        </div>
-
-        <div id="form-instituicao" class="form-group">
-            <label for="title">nmInstituicao</label>
-            <div class="input-group mb-3">
-                <input placeholder="Nome Instituição..." type="text" class="form-control" id="nmInstituicao" name="nmInstituicao" aria-label="Nome Instituicao" aria-describedby="button-addon2" required />
-
-                <input type="submit" class="btn btn-primary" value="Criar Instituição" class="btn btn-outline-secondary" id="button-addon2">
-            </div>
-        </div>
-    </form>
-</div>
 
 
 <h1>Instituições</h1>
@@ -60,5 +35,31 @@
     </table>
 
 </div>
+<h1>Crie sua Instituição</h1>
+
+<div id="event-create-container" class="col-md-10 offset-md-1">
+    <form action="instituicoes" method="POST">
+        @csrf
+        <div class="form-group">
+            <label for="title">cdTipoInstituicao</label>
+            <select name="cdTipoInstituicao" id="cdTipoInstituicao" class="form-select">
+                @foreach ($instituicoes as $instituicoe)
+                <option value="{{$instituicoe->cdTipoInstancia}}"> {{$instituicoe->dsTipoInstancia}}</option>
+
+                @endforeach
+            </select>
+        </div>
+
+        <div id="form-instituicao" class="form-group">
+            <label for="title">nmInstituicao</label>
+            <div class="input-group mb-3">
+                <input placeholder="Nome Instituição..." type="text" class="form-control" id="nmInstituicao" name="nmInstituicao" aria-label="Nome Instituicao" aria-describedby="button-addon2" required />
+
+                <input type="submit" class="btn btn-primary" value="Criar Instituição" class="btn btn-outline-secondary" id="button-addon2">
+            </div>
+        </div>
+    </form>
+</div>
+
 
 @endsection
