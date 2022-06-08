@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="/css/normalize.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <script src="/js/scripts.js"></script>
+    <script src="/public/js/scripts.js"></script>
 </head>
 
 <body>
