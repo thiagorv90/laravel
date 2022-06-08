@@ -103,7 +103,7 @@ class RepresentacoesController extends Controller
          ->join('instituicoes', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
          ->leftjoin('agendas', 'agendas.cdRepresentacao', '=', 'representacoes.cdRepresentacao')
          ->where('instancias.cdInstancia', '=', $id)
-         ->get(['representacoes.cdRepresentacao', 'nmRepresentanteSuplente', 'dtInicioVigencia', 'cdTitular']);
+         ->get(['representacoes.cdRepresentacao', 'nmRepresentanteSuplente', 'dtInicioVigencia', 'cdTitular','representacoes.cdInstancia','nmInstancia']);
 
 
 
