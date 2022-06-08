@@ -100,4 +100,18 @@
   </form>
 </div>
 
+<script>
+  $("#dtFimVigencia").change(function() {
+    var dataInicio = document.getElementById("dtInicioVigencia").value;
+    var dataFim = document.getElementById("dtFimVigencia").value;
+
+    if (!(Date.parse(dataFim) >= Date.parse(dataInicio))) {
+      alert("A data final precisa ser maior que a data inicial!");
+      document.getElementById("dtFimVigencia").value = "";
+    }
+  });
+</script>
+
+
+
 @endsection

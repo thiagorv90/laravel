@@ -24,8 +24,12 @@ class RepresentacoesController extends Controller
       $event->cdInstancia = $request->cdInstancia;
       $event->cdTitular = $request->cdTitular;
       $event->cdSuplente = $request->cdSuplente;
+
+
       $event->dtInicioVigencia = $request->dtInicioVigencia;
       $event->dtFimVigencia = $request->dtFimVigencia;
+
+      
       $event->dsDesignacao = $request->dsDesignacao;
       $event->dsNomeacao = $request->dsNomeacao;
       $event->stAtivo = $request->stAtivo;
@@ -34,6 +38,7 @@ class RepresentacoesController extends Controller
 
       return back();
    }
+
    public function representacoescreate()
    {
       $email = auth()->user()->email;
