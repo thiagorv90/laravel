@@ -24,6 +24,7 @@ class InstanciasExport implements FromView, ShouldAutoSize, WithDrawings
 {
     protected $id;
     use Exportable;
+
     /**
      * @return \Illuminate\Support\Collection
      */
@@ -31,6 +32,7 @@ class InstanciasExport implements FromView, ShouldAutoSize, WithDrawings
     {
         $this->id = $id;
     }
+
     public function view(): view
     {
         return view('exports.instancias', ['instancias' => Instancia::join('tema_representacoes', 'instancias.cdTema', '=', 'tema_representacoes.cdTema')
@@ -41,6 +43,7 @@ class InstanciasExport implements FromView, ShouldAutoSize, WithDrawings
             ->where('instancias.cdInstancia', '=', $this->id)
             ->get()]);
     }
+
     public function drawings()
     {
         $drawing = new Drawing();

@@ -3,8 +3,13 @@
 @section('title', 'Editando Representações')
 
 @section('content')
-<h1>SGR</h1>
-<a href="{{route('excel')}}">excell</a>
-<a href="{{route('superRepresentacao')}}">superRepresentacao</a>
-<a href="{{route('teste')}}">users</a>
+    <div class="container">
+        <h1>SGR</h1>
+        <ul>
+{{--            <li><a href="{{route('excel')}}">excell</a></li>--}}
+            <li><a href="{{route('porInstancia')}}">2. Por Instancia</a></li>
+            <li><a href="{{route('porRepresentante')}}">3. Por Representante</a></li>
+{{--            <li><a href="{{route('teste')}}">users</a></li>--}}
+        </ul>
+    </div>
 @endsection

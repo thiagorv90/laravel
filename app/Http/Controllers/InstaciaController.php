@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\InstanciasPorIdExport;
 use Illuminate\Http\Request;
 use App\Models\Instancia;
 use App\Models\Representacoe;
@@ -124,5 +125,10 @@ class InstaciaController extends Controller
   public function export()
   {
     return (new InstanciasExport)->download('instancias.xlsx');
+  }
+
+  public function exportPorId()
+  {
+      return (new InstanciasPorIdExport())->download('instanciaId.xlsx');
   }
 }

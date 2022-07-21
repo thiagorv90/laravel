@@ -134,7 +134,9 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::get('users/export/', [UsersController::class, 'export'])->name('teste');
 
-        Route::get('dashboard/export/representacoes/', [RepresentacoesController::class, 'export'])->name('superRepresentacao');
+        Route::get('dashboard/export/representacoes/', [RepresentacoesController::class, 'export'])->name('porRepresentante');
+
+        Route::get('dashboard/export/instancias/', [InstaciaController::class, 'exportPorId'])->name('porInstancia');
 
         Route::view('auth/register', 'auth/register');
     });
