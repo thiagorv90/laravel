@@ -5,13 +5,13 @@
 <br>
 <br>
 <br>
-<h1>Representante</h1>
+<h2>Representante</h2>
 <table class="table">
     <thead>
     <tr>
         <th scope="col"><strong>Nome</strong></th>
         <th scope="col"><strong>Instancias</strong></th>
-        <th scope="col"><strong>Data Nomeacao</strong></th>
+        <th scope="col"><strong>*Data Nomeacao</strong></th>
         <th scope="col"><strong>Vigencia</strong></th>
         <th scope="col"><strong>Mandato</strong></th>
         <th scope="col"><strong>Designacao</strong></th>

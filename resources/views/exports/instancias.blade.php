@@ -5,7 +5,7 @@
 <br>
 <br>
 <br>
-<h1>Representante</h1>
+<h2>Representante</h2>
 <table class="table">
     <thead>
     <tr>

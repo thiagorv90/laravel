@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\RepresentacaoNumerosExport;
 use Illuminate\Http\Request;
 use App\Models\Representacoe;
 use DB;
@@ -110,5 +111,10 @@ class RepresentacoesController extends Controller
     public function export()
     {
         return (new RepresentacoesExport)->download('representacoes.xlsx');
+    }
+
+    public function exportRepEmNumeros()
+    {
+        return (new RepresentacaoNumerosExport)->download('repEmNumeros.xlsx');
     }
 }

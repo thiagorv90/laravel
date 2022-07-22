@@ -3,47 +3,31 @@
 namespace App\Exports;
 
 use App\Models\Instancia;
-use App\Models\Representacoe;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
-use Maatwebsite\Excel\Concerns\FromCollection;
-
-use Illuminate\Contracts\View\view;
-use Illuminate\Contracts\Support\Responsable;
-use Illuminate\Database\Eloquent\Collection;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromView;
-use Maatwebsite\Excel\Concerns\FromQuery;
-use Maatwebsite\Excel\Concerns\WithDrawings;
-use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithDrawings;
+use PhpOffice\PhpSpreadsheet\Worksheet\BaseDrawing;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 
-
-class InstanciasPorIdExport implements FromView, ShouldAutoSize, WithDrawings
+class InstanciaPorTemaExport implements FromView, ShouldAutoSize, WithDrawings
 {
-    protected $id;
-    use \Maatwebsite\Excel\Concerns\Exportable;
-
-    /**
-     * @return \Illuminate\Support\Collection
-     */
-//    public function __construct($id)
-//    {
-//        $this->id = $id;
-//    }
+    use Exportable;
 
     public function view(): View
     {
-        return view('exports.instanciasPorId', [
+        return view('exports.instanciasPorTema', [
             'instancias' => Instancia::join('representacoes as r', 'r.cdInstancia', '=', 'instancias.cdInstancia')
                 ->join('representante_suplentes as rs', 'rs.cdRepSup', '=', 'r.cdSuplente')
                 ->join('representante_suplentes as rt', 'rt.cdRepSup', '=', 'r.cdTitular')
-                ->select(DB::raw('nmInstancia, tpAtribuicoes, tpPublicoPrivado, tpFederalDistrital, dsObjetivo,
-                rs.nmRepresentanteSuplente as repSup, rt.nmRepresentanteSuplente as repTit'))
+                ->join('tema_representacoes as tr', 'instancias.cdTema', '=', 'tr.cdTema')
+                ->select(DB::raw('tr.nmTema as tema, instancias.nmInstancia as instancia,
+                rt.nmRepresentanteSuplente as repTit, rs.nmRepresentanteSuplente as repSup'))
                 ->get()
         ]);
     }
-
 
     public function drawings()
     {

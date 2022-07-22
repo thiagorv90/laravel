@@ -11,11 +11,12 @@ use Illuminate\Database\Eloquent\Collection;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\FromQuery;
+use Maatwebsite\Excel\Concerns\WithDrawings;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 
-class RepresentacoesExport implements FromView, ShouldAutoSize
+class RepresentacoesExport implements FromView, ShouldAutoSize, WithDrawings
 {
     use Exportable;
     /**

@@ -5,7 +5,7 @@
 <br>
 <br>
 <br>
-<h1>Relatório de Instâncias</h1>
+<h2>Relatório de Instâncias</h2>
 <table class="table">
     <thead>
     <tr>

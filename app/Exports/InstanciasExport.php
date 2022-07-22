@@ -20,7 +20,6 @@ use Maatwebsite\Excel\Concerns\WithCustomStartCell;
 
 
 class InstanciasExport implements FromView, ShouldAutoSize, WithDrawings
-
 {
     protected $id;
     use Exportable;
