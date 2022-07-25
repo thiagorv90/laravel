@@ -3,19 +3,7 @@
 @section('title', 'Tipo Instancia')
 
 @section('content')
-
-<h1>Crie Tipo_instancia</h1>
-
-<div id="event-create-container" class="col-md-10 offset-md-1">
-    <form action="tipoinsta" method="POST">
-        @csrf
-        <div class="input-group mb-3">
-            <input placeholder="Criar Tipo_instancia..." type="text" class="form-control" id="dsTipoInstancia" name="dsTipoInstancia" required />
-            <input type="submit" class="btn btn-primary" value="Criar Tipo_instancia">
-
-        </div>
-    </form>
-</div>
+<h1>Tipos de Instancias</h1>
 <div class="col-md-10 offset-md-1 dashboard-events-container">
     <table class="table">
         <thead>
@@ -36,6 +24,31 @@
         </tbody>
     </table>
 
+</div>
+<br>
+<form action="/tipoinsta/{{$event->cdTipoInstancia}}/search" method="GET" >
+    @csrf
+    <div class="row">
+         <div class="col-lg-10">
+             <div class="form-group">
+             <input type="text" class="form-control" value="" name="query" id="query" placeholder="busca">
+             <button class="navbar-search__buttton">
+                 <i class="fa fa-search"></i>
+</button>
+</div></div></div></form>
+<br>
+
+<h1>Crie Tipo das instancias</h1>
+
+<div id="event-create-container" class="col-md-10 offset-md-1">
+    <form action="tipoinsta" method="POST">
+        @csrf
+        <div class="input-group mb-3">
+            <input placeholder="Criar Tipo_instancia..." type="text" class="form-control" id="dsTipoInstancia" name="dsTipoInstancia" required />
+            <input type="submit" class="btn btn-primary" value="Criar Tipo_instancia">
+
+        </div>
+    </form>
 </div>
 
 @endsection

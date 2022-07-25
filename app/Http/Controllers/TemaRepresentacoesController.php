@@ -48,4 +48,20 @@ class TemaRepresentacoesController extends Controller
       
       }
 
+      public function search(Request $request){
+
+         $request ->validate([
+            'query'=>'required',
+        ]);
+        
+      $query = $request->input('query');
+         $events =DB::table('tema_representacoes')
+      ->select('cdTema','nmTema')
+      ->where('nmTema','like',"%$query%")
+     
+      ->get();
+      
+      
+      return view('/temarep/search-results',compact('events'));
+      }
 }

@@ -4,18 +4,7 @@
 
 @section('content')
 
-<h1>Crie Tema</h1>
-
-<div id="event-create-container" class="col-md-10 offset-md-1">
-    <form action="temarep" method="POST">
-        @csrf
-        <div class="input-group mb-3">
-            <input placeholder="Criar Tema..." type="text" class="form-control" id="nmTema" name="nmTema" aria-label="Criar Tema" aria-describedby="button-addon2" required />
-            <input type="submit" class="btn btn-primary" value="Criar Tema" class="btn btn-outline-secondary" id="button-addon2">
-        </div>
-    </form>
-</div>
-
+<h1>Temas</h1>
 <div class="col-md-10 offset-md-1 dashboard-events-container">
     <table class="table">
         <thead>
@@ -41,5 +30,31 @@
     </table>
 
 </div>
+<br>
+<form action="/temarep/{{$event->cdTema}}/search" method="GET" >
+    @csrf
+    <div class="row">
+         <div class="col-lg-10">
+             <div class="form-group">
+             <input type="text" class="form-control" value="" name="query" id="query" placeholder="busca">
+             <button class="navbar-search__buttton">
+                 <i class="fa fa-search"></i>
+</button>
+</div></div></div></form>
+<br>
+
+<h1>Crie Tema</h1>
+
+<div id="event-create-container" class="col-md-10 offset-md-1">
+    <form action="temarep" method="POST">
+        @csrf
+        <div class="input-group mb-3">
+            <input placeholder="Criar Tema..." type="text" class="form-control" id="nmTema" name="nmTema" aria-label="Criar Tema" aria-describedby="button-addon2" required />
+            <input type="submit" class="btn btn-primary" value="Criar Tema" class="btn btn-outline-secondary" id="button-addon2">
+        </div>
+    </form>
+</div>
+
+
 
 @endsection

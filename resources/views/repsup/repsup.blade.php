@@ -26,12 +26,20 @@
             <input placeholder="Profissão..." type="text" class="form-control" id="dsProfissao" name="dsProfissao" required />
         </div>
         <div class="form-group">
-            <label for="title">stAtivo</label>
-            <select name="stAtivo" id="stAtivo" class="form-select">
-                <option value="0">Não</option>
-                <option value="1">Sim</option>
-            </select>
-        </div>
+            <label for="title">Ativo</label>
+            <div class="form-check">
+  <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="1" >
+  <label class="form-check-label" for="stAtivo">
+    Ativo
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo"  value="0" >
+  <label class="form-check-label" for="stAtivo">
+    Desativado
+  </label>
+</div>
+</div>
         <div class="form-group">
             <label for="title">cdEscolaridade</label>
             <select name="cdEscolaridade" id="cdEscolaridade" class="form-select">

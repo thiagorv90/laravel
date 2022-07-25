@@ -4,7 +4,7 @@
 
 @section('content')
 
-<echo>{{$selecionado}}</echo>
+
 @if (is_countable($selecionado) && count($selecionado) == 0) 
 @foreach ( $instancias as  $instancia)
 <h3>Não ha representações para esta instancia:{{$instancia->nmInstancia}}</h3>
@@ -61,21 +61,28 @@
       <input type="text" class="form-control" id="dsNomeacao" name="dsNomeacao" >
     </div>
     <div class="form-group">
-      <label for="title">stAtivo</label>
-      <select name="stAtivo" id="stAtivo" class="form-control">
-        <option value="0">Não</option>
-        <option value="1">Sim</option>
-      </select>
+    <div class="form-check">
+  <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="1" @if($instancias->stAtivo ==1) checked @endif >
+  <label class="form-check-label" for="stAtivo">
+    Ativo
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo"  value="0" @if($instancias->stAtivo ==0) checked @endif  >
+  <label class="form-check-label" for="stAtivo">
+    Desativado
+  </label>
+</div>
     </div>
     <br>
-    <input type="submit" class="btn btn-primary" value="Criar Evento">
+    <input type="submit" class="btn btn-primary" value="Criar Representação">
   </form>
 </div>
 
 
 
 @else
-@foreach ($selecionado as $event)
+
 <div class="col-md-10 offset-md-1 dashboard-events-container">
 
     <table class="table">
@@ -88,22 +95,23 @@
             </tr>
         </thead>
         <tbody>
-        
+        @foreach ($selecionado as $event)
                 <tr>
+                
                     <td scropt="row">{{$event->nmRepresentanteSuplente}}</td>
                     <td><a >{{ $event->dtInicioVigencia }}</a></td>
                     
                     <td>         <a href="/representacoes/edit/{{$event->cdRepresentacao}}" class="btn btn-info edit-btn"><ion-icon name="create-outline"></ion-icon> </a>          
                                 <a href="/repsup/edit/{{$event->cdTitular}}" class="btn btn-info edit-btn"><ion-icon name="person-outline"></ion-icon> </a>   
                                 <a href="/agendas/{{$event->cdRepresentacao}}" class="btn btn-info edit-btn"><ion-icon name="book-outline"></ion-icon> </a>   
-                    
+                             
                 </tr>
-               
+                @endforeach 
         </tbody>
     </table>
     
 </div>
-@endforeach 
+
 <br>
 <br>
 <br>
@@ -160,11 +168,20 @@
       <input type="text" class="form-control" id="dsNomeacao" name="dsNomeacao" >
     </div>
     <div class="form-group">
-      <label for="title">stAtivo</label>
-      <select name="stAtivo" id="stAtivo" class="form-control">
-        <option value="0">Não</option>
-        <option value="1">Sim</option>
-      </select>
+    <label for="title">Ativo?</label>
+    <div class="form-check">
+   
+  <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="1" @if($instancia->stAtivo ==1) checked @endif >
+  <label class="form-check-label" for="stAtivo">
+    Ativo
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo"  value="0" @if($instancia->stAtivo ==0) checked @endif  >
+  <label class="form-check-label" for="stAtivo">
+    Desativado
+  </label>
+</div>
     </div>
     <br>
     <input type="submit" class="btn btn-primary" value="Criar Evento">

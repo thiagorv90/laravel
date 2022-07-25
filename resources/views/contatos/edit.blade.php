@@ -19,11 +19,11 @@
     <div class="form-group">
     <label for="title">Instancia:</label>
     <select id="cdInstancia"  name="cdInstancia" class="form-control">
-    @foreach($lista as $i)
-        <option value="{{$i->cdInstancia}}"  @if ($con->cdInstancia == $i->cdInstancia) selected @endif >
-            {{ $i->nmInstancia }}
+    
+        <option value="{{$con->cdInstancia}}" >
+            {{ $con->nmInstancia }}
         </option>
-    @endforeach
+  
     </select>
 </div>
     <div class="form-group">
@@ -33,13 +33,37 @@
     
    
     <div class="form-group">
-      <label for="title">Está Ativo?:</label>
-      <input type="text" class="form-control" id="stAtivo" name="stAtivo" value="{{$con->stAtivo}}"></input>
-    </div>
+      <label for="title">Ativo:</label>
+      <div class="form-check">
+      
+  <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="1" @if($con->stAtivo ==1) checked @endif >
+  <label class="form-check-label" for="stAtivo">
+    Ativo
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo"  value="0" @if($con->stAtivo ==0) checked @endif >
+  <label class="form-check-label" for="stAtivo">
+    Desativado
+  </label>
+</div>
+</div>
+    
     <div class="form-group">
-      <label for="title">tpContatoRepresentante:</label>
-      <input type="text" class="form-control" id="tpContatoRepresentante" name="tpContatoRepresentante" value="{{$con->tpContatoRepresentante}}"></input>
-    </div>
+      <label for="title">Contato Representante:</label>
+      <div class="form-check">
+  <input class="form-check-input" type="radio" name="tpContatoRepresentante" id="tpContatoRepresentante" value="1" @if($con->tpContatoRepresentante ==1) checked @endif >
+  <label class="form-check-label" for="tpContatoRepresentante">
+    Sim
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="tpContatoRepresentante" id="tpContatoRepresentante"  value="0" @if($con->tpContatoRepresentante ==0) checked @endif  >
+  <label class="form-check-label" for="tpContatoRepresentante">
+    Não
+  </label>
+</div>
+</div>
     <div class="form-group">
       <label for="title">dsEmailAlternativo:</label>
       <input type="text" class="form-control" id="dsEmailAlternativo" name="dsEmailAlternativo" value="{{$con->dsEmailAlternativo}}"></input>

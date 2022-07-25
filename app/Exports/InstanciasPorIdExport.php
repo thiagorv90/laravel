@@ -2,7 +2,9 @@
 
 namespace App\Exports;
 
+use App\Models\Instancia;
 use App\Models\Representacoe;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
 use Illuminate\Contracts\View\view;
@@ -16,23 +18,32 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 
-class RepresentacoesExport implements FromView, ShouldAutoSize, WithDrawings
+
+class InstanciasPorIdExport implements FromView, ShouldAutoSize, WithDrawings
 {
-    use Exportable;
+    protected $id;
+    use \Maatwebsite\Excel\Concerns\Exportable;
+
     /**
      * @return \Illuminate\Support\Collection
      */
+//    public function __construct($id)
+//    {
+//        $this->id = $id;
+//    }
 
-    public function view(): view
+    public function view(): View
     {
-        //Falta terminar a querry
-        return view('exports.representacoes', [
-            'representacoes' => Representacoe::join('instancias', 'representacoes.cdInstancia', '=', 'instancias.cdInstancia')
-                ->join('representante_suplentes', 'representante_suplentes.cdRepSup', '=', 'representacoes.cdTitular')
+        return view('exports.instanciasPorId', [
+            'instancias' => Instancia::join('representacoes as r', 'r.cdInstancia', '=', 'instancias.cdInstancia')
+                ->join('representante_suplentes as rs', 'rs.cdRepSup', '=', 'r.cdSuplente')
+                ->join('representante_suplentes as rt', 'rt.cdRepSup', '=', 'r.cdTitular')
+                ->select(DB::raw('nmInstancia, tpAtribuicoes, tpPublicoPrivado, tpFederalDistrital, dsObjetivo,
+                rs.nmRepresentanteSuplente as repSup, rt.nmRepresentanteSuplente as repTit'))
                 ->get()
-
         ]);
     }
+
 
     public function drawings()
     {

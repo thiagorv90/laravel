@@ -27,11 +27,11 @@
         </div>
         <div class="form-group">
             <label for="title">hrAgenda:</label>
-            <input type="time" class="form-select" id="hrAgenda" name="hrAgenda">
+            <input type="time" class="form-control" id="hrAgenda" name="hrAgenda">
         </div>
         <div class="form-group">
             <label for="title">Assunto:</label>
-            <input type="time" class="form-select" id="dsAssunto" name="dsAssunto">
+            <input type="text" class="form-control" id="dsAssunto" name="dsAssunto">
         </div>
         <div class="form-group">
             <label for="title"> stAgenda</label>
@@ -65,16 +65,17 @@
 </div>
 
 @else
-@foreach ($selecionado as $event)
 
-<h1>Agendas da representação:{{$event->nmRepresentanteSuplente}}</h1>
+
+<h1>Agendas da representação:</h1>
 <div class="col-md-10 offset-md-1 dashboard-events-container">
   
     <table class="table">
         <thead>
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Número</th>
+                <th scope="col">Assunto</th>
+                <th scope="col">Pauta</th>
                 <th scope="col">Opções</th>
 
             </tr>
@@ -82,9 +83,11 @@
         <tbody>
 
             <tr>
+            @foreach ($selecionado as $event)
                 <td scropt="row">{{$event->cdAgenda}}</td>
-                <td><a>{{ $event->dtAgenda }}</a></td>
-
+                <td><a>{{$event->dsAssunto}}</a></td>
+                <td><a>{{$event->dsPauta}}</a></td>
+                
                 <td class="opcoes-agenda">
                   <a href="/agendas/edit/{{$event->cdAgenda}}" class="btn btn-info edit-btn"><ion-icon name="create-outline"></ion-icon></a>
 
@@ -102,7 +105,30 @@
     </table>
 
 </div>
-
+<br>
+<form action="/agendas/{{$event->cdAgenda}}/search" method="GET" >
+    @csrf
+    <div class="row">
+         <div class="col-lg-10">
+         <div class="form-check">
+  <input class="form-check-input" type="radio" name="busca" id="busca" value="1"checked>
+  <label class="form-check-label" for="busca">
+    Assunto
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="busca" id="busca" value="2" checked>
+  <label class="form-check-label" for="busca">
+    Pauta
+  </label>
+</div>
+             <div class="form-group">
+                         <input type="text" class="form-control" value="" name="query" id="query" placeholder="busca">
+             <button class="navbar-search__buttton">
+                 <i class="fa fa-search"></i>
+</button>
+</div></div></div></form>
+<br>
 <h1>Agenda</h1>
 
 <div id="event-create-container" class="col-md-6 offset-md-3">

@@ -40,25 +40,50 @@
     </div>
     <div class="form-group">
       <label for="title">Federal Distrital?</label>
-      <select name="tpFederalDistrital" id="tpFederalDistrital" class="form-control">
-        <option value="0">Não</option>
-        <option value="1">Sim</option>
-      </select>
-    </div>
+      <div class="form-check">
+  <input class="form-check-input" type="radio" name="tpFederalDistrital" id="tpFederalDistrital" value="1" @if($instituicao->tpFederalDistrital ==1) checked @endif >
+  <label class="form-check-label" for="tpFederalDistrital">
+    Federal
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="tpFederalDistrital" id="tpFederalDistrital"  value="0" @if($instituicao->tpFederalDistrital ==0) checked @endif  >
+  <label class="form-check-label" for="tpFederalDistrital">
+    Distrital
+  </label>
+</div>
+          </div>
     <div class="form-group">
       <label for="title">Publico, Privado?</label>
-      <select name="tpPublicoPrivado" id="tpPublicoPrivado" class="form-control">
-        <option value="0">Não</option>
-        <option value="1">Sim</option>
-      </select>
+      <div class="form-check">
+  <input class="form-check-input" type="radio" name="tpPublicoPrivado" id="tpPublicoPrivado" value="1" @if($instituicao->tpPublicoPrivado ==1) checked @endif >
+  <label class="form-check-label" for="tpPublicoPrivado">
+    Público
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="tpPublicoPrivado" id="tpPublicoPrivado"  value="0" @if($instituicao->tpPublicoPrivado ==0) checked @endif  >
+  <label class="form-check-label" for="tpPublicoPrivado">
+    Privado
+  </label>
+</div>
+      
     </div>
     <div class="form-group">
       <label for="title">Ativo?</label>
-      <select name="stAtivo" id="stAtivo" class="form-control">
-        <option value="0">Não</option>
-        <option value="1">Sim</option>
-      </select>
-    </div>
+      <div class="form-check">
+  <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="1" @if($instituicao->stAtivo ==1) checked @endif >
+  <label class="form-check-label" for="stAtivo">
+    Ativo
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo"  value="0" @if($instituicao->stAtivo ==0) checked @endif  >
+  <label class="form-check-label" for="stAtivo">
+    Desativado
+  </label>
+</div>
+      
     <div class="form-group">
       <label for="title">Descrição Objetivo:</label>
       <input name="dsObjetivo" id="dsObjetivo" class="form-control" value="{{$instituicao->dsObjetivo}}"></input>
@@ -70,8 +95,27 @@
     </div>
     <div class="form-group">
       <label for="title">Prioridade:</label>
-      <input type="text" class="form-control" id="tpPrioridade" name="tpPrioridade" value="{{$instituicao->tpPrioridade}}">
-    </div>
+      <div class="form-check">
+  <input class="form-check-input" type="radio" name="tpPrioridade" id="tpPrioridade" value="1" @if($instituicao->tpPrioridade ==1) checked @endif  >
+  <label class="form-check-label" for="tpPrioridade">
+    Baixa
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="tpPrioridade" id="tpPrioridade"  value="2" @if($instituicao->tpPrioridade ==2) checked @endif   >
+  <label class="form-check-label" for="tpPrioridade">
+    Média
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="tpPrioridade" id="tpPrioridade"  value="3" @if($instituicao->tpPrioridade ==3) checked @endif  >
+  <label class="form-check-label" for="tpPrioridade">
+    Alta
+  </label>
+</div>
+</div> 
+        </div>
+    
     <div class="form-group">
       <label for="title">Ameaças:</label>
       <input type="text" class="form-control" id="dsAmeacas" name="dsAmeacas" value="{{$instituicao->dsAmeacas}}">

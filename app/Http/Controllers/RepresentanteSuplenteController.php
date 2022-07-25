@@ -92,7 +92,7 @@ class RepresentanteSuplenteController extends Controller
       $events = Representante_suplente::all();
       $dados = DB::table('users')->get();
       $empresas = DB::table('empresas')->get();
-      $escolaridades = DB::table('escolaridades')->get();
+      $escolaridades = DB::table('escolaridades')->orderby('dsEscolaridade')->get();
       $selecionado = Representacoe::join('representante_suplentes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
          ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
          ->join('instituicoes', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')

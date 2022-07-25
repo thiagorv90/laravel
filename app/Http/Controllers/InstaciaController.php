@@ -50,8 +50,8 @@ class InstaciaController extends Controller
       ->join('instituicoes', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
       ->leftjoin('representacoes', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
       ->leftjoin('representante_suplentes', 'representacoes.cdTitular', '=', 'cdRepsup')
-      ->leftjoin('contatos', 'contatos.cdInstancia', '=', 'instancias.cdInstancia')
-      ->where('instancias.cdInstituicao', '=', $id)->get(['instancias.cdInstancia', 'nmInstancia', 'nmTema', 'nmRepresentanteSuplente', 'nmContato']);
+      
+      ->where('instancias.cdInstituicao', '=', $id)->get(['instancias.cdInstancia', 'nmInstancia', 'nmTema', 'nmRepresentanteSuplente','instancias.cdInstituicao','instancias.stAtivo']);
 
 
     return view('instancias.instancias', ['instancias' => $insta, 'temas' => $temas, 'instituicaos' => $instituicaos]);
@@ -91,9 +91,10 @@ class InstaciaController extends Controller
       ->join('instituicoes', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
       ->where('instancias.cdinstancia', '=', $cdInstancia)
       ->get();
-
-
-    return view('instancias.edit', ['edit' => $edit]);
+    
+    $lista = Instancia::orderBy('nmInstancia')
+    ->get();
+    return view('instancias.edit', ['edit' => $edit,'lista'=>$lista]);
   }
 
   public function update(Request $request, $id)
@@ -125,4 +126,22 @@ class InstaciaController extends Controller
   {
     return (new InstanciasExport($request->id))->download('instancias.xlsx');
   }
+
+  public function search(Request $request, $id){
+
+    $request ->validate([
+       'query'=>'required',
+   ]);
+   
+ $query = $request->input('query');
+    $events =DB::table('instancias')
+ ->select('nmInstancia','cdInstancia')
+ ->where('nmInstancia','like',"%$query%")
+ ->where('cdInstituicao','=',$id)
+ ->get();
+ 
+ 
+ return view('/instancias/search-results',compact('events'));
+ }
+ 
 }

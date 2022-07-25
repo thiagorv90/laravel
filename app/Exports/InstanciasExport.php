@@ -14,20 +14,24 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
+use App\Invoice;
+use Maatwebsite\Excel\Concerns\Construct;
+use Maatwebsite\Excel\Concerns\WithCustomStartCell;
 
 
 class InstanciasExport implements FromView, ShouldAutoSize, WithDrawings
-
 {
+    protected $id;
     use Exportable;
+
     /**
      * @return \Illuminate\Support\Collection
      */
-    protected $id;
-
- function __construct($id) {
+    public function __construct($id)
+    {
         $this->id = $id;
- }
+    }
+
     public function view(): view
     {
         return view('exports.instancias', ['instancias' => Instancia::join('tema_representacoes', 'instancias.cdTema', '=', 'tema_representacoes.cdTema')
@@ -35,16 +39,18 @@ class InstanciasExport implements FromView, ShouldAutoSize, WithDrawings
             ->leftjoin('representacoes', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
             ->leftjoin('representante_suplentes', 'representacoes.cdTitular', '=', 'cdRepsup')
             ->leftjoin('contatos', 'contatos.cdInstancia', '=', 'instancias.cdInstancia')
-            ->where('instancias.cdInstancia','=',$this->id)
+            ->where('instancias.cdInstancia', '=', $this->id)
             ->get()]);
     }
+
     public function drawings()
     {
         $drawing = new Drawing();
         $drawing->setName('Logo');
-        $drawing->setDescription('Fibra');
+        $drawing->setDescription('FIBRA');
         $drawing->setPath(public_path('/image/fibralogo.png'));
         $drawing->setHeight(90);
+        $drawing->setWidth(250);
         $drawing->setCoordinates('A2');
 
         return $drawing;

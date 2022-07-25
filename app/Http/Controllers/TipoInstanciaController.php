@@ -47,4 +47,20 @@ class TipoInstanciaController extends Controller
          return view('tipoinsta.edit',['tipoinsta'=>$events]);
       
       }
+      public function search(Request $request){
+
+         $request ->validate([
+            'query'=>'required',
+        ]);
+        
+      $query = $request->input('query');
+         $events =DB::table('tipo_instancias')
+      ->select('cdTipoInstancia','dsTipoInstancia')
+      ->where('dsTipoInstancia','like',"%$query%")
+     
+      ->get();
+      
+      
+      return view('/tipoinsta/search-results',compact('events'));
+      }
 }

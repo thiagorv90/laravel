@@ -11,7 +11,7 @@
   
   
   @if ($events->isEmpty())
-  <h1>Não existe Contato da Instancia com esse nome 
+  <h1>Não existe Instituições com esse nome 
 
 
   
@@ -33,9 +33,9 @@
                     
                 
              
-                    <td><a >{{ $event->nmContato }}</a></td>
+                    <td><a >{{ $event->nmInstituicao }}</a></td>
                     
-                    <td>         <a href="/contatos/edit/{{$event->cdContato}}" class="btn btn-info edit-btn"><ion-icon name="create-outline"></ion-icon></a>   <a href="/telcon/{{$event->cdContato}}" class="btn btn-info edit-btn"><ion-icon name="call-outline"></ion-icon></a>       
+                    <td>         <a href="/instituicoes/edit/{{$event->cdInstituicao}}" class="btn btn-info edit-btn"><ion-icon name="create-outline"></ion-icon></a>          
 </tr>
 @endforeach          
               

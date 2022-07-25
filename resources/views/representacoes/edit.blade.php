@@ -4,7 +4,7 @@
 
 @section('content')
 
-<echo>{{$selecionado}}
+
 
 <div id="event-create-container" class="col-md-6 offset-md-3">
   <h1>Representacões</h1>
@@ -62,20 +62,26 @@
       <input type="text" class="form-control" id="dsDesignacao" name="dsDesignacao" value="{{$age->dsDesignacao}}" >
     </div>
     <div class="form-group">
-      <label for="title">ativo</label>
-      <select name="stAtivo" id="stAtivo" class="form-control">
-        <option value="{{$age->stAtivo}}">{{$age->stAtivo}}</option>
-        <option value="1">Sim</option>
-      </select>
+    <label for="title">Ativo?</label>
+    <div class="form-check">
+    
+  <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="1" @if($age->stAtivo ==1) checked @endif >
+  <label class="form-check-label" for="stAtivo">
+    Ativo
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo"  value="0" @if($age->stAtivo ==0) checked @endif  >
+  <label class="form-check-label" for="stAtivo">
+    Desativado
+  </label>
+</div>
     </div>
     <div class="form-group">
       <label for="title">Nomeacao: </label>
       <input type="textarea" class="form-control" id="dsNomeacao" name="dsNomeacao" value="{{$age->dsNomeacao}}">
     </div>
-    <div class="form-group">
-      <label for="title">Data de Nascimento:</label>
-      <input type="textarea" class="form-control" id="dtNascimento" name="dtNascimento" value="{{$age->dtNascimento}}" >
-    </div>
+    
     <br>
     <input type="submit" class="btn btn-primary" value="Alterar">
   </form>
