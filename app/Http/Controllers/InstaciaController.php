@@ -128,6 +128,73 @@ class InstaciaController extends Controller
         return redirect()->route('instancias', ['id' => $cd]);
     }
 
+    public function instanciasExportView()
+    {
+        $instancias = Instancia::join('tema_representacoes', 'instancias.cdTema', '=', 'tema_representacoes.cdTema')
+            ->join('representacoes as r', 'r.cdInstancia', '=', 'instancias.cdInstancia')
+            ->join('representante_suplentes as rt', 'rt.cdRepSup', '=', 'r.cdTitular')
+            ->get();
+
+        return view('exportsView/instancias', ['instancias' => $instancias]);
+    }
+
+    public function instanciasDataExportView()
+    {
+        $instancias = Instancia::join('representacoes as r', 'r.cdInstancia', '=', 'instancias.cdInstancia')
+        ->join('representante_suplentes as rt', 'rt.cdRepSup', '=', 'r.cdTitular')
+        ->join('agendas as a', 'a.cdAgenda', '=', 'r.cdRepresentacao')
+        ->get();
+
+        return view('exportsView/instanciasPorData', ['instancias' => $instancias]);
+    }
+
+    public function instanciasPorIdExportView()
+    {
+        $instancias = Instancia::join('representacoes as r', 'r.cdInstancia', '=', 'instancias.cdInstancia')
+            ->join('representante_suplentes as rs', 'rs.cdRepSup', '=', 'r.cdSuplente')
+            ->join('representante_suplentes as rt', 'rt.cdRepSup', '=', 'r.cdTitular')
+            ->select(\Illuminate\Support\Facades\DB::raw('nmInstancia, tpAtribuicoes, tpPublicoPrivado, tpFederalDistrital, dsObjetivo,
+                rs.nmRepresentanteSuplente as repSup, rt.nmRepresentanteSuplente as repTit'))
+            ->get();
+
+        return view('exportsView/instanciasPorId', ['instancias' => $instancias]);
+    }
+
+    public function instanciasPorPrioridadeExportView()
+    {
+        $instancias = Instancia::all();
+
+        return view('exportsView/instanciasPorPrioridade', ['instancias' => $instancias]);
+    }
+
+    public function instanciasPorTemaView()
+    {
+        $instancias = Instancia::join('representacoes as r', 'r.cdInstancia', '=', 'instancias.cdInstancia')
+            ->join('representante_suplentes as rs', 'rs.cdRepSup', '=', 'r.cdSuplente')
+            ->join('representante_suplentes as rt', 'rt.cdRepSup', '=', 'r.cdTitular')
+            ->join('tema_representacoes as tr', 'instancias.cdTema', '=', 'tr.cdTema')
+            ->select(\Illuminate\Support\Facades\DB::raw('tr.nmTema as tema, instancias.nmInstancia as instancia,
+                rt.nmRepresentanteSuplente as repTit, rs.nmRepresentanteSuplente as repSup'))
+            ->get();
+
+        return view('exportsView/instanciasPorTema', ['instancias' => $instancias]);
+    }
+
+    public function instanciasPorVigenciaView()
+    {
+        $instancias = Instancia::join('representacoes as r', 'r.cdInstancia', '=', 'instancias.cdInstancia')
+            ->get();
+
+        return view('exportsView/instanciasPorVigencia', ['instancias' => $instancias]);
+    }
+
+    public function instanciasPorStatusExportView()
+    {
+        $instancias = Instancia::all();
+
+        return view('exportsView/instanciasPorStatus', ['instancias' => $instancias]);
+    }
+
     public function export()
     {
         return (new InstanciasExport)->download('instancias.xlsx');

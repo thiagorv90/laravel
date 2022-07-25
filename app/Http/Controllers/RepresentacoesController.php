@@ -117,4 +117,21 @@ class RepresentacoesController extends Controller
     {
         return (new RepresentacaoNumerosExport)->download('repEmNumeros.xlsx');
     }
+
+    public function representacoesExportView()
+    {
+        $representacoes = Representacoe::join('instancias', 'representacoes.cdInstancia', '=', 'instancias.cdInstancia')
+            ->join('representante_suplentes', 'representante_suplentes.cdRepSup', '=', 'representacoes.cdTitular')
+            ->get();
+
+        return view('exportsView/representacoes', ['representacoes' => $representacoes]);
+    }
+
+    public function representacoesPorNumeroExportView()
+    {
+        $instancias = Instancia::join('tema_representacoes', 'tema_representacoes.cdTema', '=', 'instancias.cdTema')
+            ->get();
+
+        return view('exportsView/representacoesNumero', ['instancias' => $instancias]);
+    }
 }

@@ -16,11 +16,11 @@
     </thead>
     <tbody>
     @foreach($instancias as $instancia)
-    <tr>
-        <td>{{ $instancia->nmInstancia }}</td>
-        <td>{{ $instancia->dsMandato }}</td>
-        <td>{{ $instancia->dsDesignacao }}</td>
-    </tr>
+        <tr>
+            <td>{{ $instancia->nmInstancia }}</td>
+            <td>{{ $instancia->dsMandato }}</td>
+            <td>{{ $instancia->dsDesignacao }}</td>
+        </tr>
     @endforeach
     </tbody>
 </table>
