@@ -143,6 +143,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('dashboard/export/instanciasPorVigencia', [InstaciaController::class, 'exportPorVigencia'])->name('porVigencia');
         Route::get('dashboard/export/instanciasPorData', [InstaciaController::class, 'exportPorData'])->name('porData');
 
+
         Route::get('dashboard/exportView/instancias/', [InstaciaController::class, 'instanciasExportView'])->name('exportViewInstancias');
         Route::get('dashboard/exportView/instanciasData/', [InstaciaController::class, 'instanciasDataExportView'])->name('exportViewInstData');
         Route::get('dashboard/exportView/instanciasPorId/', [InstaciaController::class, 'instanciasPorIdExportView'])->name('exportViewInstId');
