@@ -11,7 +11,6 @@ use App\Exports\InstaciasExport;
 class agendasController extends Controller
 {
 
-
    public function agendastore(Request $request, $id)
    {
 
@@ -82,4 +81,27 @@ class agendasController extends Controller
       // $deleted = DB::delete('delete from telefone_contatos where cdTelefone = ?', [$id]);
       return redirect('/agendas');
    }
+   
+   public function search(Request $request, $id){
+
+   $request ->validate([
+      'query'=>'required','busca'=>'required',
+  ]);
+  
+$query = $request->input('query');
+$busca = $request->input('busca');
+ if($busca ==1){
+   $events =DB::table('agendas')
+->where('dsAssunto','like',"%$query%")
+->where('cdAgenda','=',$id)
+->get();
+ }
+ if($busca ==2){
+   $events =DB::table('agendas')
+->where('dsPauta','like',"%$query%")
+->where('cdAgenda','=',$id)
+->get();
+ }
+return view('/agendas/search-results',compact('events'));
+}
 }

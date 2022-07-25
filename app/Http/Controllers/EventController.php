@@ -70,11 +70,25 @@ class EventController extends Controller
     public function dashe()
     {
 
-
-
         $eventos = DB::table('empresas')->get();
-
 
         return view('/empresas/empresas', ['empresas' => $eventos]);
     }
+
+ public function search(Request $request){
+
+    $request ->validate([
+       'query'=>'required',
+   ]);
+   
+ $query = $request->input('query');
+    $events =DB::table('empresas')
+ ->select('cdEmpresa','nmEmpresa')
+ ->where('nmEmpresa','like',"%$query%")
+
+ ->get();
+ 
+ 
+ return view('/empresas/search-results',compact('events'));
+ }
 }

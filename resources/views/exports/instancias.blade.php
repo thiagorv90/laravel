@@ -1,4 +1,5 @@
 <html>
+
 <body>
 <br>
 <br>
@@ -6,6 +7,7 @@
 <br>
 <br>
 <h2>Representante</h2>
+
 <table class="table">
     <thead>
     <tr>
@@ -27,4 +29,6 @@
     </tbody>
 </table>
 </body>
+
 </html>
+

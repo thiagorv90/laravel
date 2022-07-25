@@ -10,13 +10,12 @@ class TemaRepresentacoesController extends Controller
 {
    public function temarepindex()
    {
-
       $events = Tema_representacoe::all();
 
 
       return view('temarep/temarep', ['tema_representacoe' => $events]);
    }
-
+   
    public function temarepstore(Request $request)
    {
 
@@ -30,7 +29,7 @@ class TemaRepresentacoesController extends Controller
 
       return redirect('/temarep');
    }
-
+   
    public function updateTem(Request $request, $id)
    {
       $name = $request->input('nmTema');
@@ -39,7 +38,7 @@ class TemaRepresentacoesController extends Controller
 
       return redirect('/temarep')->with('msg', 'evento alterado com sucesso');
    }
-
+   
    public function editTem($id)
    {
       $events = Tema_representacoe::find($id);
@@ -47,4 +46,21 @@ class TemaRepresentacoesController extends Controller
 
       return view('temarep.edit', ['temarep' => $events]);
    }
+   
+   public function search(Request $request){
+
+         $request ->validate([
+            'query'=>'required',
+        ]);
+        
+      $query = $request->input('query');
+         $events =DB::table('tema_representacoes')
+      ->select('cdTema','nmTema')
+      ->where('nmTema','like',"%$query%")
+     
+      ->get();
+      
+      
+      return view('/temarep/search-results',compact('events'));
+      }
 }

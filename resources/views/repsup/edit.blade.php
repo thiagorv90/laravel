@@ -50,11 +50,21 @@
     </div>
     <div class="form-group">
       <label for="title">ativo</label>
-      <select name="stAtivo" id="stAtivo" class="form-control">
-        <option value="{{$age->stAtivo}}">{{$age->stAtivo}}</option>
-        <option value="1">Sim</option>
-      </select>
-    </div>
+     
+            
+            <div class="form-check">
+  <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="1" @if($age->stAtivo ==1) checked @endif >
+  <label class="form-check-label" for="stAtivo">
+    Ativo
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo"  value="0" @if($age->stAtivo ==0) checked @endif  >
+  <label class="form-check-label" for="stAtivo">
+    Desativado
+  </label>
+</div>
+</div>
     <div class="form-group">
       <label for="title">Endereço:</label>
       <input type="textarea" class="form-control" id="dsEndereco" name="dsEndereco" value="{{$age->dsEndereco}}">

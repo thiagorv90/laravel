@@ -6,39 +6,36 @@
 
 
 <div id="event-create-container" class="col-md-6 offset-md-3">
-
-  <h1>Contatos</h1>
+  <h1>Escolaridade</h1>
   
   
   
   @if ($events->isEmpty())
-  <h1>Não existe Contato da Instancia com esse nome 
+  <h1>Não existe Escolaridade com esse nome. 
 
 
   
  @else
 
  <table class="table">
-
         <thead>
             <tr>
-
-
-                <th scope="col">Nome</th>
+                
+            
+                <th scope="col">Descrição</th>
                 <th scope="col">Opções</th>
-
+               
             </tr>
         </thead>
         <tbody>
-
         @foreach ($events as $event)
                 <tr>
                     
                 
              
-                    <td><a >{{ $event->nmContato }}</a></td>
+                    <td><a >{{ $event->dsEscolaridade }}</a></td>
                     
-                    <td>         <a href="/contatos/edit/{{$event->cdContato}}" class="btn btn-info edit-btn"><ion-icon name="create-outline"></ion-icon></a>   <a href="/telcon/{{$event->cdContato}}" class="btn btn-info edit-btn"><ion-icon name="call-outline"></ion-icon></a>       
+                    <td>         <a href="/escolaridade/edit/{{$event->cdEscolaridade}}" class="btn btn-info edit-btn"><ion-icon name="create-outline"></ion-icon></a>          
 </tr>
 @endforeach          
               

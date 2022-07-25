@@ -15,20 +15,16 @@ use Maatwebsite\Excel\Facades\Excel;
 class RepresentacoesController extends Controller
 {
 
-
     public function representacoesstore(Request $request)
-    {
+     {
+
         $event = new Representacoe;
 
         $event->cdInstancia = $request->cdInstancia;
         $event->cdTitular = $request->cdTitular;
         $event->cdSuplente = $request->cdSuplente;
-
-
         $event->dtInicioVigencia = $request->dtInicioVigencia;
         $event->dtFimVigencia = $request->dtFimVigencia;
-
-
         $event->dsDesignacao = $request->dsDesignacao;
         $event->dsNomeacao = $request->dsNomeacao;
         $event->stAtivo = $request->stAtivo;
@@ -36,8 +32,8 @@ class RepresentacoesController extends Controller
         $event->save();
 
         return back();
-    }
-
+     }
+   
     public function representacoescreate()
     {
         $email = auth()->user()->email;

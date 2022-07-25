@@ -3,6 +3,7 @@
 @section('title', 'Editando Representações')
 
 @section('content')
+
     <div class="container">
         <h1>SGR</h1>
         <div class="container d-flex justify-content-evenly">
@@ -38,3 +39,4 @@
         </ul>
     </div>
 @endsection
+

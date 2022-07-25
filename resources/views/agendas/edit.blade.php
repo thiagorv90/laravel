@@ -30,10 +30,10 @@
       <input type="text" class="form-control" id="hrAgenda" name="hrAgenda" value="{{$age->hrAgenda}}">
     </div>
     <div class="form-group">
-      <label for="title">Assunto:</label>
-      <input type="text" class="form-control" id="dsAssunto" name="dsAssunto">
+            <label for="title">Assunto:</label>
+            <input type="text" class="form-control" id="dsAssunto" name="dsAssunto" value="{{$age->dsAssunto}}">
     </div>
-
+    
     <div class="form-group">
       <label for="title">stAgenda</label>
       <select name="stAgenda" id="stAgenda" class="form-control">
