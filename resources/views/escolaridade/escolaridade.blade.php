@@ -4,7 +4,6 @@
 
 @section('content')
 
-
 <h1>Criar Escolaridade</h1>
 <div class="col-md-10 offset-md-1 dashboard-events-container">
     <table class="table">

@@ -25,7 +25,7 @@ class EscolaridadeController extends Controller
           
         $events->save();
   
-          return redirect('/escolaridade');
+        return redirect('/escolaridade');
   
   
        }

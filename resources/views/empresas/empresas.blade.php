@@ -7,7 +7,6 @@
 <h1>Empresas:</h1>
 
 
-
 <div class="col-md-10 offset-md-1 dashboard-events-container">
     <table class="table">
         <thead>

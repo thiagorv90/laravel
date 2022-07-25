@@ -6,42 +6,42 @@
 
 
 
-<div id="event-create-container" class="col-md-6 offset-md-3">
-  <h1>Representacões</h1>
-  @foreach ($selecionado as $age)
-  <form action="/representacoes/update/{{ $age->cdRepresentacao}}" method="POST">
-  @csrf
-   
-   @method('PUT')
-    
-    <div class="form-group">
-      <label for="title">Instancias	</label>
-      <select id="cdInstancia"  name="cdInstancia" class="form-control">
-    @foreach($lista as $i)
-        <option value="{{$i->cdInstancia}}"  @if ($age->cdInstancia == $i->cdInstancia) selected @endif > 
+  <div id="event-create-container" class="col-md-6 offset-md-3">
+    <h1>Representacões</h1>
+    @foreach ($selecionado as $age)
+    <form action="/representacoes/update/{{ $age->cdRepresentacao}}" method="POST">
+      @csrf
+
+      @method('PUT')
+
+      <div class="form-group">
+        <label for="title">Instancias </label>
+        <select id="cdInstancia" name="cdInstancia" class="form-control">
+          @foreach($lista as $i)
+          <option value="{{$i->cdInstancia}}" @if ($age->cdInstancia == $i->cdInstancia) selected @endif >
             {{ $i->nmInstancia }}
-        </option>
-    @endforeach
-    </select>
-    </div>
-    <div class="form-group">
-      <label for="title">Titular	</label>
-      <select id="cdTitular"  name="cdTitular" class="form-control">
-    @foreach($rep as $e)
-  
-        <option value="{{$e->cdRepSup}}"  @if ($age->cdTitular == $e->cdRepSup) selected @endif >
+          </option>
+          @endforeach
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="title">Titular </label>
+        <select id="cdTitular" name="cdTitular" class="form-control">
+          @foreach($rep as $e)
+
+          <option value="{{$e->cdRepSup}}" @if ($age->cdTitular == $e->cdRepSup) selected @endif >
             {{ $e->nmRepresentanteSuplente }}
-        </option>
-    @endforeach
-    </select>
-    </div>
-    <div class="form-group">
-      <label for="title">Suplente	</label>
-      <select id="cdSuplente"  name="cdSuplente" class="form-control">
-     
-      @foreach($rep as $e)
-   
-        <option value="{{$e->cdRepSup}}"  @if ($age->cdSuplente == $e->cdRepSup) selected @endif >
+          </option>
+          @endforeach
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="title">Suplente </label>
+        <select id="cdSuplente" name="cdSuplente" class="form-control">
+
+          @foreach($rep as $e)
+
+          <option value="{{$e->cdRepSup}}" @if ($age->cdSuplente == $e->cdRepSup) selected @endif >
             {{ $e->nmRepresentanteSuplente }}
         </option>
     @endforeach
@@ -90,4 +90,4 @@
  @endforeach
 
 
-@endsection
+  @endsection

@@ -6,6 +6,7 @@
 
 
 <div id="event-create-container" class="col-md-6 offset-md-3">
+
   <h1>Contatos</h1>
   
   
@@ -18,16 +19,18 @@
  @else
 
  <table class="table">
+
         <thead>
             <tr>
-                
-            
+
+
                 <th scope="col">Nome</th>
                 <th scope="col">Opções</th>
-               
+
             </tr>
         </thead>
         <tbody>
+
         @foreach ($events as $event)
                 <tr>
                     

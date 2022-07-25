@@ -12,7 +12,8 @@ class Empresa extends Model
     use HasFactory;
     public $timestamps = false;
 
-    public function Representante_suplente(){
+    public function Representante_suplente()
+    {
         return $this->hasMany('App\Models\Representante_suplente');
     }
 }

@@ -136,7 +136,31 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::get('users/export/', [UsersController::class, 'export'])->name('teste');
 
-        Route::get('dashboard/export/representacoes/', [RepresentacoesController::class, 'export'])->name('superRepresentacao');
+        Route::get('dashboard/export/representacoes/', [RepresentacoesController::class, 'export'])->name('porRepresentante');
+        Route::get('dashboard/export/instancias/', [InstaciaController::class, 'exportPorId'])->name('porInstancia');
+        Route::get('dashboard/export/repEmNumeros/', [RepresentacoesController::class, 'exportRepEmNumeros'])->name('repEmNumeros');
+        Route::get('dashboard/export/instanciasPorStatus', [InstaciaController::class, 'exportPorStatus'])->name('porStatus');
+        Route::get('dashboard/export/instanciasPorTema', [InstaciaController::class, 'exportPorTema'])->name('porTema');
+        Route::get('dashboard/export/instanciasPorPrioridade', [InstaciaController::class, 'exportPorPrioridade'])->name('porPrioridade');
+        Route::get('dashboard/export/instanciasPorVigencia', [InstaciaController::class, 'exportPorVigencia'])->name('porVigencia');
+        Route::get('dashboard/export/instanciasPorData', [InstaciaController::class, 'exportPorData'])->name('porData');
+
+
+        Route::get('dashboard/exportView/instancias/', [InstaciaController::class, 'instanciasExportView'])->name('exportViewInstancias');
+        Route::get('dashboard/exportView/instanciasData/', [InstaciaController::class, 'instanciasDataExportView'])->name('exportViewInstData');
+        Route::get('dashboard/exportView/instanciasPorId/', [InstaciaController::class, 'instanciasPorIdExportView'])->name('exportViewInstId');
+        Route::get('dashboard/exportView/instanciasPorPrioridade/', [InstaciaController::class, 'instanciasPorPrioridadeExportView'])->name('exportViewInstPrioridade');
+        Route::get('dashboard/exportView/instanciasPorTema/', [InstaciaController::class, 'instanciasPorTemaView'])->name('exportViewInstTema');
+        Route::get('dashboard/exportView/instanciasPorVigencia/', [InstaciaController::class, 'instanciasPorVigenciaView'])->name('exportViewInstVigencia');
+        Route::get('dashboard/exportView/instanciasPorStatus/', [InstaciaController::class, 'instanciasPorStatusExportView'])->name('exportViewInstStatus');
+        Route::get('dashboard/exportView/representantes/', [RepresentacoesController::class, 'representacoesExportView'])->name('exportViewRepresentacoes');
+        Route::get('dashboard/exportView/representacoesEmNumero/', [RepresentacoesController::class, 'representacoesPorNumeroExportView'])->name('exportViewRepresentacoesNum');
+
+
+
+        Route::get('dashboard/teste', function (){
+            require __DIR__ . '\resources\views\exports\representacaoNumeros.blade.php';
+        });
 
         Route::view('auth/register', 'auth/register');
     });

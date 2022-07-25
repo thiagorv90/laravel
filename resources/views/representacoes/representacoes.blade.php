@@ -96,8 +96,21 @@
         <option value="1">Sim</option>
       </select>
     </div>
-    <input type="submit" class="btn btn-primary" value="Criar Evento" />
+    <input onclick="validaData()" type="submit" class="btn btn-primary" value="Criar Evento" />
   </form>
 </div>
+
+<script>
+  function validaData() {
+    var dataInicio = document.getElementById("dtInicioVigencia").value;
+    var dataFim = document.getElementById("dtFimVigencia").value;
+
+    if (dataInicio > dataFim) {
+      alert('A data final precisa ser maior que data inicial!');
+    }
+  };
+</script>
+
+
 
 @endsection

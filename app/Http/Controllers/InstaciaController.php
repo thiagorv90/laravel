@@ -2,6 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\InstanciaAtivaExport;
+use App\Exports\InstanciaPorData;
+use App\Exports\InstanciaPorPrioridadeExport;
+use App\Exports\InstanciaPorTemaExport;
+use App\Exports\InstanciaPorVigenciaExport;
+use App\Exports\InstanciasPorIdExport;
 use Illuminate\Http\Request;
 use App\Models\Instancia;
 use App\Models\Representacoe;
@@ -14,6 +20,7 @@ use DB;
 
 class InstaciaController extends Controller
 {
+
   public function storeinst(Request $request, $id)
   {
 
@@ -122,11 +129,6 @@ class InstaciaController extends Controller
     return redirect()->route('instancias', ['id' => $cd]);
   }
 
-  public function export(Request $request)
-  {
-    return (new InstanciasExport($request->id))->download('instancias.xlsx');
-  }
-
   public function search(Request $request, $id){
 
     $request ->validate([
@@ -144,4 +146,105 @@ class InstaciaController extends Controller
  return view('/instancias/search-results',compact('events'));
  }
  
+public function instanciasExportView()
+    {
+        $instancias = Instancia::join('tema_representacoes', 'instancias.cdTema', '=', 'tema_representacoes.cdTema')
+            ->join('representacoes as r', 'r.cdInstancia', '=', 'instancias.cdInstancia')
+            ->join('representante_suplentes as rt', 'rt.cdRepSup', '=', 'r.cdTitular')
+            ->get();
+
+        return view('exportsView/instancias', ['instancias' => $instancias]);
+    }
+
+    public function instanciasDataExportView()
+    {
+        $instancias = Instancia::join('representacoes as r', 'r.cdInstancia', '=', 'instancias.cdInstancia')
+        ->join('representante_suplentes as rt', 'rt.cdRepSup', '=', 'r.cdTitular')
+        ->join('agendas as a', 'a.cdAgenda', '=', 'r.cdRepresentacao')
+        ->get();
+
+        return view('exportsView/instanciasPorData', ['instancias' => $instancias]);
+    }
+
+    public function instanciasPorIdExportView()
+    {
+        $instancias = Instancia::join('representacoes as r', 'r.cdInstancia', '=', 'instancias.cdInstancia')
+            ->join('representante_suplentes as rs', 'rs.cdRepSup', '=', 'r.cdSuplente')
+            ->join('representante_suplentes as rt', 'rt.cdRepSup', '=', 'r.cdTitular')
+            ->select(\Illuminate\Support\Facades\DB::raw('nmInstancia, tpAtribuicoes, tpPublicoPrivado, tpFederalDistrital, dsObjetivo,
+                rs.nmRepresentanteSuplente as repSup, rt.nmRepresentanteSuplente as repTit'))
+            ->get();
+
+        return view('exportsView/instanciasPorId', ['instancias' => $instancias]);
+    }
+
+    public function instanciasPorPrioridadeExportView()
+    {
+        $instancias = Instancia::all();
+
+        return view('exportsView/instanciasPorPrioridade', ['instancias' => $instancias]);
+    }
+
+    public function instanciasPorTemaView()
+    {
+        $instancias = Instancia::join('representacoes as r', 'r.cdInstancia', '=', 'instancias.cdInstancia')
+            ->join('representante_suplentes as rs', 'rs.cdRepSup', '=', 'r.cdSuplente')
+            ->join('representante_suplentes as rt', 'rt.cdRepSup', '=', 'r.cdTitular')
+            ->join('tema_representacoes as tr', 'instancias.cdTema', '=', 'tr.cdTema')
+            ->select(\Illuminate\Support\Facades\DB::raw('tr.nmTema as tema, instancias.nmInstancia as instancia,
+                rt.nmRepresentanteSuplente as repTit, rs.nmRepresentanteSuplente as repSup'))
+            ->get();
+
+        return view('exportsView/instanciasPorTema', ['instancias' => $instancias]);
+    }
+
+    public function instanciasPorVigenciaView()
+    {
+        $instancias = Instancia::join('representacoes as r', 'r.cdInstancia', '=', 'instancias.cdInstancia')
+            ->get();
+
+        return view('exportsView/instanciasPorVigencia', ['instancias' => $instancias]);
+    }
+
+    public function instanciasPorStatusExportView()
+    {
+        $instancias = Instancia::all();
+
+        return view('exportsView/instanciasPorStatus', ['instancias' => $instancias]);
+    }
+
+    public function export()
+    {
+        return (new InstanciasExport)->download('instancias.xlsx');
+    }
+
+    public function exportPorId()
+    {
+        return (new InstanciasPorIdExport())->download('instanciaId.xlsx');
+    }
+
+    public function exportPorStatus()
+    {
+        return (new InstanciaAtivaExport)->download('instanciaStatus.xlsx');
+    }
+
+    public function exportPorTema()
+    {
+        return (new InstanciaPorTemaExport)->download('instanciaTema.xlsx');
+    }
+
+    public function exportPorPrioridade()
+    {
+        return (new InstanciaPorPrioridadeExport)->download('instanciaPrioridade.xlsx');
+    }
+
+    public function exportPorVigencia()
+    {
+        return (new InstanciaPorVigenciaExport)->download('instanciaPorVigencia.xlsx');
+    }
+
+    public function exportPorData()
+    {
+        return (new InstanciaPorData)->download('instanciaPorData.xlsx');
+    }
 }

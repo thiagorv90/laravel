@@ -7,10 +7,10 @@
 
 <div id="event-create-container" class="col-md-6 offset-md-3">
 
-    @foreach ($selecionado as $con)
+  @foreach ($selecionado as $con)
   <form action="/contatos/update/{{ $con->cdContato}}" method="POST">
-     @csrf
-   
+    @csrf
+
     @method('PUT')
     <div class="form-group">
       <label for="title">Nome:</label>
@@ -30,8 +30,8 @@
       <label for="title">Email:</label>
       <input type="text" class="form-control" id="dsEmail" name="dsEmail" value="{{$con->dsEmail}}"></input>
     </div>
-    
-   
+
+
     <div class="form-group">
       <label for="title">Ativo:</label>
       <div class="form-check">
@@ -72,9 +72,9 @@
 
     <br>
     <input type="submit" class="btn btn-primary" value="Alterar">
-</form>
-@endforeach
- 
+  </form>
+  @endforeach
+
 </div>
 
 

@@ -3,6 +3,7 @@
 @section('title', 'Instancias')
 
 @section('content')
+
 @if (is_countable($instancias) && count($instancias) == 0) 
 
 @foreach ($instituicaos as $instituicao)
@@ -19,13 +20,14 @@
             <label for="title">cdInstituicao </label>
             <select name="cdInstituicao" id="cdInstituicao" class="form-select">
                              <option value="{{$instituicao->cdInstituicao}}"> {{$instituicao->nmInstituicao}}</option>
+
                         </select>
-        </div>
-        <div class="form-group">
-            <label for="title">cdTema </label>
-            <select name="cdTema" id="cdTema" class="form-select">
-                @foreach ($temas as $tema)
-                <option value="{{$tema->cdTema}}"> {{$tema->nmTema}}</option>
+                    </div>
+                    <div class="form-group">
+                        <label for="title">cdTema </label>
+                        <select name="cdTema" id="cdTema" class="form-select">
+                            @foreach ($temas as $tema)
+                                <option value="{{$tema->cdTema}}"> {{$tema->nmTema}}</option>
 
                 @endforeach
             </select>
@@ -148,16 +150,30 @@
             @foreach ($instituicaos as $instituicao)
                 <option value="{{$instituicao->cdInstituicao}}"> {{$instituicao->nmInstituicao}}</option>
 
-                @endforeach
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="title">cdTema </label>
-            <select name="cdTema" id="cdTema" class="form-select">
-                @foreach ($temas as $tema)
-                <option value="{{$tema->cdTema}}"> {{$tema->nmTema}}</option>
+                @foreach($instancias as $instancia)
+                    <tr>
 
+                        <td><a>{{ $instancia->nmInstancia }}</a></td>
+                        <td>{{$instancia->nmTema}}</td>
+                        <td>{{$instancia->nmRepresentanteSuplente}}</td>
+                        <td>{{$instancia->nmContato}}</td>
+                        <td><a href="/instancias/{{$instancia->cdInstancia}}" class="btn btn-info edit-btn">
+                                <ion-icon name="search-outline"></ion-icon>
+                            </a>
+                            <a href="/instancias/edit/{{$instancia->cdInstancia}}" class="btn btn-info edit-btn">
+                                <ion-icon name="create-outline"></ion-icon>
+                            </a>
+                            <a href="/contatos/listacontato/{{$instancia->cdInstancia}}" class="btn btn-info edit-btn">
+                                <ion-icon name="person-outline"></ion-icon>
+                            </a>
+                            <a href="/repinsta/{{$instancia->cdInstancia}}" class="btn btn-info edit-btn">
+                                <ion-icon name="reader-outline"></ion-icon>
+                            </a>
+
+
+                    </tr>
                 @endforeach
+
             </select>
         </div>
         <div class="form-group">
@@ -262,3 +278,4 @@
 @endif
 
 @endsection
+

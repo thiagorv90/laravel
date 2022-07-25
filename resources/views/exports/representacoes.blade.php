@@ -1,17 +1,25 @@
+<html>
+<body>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2>Relatorio de Representantes</h2>
 <table class="table">
     <thead>
-        <tr>
-            <th scope="col">Nome</th>
-            <th scope="col">Instancias</th>
-            <th scope="col">Data Nomeacao</th>
-            <th scope="col">Vigencia</th>
-            <th scope="col">Mandato</th>
-            <th scope="col">Designacao</th>
-            <th scope="col">Nomeacao</th>
-        </tr>
+    <tr>
+        <th scope="col"><strong>Nome</strong></th>
+        <th scope="col"><strong>Instancias</strong></th>
+        <th scope="col"><strong>*Data Nomeacao</strong></th>
+        <th scope="col"><strong>Vigencia</strong></th>
+        <th scope="col"><strong>Mandato</strong></th>
+        <th scope="col"><strong>Designacao</strong></th>
+        <th scope="col"><strong>Nomeacao</strong></th>
+    </tr>
     </thead>
     <tbody>
-        @foreach($representacoes as $representacao)
+    @foreach($representacoes as $representacao)
         <tr>
             <td>{{ $representacao->nmRepresentanteSuplente }}</td>
             <td>{{ $representacao->nmInstancia }}</td>
@@ -21,6 +29,8 @@
             <td>{{ $representacao->dsDesignacao }}</td>
             <td>{{ $representacao->dsNomeacao}}</td>
         </tr>
-        @endforeach
+    @endforeach
     </tbody>
 </table>
+</body>
+</html>

@@ -16,13 +16,12 @@ class admin
      */
     public function handle(Request $request, Closure $next)
     {
-       
-        if (auth()->user()->statusadm != '1'){
+
+        if (auth()->user()->statusadm != '1') {
             abort('403');
-            
-         }
-        
-        
+        }
+
+
         return $next($request);
     }
 }

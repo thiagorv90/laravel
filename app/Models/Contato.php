@@ -11,18 +11,19 @@ class Contato extends Model
     use HasFactory;
     public $timestamps = false;
 
-    public function telefone(){
+    public function telefone()
+    {
         return $this->hasMany('App\Models\Telefone_contato');
     }
-    public function instancia(){
+    public function instancia()
+    {
         return $this->hasOne('App\Models\Instancia');
     }
     public function scopeFilter($query, array $filters)
     {
-        $query->when($filters['search'] ?? false, fn($query, $search) =>
-            $query
-                ->where('nmContato', 'like', '%' . $search . '%')
-                ->orWhere('dsEmail', 'like', '%' . $search . '%'));
+        $query->when($filters['search'] ?? false, fn ($query, $search) =>
+        $query
+            ->where('nmContato', 'like', '%' . $search . '%')
+            ->orWhere('dsEmail', 'like', '%' . $search . '%'));
     }
-
 }

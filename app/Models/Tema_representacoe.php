@@ -9,5 +9,6 @@ class Tema_representacoe extends Model
 {
     protected $primaryKey = 'cdTema';
     use HasFactory;
+
     public $timestamps = false;
 }

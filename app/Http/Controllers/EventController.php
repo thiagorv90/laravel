@@ -10,14 +10,16 @@ use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
-    public function editEmp($emp){
-       //$events = Empresas::all();
-       $event=empresa::find($emp) ;  
-        
-        return view('/empresas.edit',['empresas'=>$event]);
+    public function editEmp($emp)
+    {
+        //$events = Empresas::all();
+        $event = empresa::find($emp);
+
+        return view('/empresas.edit', ['empresas' => $event]);
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
 
         $event =  new Empresa;
 
@@ -25,56 +27,54 @@ class EventController extends Controller
 
         $event->save();
 
-        return redirect('/'); 
-
+        return redirect('/');
     }
 
 
-    public function updateEmp(Request $request,$emp) {
+    public function updateEmp(Request $request, $emp)
+    {
         $name = $request->input('nmEmpresa');
-        DB::update('update empresas set nmEmpresa = ? where cdEmpresa = ?',[$name,$emp]);
-       
+        DB::update('update empresas set nmEmpresa = ? where cdEmpresa = ?', [$name, $emp]);
 
-        return redirect('/empresas')->with('msg','evento alterado com sucesso');
-     }
 
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
+        return redirect('/empresas')->with('msg', 'evento alterado com sucesso');
+    }
+
+
+
+
+
+
+
+
+
+
+
     public function logout(Request $request)
-{
-    Auth::logout();
+    {
+        Auth::logout();
 
-    $request->session()->invalidate();
+        $request->session()->invalidate();
 
-    $request->session()->regenerateToken();
+        $request->session()->regenerateToken();
 
-    return redirect('/');
-}
-
-
+        return redirect('/');
+    }
 
 
 
 
 
-public function dashe(){
-        
 
 
-    $eventos = DB::table('empresas')->get();  
+    public function dashe()
+    {
 
-     
-    return view('/empresas/empresas',['empresas'=>$eventos]);
- }
-    
+        $eventos = DB::table('empresas')->get();
+
+        return view('/empresas/empresas', ['empresas' => $eventos]);
+    }
+
  public function search(Request $request){
 
     $request ->validate([

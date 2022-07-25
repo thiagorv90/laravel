@@ -51,21 +51,22 @@
     @csrf
     <div class="form-group">
       <label for="title">Nome:</label>
-      <input type="text" class="form-control" id="nmContato" name="nmContato" >
+      <input type="text" class="form-control" id="nmContato" name="nmContato">
     </div>
     <div class="form-group">
       <label for="title">cdInstancia</label>
       <select name="cdInstancia" id="cdInstancia" class="form-select">
 
+
       <option value="{{$name->cdInstancia}}" > {{$name->nmInstancia}}</option>
    
-    
+  
       </select>
     </div>
     
     <div class="form-group">
       <label for="title">dsEmail:</label>
-      <input type="text" class="form-control" id="dsEmail" name="dsEmail" >
+      <input type="text" class="form-control" id="dsEmail" name="dsEmail">
     </div>
     <div class="form-group">
       <label for="title">Ativo?</label>
@@ -83,6 +84,7 @@
 </div>
     
     <div class="form-group">
+
       <label for="title">Contato Representante</label>
       <div class="form-check">
   <input class="form-check-input" type="radio" name="tpContatoRepresentante" id="tpContatoRepresentante" value="1" checked >
@@ -98,15 +100,16 @@
   </label>
 </div>
 </div>
-    
+
     <div class="form-group">
       <label for="title">Email Alternativo:</label>
-      <input type="text" class="form-control" id="dsEmailAlternativo" name="dsEmailAlternativo" >
+      <input type="text" class="form-control" id="dsEmailAlternativo" name="dsEmailAlternativo">
     </div>
     <br>
     <input type="submit" class="btn btn-primary" value="Criar Evento">
   </form>
 </div>
+
 
 @else
 @foreach ($nome as $contato)
@@ -119,11 +122,12 @@
     @csrf
     <div class="form-group">
       <label for="title">Nome:</label>
-      <input type="text" class="form-control" id="nmContato" name="nmContato" >
+      <input type="text" class="form-control" id="nmContato" name="nmContato">
     </div>
     <div class="form-group">
       <label for="title">cdInstancia</label>
       <select name="cdInstancia" id="cdInstancia" class="form-select">
+
      
       <option value="{{$contato->cdInstancia}}" > {{$contato->nmInstancia}}</option>
    
@@ -132,7 +136,7 @@
     </div>
     <div class="form-group">
       <label for="title">dsEmail:</label>
-      <input type="text" class="form-control" id="dsEmail" name="dsEmail" >
+      <input type="text" class="form-control" id="dsEmail" name="dsEmail">
     </div>
     <div class="form-group">
       <label for="title">Ativo?</label>
@@ -150,6 +154,7 @@
 </div>
     
     <div class="form-group">
+
       <label for="title">Contato Representante</label>
       <div class="form-check">
   <input class="form-check-input" type="radio" name="tpContatoRepresentante" id="tpContatoRepresentante" value="1" checked >
@@ -164,9 +169,10 @@
   </label>
 </div>
     
+
     <div class="form-group">
       <label for="title">Email Alternativo:</label>
-      <input type="text" class="form-control" id="dsEmailAlternativo" name="dsEmailAlternativo" >
+      <input type="text" class="form-control" id="dsEmailAlternativo" name="dsEmailAlternativo">
     </div>
     <br>
     <input type="submit" class="btn btn-primary" value="Criar Evento">

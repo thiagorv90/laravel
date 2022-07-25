@@ -6,11 +6,11 @@
 <echo>{{$selecionado}}</echo>
 
 <div id="event-create-container" class="col-md-6 offset-md-3">
- 
-    @foreach ($selecionado as $tel)
+
+  @foreach ($selecionado as $tel)
   <form action="/telrepsup/update/{{ $tel->cdTelefone}}" method="POST">
-  @csrf
-   
+    @csrf
+
     @method('PUT')
     <div class="form-group">
       <label for="title">Numero:</label>
@@ -26,18 +26,18 @@
       <input type="text" class="form-control" id="tpTelefone" name="tpTelefone" value="{{$tel->tpTelefone}}"></input>
     </div>
     <label for="title">Nome:</label>
-    <select id="cdRepSup"  name="cdRepSup" class="form-control">
-    @foreach($lista as $i)
-        <option value="{{$i->cdRepSup}}"  @if ($tel->cdRepSup == $i->cdRepSup) selected @endif >
-            {{ $i->nmRepresentanteSuplente }}
-        </option>
-    @endforeach
-</select>
+    <select id="cdRepSup" name="cdRepSup" class="form-control">
+      @foreach($lista as $i)
+      <option value="{{$i->cdRepSup}}" @if ($tel->cdRepSup == $i->cdRepSup) selected @endif >
+        {{ $i->nmRepresentanteSuplente }}
+      </option>
+      @endforeach
+    </select>
     <br>
     <input type="submit" class="btn btn-primary" value="Alterar">
-</form>
-@endforeach
- 
+  </form>
+  @endforeach
+
 </div>
 
 
