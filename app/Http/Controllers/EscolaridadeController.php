@@ -45,4 +45,20 @@ class EscolaridadeController extends Controller
          return view('escolaridade.edit',['escolaridade'=>$events]);
       
       }
+      public function search(Request $request){
+
+         $request ->validate([
+            'query'=>'required',
+        ]);
+        
+      $query = $request->input('query');
+         $events =DB::table('escolaridades')
+      ->select('cdEscolaridade','dsEscolaridade')
+      ->where('dsEscolaridade','like',"%$query%")
+     
+      ->get();
+      
+      
+      return view('/escolaridade/search-results',compact('events'));
+      }
 }

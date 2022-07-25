@@ -55,5 +55,23 @@ class InstituicoesController extends Controller
       
       }
 
+      public function search(Request $request){
+
+         $request ->validate([
+            'query'=>'required',
+        ]);
+        
+      $query = $request->input('query');
+         $events =DB::table('instituicoes')
+      ->select('nmInstituicao','cdInstituicao')
+      ->where('nmInstituicao','like',"%$query%")
+     
+      ->get();
+      
+      
+      return view('/instituicoes/search-results',compact('events'));
+      }
+      
+
 
 }

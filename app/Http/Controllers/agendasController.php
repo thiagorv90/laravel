@@ -47,7 +47,9 @@ public function agendastore(Request $request,$id){
 
 public function editAgen($id){
    //$events=Instituicoe::find($id);
-   $edit = agenda::join('representacoes', 'representacoes.cdRepresentacao', '=','agendas.cdRepresentacao')
+   $edit = Agenda::join('representacoes', 'representacoes.cdRepresentacao', '=','agendas.cdRepresentacao')
+   ->join('representante_suplentes', 'representacoes.cdTitular', '=','representante_suplentes.cdRepSup')
+   ->join('instancias','instancias.cdInstancia', '=','representacoes.cdInstancia')
       ->where('cdAgenda','=', $id)
    ->get();
   // $insta = Instituicoe::join('tipo_instancias', 'tipo_instancias.cdTipoInstancia', '=','instituicoes.cdTipoInstituicao')->get();
@@ -80,9 +82,32 @@ public function updateAgen (Request $request,$id) {
      
    agenda::find($id)->delete();
   // $deleted = DB::delete('delete from telefone_contatos where cdTelefone = ?', [$id]);
-   return redirect('/agendas');
+  return back();
 
   }
+  public function search(Request $request, $id){
+
+   $request ->validate([
+      'query'=>'required','busca'=>'required',
+  ]);
+  
+$query = $request->input('query');
+$busca = $request->input('busca');
+ if($busca ==1){
+   $events =DB::table('agendas')
+->where('dsAssunto','like',"%$query%")
+->where('cdAgenda','=',$id)
+->get();
+ }
+ if($busca ==2){
+   $events =DB::table('agendas')
+->where('dsPauta','like',"%$query%")
+->where('cdAgenda','=',$id)
+->get();
+ }
+return view('/agendas/search-results',compact('events'));
+}
+
 
 }
 

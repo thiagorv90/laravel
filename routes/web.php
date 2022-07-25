@@ -41,12 +41,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('representacoes', [RepresentacoesController::class, 'representacoescreate']);
     Route::get('agendas/{id}', [AgendasController::class, 'agendacreate'])->name('agendas');
     Route::post('agendas/{id}', [AgendasController::class, 'agendastore']);
+    Route::get('agendas/{id}/search', [AgendasController::class, 'search']);
 
     Route::get('agendas/edit/{id}', [AgendasController::class, 'editAgen']);
     Route::PUT('agendas/update/{id}', [AgendasController::class, 'updateAgen']);
     Route::get('instancias/show/{id}', [InstaciaController::class, 'show']);
     Route::get('instancias/edit/{cdInstancia}', [InstaciaController::class, 'edit']);
     Route::PUT('instancias/update/{cdInstancia}', [InstaciaController::class, 'update']);
+    Route::get('/instancias/{id}/search', [InstaciaController::class, 'search']);
     Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
@@ -61,13 +63,14 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('empresas', [EventController::class, 'dashe']);
         Route::PUT('empresas/update/{emp}', [EventController::class, 'updateEmp']);
         Route::get('empresas/edit/{emp}', [EventController::class, 'editEmp']);
+        Route::get('empresas/{id}/search', [EventController::class, 'search']);
 
         Route::post('inicial/', [InstaciaController::class, 'searchinst']);
         Route::post('instancias/{id}', [InstaciaController::class, 'storeinst']);
         Route::get('instancias/{id}', [InstaciaController::class, 'instacreate'])->name('instancias');
         Route::get('/dashboard/export/{id}', [InstaciaController::class, 'export'])->name('excel');
 
-        Route::get('contatos/search', [ContatoController::class, 'search'])->name('searchco');
+        Route::get('/contatos/{id}/search', [ContatoController::class, 'search'])->name('searchco');
         Route::post('contatos/listacontato/{id}', [ContatoController::class, 'contastore']);
 
         Route::get('contatos/edit/{id}', [ContatoController::class, 'editCon']);
@@ -80,7 +83,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('escolaridade', [EscolaridadeController::class, 'escolaridadeindex']);
         Route::PUT('escolaridade/update/{id}', [EscolaridadeController::class, 'updateEsc']);
         Route::get('escolaridade/edit/{id}', [EscolaridadeController::class, 'editEsc']);
+        Route::get('escolaridade/{id}/search', [EscolaridadeController::class, 'search']);
 
+        Route::get('/instituicoes/{id}/search', [InstituicoesController::class, 'search'])->name('searchinst');
         Route::post('instituicoes', [InstituicoesController::class, 'instituicoesstore']);
         Route::get('instituicoes', [InstituicoesController::class, 'instituicoesindex']);
         Route::get('instituicoes', [InstituicoesController::class, 'instituicoescreate']);
@@ -115,11 +120,13 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('temarep', [TemaRepresentacoesController::class, 'temarepindex']);
         Route::PUT('temarep/update/{id}', [TemaRepresentacoesController::class, 'updateTem']);
         Route::get('temarep/edit/{id}', [TemaRepresentacoesController::class, 'editTem']);
+        Route::get('/temarep/{id}/search', [TemaRepresentacoesController::class, 'search']);
 
         Route::post('tipoinsta', [TipoInstanciaController::class, 'tipoinstastore']);
         Route::get('tipoinsta', [TipoInstanciaController::class, 'tipoinstaindex']);
         Route::PUT('tipoinsta/update/{id}', [TipoInstanciaController::class, 'updateTipo']);
         Route::get('tipoinsta/edit/{id}', [TipoInstanciaController::class, 'editTipo']);
+        Route::get('/tipoinsta/{id}/search', [TipoInstanciaController::class, 'search'])->name('searchtipinst');
 
         Route::view('autenrep', 'autenrep');
 

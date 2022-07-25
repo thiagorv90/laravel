@@ -39,24 +39,22 @@ public function contastore(Request $request,$id){
 }
 
 public function contalista($id){
-   $contatos = DB::table('instancias')->where('instancias.cdInstancia','=', $id)->get();
+   $contatos = DB::table('instancias')->join('contatos','contatos.cdInstancia', '=','instancias.cdInstancia')->where('instancias.cdInstancia','=', $id)->get();
    $edit = contato::join('instancias', 'contatos.cdInstancia', '=','instancias.cdInstancia')
-->where('instancias.cdInstancia','=', $id)
+->where('contatos.cdInstancia','=', $id)
 ->get();
-   
-return view('contatos.listacontato',['selecionado'=>$edit,'contatos'=>$contatos]);
+$nome = DB::table('instancias')->where('instancias.cdInstancia','=', $id)->get(['nmInstancia','cdInstancia']);
+return view('contatos.listacontato',['selecionado'=>$edit,'contatos'=>$contatos,'nome'=>$nome]);
 
 }
 public function editCon($id){
-   //$events=Instituicoe::find($id);
+  
    $edit = contato::join('instancias', 'contatos.cdInstancia', '=','instancias.cdInstancia')
    ->where('cdContato','=', $id)
-   ->get();
-  // $insta = Instituicoe::join('tipo_instancias', 'tipo_instancias.cdTipoInstancia', '=','instituicoes.cdTipoInstituicao')->get();
-  $insta = Instancia::orderBy('nmInstancia')
-  ->get();
-
-   return view('contatos.edit',['selecionado'=>$edit,'lista'=>$insta]);
+   ->get(['nmContato','contatos.cdInstancia','dsEmail','nmInstancia','contatos.stAtivo','tpContatoRepresentante','dsEmailAlternativo','contatos.cdContato']);
+ 
+ 
+   return view('contatos.edit',['selecionado'=>$edit]);
 
 
 }
@@ -78,14 +76,19 @@ public function updateCon (Request $request,$id) {
   }
 
 
-public function search(Request $request){
-   $request ->validate([
-       'query'=>'required',
-   ]);
-   
-$query = $request->input('query');
+public function search(Request $request, $id){
 
-$events = contato::where('nmContato','like',"%$query%")->orWhere('dsEmail','like',"%$query%")->get();
+   $request ->validate([
+      'query'=>'required',
+  ]);
+  
+$query = $request->input('query');
+   $events =DB::table('contatos')
+->select('nmContato','cdContato')
+->where('nmContato','like',"%$query%")
+->where('cdInstancia','=',$id)
+->get();
+
 
 return view('/contatos/search-results',compact('events'));
 }

@@ -58,9 +58,9 @@ class RepresentacoesController extends Controller
       $edit = Representacoe::join('representante_suplentes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
          ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
          ->where('cdRepresentacao', '=', $id)
-         ->get();
+         ->get(['representacoes.cdRepresentacao','representacoes.cdInstancia','cdTitular','cdSuplente','dtInicioVigencia','dtFimVigencia','dsDesignacao','dsNomeacao','representacoes.stAtivo']);
       // $insta = Instituicoe::join('tipo_instancias', 'tipo_instancias.cdTipoInstancia', '=','instituicoes.cdTipoInstituicao')->get();
-      $rep = representante_suplente::orderBy('cdRepSup')
+      $rep = representante_suplente::orderBy('nmRepresentanteSuplente')
          ->get();
       $insta = instancia::orderBy('nmInstancia')
          ->get();
@@ -90,7 +90,7 @@ class RepresentacoesController extends Controller
    public function instareprescreate($id)
    {
 
-      $representantes = DB::table('representante_suplentes')->get();
+      $representantes = DB::table('representante_suplentes')->orderby('nmRepresentanteSuplente')->get();
       $events = Representacoe::all();
       $instancias = DB::table('instancias')->where('instancias.cdInstancia', '=', $id)->get();
       $selecionado = Representacoe::join('representante_suplentes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
@@ -98,7 +98,7 @@ class RepresentacoesController extends Controller
          ->join('instituicoes', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
          ->leftjoin('agendas', 'agendas.cdRepresentacao', '=', 'representacoes.cdRepresentacao')
          ->where('instancias.cdInstancia', '=', $id)
-         ->get(['representacoes.cdRepresentacao', 'nmRepresentanteSuplente', 'dtInicioVigencia', 'cdTitular']);
+         ->get(['representacoes.cdRepresentacao', 'nmRepresentanteSuplente', 'dtInicioVigencia', 'cdTitular','representacoes.cdInstancia','nmInstancia']);
 
 
 
