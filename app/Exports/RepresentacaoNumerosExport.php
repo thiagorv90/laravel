@@ -32,7 +32,7 @@ class RepresentacaoNumerosExport implements FromView, ShouldAutoSize, WithDrawin
         return view('exports.representacaoNumeros', [
             'instancias' => Instancia::join('tema_representacoes', 'tema_representacoes.cdTema', '=', 'instancias.cdTema')
                 ->get()
-            ]);
+        ]);
     }
 
     public function drawings()

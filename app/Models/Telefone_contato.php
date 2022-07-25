@@ -9,6 +9,7 @@ class Telefone_contato extends Model
 {
     protected $primaryKey = 'cdTelefone';
     use HasFactory;
+
     public $timestamps = false;
 
     public function contatos()

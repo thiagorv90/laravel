@@ -9,20 +9,15 @@ use App\Models\Users;
 
 class authrepController extends Controller
 {
-   public function authindex()
-   {
+    public function authindex()
+    {
+        $events = DB::table('users')->get();
 
-      $events = DB::table('users')->get();
+        return view('repsup/autenrep', compact('events'));
+    }
 
-
-
-      return view('repsup/autenrep', compact('events'));
-   }
-
-   public function authcreate()
-   {
-
-
-      return view('repsup/repsup', compact('event'));
-   }
+    public function authcreate()
+    {
+        return view('repsup/repsup', compact('event'));
+    }
 }

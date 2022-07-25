@@ -20,11 +20,8 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
-
-        $event =  new Empresa;
-
+        $event = new Empresa;
         $event->nmEmpresa = $request->nmEmpresa;
-
         $event->save();
 
         return redirect('/');
@@ -36,59 +33,40 @@ class EventController extends Controller
         $name = $request->input('nmEmpresa');
         DB::update('update empresas set nmEmpresa = ? where cdEmpresa = ?', [$name, $emp]);
 
-
         return redirect('/empresas')->with('msg', 'evento alterado com sucesso');
     }
-
-
-
-
-
-
-
-
-
 
 
     public function logout(Request $request)
     {
         Auth::logout();
-
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
 
         return redirect('/');
     }
 
 
-
-
-
-
-
     public function dashe()
     {
-
         $eventos = DB::table('empresas')->get();
 
         return view('/empresas/empresas', ['empresas' => $eventos]);
     }
 
- public function search(Request $request){
+    public function search(Request $request)
+    {
+        $request->validate([
+            'query' => 'required',
+        ]);
 
-    $request ->validate([
-       'query'=>'required',
-   ]);
-   
- $query = $request->input('query');
-    $events =DB::table('empresas')
- ->select('cdEmpresa','nmEmpresa')
- ->where('nmEmpresa','like',"%$query%")
+        $query = $request->input('query');
+        $events = DB::table('empresas')
+            ->select('cdEmpresa', 'nmEmpresa')
+            ->where('nmEmpresa', 'like', "%$query%")
+            ->get();
 
- ->get();
- 
- 
- return view('/empresas/search-results',compact('events'));
- }
+
+        return view('/empresas/search-results', compact('events'));
+    }
 }

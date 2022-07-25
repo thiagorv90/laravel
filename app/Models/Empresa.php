@@ -10,6 +10,7 @@ class Empresa extends Model
     protected $primaryKey = 'cdEmpresa';
 
     use HasFactory;
+
     public $timestamps = false;
 
     public function Representante_suplente()

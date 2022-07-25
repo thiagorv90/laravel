@@ -9,13 +9,16 @@ class Instancia extends Model
 {
     protected $primaryKey = 'cdInstancia';
     use HasFactory;
+
     public $timestamps = false;
 
     public function Contato()
     {
         return $this->hasMany('App\Models\Contato');
     }
+
     protected $guarded = [];
+
     public function instituicoes()
     {
         return $this->hasOne('App\Models\Instituicoe');

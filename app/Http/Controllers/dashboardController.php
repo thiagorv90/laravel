@@ -8,5 +8,5 @@ use App\Models\Instancia;
 
 class dashboardController extends Controller
 {
-    
+
 }

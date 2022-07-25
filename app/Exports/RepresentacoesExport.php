@@ -19,6 +19,7 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 class RepresentacoesExport implements FromView, ShouldAutoSize, WithDrawings
 {
     use Exportable;
+
     /**
      * @return \Illuminate\Support\Collection
      */

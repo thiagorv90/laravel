@@ -22,7 +22,6 @@
     <table class="table">
         <thead>
         <tr>
-
             <th scope="col">Nome</th>
             <th scope="col">Tema</th>
             <th scope="col">Representantes</th>
@@ -51,7 +50,7 @@
                         <a href="/instancias/edit/{{$instancia->cdInstancia}}" class="btn btn-info edit-btn">
                             <ion-icon name="create-outline"></ion-icon>
                         </a>
-                    @endif
+                @endif
 
             </tr>
         @endforeach

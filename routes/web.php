@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\InstaciaController;
 use App\Http\Controllers\ContatoController;
@@ -157,8 +158,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('dashboard/exportView/representacoesEmNumero/', [RepresentacoesController::class, 'representacoesPorNumeroExportView'])->name('exportViewRepresentacoesNum');
 
 
-
-        Route::get('dashboard/teste', function (){
+        Route::get('dashboard/teste', function () {
             require __DIR__ . '\resources\views\exports\representacaoNumeros.blade.php';
         });
 

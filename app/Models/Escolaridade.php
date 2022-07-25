@@ -9,6 +9,7 @@ class Escolaridade extends Model
 {
     protected $primaryKey = 'cdEscolaridade';
     use HasFactory;
+
     public $timestamps = false;
 
     public function Escolaridade()

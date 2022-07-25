@@ -9,6 +9,7 @@ class agenda extends Model
 {
     protected $primaryKey = 'cdAgenda';
     use HasFactory;
+
     public $timestamps = false;
     protected $dates = ['dtAgenda'];
 

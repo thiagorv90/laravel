@@ -9,7 +9,9 @@ class Telefone_representante_suplente extends Model
 {
     protected $primaryKey = 'cdTelefone';
     use HasFactory;
+
     public $timestamps = false;
+
     public function Telefone_representante_suplente()
     {
         return $this->hasOne('App\Models\Telefone_representante_suplente');

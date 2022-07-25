@@ -9,6 +9,7 @@ class Tipo_instancia extends Model
 {
     protected $primaryKey = 'cdTipoInstancia';
     use HasFactory;
+
     public $timestamps = false;
 
     public function Instituicoe()

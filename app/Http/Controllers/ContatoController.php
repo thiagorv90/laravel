@@ -11,81 +11,80 @@ class ContatoController extends Controller
 {
 
 
-   public function contastore(Request $request, $id)
-   {
+    public function contastore(Request $request, $id)
+    {
+        $events = new Contato;
 
-      $events = new Contato;
+        $events->cdInstancia = $request->cdInstancia;
+        $events->tpContatoRepresentante = $request->tpContatoRepresentante;
+        $events->nmContato = $request->nmContato;
+        $events->dsEmail = $request->dsEmail;
+        $events->dsEmailAlternativo = $request->dsEmailAlternativo;
+        $events->stAtivo = $request->stAtivo;
 
-      $events->cdInstancia = $request->cdInstancia;
-      $events->tpContatoRepresentante = $request->tpContatoRepresentante;
-      $events->nmContato = $request->nmContato;
-      $events->dsEmail = $request->dsEmail;
-      $events->dsEmailAlternativo = $request->dsEmailAlternativo;
-      $events->stAtivo = $request->stAtivo;
+        $events->save();
 
-      $events->save();
+        return back();
+    }
 
-      return back();
-   }
-   public function contacreate()
-   {
+    public function contacreate()
+    {
+        $contatos = DB::table('instancias')->get();
+        $events = Contato::all();
 
-      $contatos = DB::table('instancias')->get();
-      $events = Contato::all();
+        return view('contatos\contatos', compact('contatos', 'events'));
+    }
 
-      return view('contatos\contatos', compact('contatos', 'events'));
-   }
+    public function contalista($id)
+    {
+        $contatos = DB::table('instancias')->join('contatos', 'contatos.cdInstancia', '=', 'instancias.cdInstancia')->where('instancias.cdInstancia', '=', $id)->get();
+        $edit = contato::join('instancias', 'contatos.cdInstancia', '=', 'instancias.cdInstancia')
+            ->where('contatos.cdInstancia', '=', $id)
+            ->get();
+        $nome = DB::table('instancias')->where('instancias.cdInstancia', '=', $id)->get(['nmInstancia', 'cdInstancia']);
+        return view('contatos.listacontato', ['selecionado' => $edit, 'contatos' => $contatos, 'nome' => $nome]);
 
-  public function contalista($id){
-     $contatos = DB::table('instancias')->join('contatos','contatos.cdInstancia', '=','instancias.cdInstancia')->where('instancias.cdInstancia','=', $id)->get();
-     $edit = contato::join('instancias', 'contatos.cdInstancia', '=','instancias.cdInstancia')
-  ->where('contatos.cdInstancia','=', $id)
-  ->get();
-  $nome = DB::table('instancias')->where('instancias.cdInstancia','=', $id)->get(['nmInstancia','cdInstancia']);
-  return view('contatos.listacontato',['selecionado'=>$edit,'contatos'=>$contatos,'nome'=>$nome]);
+    }
 
-  }
-
-   public function editCon($id){
-  
-   $edit = contato::join('instancias', 'contatos.cdInstancia', '=','instancias.cdInstancia')
-   ->where('cdContato','=', $id)
-   ->get(['nmContato','contatos.cdInstancia','dsEmail','nmInstancia','contatos.stAtivo','tpContatoRepresentante','dsEmailAlternativo','contatos.cdContato']);
- 
- 
-   return view('contatos.edit',['selecionado'=>$edit]);
-   }
-
-   public function updateCon(Request $request, $id)
-   {
-
-      $cd = $request->input('cdInstancia');
-      $con = $request->input('tpContatoRepresentante');
-      $name = $request->input('nmContato');
-      $email = $request->input('dsEmail');
-      $emaila = $request->input('dsEmailAlternativo');
-      $ativo = $request->input('stAtivo');
-
-      DB::update('update contatos set cdInstancia = ?, tpContatoRepresentante = ?, nmContato = ?, dsEmail = ?, dsEmailAlternativo = ?, stAtivo = ? 
-     where cdContato = ?', [$cd, $con, $name, $email, $emaila, $ativo, $id]);
-
-      return redirect()->route('contatos', ['id' => $cd]);
-   }
-
-public function search(Request $request, $id){
-
-   $request ->validate([
-      'query'=>'required',
-  ]);
-  
-$query = $request->input('query');
-   $events =DB::table('contatos')
-->select('nmContato','cdContato')
-->where('nmContato','like',"%$query%")
-->where('cdInstancia','=',$id)
-->get();
+    public function editCon($id)
+    {
+        $edit = contato::join('instancias', 'contatos.cdInstancia', '=', 'instancias.cdInstancia')
+            ->where('cdContato', '=', $id)
+            ->get(['nmContato', 'contatos.cdInstancia', 'dsEmail', 'nmInstancia', 'contatos.stAtivo', 'tpContatoRepresentante', 'dsEmailAlternativo', 'contatos.cdContato']);
 
 
-      return view('/contatos/search-results', compact('events'));
-   }
+        return view('contatos.edit', ['selecionado' => $edit]);
+    }
+
+    public function updateCon(Request $request, $id)
+    {
+        $cd = $request->input('cdInstancia');
+        $con = $request->input('tpContatoRepresentante');
+        $name = $request->input('nmContato');
+        $email = $request->input('dsEmail');
+        $emaila = $request->input('dsEmailAlternativo');
+        $ativo = $request->input('stAtivo');
+
+        DB::update('update contatos set cdInstancia = ?, tpContatoRepresentante = ?, nmContato = ?, dsEmail = ?, dsEmailAlternativo = ?, stAtivo = ?
+        where cdContato = ?', [$cd, $con, $name, $email, $emaila, $ativo, $id]);
+
+        return redirect()->route('contatos', ['id' => $cd]);
+    }
+
+    public function search(Request $request, $id)
+    {
+        $request->validate([
+            'query' => 'required',
+        ]);
+
+        $query = $request->input('query');
+        $events = DB::table('contatos')
+            ->select('nmContato', 'cdContato')
+            ->where('nmContato', 'like', "%$query%")
+            ->where('cdInstancia', '=', $id)
+            ->get();
+
+
+        return view('/contatos/search-results', compact('events'));
+    }
 }

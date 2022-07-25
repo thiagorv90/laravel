@@ -20,7 +20,7 @@ class InstanciaPorPrioridadeExport implements FromView, ShouldAutoSize, WithDraw
      */
     public function view(): View
     {
-        return view('exports.instanciasPorPrioridade',['instancias' => Instancia::all()]);
+        return view('exports.instanciasPorPrioridade', ['instancias' => Instancia::all()]);
     }
 
     public function drawings()

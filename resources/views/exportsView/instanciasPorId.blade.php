@@ -4,7 +4,9 @@
 
 @section('content')
     <h2>Relatório de Instâncias Por ID</h2>
-    <a href="{{route('porInstancia')}}" class="btn btn-primary"><ion-icon name="arrow-down-outline"></ion-icon></a>
+    <a href="{{route('porInstancia')}}" class="btn btn-primary">
+        <ion-icon name="arrow-down-outline"></ion-icon>
+    </a>
     <table class="table">
         <thead>
         <tr>
