@@ -29,7 +29,7 @@
     </div>
 
     <br>
-
+    @if (!$tema_representacoe->isEmpty())
     <form action="/temarep/{{$event->cdTema}}/search" method="GET">
         @csrf
         <div class="row">
@@ -43,6 +43,7 @@
             </div>
         </div>
     </form>
+    @endif
     <br>
 
     <h1>Crie Tema</h1>

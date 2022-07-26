@@ -28,6 +28,7 @@
     </div>
 
     <br>
+    @if (!$escolaridade->isEmpty())
     <form action="escolaridade/{{$event->cdEscolaridade}}/search" method="GET">
         @csrf
         <div class="row">
@@ -41,6 +42,7 @@
             </div>
         </div>
     </form>
+    @endif
     <br>
     <h1>Escolaridade</h1>
 

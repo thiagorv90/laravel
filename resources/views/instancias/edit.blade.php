@@ -143,6 +143,29 @@
                     <input type="text" class="form-control" id="dsObservacao" name="dsObservacao"
                            value="{{$instituicao->dsObservacao}}">
                 </div>
+                <div class="form-group">
+                        <label for="title">Ato Normativo:</label>
+                        <input placeholder="Observações..." type="text" class="form-control" id="dsAtoNormativo"
+                               name="dsAtoNormativo" value="{{$instituicao->dsAtoNormativo}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Carater</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="boCaraterDaInstancia" id="boCaraterDaInstancia"
+                                   value="1"  @if($instituicao->boCaraterDaInstancia ==1) checked @endif >
+                            <label class="form-check-label" for="boCaraterDaInstancia">
+                                Consultivo
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="boCaraterDaInstancia" id="boCaraterDaInstancia"
+                                   value="0" @if($instituicao->boCaraterDaInstancia ==0) checked @endif >
+                            <label class="form-check-label" for="boCaraterDaInstancia">
+                                Deliberativo
+                            </label>
+                        </div>
+
+                    </div>
                 <br>
                 <input type="submit" class="btn btn-primary" value="Criar Evento">
                 @endforeach

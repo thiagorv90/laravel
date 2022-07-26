@@ -26,6 +26,9 @@ class RepresentacoesController extends Controller
         $event->dsDesignacao = $request->dsDesignacao;
         $event->dsNomeacao = $request->dsNomeacao;
         $event->stAtivo = $request->stAtivo;
+        $event->dtNomeacao = $request->dtNomeacao;
+        $event->nuNomeacao = $request->nuNomeacao;
+
         $event->save();
 
         return back();
@@ -74,9 +77,12 @@ class RepresentacoesController extends Controller
         $desi = $request->input('dsDesignacao');
         $nomea = $request->input('dsNomeacao');
         $ativo = $request->input('stAtivo');
+        $numero = $request->input('nuNomeacao');
+        $dt = $request->input('dtNomeacao');
+        
 
-        DB::update('update representacoes set cdInstancia = ?, cdTitular = ?, cdSuplente = ?, dtInicioVigencia = ?, dtFimVigencia = ?, dsDesignacao = ?, dsNomeacao = ?, stAtivo = ?
-        where cdRepresentacao = ?', [$cd, $titular, $suplente, $ini, $fim, $desi, $nomea, $ativo, $id]);
+        DB::update('update representacoes set cdInstancia = ?, cdTitular = ?, cdSuplente = ?, dtInicioVigencia = ?, dtFimVigencia = ?, dsDesignacao = ?, dsNomeacao = ?, stAtivo = ?, nuNomeacao=?,dtNomeacao=?
+        where cdRepresentacao = ?', [$cd, $titular, $suplente, $ini, $fim, $desi, $nomea, $ativo,$numero,$dt, $id]);
 
         return redirect()->route('repre', ['id' => $cd]);
     }

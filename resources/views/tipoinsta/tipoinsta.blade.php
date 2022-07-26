@@ -19,13 +19,15 @@
                             <ion-icon name="create-outline"></ion-icon>
                         </a>
                 </tr>
-            @endforeach
+                @endforeach
             </tbody>
         </table>
 
     </div>
     <br>
+    @if (!$tipo_instancia->isEmpty())
     <form action="/tipoinsta/{{$event->cdTipoInstancia}}/search" method="GET">
+    
         @csrf
         <div class="row">
             <div class="col-lg-10">
@@ -38,6 +40,7 @@
             </div>
         </div>
     </form>
+    @endif
     <br>
 
     <h1>Crie Tipo das instancias</h1>

@@ -37,25 +37,54 @@
                                name="dsMandato">
                     </div>
                     <div class="form-group">
+                        <label for="title">Ativo?</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="1">
+                            <label class="form-check-label" for="stAtivo">
+                                Ativo
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="0">
+                            <label class="form-check-label" for="stAtivo">
+                                Desativado
+                            </label>
+                        </div>
+                    
+                    <div class="form-group">
                         <label for="title">Federal Distrital?</label>
-                        <select name="tpFederalDistrital" id="tpFederalDistrital" class="form-select">
-                            <option value="0">Não</option>
-                            <option value="1">Sim</option>
-                        </select>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tpFederalDistrital"
+                                   id="tpFederalDistrital" value="1">
+                            <label class="form-check-label" for="tpFederalDistrital">
+                                Federal
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tpFederalDistrital"
+                                   id="tpFederalDistrital" value="0">
+                            <label class="form-check-label" for="tpFederalDistrital">
+                                Distrital
+                            </label>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="title">Publico, Privado?</label>
-                        <select name="tpPublicoPrivado" id="tpPublicoPrivado" class="form-select">
-                            <option value="0">Não</option>
-                            <option value="1">Sim</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="title">Ativo?</label>
-                        <select name="stAtivo" id="stAtivo" class="form-select">
-                            <option value="0">Não</option>
-                            <option value="1">Sim</option>
-                        </select>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tpPublicoPrivado" id="tpPublicoPrivado"
+                                   value="1">
+                            <label class="form-check-label" for="tpPublicoPrivado">
+                                Público
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tpPublicoPrivado" id="tpPublicoPrivado"
+                                   value="0">
+                            <label class="form-check-label" for="tpPublicoPrivado">
+                                Privado
+                            </label>
+                        </div>
+
                     </div>
                     <div class="form-group">
                         <label for="title">Descrição Objetivo:</label>
@@ -69,10 +98,30 @@
                                name="tpAtribuicoes">
                     </div>
                     <div class="form-group">
-                        <label for="title">Prioridade:</label>
-                        <input placeholder="Prioridade..." type="text" class="form-control" id="tpPrioridade"
-                               name="tpPrioridade">
-                    </div>
+                            <label for="title">Prioridade:</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="tpPrioridade" id="tpPrioridade"
+                                       value="1">
+                                <label class="form-check-label" for="tpPrioridade">
+                                    Baixa
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="tpPrioridade" id="tpPrioridade"
+                                       value="2">
+                                <label class="form-check-label" for="tpPrioridade">
+                                    Média
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="tpPrioridade" id="tpPrioridade"
+                                       value="3">
+                                <label class="form-check-label" for="tpPrioridade">
+                                    Alta
+                                </label>
+                            </div>
+
+                        </div>
                     <div class="form-group">
                         <label for="title">Ameaças:</label>
                         <input placeholder="Ameaças..." type="text" class="form-control" id="dsAmeacas"
@@ -87,6 +136,29 @@
                         <label for="title">Observação:</label>
                         <input placeholder="Observações..." type="text" class="form-control" id="dsObservacao"
                                name="dsObservacao">
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Ato Normativo:</label>
+                        <input placeholder="Observações..." type="text" class="form-control" id="dsAtoNormativo"
+                               name="dsAtoNormativo">
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Carater</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="boCaraterDaInstancia" id="boCaraterDaInstancia"
+                                   value="1">
+                            <label class="form-check-label" for="boCaraterDaInstancia">
+                                Consultivo
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="boCaraterDaInstancia" id="boCaraterDaInstancia"
+                                   value="0">
+                            <label class="form-check-label" for="boCaraterDaInstancia">
+                                Deliberativo
+                            </label>
+                        </div>
+
                     </div>
                     <br>
                     <input type="submit" class="btn btn-primary" value="Criar Instância">
@@ -293,6 +365,29 @@
                             <input placeholder="Observações..." type="text" class="form-control" id="dsObservacao"
                                    name="dsObservacao">
                         </div>
+                        <div class="form-group">
+                        <label for="title">Ato Normativo:</label>
+                        <input placeholder="Observações..." type="text" class="form-control" id="dsAtoNormativo"
+                               name="dsAtoNormativo">
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Carater</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="boCaraterDaInstancia" id="boCaraterDaInstancia"
+                                   value="1">
+                            <label class="form-check-label" for="boCaraterDaInstancia">
+                                Consultivo
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="boCaraterDaInstancia" id="boCaraterDaInstancia"
+                                   value="0">
+                            <label class="form-check-label" for="boCaraterDaInstancia">
+                                Deliberativo
+                            </label>
+                        </div>
+
+                    </div>
                         <br>
                         <input type="submit" class="btn btn-primary" value="Criar Instância">
                 </form>
