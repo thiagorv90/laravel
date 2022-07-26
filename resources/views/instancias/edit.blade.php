@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <div id="event-create-container" class="col-md-6 offset-md-3">
+    <div id="event-create-container" class="container">
         <h1>Editar</h1>
         @foreach ($edit as $instituicao)
             <form action="/instancias/update/{{ $instituicao->cdInstancia}}" method="POST">
@@ -17,7 +17,7 @@
                            value="{{$instituicao->nmInstancia}}"></input>
                 </div>
                 <div class="form-group">
-                    <label for="title">cdInstituicao </label>
+                    <label for="title">Instituição: </label>
                     <select name="cdInstituicao" id="cdInstituicao" class="form-control">
 
                         <option value="{{$instituicao->cdInstituicao}}"> {{$instituicao->nmInstituicao}}</option>
@@ -26,7 +26,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="title">cdTema </label>
+                    <label for="title">Tema: </label>
                     <select name="cdTema" id="cdTema" class="form-control">
 
                         <option value="{{$instituicao->cdTema}}"> {{$instituicao->nmTema}}</option>
@@ -40,7 +40,7 @@
                            value="{{$instituicao->dsMandato}}">
                 </div>
                 <div class="form-group">
-                    <label for="title">Federal Distrital?</label>
+                    <label for="title">Classificação:</label>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="tpFederalDistrital" id="tpFederalDistrital"
                                value="1" @if($instituicao->tpFederalDistrital ==1) checked @endif >
@@ -57,7 +57,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="title">Publico, Privado?</label>
+                    <label for="title">Classificação:</label>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="tpPublicoPrivado" id="tpPublicoPrivado"
                                value="1" @if($instituicao->tpPublicoPrivado ==1) checked @endif >
@@ -75,7 +75,7 @@
 
                 </div>
                 <div class="form-group">
-                    <label for="title">Ativo?</label>
+                    <label for="title">Status:</label>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="1"
                                @if($instituicao->stAtivo ==1) checked @endif >
@@ -98,7 +98,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="title">atribuições:</label>
+                        <label for="title">Atribuições:</label>
                         <input type="text" class="form-control" id="tpAtribuicoes" name="tpAtribuicoes"
                                value="{{$instituicao->tpAtribuicoes}}">
                     </div>
@@ -149,7 +149,7 @@
                                name="dsAtoNormativo" value="{{$instituicao->dsAtoNormativo}}">
                     </div>
                     <div class="form-group">
-                        <label for="title">Carater</label>
+                        <label for="title">Carater:</label>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="boCaraterDaInstancia" id="boCaraterDaInstancia"
                                    value="1"  @if($instituicao->boCaraterDaInstancia ==1) checked @endif >
@@ -167,7 +167,7 @@
 
                     </div>
                 <br>
-                <input type="submit" class="btn btn-primary" value="Criar Evento">
+                <input type="submit" class="btn btn-primary mb-2" value="Criar Evento">
                 @endforeach
             </form>
     </div>

@@ -5,16 +5,16 @@
 @section('content')
 
 
-    <div id="event-create-container" class="col-md-6 offset-md-3">
+    <div id="event-create-container" class="container">
         <h1>Contatos</h1>
-        <form action="contatos" method="POST">
+        <form action="/contatos" method="POST">
             @csrf
             <div class="form-group">
                 <label for="title">Nome:</label>
-                <input type="text" class="form-control" id="nmContato" name="nmContato">
+                <input type="text" class="form-control" id="nmContato" name="nmContato" placeholder="Nome">
             </div>
             <div class="form-group">
-                <label for="title">cdInstancia</label>
+                <label for="title">Instancia:</label>
                 <select name="cdInstancia" id="cdInstancia" class="form-control">
                     @foreach ($contatos as $contato)
                         <option value="{{$contato->cdInstancia}}"> {{$contato->nmInstancia}}</option>
@@ -23,7 +23,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="title">dsEmail:</label>
+                <label for="title">Email:</label>
                 <input type="text" class="form-control" id="dsEmail" name="dsEmail">
             </div>
             <div class="form-group">
