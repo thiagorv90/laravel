@@ -6,8 +6,8 @@
 
     <h1>Crie Representante</h1>
 
-    <div id="event-create-container" class="col-md-10 offset-md-1">
-        <form action="repsup" method="POST">
+    <div id="event-create-container" class="container">
+        <form action="/repsup" method="POST">
             @csrf
             <div class="form-group">
                 <label for="title">Nome:</label>
@@ -15,21 +15,21 @@
                        name="nmRepresentanteSuplente" required/>
             </div>
             <div class="form-group">
-                <label for="title">dsEmail:</label>
+                <label for="title">Email Principal:</label>
                 <input placeholder="Email..." type="text" class="form-control" id="dsEmail" name="dsEmail" required/>
             </div>
             <div class="form-group">
-                <label for="title"> dsEmailAlternativo</label>
+                <label for="title">Email Secundário:</label>
                 <input placeholder="Email Alternativo..." type="text" class="form-control" id="dsEmailAlternativo"
                        name="dsEmailAlternativo" required/>
             </div>
             <div class="form-group">
-                <label for="title">dsProfissao:</label>
+                <label for="title">Profissão:</label>
                 <input placeholder="Profissão..." type="text" class="form-control" id="dsProfissao" name="dsProfissao"
                        required/>
             </div>
             <div class="form-group">
-                <label for="title">Ativo</label>
+                <label for="title">Status:</label>
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="1">
                     <label class="form-check-label" for="stAtivo">
@@ -44,7 +44,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="title">cdEscolaridade</label>
+                <label for="title">Escolaridade:</label>
                 <select name="cdEscolaridade" id="cdEscolaridade" class="form-select">
                     @foreach ($escolaridades as $escolaridade)
                         <option value="{{$escolaridade->cdEscolaridade}}"> {{$escolaridade->dsEscolaridade}}</option>
@@ -53,7 +53,7 @@
             </div>
             <div class="form-group">
 
-                <label for="title">cdEmpresa</label>
+                <label for="title">Empresa:</label>
                 <select name="cdEmpresa" id="cdEmpresa" class="form-select">
 
                     @foreach ($empresas as $empresa)
@@ -63,13 +63,13 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="title"> dsEndereco</label>
+                <label for="title"> Endereço:</label>
                 <textarea placeholder="Endereço..." name="dsEndereco" id="dsEndereco" class="form-control"
                           required></textarea>
             </div>
 
             <div class="form-group">
-                <label for="title">dtNascimento:</label>
+                <label for="title">Data de Nascimento:</label>
                 <input type="date" class="form-control" id="dtNascimento" name="dtNascimento">
             </div>
             <br>
@@ -77,7 +77,7 @@
         </form>
     </div>
 
-    <div class="col-md-10 offset-md-1 dashboard-events-container">
+    <div class="container mt-5">
         <table class="table">
             <thead>
             <tr>
@@ -103,7 +103,6 @@
             @endforeach
             </tbody>
         </table>
-
     </div>
 
 @endsection

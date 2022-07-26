@@ -3,8 +3,8 @@
 @section('title', 'Tipo Instancia')
 
 @section('content')
-    <h1>Tipos de Instancias</h1>
-    <div class="col-md-10 offset-md-1 dashboard-events-container">
+    <div class="container">
+        <h1>Tipos de Instancias</h1>
         <table class="table">
             <thead>
             <tr>
@@ -19,39 +19,31 @@
                             <ion-icon name="create-outline"></ion-icon>
                         </a>
                 </tr>
-                @endforeach
+            @endforeach
             </tbody>
         </table>
 
-    </div>
-    <br>
-    @if (!$tipo_instancia->isEmpty())
-    <form action="/tipoinsta/{{$event->cdTipoInstancia}}/search" method="GET">
-    
-        @csrf
-        <div class="row">
-            <div class="col-lg-10">
-                <div class="form-group">
-                    <input type="text" class="form-control" value="" name="query" id="query" placeholder="busca">
-                    <button class="navbar-search__buttton">
-                        <i class="fa fa-search"></i>
-                    </button>
+        <br>
+        @if (!$tipo_instancia->isEmpty())
+            <form action="/tipoinsta/{{$event->cdTipoInstancia}}/search" method="GET">
+                @csrf
+                <div class="input-group mb-3">
+                    <input placeholder="Buscar Tipo..." type="text" class="form-control" id="query"
+                           name="query" aria-label="Buscar Tipo" aria-describedby="button-addon2" required/>
+                    <input type="submit" class="btn btn-primary" value="Buscar" id="button-addon2">
                 </div>
-            </div>
-        </div>
-    </form>
-    @endif
-    <br>
+            </form>
+        @endif
+        <br>
 
-    <h1>Crie Tipo das instancias</h1>
+        <h1>Crie Tipo das instancias</h1>
 
-    <div id="event-create-container" class="col-md-10 offset-md-1">
-        <form action="tipoinsta" method="POST">
+        <form action="/tipoinsta" method="POST">
             @csrf
             <div class="input-group mb-3">
-                <input placeholder="Criar Tipo_instancia..." type="text" class="form-control" id="dsTipoInstancia"
+                <input placeholder="Criar Tipo..." type="text" class="form-control" id="dsTipoInstancia"
                        name="dsTipoInstancia" required/>
-                <input type="submit" class="btn btn-primary" value="Criar Tipo_instancia">
+                <input type="submit" class="btn btn-primary" value="Criar">
 
             </div>
         </form>

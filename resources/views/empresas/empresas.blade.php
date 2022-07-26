@@ -1,6 +1,6 @@
 @extends('layout.main')
 
-@section('title', 'HDC Events')
+@section('title', 'Empresas')
 
 @section('content')
 
@@ -49,7 +49,7 @@
                     <input placeholder="Criar Empresa..." type="text" class="form-control" id="nmEmpresa"
                            name="nmEmpresa"
                            aria-label="Criar Empresa" aria-describedby="button-addon2" required/>
-                    <input type="submit" class="btn btn-primary" value="Criar Empresa" id="button-addon2">
+                    <input type="submit" class="btn btn-primary" value="Criar" id="button-addon2">
                 </div>
             </form>
     </div>
