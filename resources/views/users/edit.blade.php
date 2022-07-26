@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <div id="event-create-container" class="col-md-6 offset-md-3">
+    <div id="event-create-container" class="container">
         <h1>Usuarios</h1>
         @foreach ($users as $age)
             <form action="/usuarios/update/{{$age->id}}" method="POST">
@@ -16,8 +16,8 @@
                     <input type="text" class="form-control" id="name" name="name" value="{{$age->name}}">
                 </div>
                 <div class="form-group">
-                    <label for="title">Perfil </label>
-                    <select id="statusadm" name="statusadm" class="form-control">
+                    <label for="title">Perfil: </label>
+                    <select id="statusadm" name="statusadm" class="form-select">
 
                         @if ($age->statusadm == 1)
                             <option value="{{$age->statusadm}}">

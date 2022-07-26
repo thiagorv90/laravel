@@ -53,29 +53,31 @@
                 </div>
 
                 <div class="offcanvas-body">
-                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                        @if(auth()->user()->statusadm ==1)
-                            
-                            <li class="nav-item"><a class="nav-link" href="/register">Cadastrar</a></li>
-                           
-                            <li class="nav-item"><a class="nav-link" href="/empresas">Empresas</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/escolaridade">Escolaridade</a></li>
-                            
-                            <li class="nav-item"><a class="nav-link" href="/instituicoes">Instituicoes</a></li>
-                            
-                            <li class="nav-item"><a class="nav-link" href="/repsup">Representantes</a></li>
-                            
-                            <li class="nav-item"><a class="nav-link" href="/temarep">Tema Representação</a></li>
-                            
-                            <li class="nav-item"><a class="nav-link" href="/tipoinsta">Tipo de Instancias</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/usuarios">Usuários</a></li>
-                        @else
-                            <li class="nav-item"><a class="nav-link" href="/representacoes">Usuários</a></li>
-                            @endif
-                        
-                    </ul>
+                    <div class="container">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                            @if(auth()->user()->statusadm ==1)
 
-                    <div class="container-fluid funcionalidades">
+                                <li class="nav-item"><a class="nav-link" href="/register">Cadastrar</a></li>
+
+                                <li class="nav-item"><a class="nav-link" href="/empresas">Empresas</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/escolaridade">Escolaridade</a></li>
+
+                                <li class="nav-item"><a class="nav-link" href="/instituicoes">Instituicoes</a></li>
+
+                                <li class="nav-item"><a class="nav-link" href="/repsup">Representantes</a></li>
+
+                                <li class="nav-item"><a class="nav-link" href="/temarep">Tema Representação</a></li>
+
+                                <li class="nav-item"><a class="nav-link" href="/tipoinsta">Tipo de Instancias</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/usuarios">Usuários</a></li>
+                            @else
+                                <li class="nav-item"><a class="nav-link" href="/representacoes">Usuários</a></li>
+                            @endif
+
+                        </ul>
+                    </div>
+
+                    <div class="container d-flex justify-content-between align-items-end mt-5">
                         <x-jet-responsive-nav-link class="btn btn-info" href="{{ route('profile.show') }}"
                                                    :active="request()->routeIs('profile.show')">
                             {{ __('Perfil') }}

@@ -15,7 +15,7 @@
             @foreach ($tipo_instancia as $event)
                 <tr>
                     <td><a>{{ $event->dsTipoInstancia }}</a></td>
-                    <td><a href="/agendas/edit/{{$event->cdAgenda}}" class="btn btn-info edit-btn">
+                    <td><a href="/tipoinsta/edit/{{$event->cdTipoInstancia}}" class="btn btn-info edit-btn">
                             <ion-icon name="create-outline"></ion-icon>
                         </a>
                 </tr>

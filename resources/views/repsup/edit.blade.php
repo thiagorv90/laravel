@@ -4,8 +4,9 @@
 
 @section('content')
     @foreach ($selecionado as $age)
-        <div id="event-create-container" class="col-md-6 offset-md-3">
-            <h1>Editar dados Representante:{{$age->nmRepresentanteSuplente}}</h1>
+        <div id="event-create-container" class="container">
+            <h1>Editar dados</h1>
+            <h3>Representante:{{$age->nmRepresentanteSuplente}}</h3>
 
             <form action="/repsup/update/{{ $age->cdRepSup}}" method="POST">
                 @csrf
@@ -17,7 +18,7 @@
                            value="{{$age->nmRepresentanteSuplente}}">
                 </div>
                 <div class="form-group">
-                    <label for="title">cdRepresentacao </label>
+                    <label for="title">Representacao:</label>
                     <select id="cdEmpresa" name="cdEmpresa" class="form-control">
 
                         <option value="{{$age->cdEmpresa}}">
@@ -27,7 +28,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="title">Escolaridade </label>
+                    <label for="title">Escolaridade:</label>
                     <select id="cdEscolaridade" name="cdEscolaridade" class="form-control">
                         @foreach($escola as $e)
                             <option value="{{$e->cdEscolaridade}}"
@@ -53,7 +54,7 @@
                            value="{{$age->dsProfissao}}">
                 </div>
                 <div class="form-group">
-                    <label for="title">ativo</label>
+                    <label for="title">Ativo:</label>
 
 
                     <div class="form-check">
@@ -82,7 +83,7 @@
                            value="{{$age->dtNascimento}}">
                 </div>
                 <br>
-                <input type="submit" class="btn btn-primary" value="Alterar">
+                <input type="submit" class="btn btn-primary mb-3" value="Alterar">
             </form>
             @endforeach
         </div>
