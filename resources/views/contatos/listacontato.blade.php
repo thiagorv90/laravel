@@ -61,7 +61,7 @@
                     <input type="text" class="form-control" id="nmContato" name="nmContato">
                 </div>
                 <div class="form-group">
-                    <label for="title">cdInstancia</label>
+                    <label for="title">Instancia:</label>
                     <select name="cdInstancia" id="cdInstancia" class="form-select">
 
 
@@ -72,11 +72,11 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="title">dsEmail:</label>
+                    <label for="title">Email:</label>
                     <input type="text" class="form-control" id="dsEmail" name="dsEmail">
                 </div>
                 <div class="form-group">
-                    <label for="title">Ativo?</label>
+                    <label for="title">Status:</label>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="1" checked>
                         <label class="form-check-label" for="stAtivo">
@@ -92,7 +92,7 @@
 
                     <div class="form-group">
 
-                        <label for="title">Contato Representante</label>
+                        <label for="title">Contato Representante:</label>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="tpContatoRepresentante"
                                    id="tpContatoRepresentante" value="1" checked>
@@ -111,11 +111,11 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="title">Email Alternativo:</label>
+                    <label for="title">Email Secundário:</label>
                     <input type="text" class="form-control" id="dsEmailAlternativo" name="dsEmailAlternativo">
                 </div>
                 <br>
-                <input type="submit" class="btn btn-primary" value="Criar Evento">
+                <input type="submit" class="btn btn-primary mb-2" value="Criar Evento">
             </form>
         </div>
 
@@ -124,7 +124,7 @@
             <h3>Não ha contato para esta instancia:{{$contato->nmInstancia}}</h3>
 
             <h1> Criar Contatos para a Instancia {{$contato->nmInstancia}}</h1>
-            <div id="event-create-container" class="col-md-6 offset-md-3">
+            <div id="event-create-container" class="container">
 
                 <form action="listacontatos/" method="POST">
                     @csrf
@@ -133,7 +133,7 @@
                         <input type="text" class="form-control" id="nmContato" name="nmContato">
                     </div>
                     <div class="form-group">
-                        <label for="title">cdInstancia</label>
+                        <label for="title">Instancia:</label>
                         <select name="cdInstancia" id="cdInstancia" class="form-select">
 
 
@@ -143,11 +143,11 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="title">dsEmail:</label>
+                        <label for="title">Email:</label>
                         <input type="text" class="form-control" id="dsEmail" name="dsEmail">
                     </div>
                     <div class="form-group">
-                        <label for="title">Ativo?</label>
+                        <label for="title">Status:</label>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="1" checked>
                             <label class="form-check-label" for="stAtivo">
@@ -163,7 +163,7 @@
 
                         <div class="form-group">
 
-                            <label for="title">Contato Representante</label>
+                            <label for="title">Contato Representante:</label>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="tpContatoRepresentante"
                                        id="tpContatoRepresentante" value="1" checked>
@@ -181,13 +181,15 @@
 
 
                             <div class="form-group">
-                                <label for="title">Email Alternativo:</label>
+                                <label for="title">Email Secundário:</label>
                                 <input type="text" class="form-control" id="dsEmailAlternativo"
                                        name="dsEmailAlternativo">
                             </div>
                             <br>
-                            <input type="submit" class="btn btn-primary" value="Criar Evento">
+                            <input type="submit" class="btn btn-primary mb-2" value="Criar Evento">
                 </form>
+            </div>
+            </div>
             </div>
         @endforeach
     @endif

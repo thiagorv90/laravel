@@ -11,12 +11,12 @@
 
             <h3>Não ha representações para esta instancia:{{$instancia->nmInstancia}}</h3>
 
-            <div id="event-create-container" class="col-md-6 offset-md-3">
+            <div id="event-create-container" class="container">
                 <h1>Crie sua Representação</h1>
                 <form action="repinsta" method="POST">
                     @csrf
                     <div class="form-group">
-                        <label for="title">cdInstancia</label>
+                        <label for="title">Instancia:</label>
                         <select name="cdInstancia" id="cdInstancia" class="form-control">
 
                             <option value="{{$instancia->cdInstancia}}"> {{$instancia->nmInstancia}}</option>
@@ -25,7 +25,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="title">cdTitular</label>
+                        <label for="title">Titular:</label>
                         <select name="cdTitular" id="cdTitular" class="form-control">
                             @foreach ( $representantes as $representante)
                                 <option
@@ -36,7 +36,7 @@
 
                     </div>
                     <div class="form-group">
-                        <label for="title">cdSuplente</label>
+                        <label for="title">Suplente:</label>
                         <select name="cdSuplente" id="cdSuplente" class="form-control">
 
                             <option value="">Não</option>
@@ -49,33 +49,33 @@
 
                     </div>
                     <div class="form-group">
-                        <label for="title">dtInicioVigencia</label>
+                        <label for="title">Inicio da Vigência:</label>
                         <input type="date" class="form-control" id="dtInicioVigencia" name="dtInicioVigencia">
                     </div>
                     <div class="form-group">
-                        <label for="title">dtFimVigencia</label>
+                        <label for="title">Fim da Vigência:</label>
                         <input type="date" class="form-control" id="dtFimVigencia" name="dtFimVigencia">
                     </div>
                     <div class="form-group">
-                        <label for="title">dsDesignacao</label>
+                        <label for="title">Designação:</label>
                         <input type="text" class="form-control" id="dsDesignacao" name="dsDesignacao">
                     </div>
                     <div class="form-group">
-                        <label for="title">dsNomeacao</label>
+                        <label for="title">Nomeação:</label>
                         <input type="text" class="form-control" id="dsNomeacao" name="dsNomeacao">
                     </div>
                     <div class="form-group">
-                    <label for="title">Ativo:</label>
+                        <label for="title">Status:</label>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="1"
-                                  >
+                            >
                             <label class="form-check-label" for="stAtivo">
                                 Ativo
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="0"
-                                   >
+                            >
                             <label class="form-check-label" for="stAtivo">
                                 Desativado
                             </label>
@@ -90,15 +90,13 @@
                         <input type="number" class="form-control" id="nuNomeacao" name="nuNomeacao">
                     </div>
                     <br>
-                    <input type="submit" class="btn btn-primary" value="Criar Representação">
+                    <input type="submit" class="btn btn-primary mb-2" value="Criar Representação">
                 </form>
             </div>
 
-
-
             @else
 
-                <div class="col-md-10 offset-md-1 dashboard-events-container">
+                <div class="container">
 
 
                     <table class="table">
@@ -140,12 +138,12 @@
                 <br>
                 <br>
 
-                <div id="event-create-container" class="col-md-6 offset-md-3">
+                <div id="event-create-container" class="container">
                     <h1>Crie sua Representação</h1>
                     <form action="repinsta" method="POST">
                         @csrf
                         <div class="form-group">
-                            <label for="title">cdInstancia</label>
+                            <label for="title">Instância:</label>
                             <select name="cdInstancia" id="cdInstancia" class="form-control">
                                 @foreach ( $selecionado as $instancia)
                                     <option value="{{$instancia->cdInstancia}}"> {{$instancia->nmInstancia}}</option>
@@ -154,7 +152,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="title">cdTitular</label>
+                            <label for="title">Titular:</label>
                             <select name="cdTitular" id="cdTitular" class="form-control">
                                 @foreach ( $representantes as $representante)
                                     <option
@@ -165,7 +163,7 @@
 
                         </div>
                         <div class="form-group">
-                            <label for="title">cdSuplente</label>
+                            <label for="title">Suplente:</label>
                             <select name="cdSuplente" id="cdSuplente" class="form-control">
 
                                 <option value="">Não</option>
@@ -178,49 +176,49 @@
 
                         </div>
                         <div class="form-group">
-                            <label for="title">dtInicioVigencia</label>
+                            <label for="title">Inicio da Vigência:</label>
                             <input type="date" class="form-control" id="dtInicioVigencia" name="dtInicioVigencia">
                         </div>
                         <div class="form-group">
-                            <label for="title">dtFimVigencia</label>
+                            <label for="title">Fim da Vigência:</label>
                             <input type="date" class="form-control" id="dtFimVigencia" name="dtFimVigencia">
                         </div>
                         <div class="form-group">
-                            <label for="title">dsDesignacao</label>
+                            <label for="title">Designação:</label>
                             <input type="text" class="form-control" id="dsDesignacao" name="dsDesignacao">
                         </div>
                         <div class="form-group">
-                            <label for="title">dsNomeacao</label>
+                            <label for="title">Nomeação:</label>
                             <input type="text" class="form-control" id="dsNomeacao" name="dsNomeacao">
                         </div>
                         <div class="form-group">
-                            <label for="title">Ativo?</label>
+                            <label for="title">Status:</label>
                             <div class="form-check">
 
                                 <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="1"
-                                      >
+                                >
                                 <label class="form-check-label" for="stAtivo">
                                     Ativo
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="0"
-                                       >
+                                >
                                 <label class="form-check-label" for="stAtivo">
                                     Desativado
                                 </label>
                             </div>
                             <div class="form-group">
-                        <label for="title">Data de Nomeação:</label>
-                        <input type="date" class="form-control" id="dtNomeacao" name="dtNomeacao">
-                    </div>
-                    <div class="form-group">
-                        <label for="title">Nomeação:</label>
-                        <input type="number" class="form-control" id="nuNomeacao" name="nuNomeacao">
-                    </div>
+                                <label for="title">Data de Nomeação:</label>
+                                <input type="date" class="form-control" id="dtNomeacao" name="dtNomeacao">
+                            </div>
+                            <div class="form-group">
+                                <label for="title">Nomeação:</label>
+                                <input type="number" class="form-control" id="nuNomeacao" name="nuNomeacao">
+                            </div>
                         </div>
                         <br>
-                        <input type="submit" class="btn btn-primary" value="Criar Evento">
+                        <input type="submit" class="btn btn-primary mb-2" value="Criar Evento">
                     </form>
                 </div>
 
