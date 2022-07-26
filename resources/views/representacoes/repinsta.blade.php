@@ -65,20 +65,29 @@
                         <input type="text" class="form-control" id="dsNomeacao" name="dsNomeacao">
                     </div>
                     <div class="form-group">
+                    <label for="title">Ativo:</label>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="1"
-                                   @if($instancias->stAtivo ==1) checked @endif >
+                                  >
                             <label class="form-check-label" for="stAtivo">
                                 Ativo
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="0"
-                                   @if($instancias->stAtivo ==0) checked @endif >
+                                   >
                             <label class="form-check-label" for="stAtivo">
                                 Desativado
                             </label>
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Data de Nomeação:</label>
+                        <input type="date" class="form-control" id="dtNomeacao" name="dtNomeacao">
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Nomeação:</label>
+                        <input type="number" class="form-control" id="nuNomeacao" name="nuNomeacao">
                     </div>
                     <br>
                     <input type="submit" class="btn btn-primary" value="Criar Representação">
@@ -189,18 +198,26 @@
                             <div class="form-check">
 
                                 <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="1"
-                                       @if($instancia->stAtivo ==1) checked @endif >
+                                      >
                                 <label class="form-check-label" for="stAtivo">
                                     Ativo
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="0"
-                                       @if($instancia->stAtivo ==0) checked @endif >
+                                       >
                                 <label class="form-check-label" for="stAtivo">
                                     Desativado
                                 </label>
                             </div>
+                            <div class="form-group">
+                        <label for="title">Data de Nomeação:</label>
+                        <input type="date" class="form-control" id="dtNomeacao" name="dtNomeacao">
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Nomeação:</label>
+                        <input type="number" class="form-control" id="nuNomeacao" name="nuNomeacao">
+                    </div>
                         </div>
                         <br>
                         <input type="submit" class="btn btn-primary" value="Criar Evento">

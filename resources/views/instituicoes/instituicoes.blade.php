@@ -30,6 +30,7 @@
     </div>
 
     <br>
+    @if (!$events->isEmpty())
     <form action="/instituicoes/{{$event->cdInstituicao}}/search" method="GET">
         @csrf
         <div class="row">
@@ -43,6 +44,7 @@
             </div>
         </div>
     </form>
+   @endif
     <br>
     <h1>Crie sua Instituição</h1>
 

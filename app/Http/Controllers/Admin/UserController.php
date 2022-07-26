@@ -113,7 +113,8 @@ class UserController extends Controller
         $query = $request->input('query');
 
         $users = DB::table('users')->where('name', 'like', "%$query%")->orWhere('email', 'like', "%$query%")->paginate(6);
-        dd($users);
-        return view('/usuarios/search-resultados');
+        
+        return view('users/search-results', compact('users'));
+        
     }
 }

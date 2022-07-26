@@ -86,6 +86,16 @@
                     <input type="textarea" class="form-control" id="dsNomeacao" name="dsNomeacao"
                            value="{{$age->dsNomeacao}}">
                 </div>
+                <div class="form-group">
+                        <label for="title">Data de Nomeação:</label>
+                        <input type="date" class="form-control" id="dtNomeacao" name="dtNomeacao" 
+                        value="{{$age->dtNomeacao}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Nomeação:</label>
+                        <input type="number" class="form-control" id="nuNomeacao" name="nuNomeacao"
+                        value="{{$age->nuNomeacao}}">
+                    </div>
 
                 <br>
                 <input type="submit" class="btn btn-primary" value="Alterar">

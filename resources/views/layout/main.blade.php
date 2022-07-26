@@ -55,20 +55,24 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         @if(auth()->user()->statusadm ==1)
-                            <li class="nav-item"><a class="nav-link" href="/agendas">Agenda</a></li>
+                            
                             <li class="nav-item"><a class="nav-link" href="/register">Cadastrar</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/contatos">Contatos</a></li>
+                           
                             <li class="nav-item"><a class="nav-link" href="/empresas">Empresas</a></li>
                             <li class="nav-item"><a class="nav-link" href="/escolaridade">Escolaridade</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/instancias">Instancias</a></li>
+                            
                             <li class="nav-item"><a class="nav-link" href="/instituicoes">Instituicoes</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/representacoes">Representacoes</a></li>
+                            
                             <li class="nav-item"><a class="nav-link" href="/repsup">Representantes</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/telcon">Telefone dos Contatos</a></li>
+                            
                             <li class="nav-item"><a class="nav-link" href="/temarep">Tema Representação</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/telrepsup">Telefone Representante</a></li>
+                            
                             <li class="nav-item"><a class="nav-link" href="/tipoinsta">Tipo de Instancias</a></li>
-                        @endif
+                            <li class="nav-item"><a class="nav-link" href="/usuarios">Usuários</a></li>
+                        @else
+                            <li class="nav-item"><a class="nav-link" href="/representacoes">Usuários</a></li>
+                            @endif
+                        
                     </ul>
 
                     <div class="container-fluid funcionalidades">

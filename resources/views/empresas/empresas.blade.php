@@ -3,7 +3,7 @@
 @section('title', 'HDC Events')
 
 @section('content')
-    ,
+    
 
     <h1>Empresas:</h1>
 
@@ -30,6 +30,7 @@
         </table>
     </div>
     <br>
+    @if (!$empresas->isEmpty())
     <form action="empresas/{{$empresa->cdEmpresa}}/search" method="GET">
         @csrf
         <div class="row">
@@ -43,6 +44,7 @@
             </div>
         </div>
     </form>
+    @endif
     <br>
 
     <h1>Criar Empresas:</h1>

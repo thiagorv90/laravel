@@ -58,7 +58,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/usuarios', [UserController::class, 'show']);
         Route::get('/usuarios/edit/{id}', [UserController::class, 'edit']);
         Route::PUT('/usuarios/update/{id}', [UserController::class, 'update']);
-        Route::get('/usuarios/searchusu', [UserController::class, 'search'])->name('searchusu');
+        Route::get('/usuarios/search', [UserController::class, 'search'])->name('searchusu');
 
         Route::post('empresas', [EventController::class, 'store']);
         Route::get('empresas', [EventController::class, 'dashe']);
