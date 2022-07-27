@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <div id="event-create-container" class="col-md-6 offset-md-3">
+    <div id="event-create-container" class="container">
         <h1>Representacões</h1>
         @foreach ($selecionado as $age)
             <form action="/representacoes/update/{{ $age->cdRepresentacao}}" method="POST">
@@ -13,8 +13,8 @@
                 @method('PUT')
 
                 <div class="form-group">
-                    <label for="title">Instancias </label>
-                    <select id="cdInstancia" name="cdInstancia" class="form-control">
+                    <label for="title">Instancias:</label>
+                    <select id="cdInstancia" name="cdInstancia" class="form-select">
                         @foreach($lista as $i)
                             <option value="{{$i->cdInstancia}}"
                                     @if ($age->cdInstancia == $i->cdInstancia) selected @endif >
@@ -24,8 +24,8 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="title">Titular </label>
-                    <select id="cdTitular" name="cdTitular" class="form-control">
+                    <label for="title">Titular:</label>
+                    <select id="cdTitular" name="cdTitular" class="form-select">
                         @foreach($rep as $e)
 
                             <option value="{{$e->cdRepSup}}" @if ($age->cdTitular == $e->cdRepSup) selected @endif >
@@ -35,8 +35,8 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="title">Suplente </label>
-                    <select id="cdSuplente" name="cdSuplente" class="form-control">
+                    <label for="title">Suplente:</label>
+                    <select id="cdSuplente" name="cdSuplente" class="form-select">
 
                         @foreach($rep as $e)
 
@@ -64,7 +64,7 @@
                            value="{{$age->dsDesignacao}}">
                 </div>
                 <div class="form-group">
-                    <label for="title">Ativo?</label>
+                    <label for="title">Status:</label>
                     <div class="form-check">
 
                         <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="1"
@@ -88,7 +88,7 @@
                 </div>
                 <div class="form-group">
                         <label for="title">Data de Nomeação:</label>
-                        <input type="date" class="form-control" id="dtNomeacao" name="dtNomeacao" 
+                        <input type="date" class="form-control" id="dtNomeacao" name="dtNomeacao"
                         value="{{$age->dtNomeacao}}">
                     </div>
                     <div class="form-group">
@@ -98,7 +98,7 @@
                     </div>
 
                 <br>
-                <input type="submit" class="btn btn-primary" value="Alterar">
+                <input type="submit" class="btn btn-primary mb-2" value="Alterar">
             </form>
 
     </div>

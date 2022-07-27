@@ -7,7 +7,7 @@
     @if (isset($selecionado) && $selecionado->count() > 0)
 
         @foreach ($nome as $name)
-            <h1>Contatos da Instancia:{{$name->nmInstancia}}</h1>
+            <h1>Contatos da Instancia: {{$name->nmInstancia}}</h1>
         @endforeach
 
         <table class="table">
@@ -23,10 +23,12 @@
 
                 <tr>
                     <td><a>{{ $event->nmContato }}</a></td>
-                    <td><a href="/contatos/edit/{{$event->cdContato}}" class="btn btn-info edit-btn">
+                    <td><a href="/contatos/edit/{{$event->cdContato}}" class="btn btn-info edit-btn"
+                           data-bs-toggle="tooltip" data-bs-title="Editar">
                             <ion-icon name="create-outline"></ion-icon>
                         </a>
-                        <a href="/telcon/{{$event->cdContato}}" class="btn btn-info edit-btn">
+                        <a href="/telcon/{{$event->cdContato}}" class="btn btn-info edit-btn"
+                           data-bs-toggle="tooltip" data-bs-title="Contato">
                             <ion-icon name="call-outline"></ion-icon>
                         </a></td>
                 </tr>
@@ -37,22 +39,18 @@
 
         <form action="/contatos/{{$name->cdInstancia}}/search" method="GET">
             @csrf
-            <div class="row">
-                <div class="col-lg-10">
-                    <div class="form-group">
-                        <input type="text" class="form-control" value="" name="query" id="query" placeholder="busca">
-                        <button class="navbar-search__buttton">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" value="" name="query" id="query"
+                       placeholder="Buscar Contato..."
+                       aria-label="Buscar Contato" aria-describedby="button-addon2" required/>
+                <input type="submit" class="btn btn-primary" value="Buscar" id="button-addon2">
             </div>
         </form>
         <br>
         <br>
         <br>
-        <h1> Criar Contatos da Instância:{{$name->nmInstancia}}</h1>
-        <div id="event-create-container" class="col-md-6 offset-md-3">
+        <h1> Criar Contatos da Instância: {{$name->nmInstancia}}</h1>
+        <div id="event-create-container" class="container">
 
             <form action="listacontatos/" method="POST">
                 @csrf

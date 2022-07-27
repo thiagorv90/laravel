@@ -29,7 +29,8 @@
                     <td><a>{{ $user->email }}</a></td>
 
                     <td>
-                        <a href="/usuarios/edit/{{$user->id}}" class="btn btn-info edit-btn">
+                        <a href="/usuarios/edit/{{$user->id}}" class="btn btn-info edit-btn"
+                           data-bs-toggle="tooltip" data-bs-title="Editar">
                             <ion-icon name="create-outline"></ion-icon>
                         </a>
                     </td>

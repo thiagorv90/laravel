@@ -6,8 +6,8 @@
     @if (is_countable($selecionado) && count($selecionado) == 0)
 
         @foreach ($agendas as $agenda)
-            <h3>Não ha Agenda para esta Representação(pensar em algo):</h3>
-            <h1> Criar Agenda</h1>
+            <h3>Não há nada agendado para esta representação</h3>
+            <h1>Criar Agenda</h1>
 
             <div id="event-create-container" class="container">
                 <form action="agendas" method="POST">
