@@ -79,10 +79,10 @@ class RepresentacoesController extends Controller
         $ativo = $request->input('stAtivo');
         $numero = $request->input('nuNomeacao');
         $dt = $request->input('dtNomeacao');
-        
+
 
         DB::update('update representacoes set cdInstancia = ?, cdTitular = ?, cdSuplente = ?, dtInicioVigencia = ?, dtFimVigencia = ?, dsDesignacao = ?, dsNomeacao = ?, stAtivo = ?, nuNomeacao=?,dtNomeacao=?
-        where cdRepresentacao = ?', [$cd, $titular, $suplente, $ini, $fim, $desi, $nomea, $ativo,$numero,$dt, $id]);
+        where cdRepresentacao = ?', [$cd, $titular, $suplente, $ini, $fim, $desi, $nomea, $ativo, $numero, $dt, $id]);
 
         return redirect()->route('repre', ['id' => $cd]);
     }
