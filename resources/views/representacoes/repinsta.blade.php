@@ -115,17 +115,20 @@
                                 <td scropt="row">{{$event->nmRepresentanteSuplente}}</td>
                                 <td><a>{{ $event->dtInicioVigencia }}</a></td>
 
-                                <td><a href="/representacoes/edit/{{$event->cdRepresentacao}}"
-                                       class="btn btn-info edit-btn">
+                                <td>
+                                    <a href="/representacoes/edit/{{$event->cdRepresentacao}}" class="btn btn-info edit-btn"
+                                       data-bs-toggle="tooltip" data-bs-title="Editar">
                                         <ion-icon name="create-outline"></ion-icon>
                                     </a>
-                                    <a href="/repsup/edit/{{$event->cdTitular}}" class="btn btn-info edit-btn">
+                                    <a href="/repsup/edit/{{$event->cdTitular}}" class="btn btn-info edit-btn"
+                                       data-bs-toggle="tooltip" data-bs-title="Contatos">
                                         <ion-icon name="person-outline"></ion-icon>
                                     </a>
-                                    <a href="/agendas/{{$event->cdRepresentacao}}" class="btn btn-info edit-btn">
+                                    <a href="/agendas/{{$event->cdRepresentacao}}" class="btn btn-info edit-btn"
+                                       data-bs-toggle="tooltip" data-bs-title="Agenda">
                                         <ion-icon name="book-outline"></ion-icon>
                                     </a>
-
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -133,12 +136,7 @@
 
                 </div>
 
-
-                <br>
-                <br>
-                <br>
-
-                <div id="event-create-container" class="container">
+                <div id="event-create-container" class="container mt-5">
                     <h1>Crie sua Representação</h1>
                     <form action="repinsta" method="POST">
                         @csrf

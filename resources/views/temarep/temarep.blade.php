@@ -19,7 +19,8 @@
                     <td scropt="row">{{$event->cdTema}}</td>
                     <td><a>{{ $event->nmTema }}</a></td>
 
-                    <td><a href="/temarep/edit/{{$event->cdTema}}" class="btn btn-info edit-btn">
+                    <td><a href="/temarep/edit/{{$event->cdTema}}" class="btn btn-info edit-btn"
+                           data-bs-toggle="tooltip" data-bs-title="Editar">
                             <ion-icon name="create-outline"></ion-icon>
                         </a>
                     </td>

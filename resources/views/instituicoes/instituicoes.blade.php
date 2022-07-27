@@ -17,10 +17,12 @@
                 <tr>
                     <td scropt="row">{{$event->cdInstituicao}}</td>
                     <td><a>{{ $event->nmInstituicao }}</a></td>
-                    <td><a href="/instituicoes/edit/{{$event->cdInstituicao}}" class="btn btn-info edit-btn">
+                    <td><a href="/instituicoes/edit/{{$event->cdInstituicao}}" class="btn btn-info edit-btn"
+                           data-bs-toggle="tooltip" data-bs-title="Editar">
                             <ion-icon name="create-outline"></ion-icon>
                         </a>
-                        <a href="/instancias/{{$event->cdInstituicao}}" class="btn btn-info edit-btn">
+                        <a href="/instancias/{{$event->cdInstituicao}}" class="btn btn-info edit-btn"
+                           data-bs-toggle="tooltip" data-bs-title="Instâncias">
                             <ion-icon name="clipboard-outline"></ion-icon>
                         </a>
                     </td>
