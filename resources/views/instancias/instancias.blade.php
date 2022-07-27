@@ -98,7 +98,7 @@
 
                             <div class="form-group">
                                 <label for="title">Atribuições:</label>
-                                <input placeholder="Atribuições..." type="text" class="form-control" id="tpAtribuicoes"
+                                <input placeholder="Atribuições..." type="number" class="form-control" id="tpAtribuicoes"
                                        name="tpAtribuicoes">
                             </div>
                             <div class="form-group">
@@ -213,10 +213,7 @@
                                     <a href="/repinsta/{{$instancia->cdInstancia}}" class="btn btn-info edit-btn">
                                         <ion-icon name="reader-outline"></ion-icon>
                                     </a>
-                                    <a href="/dashboard/export/{{$instancia->cdInstancia}}"
-                                       class="btn btn-info edit-btn">
-                                        <ion-icon name="download-outline"></ion-icon>
-                                    </a>
+                                    
 
 
                             </tr>
@@ -327,7 +324,7 @@
 
                             <div class="form-group">
                                 <label for="title">Atribuições:</label>
-                                <input placeholder="Atribuições..." type="text" class="form-control" id="tpAtribuicoes"
+                                <input placeholder="Atribuições..." type="number" class="form-control" id="tpAtribuicoes"
                                        name="tpAtribuicoes">
                             </div>
                             <div class="form-group">

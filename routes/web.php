@@ -111,7 +111,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/telcon/edit/{id}', [TelefoneContatosController::class, 'editTel']);
         Route::delete('/telcon/edit/{id}', [TelefoneContatosController::class, 'deleteTel']);
 
-        Route::post('telrepsup', [TelefoneRepresentanteSuplenteController::class, 'telrepsupstore']);
+        Route::post('telrepsup/{id}', [TelefoneRepresentanteSuplenteController::class, 'telrepsupstore']);
         Route::get('telrepsup/{id}', [TelefoneRepresentanteSuplenteController::class, 'telrepsupcreate']);
         Route::get('telrepsup/edit/{id}', [TelefoneRepresentanteSuplenteController::class, 'editTrel']);
         Route::PUT('telrepsup/update/{id}', [TelefoneRepresentanteSuplenteController::class, 'updateTrel']);
@@ -140,7 +140,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('dashboard/export/representacoes/', [RepresentacoesController::class, 'export'])->name('porRepresentante');
         Route::get('dashboard/export/instancias/', [InstaciaController::class, 'exportPorId'])->name('porInstancia');
         Route::get('dashboard/export/repEmNumeros/', [RepresentacoesController::class, 'exportRepEmNumeros'])->name('repEmNumeros');
-        Route::get('dashboard/export/instanciasPorStatus', [InstaciaController::class, 'exportPorStatus'])->name('porStatus');
+        Route::get('/dashboard/export/instanciasPorStatus', [InstaciaController::class, 'exportPorStatus'])->name('porStatus');
         Route::get('dashboard/export/instanciasPorTema', [InstaciaController::class, 'exportPorTema'])->name('porTema');
         Route::get('dashboard/export/instanciasPorPrioridade', [InstaciaController::class, 'exportPorPrioridade'])->name('porPrioridade');
         Route::get('dashboard/export/instanciasPorVigencia', [InstaciaController::class, 'exportPorVigencia'])->name('porVigencia');

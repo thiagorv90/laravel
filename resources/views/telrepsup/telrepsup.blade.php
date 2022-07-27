@@ -4,12 +4,13 @@
 
 @section('content')
     @if (is_countable($selecionado) && count($selecionado) == 0)
-        @foreach ($telefones as $telefone)
+       
             <h3>Não ha telefone para esta Representante:{{$telefone->nmRepresentanteSuplente}}</h3>
             <h1>Crie telefone</h1>
 
             <div id="event-create-container" class="col-md-10 offset-md-1">
                 <form action="telrepsup" method="POST">
+                @foreach ($telefones as $telefone)
                     @csrf
                     <div class="form-group">
                         <label for="title">nuTelefone</label>
@@ -41,8 +42,8 @@
             </div>
         @endforeach
     @else
-        @foreach ($selecionado as $event)
-            <<h1>Contatos do(a) Representante:{{$event->nmRepresentanteSuplente}}</h1>
+        
+            <<h1>Contatos do(a) Representante:</h1>
             <div class="col-md-10 offset-md-1 dashboard-events-container">
                 <table class="table">
                     <thead>
@@ -54,7 +55,7 @@
                     </thead>
                     <tbody>
 
-
+                    @foreach ($selecionado as $event)
                     <tr>
                         <td scropt="row">{{$event->cdTelefone}}</td>
                         <td><a>{{ $event->nuTelefone }}</a></td>
@@ -71,7 +72,7 @@
                             </form>
                         </td>
                     </tr>
-
+                    @endforeach
                     </tbody>
                 </table>
 
@@ -115,7 +116,7 @@
                 </form>
             </div>
 
-        @endforeach
+        
 
     @endif
 
