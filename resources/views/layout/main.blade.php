@@ -64,6 +64,8 @@
 
                                 <li class="nav-item"><a class="nav-link" href="/instituicoes">Instituicoes</a></li>
 
+                                <li class="nav-item"><a class="nav-link" href="/dashboard">Relatórios</a></li>
+
                                 <li class="nav-item"><a class="nav-link" href="/repsup">Representantes</a></li>
 
                                 <li class="nav-item"><a class="nav-link" href="/temarep">Tema Representação</a></li>

@@ -6,7 +6,7 @@
     @foreach ($selecionado as $age)
         <div id="event-create-container" class="container">
             <h1>Editar dados</h1>
-            <h3>Representante:{{$age->nmRepresentanteSuplente}}</h3>
+            <h3>Representante: {{$age->nmRepresentanteSuplente}}</h3>
 
             <form action="/repsup/update/{{ $age->cdRepSup}}" method="POST">
                 @csrf
@@ -19,7 +19,7 @@
                 </div>
                 <div class="form-group">
                     <label for="title">Representacao:</label>
-                    <select id="cdEmpresa" name="cdEmpresa" class="form-control">
+                    <select id="cdEmpresa" name="cdEmpresa" class="form-select">
 
                         <option value="{{$age->cdEmpresa}}">
                             {{ $age->nmEmpresa }}
@@ -29,7 +29,7 @@
                 </div>
                 <div class="form-group">
                     <label for="title">Escolaridade:</label>
-                    <select id="cdEscolaridade" name="cdEscolaridade" class="form-control">
+                    <select id="cdEscolaridade" name="cdEscolaridade" class="form-select">
                         @foreach($escola as $e)
                             <option value="{{$e->cdEscolaridade}}"
                                     @if ($age->cdEscolaridade == $e->cdEscolaridade) selected @endif >

@@ -4,7 +4,8 @@
 
 @section('content')
     <h1>Relatorio de Instâncias</h1>
-    <a href="{{route('porInstancia')}}" class="btn btn-primary">
+    <a href="{{route('porInstancia')}}" class="btn btn-primary"
+       data-bs-toggle="tooltip" data-bs-title="Download">
         <ion-icon name="arrow-down-outline"></ion-icon>
     </a>
     <table class="table">

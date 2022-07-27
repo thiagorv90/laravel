@@ -92,10 +92,12 @@
                     <td scropt="row">{{$event->cdRepSup}}</td>
                     <td><a>{{ $event->nmRepresentanteSuplente }}</a></td>
 
-                    <td><a href="/repsup/edit/{{$event->cdRepSup}}" class="btn btn-info edit-btn">
+                    <td><a href="/repsup/edit/{{$event->cdRepSup}}" class="btn btn-info edit-btn"
+                           data-bs-toggle="tooltip" data-bs-title="Editar">
                             <ion-icon name="create-outline"></ion-icon>
                         </a>
-                        <a href="/telrepsup/{{$event->cdRepSup}}" class="btn btn-info edit-btn">
+                        <a href="/telrepsup/{{$event->cdRepSup}}" class="btn btn-info edit-btn"
+                           data-bs-toggle="tooltip" data-bs-title="Contato">
                             <ion-icon name="call-outline"></ion-icon>
                         </a>
                     </td>

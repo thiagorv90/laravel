@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <div id="event-create-container" class="col-md-6 offset-md-3">
+    <div id="event-create-container" class="container">
 
         @foreach ($selecionado as $con)
             <form action="/contatos/update/{{ $con->cdContato}}" method="POST">
@@ -77,9 +77,7 @@
                            value="{{$con->dsEmailAlternativo}}"></input>
                 </div>
 
-
-                <br>
-                <input type="submit" class="btn btn-primary" value="Alterar">
+                <input type="submit" class="btn btn-primary mt-3" value="Alterar">
             </form>
         @endforeach
 

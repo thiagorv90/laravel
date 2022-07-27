@@ -20,7 +20,7 @@ class TelefoneRepresentanteSuplenteController extends Controller
 
         $event->save();
 
-        return redirect('/telrepsup');
+        return back();
     }
 
 

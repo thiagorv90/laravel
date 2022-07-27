@@ -4,8 +4,8 @@
 
 @section('content')
     <h1>Representações</h1>
-    
-    <div class="col-md-10 offset-md-1 dashboard-events-container">
+
+    <div class="container">
         <table class="table">
             <thead>
             <tr>
@@ -31,6 +31,6 @@
         </table>
     </div>
 
-   
+
 
 @endsection

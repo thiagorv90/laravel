@@ -15,7 +15,8 @@
             @foreach ($tipo_instancia as $event)
                 <tr>
                     <td><a>{{ $event->dsTipoInstancia }}</a></td>
-                    <td><a href="/tipoinsta/edit/{{$event->cdTipoInstancia}}" class="btn btn-info edit-btn">
+                    <td><a href="/tipoinsta/edit/{{$event->cdTipoInstancia}}" class="btn btn-info edit-btn"
+                           data-bs-toggle="tooltip" data-bs-title="Editar">
                             <ion-icon name="create-outline"></ion-icon>
                         </a>
                 </tr>
@@ -23,7 +24,6 @@
             </tbody>
         </table>
 
-        <br>
         @if (!$tipo_instancia->isEmpty())
             <form action="/tipoinsta/{{$event->cdTipoInstancia}}/search" method="GET">
                 @csrf

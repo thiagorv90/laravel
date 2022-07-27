@@ -5,45 +5,43 @@
 @section('content')
     @if (is_countable($selecionado) && count($selecionado) == 0)
         @foreach ($telefones as $telefone)
-            <h3>Não ha telefone para esta Representante:{{$telefone->nmRepresentanteSuplente}}</h3>
+            <h3>Não ha telefone para este representante: {{$telefone->nmRepresentanteSuplente}}</h3>
             <h1>Crie telefone</h1>
 
-            <div id="event-create-container" class="col-md-10 offset-md-1">
-                <form action="telrepsup" method="POST">
+            <div id="event-create-container" class="container">
+                <form action="telrepsup" method="post">
                     @csrf
                     <div class="form-group">
-                        <label for="title">nuTelefone</label>
+                        <label for="title">Telefone:</label>
                         <input placeholder="Telefone..." type="text" class="form-control" id="nuTelefone"
                                name="nuTelefone">
                     </div>
                     <div class="form-group">
-                        <label for="title">nuDDDTelefone</label>
+                        <label for="title">DDD:</label>
                         <input placeholder="DDD..." type="text" class="form-control" id="nuDDDTelefone"
                                name="nuDDDTelefone">
                     </div>
 
                     <div class="form-group">
-                        <label for="title">cdRepSup</label>
+                        <label for="title">Representante:</label>
                         <select name="cdRepSup" id="cdRepSup" class="form-select">
                             <option value="{{$telefone->cdRepSup}}"> {{$telefone->nmRepresentanteSuplente}}</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="title">tpTelefone</label>
+                        <label for="title">Tipo:</label>
                         <select name="tpTelefone" id="tpTelefone" class="form-select">
                             <option value="0">Celular</option>
                             <option value="1">Fixo</option>
                         </select>
                     </div>
-                    <br>
-                    <input type="submit" class="btn btn-primary" value="Criar Telefone">
+                    <input type="submit" class="btn btn-primary mt-2" value="Criar Telefone">
                 </form>
             </div>
         @endforeach
     @else
-        @foreach ($selecionado as $event)
-            <<h1>Contatos do(a) Representante:{{$event->nmRepresentanteSuplente}}</h1>
-            <div class="col-md-10 offset-md-1 dashboard-events-container">
+            <h1>Contatos de </h1>
+            <div class="container">
                 <table class="table">
                     <thead>
                     <tr>
@@ -53,50 +51,54 @@
                     </tr>
                     </thead>
                     <tbody>
-
+                    @foreach ($selecionado as $event)
 
                     <tr>
                         <td scropt="row">{{$event->cdTelefone}}</td>
                         <td><a>{{ $event->nuTelefone }}</a></td>
-                        <td class="alterar-deletar"><a href="/telrepsup/edit/{{$event->cdTelefone}}"
-                                                       class="btn btn-info edit-btn">
+                        <td class="d-flex">
+                            <a href="/telrepsup/edit/{{$event->cdTelefone}}"  class="btn btn-info edit-btn me-2"
+                               data-bs-toggle="tooltip" data-bs-title="Editar">
                                 <ion-icon name="create-outline"></ion-icon>
                             </a>
                             <form action="/telrepsup/edit/{{ $event->cdTelefone }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger delete-btn">
+                                <button type="submit" class="btn btn-danger delete-btn"
+                                        data-bs-toggle="tooltip" data-bs-title="Apagar">
                                     <ion-icon name="trash-outline"></ion-icon>
                                 </button>
                             </form>
                         </td>
                     </tr>
 
+                    @endforeach
+
+
                     </tbody>
                 </table>
 
             </div>
-            <br>
-            <br>
-            <br>
+
             <h1>Crie telefone</h1>
 
-            <div id="event-create-container" class="col-md-10 offset-md-1">
-                <form action="telrepsup" method="POST">
+            <div id="event-create-container" class="container">
+                <form action="telrepsup" method="post">
                     @csrf
                     <div class="form-group">
-                        <label for="title">nuTelefone</label>
+                        <label for="title">DDD:</label>
+                        <input placeholder="DDD..." type="text" class="form-control" id="nuDDDTelefone"
+                               name="nuDDDTelefone"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="title">Telefone:</label>
                         <input placeholder="Telefone..." type="text" class="form-control" id="nuTelefone"
                                name="nuTelefone">
                     </div>
-                    <div class="form-group">
-                        <label for="title">nuDDDTelefone</label>
-                        <input placeholder="DDD..." type="text" class="form-control" id="nuDDDTelefone"
-                               name="nuDDDTelefone">
-                    </div>
 
                     <div class="form-group">
-                        <label for="title">cdRepSup</label>
+                        <label for="title">Representante:</label>
                         <select name="cdRepSup" id="cdRepSup" class="form-select">
                             @foreach ($telefones as $telefone)
                                 <option value="{{$telefone->cdRepSup}}"> {{$telefone->nmRepresentanteSuplente}}</option>
@@ -104,18 +106,16 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="title">tpTelefone</label>
+                        <label for="title">Tipo:</label>
                         <select name="tpTelefone" id="tpTelefone" class="form-select">
                             <option value="0">Celular</option>
                             <option value="1">Fixo</option>
                         </select>
                     </div>
-                    <br>
-                    <input type="submit" class="btn btn-primary" value="Criar Telefone">
+                    <input type="submit" class="btn btn-primary mt-3 mb-2" value="Criar Telefone">
                 </form>
             </div>
 
-        @endforeach
 
     @endif
 
