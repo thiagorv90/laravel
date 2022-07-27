@@ -23,7 +23,7 @@
 
             <div class="list-group">
                 {{--            <li><a href="{{route('excel')}}">excell</a></li>--}}
-                <a href="{{route('exportViewInstancias')}}" class="list-group-item list-group-item-action">0. -- Instancias --</a>
+                <a href="{{route('exportViewInstancias')}}" class="list-group-item list-group-item-action" data-bs-toggle="tooltip" data-bs-title="Default tooltip">0. -- Instancias --</a>
                 <a href="{{route('exportViewRepresentacoesNum')}}" class="list-group-item list-group-item-action">1. -- Representacoes Numeros --</a>
                 <a href="{{route('exportViewInstId')}}" class="list-group-item list-group-item-action">2. -- Por Instancia --</a>
                 <a href="{{route('exportViewRepresentacoes')}}" class="list-group-item list-group-item-action">3. -- Representantes --</a>
