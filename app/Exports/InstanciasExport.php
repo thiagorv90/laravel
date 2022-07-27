@@ -27,10 +27,10 @@ class InstanciasExport implements FromView, ShouldAutoSize, WithDrawings
     /**
      * @return \Illuminate\Support\Collection
      */
-    public function __construct($id)
-    {
-        $this->id = $id;
-    }
+//    public function __construct($id)
+//    {
+//        $this->id = $id;
+//    }
 
     public function view(): view
     {
