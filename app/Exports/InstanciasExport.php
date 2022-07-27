@@ -27,10 +27,10 @@ class InstanciasExport implements FromView, ShouldAutoSize, WithDrawings
     /**
      * @return \Illuminate\Support\Collection
      */
-    public function __construct($id)
-    {
-        $this->id = $id;
-    }
+//    public function __construct($id)
+//    {
+//        $this->id = $id;
+//    }
 
     public function view(): view
     {
@@ -39,8 +39,9 @@ class InstanciasExport implements FromView, ShouldAutoSize, WithDrawings
             ->leftjoin('representacoes', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
             ->leftjoin('representante_suplentes', 'representacoes.cdTitular', '=', 'cdRepsup')
             ->leftjoin('contatos', 'contatos.cdInstancia', '=', 'instancias.cdInstancia')
-            ->where('instancias.cdInstancia', '=', $this->id)
-            ->get()]);
+            //->where('instancias.cdInstancia', '=', $this->id)
+            ->get()
+        ]);
     }
 
     public function drawings()

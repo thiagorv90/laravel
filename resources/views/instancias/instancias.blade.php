@@ -7,9 +7,9 @@
 
         <div class="container">
             @foreach ($instituicaos as $instituicao)
-                <h3>Não ha instancia para a Instituição:{{$instituicao->nmInstituicao}}</h3>
+                <h3>Não ha instancia para a Instituição: {{$instituicao->nmInstituicao}}</h3>
                 <h1>Crie uma instância</h1>
-                <div id="event-create-container" class="col-md-10 offset-md-1">
+                <div id="event-create-container" class="container">
                     <form action="instancias" method="POST">
                         @csrf
                         <div class="form-group">
@@ -168,9 +168,11 @@
 
                             </div>
                             <br>
-                            <input type="submit" class="btn btn-primary" value="Criar Instância">
+                            <input type="submit" class="btn btn-primary mb-2" value="Criar Instância">
                     </form>
                 </div>
+        </div>
+        </div>
             @endforeach
             @else
                 <h1>Instâncias</h1>
@@ -199,22 +201,21 @@
                                 @else
                                     <td>Desativado</td>
                                 @endif
-                                <td><a href="/instancias/{{$instancia->cdInstancia}}" class="btn btn-info edit-btn">
-                                        <ion-icon name="search-outline"></ion-icon>
-                                    </a>
-                                    <a href="/instancias/edit/{{$instancia->cdInstancia}}"
-                                       class="btn btn-info edit-btn">
+                                <td>
+                                    <a href="/instancias/edit/{{$instancia->cdInstancia}}" class="btn btn-info edit-btn"
+                                       data-bs-toggle="tooltip" data-bs-title="Editar">
                                         <ion-icon name="create-outline"></ion-icon>
                                     </a>
-                                    <a href="/contatos/listacontato/{{$instancia->cdInstancia}}"
-                                       class="btn btn-info edit-btn">
+                                    <a href="/contatos/listacontato/{{$instancia->cdInstancia}}"  class="btn btn-info edit-btn"
+                                       data-bs-toggle="tooltip" data-bs-title="Contatos">
                                         <ion-icon name="person-outline"></ion-icon>
                                     </a>
-                                    <a href="/repinsta/{{$instancia->cdInstancia}}" class="btn btn-info edit-btn">
+                                    <a href="/repinsta/{{$instancia->cdInstancia}}" class="btn btn-info edit-btn"
+                                       data-bs-toggle="tooltip" data-bs-title="Representante">
                                         <ion-icon name="reader-outline"></ion-icon>
                                     </a>
-                                    
 
+                                </td>
 
                             </tr>
                         @endforeach

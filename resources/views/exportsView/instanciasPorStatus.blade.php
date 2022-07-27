@@ -4,7 +4,10 @@
 
 @section('content')
     <h2>Relatorio por Status</h2>
-    <a href="/dashboard/export/instanciasPorStatus" class="btn btn-primary">
+
+    <a href="{{route('porStatus')}}" class="btn btn-primary"
+       data-bs-toggle="tooltip" data-bs-title="Download">
+
         <ion-icon name="arrow-down-outline"></ion-icon>
     </a>
     <table class="table">

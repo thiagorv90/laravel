@@ -64,6 +64,8 @@
 
                                 <li class="nav-item"><a class="nav-link" href="/instituicoes">Instituicoes</a></li>
 
+                                <li class="nav-item"><a class="nav-link" href="/dashboard">Relatórios</a></li>
+
                                 <li class="nav-item"><a class="nav-link" href="/repsup">Representantes</a></li>
 
                                 <li class="nav-item"><a class="nav-link" href="/temarep">Tema Representação</a></li>
@@ -118,6 +120,12 @@
         integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous">
 </script>
 <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
+
+<script>
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+</script>
+
 </body>
 
 

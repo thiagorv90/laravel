@@ -203,8 +203,6 @@ class InstaciaController extends Controller
         return view('exportsView/instanciasPorStatus', ['instancias' => $instancias]);
     }
 
-   
-
     public function exportPorId()
     {
         return (new InstanciasPorIdExport)->download('instanciaId.xlsx');
