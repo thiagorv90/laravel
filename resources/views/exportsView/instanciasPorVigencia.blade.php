@@ -4,7 +4,8 @@
 
 @section('content')
     <h2>Relatorio Por Vigencia do Mandato</h2>
-    <a href="{{route('porVigencia')}}" class="btn btn-primary">
+    <a href="{{route('porVigencia')}}" class="btn btn-primary"
+       data-bs-toggle="tooltip" data-bs-title="Download">
         <ion-icon name="arrow-down-outline"></ion-icon>
     </a>
     <table class="table">

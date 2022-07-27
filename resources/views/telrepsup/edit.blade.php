@@ -3,9 +3,7 @@
 @section('title', 'Editando Telefone Contato')
 
 @section('content')
-    <echo>{{$selecionado}}</echo>
-
-    <div id="event-create-container" class="col-md-6 offset-md-3">
+    <div id="event-create-container" class="container">
 
         @foreach ($selecionado as $tel)
             <form action="/telrepsup/update/{{ $tel->cdTelefone}}" method="POST">
@@ -19,17 +17,17 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="title">DDD</label>
+                    <label for="title">DDD:</label>
                     <input type="text" class="form-control" id="nuDDDTelefone" name="nuDDDTelefone"
-                           value="{{$tel->nuDDDTelefone}}"></input>
+                           value="{{$tel->nuDDDTelefone}}"/>
                 </div>
                 <div class="form-group">
-                    <label for="title">Tipo Telefone</label>
+                    <label for="title">Tipo:</label>
                     <input type="text" class="form-control" id="tpTelefone" name="tpTelefone"
-                           value="{{$tel->tpTelefone}}"></input>
+                           value="{{$tel->tpTelefone}}"/>
                 </div>
                 <label for="title">Nome:</label>
-                <select id="cdRepSup" name="cdRepSup" class="form-control">
+                <select id="cdRepSup" name="cdRepSup" class="form-select">
                     @foreach($lista as $i)
                         <option value="{{$i->cdRepSup}}" @if ($tel->cdRepSup == $i->cdRepSup) selected @endif >
                             {{ $i->nmRepresentanteSuplente }}
