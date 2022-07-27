@@ -135,7 +135,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('autenrep', [authrepController::class, 'authcreate']);
 
 
-        Route::get('users/export/', [UsersController::class, 'export'])->name('teste');
 
         Route::get('dashboard/export/representacoes/', [RepresentacoesController::class, 'export'])->name('porRepresentante');
         Route::get('dashboard/export/instancias/', [InstaciaController::class, 'exportPorId'])->name('porInstancia');
