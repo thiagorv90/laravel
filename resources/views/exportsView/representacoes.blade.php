@@ -4,7 +4,8 @@
 
 @section('content')
     <h2>Relatorio de Representantes</h2>
-    <a href="{{route('porRepresentante')}}" class="btn btn-primary">
+    <a href="{{route('porRepresentante')}}" class="btn btn-primary"
+       data-bs-toggle="tooltip" data-bs-title="Download">
         <ion-icon name="arrow-down-outline"></ion-icon>
     </a>
     <table class="table">
@@ -12,7 +13,7 @@
         <tr>
             <th scope="col"><strong>Nome</strong></th>
             <th scope="col"><strong>Instancias</strong></th>
-            <th scope="col"><strong>*Data Nomeacao</strong></th>
+            <th scope="col"><strong>Data Nomeacao</strong></th>
             <th scope="col"><strong>Vigencia</strong></th>
             <th scope="col"><strong>Mandato</strong></th>
             <th scope="col"><strong>Designacao</strong></th>
@@ -24,7 +25,7 @@
             <tr>
                 <td>{{ $representacao->nmRepresentanteSuplente }}</td>
                 <td>{{ $representacao->nmInstancia }}</td>
-                <td>Data Nomeacao</td>
+                <td>{{ $representacao->dtNomeacao }}</td>
                 <td>{{ $representacao->dtInicioVigencia }} - {{ $representacao->dtFimVigencia }}</td>
                 <td>{{ $representacao->dsMandato }}</td>
                 <td>{{ $representacao->dsDesignacao }}</td>

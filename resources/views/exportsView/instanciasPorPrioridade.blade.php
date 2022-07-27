@@ -4,7 +4,8 @@
 
 @section('content')
     <h2>Relatorio de Instancias Por Prioridade</h2>
-    <a href="{{route('porData')}}" class="btn btn-primary">
+    <a href="{{route('porData')}}" class="btn btn-primary"
+       data-bs-toggle="tooltip" data-bs-title="Download">
         <ion-icon name="arrow-down-outline"></ion-icon>
     </a>
     <table class="table">
@@ -18,7 +19,12 @@
         @foreach($instancias as $instancia)
             <tr>
                 <td>{{ $instancia->nmInstancia }}</td>
-                <td>{{ $instancia->tpPrioridade }}</td>
+                <td>
+                    @if($instancia->tpPrioridade == 1) Baixa
+                    @elseif($instancia->tpPrioridade == 2) Media
+                    @else Alta
+                    @endif
+                </td>
             </tr>
         @endforeach
         </tbody>
