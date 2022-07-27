@@ -4,12 +4,14 @@
 
 @section('content')
     @if (is_countable($selecionado) && count($selecionado) == 0)
+
         @foreach ($telefones as $telefone)
             <h3>Não ha telefone para este representante: {{$telefone->nmRepresentanteSuplente}}</h3>
             <h1>Crie telefone</h1>
 
             <div id="event-create-container" class="container">
                 <form action="telrepsup" method="post">
+
                     @csrf
                     <div class="form-group">
                         <label for="title">Telefone:</label>
@@ -40,8 +42,10 @@
             </div>
         @endforeach
     @else
+
             <h1>Contatos de </h1>
             <div class="container">
+
                 <table class="table">
                     <thead>
                     <tr>
@@ -51,7 +55,9 @@
                     </tr>
                     </thead>
                     <tbody>
+
                     @foreach ($selecionado as $event)
+
 
                     <tr>
                         <td scropt="row">{{$event->cdTelefone}}</td>
@@ -72,7 +78,9 @@
                         </td>
                     </tr>
 
+
                     @endforeach
+
 
 
                     </tbody>
@@ -115,6 +123,8 @@
                     <input type="submit" class="btn btn-primary mt-3 mb-2" value="Criar Telefone">
                 </form>
             </div>
+
+
 
 
     @endif

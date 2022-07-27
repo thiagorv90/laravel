@@ -111,8 +111,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/telcon/edit/{id}', [TelefoneContatosController::class, 'editTel']);
         Route::delete('/telcon/edit/{id}', [TelefoneContatosController::class, 'deleteTel']);
 
+
         Route::post('/telrepsup/{id}', [TelefoneRepresentanteSuplenteController::class, 'telrepsupstore']);
         Route::get('/telrepsup/{id}', [TelefoneRepresentanteSuplenteController::class, 'telrepsupcreate']);
+
         Route::get('telrepsup/edit/{id}', [TelefoneRepresentanteSuplenteController::class, 'editTrel']);
         Route::PUT('telrepsup/update/{id}', [TelefoneRepresentanteSuplenteController::class, 'updateTrel']);
         Route::delete('/telrepsup/edit/{id}', [TelefoneRepresentanteSuplenteController::class, 'deleteTrel']);

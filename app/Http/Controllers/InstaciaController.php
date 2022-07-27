@@ -71,8 +71,8 @@ class InstaciaController extends Controller
     {
         $insta = Instancia::join('tema_representacoes', 'instancias.cdTema', '=', 'tema_representacoes.cdTema')
             ->join('instituicoes', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
-            ->join('representacoes', 'representacoes.cdInstancia', '=', 'instancias.cdInstancia')
-            ->join('representante_suplentes', 'representante_suplentes.cdRepSup', '=', 'representacoes.cdTitular')
+            ->leftjoin('representacoes', 'representacoes.cdInstancia', '=', 'instancias.cdInstancia')
+            ->leftjoin('representante_suplentes', 'representante_suplentes.cdRepSup', '=', 'representacoes.cdTitular')
             ->where('instancias.cdinstancia', '=', $cdInstancia)
             ->get([
                 'instancias.nmInstancia', 'tema_representacoes.nmTema', 'instituicoes.nmInstituicao', 'representante_suplentes.dsemail', 'representante_suplentes.nmRepresentanteSuplente',
@@ -202,7 +202,6 @@ class InstaciaController extends Controller
 
         return view('exportsView/instanciasPorStatus', ['instancias' => $instancias]);
     }
-
 
     public function exportPorId()
     {
