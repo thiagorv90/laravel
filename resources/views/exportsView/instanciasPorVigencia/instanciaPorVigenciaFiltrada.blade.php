@@ -3,25 +3,31 @@
 @section('title', 'Relatório de Instancias')
 
 @section('content')
-    <h2>Relatorio Por Vigencia do Mandato</h2>
-    <a href="{{route('porVigencia')}}" class="btn btn-primary"
-       data-bs-toggle="tooltip" data-bs-title="Download">
-        <ion-icon name="arrow-down-outline"></ion-icon>
-    </a>
+
+    <div class="container d-flex align-items-center">
+        <h2>Relatorio Por Vigencia do Mandato</h2>
+        <a href="{{route('porVigencia')}}" class="btn btn-primary ms-2"
+           data-bs-toggle="tooltip" data-bs-title="Download">
+            <ion-icon name="arrow-down-outline"></ion-icon>
+        </a>
+    </div>
 
 
-    <form action="" method="GET">
+    <form action="{{route('filtradoInstanciaPorVigencia')}}" method="GET">
+
         <div class="input-group mb-2 inicio">
-            <label for="" class="input-group-text">Inicio da Vigência: </label>
+            <label for="dataInicio" class="input-group-text">Inicio da Vigência: </label>
             <input type="date" class="form-control" name="dataInicio" id="inicio-vigencia">
-            <input type="submit" class="btn btn-primary" value="Filtrar" id="butao-filtrar">
         </div>
-    </form>
 
-    {{--    <div class="input-group mb-2 fim">--}}
-    {{--        <label for="" class="input-group-text">Fim da Vigência:</label>--}}
-    {{--        <input type="date" class="form-control">--}}
-    {{--    </div>--}}
+        <div class="input-group mb-2">
+            <label for="dataFim" class="input-group-text">Data Final</label>
+            <input type="date" class="form-control" name="dataFim" id="fim-vigencia">
+        </div>
+
+
+        <input type="submit" class="btn btn-primary" value="Filtrar" id="butao-filtrar">
+    </form>
 
     <table class="table">
         <thead>
@@ -35,8 +41,7 @@
         @foreach($instancias as $instancia)
             <tr>
                 <td>{{ $instancia->nmInstancia }}</td>
-                <td><a class="inicio-vigencia">{{ $instancia->dtInicioVigencia }}</a> até <a
-                        class="fim-vigencia">{{ $instancia->dtFimVigencia }}</a></td>
+                <td><strong>{{ $instancia->dtInicioVigencia }}</strong> até <strong>{{ $instancia->dtFimVigencia }}</strong></td>
                 <td>{{ $instancia->dsDesignacao }}</td>
             </tr>
         @endforeach

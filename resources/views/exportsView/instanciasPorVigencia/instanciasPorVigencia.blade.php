@@ -29,11 +29,6 @@
             <input type="submit" class="btn btn-primary" value="Filtrar" id="butao-filtrar">
         </form>
 
-    {{--    <div class="input-group mb-2 fim">--}}
-    {{--        <label for="" class="input-group-text">Fim da Vigência:</label>--}}
-    {{--        <input type="date" class="form-control">--}}
-    {{--    </div>--}}
-
     <table class="table">
         <thead>
         <tr>

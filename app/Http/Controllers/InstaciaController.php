@@ -153,6 +153,11 @@ class InstaciaController extends Controller
                 ->get();
 
             return view('exportsView/instanciasPorVigencia/instanciaPorVigenciaFiltrada', ['instancias' => $instancias]);
+        } elseif ($dataInicio === null && $dataFim === null) {
+            $instancias = Instancia::join('representacoes as r', 'r.cdInstancia', '=', 'instancias.cdInstancia')
+                ->get();
+
+            return view('exportsView/instanciasPorVigencia/instanciaPorVigenciaFiltrada', ['instancias' => $instancias]);
         }
 
         $instancias = Instancia::join('representacoes as r', 'r.cdInstancia', '=', 'instancias.cdInstancia')
