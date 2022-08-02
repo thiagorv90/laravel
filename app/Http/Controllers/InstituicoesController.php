@@ -41,7 +41,7 @@ class InstituicoesController extends Controller
     public function instituicoescreate()
     {
         $instituicoes = DB::table('tipo_instancias')->get();
-        $events = DB::table('instituicoes')->get();
+        $events = DB::table('instituicoes')->join('tipo_instancias', 'tipo_instancias.cdTipoInstancia', '=', 'instituicoes.cdTipoInstituicao')->get();
         return view('instituicoes/instituicoes', compact('instituicoes', 'events'));
     }
 

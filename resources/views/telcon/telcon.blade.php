@@ -39,7 +39,7 @@
 
                     <br>
 
-                    <input type="submit" class="btn btn-primary" value="Criar Evento">
+                    <input type="submit" class="btn btn-primary" value="Criar">
                 </form>
             </div>
         @endforeach
@@ -50,7 +50,7 @@
 
         @endforeach
 
-        <div class=container">
+        <div class="container">
             <table class="table">
                 <thead>
                 <tr>
@@ -105,7 +105,7 @@
                     <input placeholder="Telefone..." type="text" class="form-control" id="nuTelefone" name="nuTelefone">
                 </div>
                 <div class="form-group">
-                    <label for="title">DDD:</label>>>>>>>> main
+                    <label for="title">DDD:</label>
                     <input placeholder="DDD..." type="text" class="form-control" id="nuDDDTelefone"
                            name="nuDDDTelefone">
                 </div>
@@ -119,7 +119,7 @@
                     </select>
                 </div>
 
-                <input type="submit" class="btn btn-primary mt-2" value="Criar Evento">
+                <input type="submit" class="btn btn-primary mt-2" value="Criar">
             </form>
         </div>
 

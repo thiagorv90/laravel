@@ -63,6 +63,6 @@ class TelefoneRepresentanteSuplenteController extends Controller
     {
         Telefone_representante_suplente::find($id)->delete();
         // $deleted = DB::delete('delete from telefone_contatos where cdTelefone = ?', [$id]);
-        return redirect('/telrepsup');
+        return back();
     }
 }

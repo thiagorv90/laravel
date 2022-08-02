@@ -90,7 +90,7 @@
                         <input type="number" class="form-control" id="nuNomeacao" name="nuNomeacao">
                     </div>
                     <br>
-                    <input type="submit" class="btn btn-primary mb-2" value="Criar Representação">
+                    <input type="submit" class="btn btn-primary mb-2" value="Criar">
                 </form>
             </div>
 
@@ -104,6 +104,7 @@
                         <tr>
                             <th scope="col">Nome Titular</th>
                             <th scope="col">Incio</th>
+                            <th scope="col">Status</th>
                             <th scope="col">Opções</th>
 
                         </tr>
@@ -114,16 +115,18 @@
 
                                 <td scropt="row">{{$event->nmRepresentanteSuplente}}</td>
                                 <td><a>{{ $event->dtInicioVigencia }}</a></td>
+                                @if($event->stAtivo ==1)
+                                    <td>Ativo</td>
+                                @else
+                                    <td>Desativado</td>
+                                @endif
 
                                 <td>
                                     <a href="/representacoes/edit/{{$event->cdRepresentacao}}" class="btn btn-info edit-btn"
                                        data-bs-toggle="tooltip" data-bs-title="Editar">
                                         <ion-icon name="create-outline"></ion-icon>
                                     </a>
-                                    <a href="/repsup/edit/{{$event->cdTitular}}" class="btn btn-info edit-btn"
-                                       data-bs-toggle="tooltip" data-bs-title="Contatos">
-                                        <ion-icon name="person-outline"></ion-icon>
-                                    </a>
+                                    
                                     <a href="/agendas/{{$event->cdRepresentacao}}" class="btn btn-info edit-btn"
                                        data-bs-toggle="tooltip" data-bs-title="Agenda">
                                         <ion-icon name="book-outline"></ion-icon>
@@ -216,7 +219,7 @@
                             </div>
                         </div>
                         <br>
-                        <input type="submit" class="btn btn-primary mb-2" value="Criar Evento">
+                        <input type="submit" class="btn btn-primary mb-2" value="Criar">
                     </form>
                 </div>
 

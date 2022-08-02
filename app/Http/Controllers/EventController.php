@@ -24,7 +24,7 @@ class EventController extends Controller
         $event->nmEmpresa = $request->nmEmpresa;
         $event->save();
 
-        return redirect('/');
+        return redirect('/empresas');
     }
 
 
@@ -37,15 +37,7 @@ class EventController extends Controller
     }
 
 
-    public function logout(Request $request)
-    {
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return redirect('/');
-    }
-
+    
 
     public function dashe()
     {

@@ -27,7 +27,7 @@
                 <input type="text" class="form-control" id="dsEmail" name="dsEmail">
             </div>
             <div class="form-group">
-                <label for="title">Ativo?</label>
+                <label for="title">Ativo:</label>
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="1" checked>
                     <label class="form-check-label" for="stAtivo">
@@ -41,19 +41,19 @@
                     </label>
                 </div>
                 <div class="form-group">
-                    <label for="title">Ativo?</label>
+                    <label for="title">Tipo</label>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="tpContatoRepresentante"
                                id="tpContatoRepresentante" value="1" checked>
                         <label class="form-check-label" for="tpContatoRepresentante">
-                            Sim
+                            Celular
                         </label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="tpContatoRepresentante"
                                id="tpContatoRepresentante" value="0">
                         <label class="form-check-label" for="tpContatoRepresentante">
-                            Não
+                            Fixo
                         </label>
                     </div>
                     <div class="form-group">

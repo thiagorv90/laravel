@@ -4,7 +4,7 @@
 
 @section('content')
     <h2>Relatorio de Instancias Por Prioridade</h2>
-    <a href="{{route('porData')}}" class="btn btn-primary"
+    <a href="{{route('porPrioridade')}}" class="btn btn-primary"
        data-bs-toggle="tooltip" data-bs-title="Download">
         <ion-icon name="arrow-down-outline"></ion-icon>
     </a>

@@ -6,6 +6,7 @@
     <div id="event-create-container" class="container">
 
         @foreach ($selecionado as $tel)
+        <h1>Crie Contato Telefonico para: {{$tel->nmContato}}</h1>
             <form action="/telcon/update/{{ $tel->cdTelefone}}" method="POST">
                 @csrf
 
@@ -31,7 +32,7 @@
                     </select>
 
                 </div>
-                <input type="submit" class="btn btn-primary mt-2" value="Alterar Telefone">
+                <input type="submit" class="btn btn-primary mt-2" value="Alterar">
 
             </form>
         @endforeach
