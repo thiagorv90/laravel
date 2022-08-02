@@ -33,10 +33,10 @@
                              name="password_confirmation" required autocomplete="new-password"/>
             </div>
             <div class="mt-4">
-                <x-jet-label for="statusadm" value="{{ __('Administrador') }}"/>
+                <x-jet-label for="statusadm" value="{{ __('Perfil') }}"/>
                 <select name="statusadm" x-model="role_id"
                         class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                    <option value="0">Usuário</option>
+                    <option value="0" >Usuário</option>
                     <option value="1">Administrador</option>
                 </select>
             </div>

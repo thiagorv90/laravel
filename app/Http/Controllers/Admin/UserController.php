@@ -59,7 +59,7 @@ class UserController extends Controller
     public function show()
     {
         $users  = DB::table('users')->get();
-        return view('users\usuarios', compact('users'));
+        return view('users.usuarios', compact('users'));
     }
 
     /**

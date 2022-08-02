@@ -4,7 +4,7 @@
 
 @section('content')
     @if (is_countable($selecionado) && count($selecionado) == 0)
-
+    @if(auth()->user()->statusadm ==1)
         @foreach ($agendas as $agenda)
             <h3>Não há nada agendado para esta representação</h3>
             <h1>Criar Agenda</h1>
@@ -34,23 +34,38 @@
                         <input type="text" class="form-control" id="dsAssunto" name="dsAssunto">
                     </div>
                     <div class="form-group">
-                        <label for="title">Status:</label>
-                        <select name="stAgenda" id="stAgenda" class="form-select">
-                            <option value="0">Não</option>
-                            <option value="1">Sim</option>
-                        </select>
-                    </div>
+                            <label for="title">Status:</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="stAgenda" id="stAgenda" value="1">
+                                <label class="form-check-label" for="stAgenda">
+                                    Ativo
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="stAgenda" id="stAgenda" value="0">
+                                <label class="form-check-label" for="stAgenda">
+                                    Desativado
+                                </label>
+                            </div>
                     <div class="form-group">
                         <label for="title">Local:</label>
                         <input type="text" class="form-control" id="dsLocal" name="dsLocal">
                     </div>
                     <div class="form-group">
-                        <label for="title">Suplente:</label>
-                        <select name="stSuplente" id="stSuplente" class="form-select">
-                            <option value="0">Não</option>
-                            <option value="1">Sim</option>
-                        </select>
-                    </div>
+                            <label for="title">Status Suplente:</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="stSuplente" id="stSuplente" value="1">
+                                <label class="form-check-label" for="stSuplente">
+                                    Ativo
+                                </label>
+                            </div>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="stSuplente" id="stSuplente" value="0">
+                                <label class="form-check-label" for="stSuplente">
+                                    Desativado
+                                </label>
+                            </div>
                     <div class="form-group">
                         <label for="title">Pauta:</label>
                         <input type="textarea" class="form-control" id="dsPauta" name="dsPauta">
@@ -60,10 +75,10 @@
                         <input type="textarea" class="form-control" id="dsResumo" name="dsResumo">
                     </div>
                     <br>
-                    <input type="submit" class="btn btn-primary mb-2" value="Criar Evento">
+                    <input type="submit" class="btn btn-primary mb-2" value="Criar">
                 </form>
             </div>
-
+            @endif
             @else
 
                 <h1>Agendas da representação:</h1>
@@ -72,9 +87,10 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th scope="col">ID</th>
+                            <th scope="col">Nome Instancia</th>
                             <th scope="col">Assunto</th>
                             <th scope="col">Pauta</th>
+                            <th scope="col">Status</th>
                             <th scope="col">Opções</th>
 
                         </tr>
@@ -83,22 +99,28 @@
 
                         <tr>
                             @foreach ($selecionado as $event)
-                                <td scropt="row">{{$event->cdAgenda}}</td>
+                                <td scropt="row">{{$event->nmInstancia}}</td>
                                 <td><a>{{$event->dsAssunto}}</a></td>
                                 <td><a>{{$event->dsPauta}}</a></td>
+                                 @if($event->stAgenda ==1)
+                                    <td>Ativo</td>
+                                @else
+                                    <td>Desativado</td>
+                                @endif
 
                                 <td class="opcoes-agenda d-flex">
-                                    <a href="/agendas/edit/{{$event->cdAgenda}}" class="btn btn-info edit-btn me-2">
+                                    <a href="/agendas/edit/{{$event->cdAgenda}}" class="btn btn-info edit-btn me-2" data-bs-toggle="tooltip" data-bs-title="Editar">
                                         <ion-icon name="create-outline"></ion-icon>
                                     </a>
-
+                                    @if(auth()->user()->statusadm ==1)
                                     <form action="/agendas/edit/{{ $event->cdAgenda }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger delete-btn">
+                                        <button type="submit" class="btn btn-danger delete-btn" data-bs-toggle="tooltip" data-bs-title="Deletar">
                                             <ion-icon name="trash-outline"></ion-icon>
                                         </button>
                                     </form>
+                                    @endif
                                 </td>
                         </tr>
                         @endforeach
@@ -107,6 +129,7 @@
 
                 </div>
                 <br>
+                
                 <form action="/agendas/{{$event->cdAgenda}}/search" method="GET">
                     @csrf
                     <div class="row">
@@ -135,6 +158,7 @@
                     </div>
                 </form>
                 <br>
+                @if(auth()->user()->statusadm ==1)
                 <h1>Agenda</h1>
 
                 <div id="event-create-container" class="container">
@@ -146,47 +170,69 @@
                         </div>
                         <div class="form-group">
                             <label for="title">Representação: </label>
-                            <select name="cdRepresentacao" id="cdRepresentacao" class="form-select">
+                            <select name="cdRepresentacao" id="cdRepresentacao" class="form-control" >
                                 @foreach ($selecionado as $agenda)
-                                    <option value="{{$agenda->cdRepresentacao}}"> {{$agenda->cdTitular}}</option>
+                                    <option value="{{$agenda->cdRepresentacao}}"> {{$agenda->nmRepresentanteSuplente}}</option>
 
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="title">Hora:</label>
-                            <input type="time" class="form-select" id="hrAgenda" name="hrAgenda">
+                            <input type="time" class="form-control" id="hrAgenda" name="hrAgenda">
                         </div>
                         <div class="form-group">
-                            <label for="title"> Status:</label>
-                            <select name="stAgenda" id="stAgenda" class="form-select">
-                                <option value="0">Não</option>
-                                <option value="1">Sim</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="title">Local:</label>
-                            <input type="text" class="form-control" id="dsLocal" name="dsLocal">
-                        </div>
+                        <label for="title">Assunto:</label>
+                        <input type="text" class="form-control" id="dsAssunto" name="dsAssunto" placeholder="Assunto...">
+                    </div>
                         <div class="form-group">
                             <label for="title">Status:</label>
-                            <select name="stSuplente" id="stSuplente" class="form-select">
-                                <option value="0">Não</option>
-                                <option value="1">Sim</option>
-                            </select>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="stAgenda" id="stAgenda" value="1">
+                                <label class="form-check-label" for="stAgenda">
+                                    Ativo
+                                </label>
+                            </div>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="stAgenda" id="stAgenda" value="0">
+                                <label class="form-check-label" for="stAgenda">
+                                    Desativado
+                                </label>
+                            </div>
+                        <div class="form-group">
+                            <label for="title">Local:</label>
+                            <input type="text" class="form-control" id="dsLocal" name="dsLocal" placeholder="Local...">
                         </div>
+                        
+                        <div class="form-group">
+                            <label for="title">Status Suplente:</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="stSuplente" id="stSuplente" value="1">
+                                <label class="form-check-label" for="stSuplente">
+                                    Ativo
+                                </label>
+                            </div>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="stSuplente" id="stSuplente" value="0">
+                                <label class="form-check-label" for="stSuplente">
+                                    Desativado
+                                </label>
+                            </div>
                         <div class="form-group">
                             <label for="title">Pauta:</label>
-                            <input type="textarea" class="form-control" id="dsPauta" name="dsPauta">
+                            <input type="textarea" class="form-control" id="dsPauta" name="dsPauta" placeholder="Pauta...">
                         </div>
                         <div class="form-group">
                             <label for="title">Resumo:</label>
-                            <input type="textarea" class="form-control" id="dsResumo" name="dsResumo">
+                            <textarea type="textarea" class="form-control" id="dsResumo" name="dsResumo" placeholder="Resumo..."></textarea>
                         </div>
                         <br>
-                        <input type="submit" class="btn btn-primary mb-2" value="Criar Evento">
+                        <input type="submit" class="btn btn-primary mb-2" value="Criar">
                     </form>
                 </div>
+            @endif
             @endif
 
             @endsection

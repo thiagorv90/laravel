@@ -32,7 +32,7 @@ class RepresentanteSuplenteController extends Controller
         $event->dtNascimento = $request->dtNascimento;
         $event->save();
 
-        return redirect('/');
+        return back();
     }
 
     public function repsupcreate()

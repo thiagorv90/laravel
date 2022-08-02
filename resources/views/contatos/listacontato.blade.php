@@ -113,7 +113,7 @@
                     <input type="text" class="form-control" id="dsEmailAlternativo" name="dsEmailAlternativo">
                 </div>
                 <br>
-                <input type="submit" class="btn btn-primary mb-2" value="Criar Evento">
+                <input type="submit" class="btn btn-primary mb-2" value="Criar">
             </form>
         </div>
 
@@ -184,7 +184,7 @@
                                        name="dsEmailAlternativo">
                             </div>
                             <br>
-                            <input type="submit" class="btn btn-primary mb-2" value="Criar Evento">
+                            <input type="submit" class="btn btn-primary mb-2" value="Criar">
                 </form>
             </div>
             </div>

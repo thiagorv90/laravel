@@ -28,6 +28,7 @@ class RepresentacoesController extends Controller
         $event->stAtivo = $request->stAtivo;
         $event->dtNomeacao = $request->dtNomeacao;
         $event->nuNomeacao = $request->nuNomeacao;
+        $event->fnNomeacao = $request->fnNomeacao;
 
         $event->save();
 
@@ -57,7 +58,8 @@ class RepresentacoesController extends Controller
         $edit = Representacoe::join('representante_suplentes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
             ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
             ->where('cdRepresentacao', '=', $id)
-            ->get();
+            ->get(['cdRepresentacao', 'nmRepresentanteSuplente', 'dtInicioVigencia', 'cdTitular', 'representacoes.cdInstancia', 'nmInstancia', 'representacoes.stAtivo'
+        ,'cdSuplente','dtInicioVigencia','dtFimVigencia','dsDesignacao','dsNomeacao','dtNomeacao','nuNomeacao']);
         // $insta = Instituicoe::join('tipo_instancias', 'tipo_instancias.cdTipoInstancia', '=','instituicoes.cdTipoInstituicao')->get();
         $rep = representante_suplente::orderBy('cdRepSup')
             ->get();
@@ -79,10 +81,11 @@ class RepresentacoesController extends Controller
         $ativo = $request->input('stAtivo');
         $numero = $request->input('nuNomeacao');
         $dt = $request->input('dtNomeacao');
+        $file = $request ->input('fnNomeacao');
 
 
         DB::update('update representacoes set cdInstancia = ?, cdTitular = ?, cdSuplente = ?, dtInicioVigencia = ?, dtFimVigencia = ?, dsDesignacao = ?, dsNomeacao = ?, stAtivo = ?, nuNomeacao=?,dtNomeacao=?
-        where cdRepresentacao = ?', [$cd, $titular, $suplente, $ini, $fim, $desi, $nomea, $ativo, $numero, $dt, $id]);
+        , fnNomeacao=? where cdRepresentacao = ?', [$cd, $titular, $suplente, $ini, $fim, $desi, $nomea, $ativo, $numero, $dt, $id]);
 
         return redirect()->route('repre', ['id' => $cd]);
     }
@@ -97,10 +100,23 @@ class RepresentacoesController extends Controller
             ->join('instituicoes', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
             ->leftjoin('agendas', 'agendas.cdRepresentacao', '=', 'representacoes.cdRepresentacao')
             ->where('instancias.cdInstancia', '=', $id)
-            ->get(['representacoes.cdRepresentacao', 'nmRepresentanteSuplente', 'dtInicioVigencia', 'cdTitular', 'representacoes.cdInstancia', 'nmInstancia']);
+            ->get(['representacoes.cdRepresentacao', 'nmRepresentanteSuplente', 'dtInicioVigencia', 'cdTitular', 'representacoes.cdInstancia', 'nmInstancia','representacoes.stAtivo']);
 
         return view('representacoes/repinsta', ['selecionado' => $selecionado, 'instancias' => $instancias, 'events' => $events, 'representantes' => $representantes]);
     }
+
+    public function represcreate()
+    {
+        $representantes = DB::table('representante_suplentes')->join('representacoes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
+        ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
+        ->where('dsEmail','=', auth()->user()->email)->get();
+       
+
+        return view('representacoes/representacoes', ['representantes' => $representantes]);
+    }
+
+
+
 
     public function export()
     {

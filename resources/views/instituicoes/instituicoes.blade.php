@@ -8,15 +8,15 @@
         <table class="table">
             <thead>
             <tr>
-                <th scope="col">ID</th>
                 <th scope="col">Nome</th>
+                <th scope="col">Tipo</th>
             </tr>
             </thead>
             <tbody>
             @foreach ($events as $event)
                 <tr>
-                    <td scropt="row">{{$event->cdInstituicao}}</td>
-                    <td><a>{{ $event->nmInstituicao }}</a></td>
+                    <td scropt="row">{{$event->nmInstituicao}}</td>
+                    <td><a>{{ $event->dsTipoInstancia }}</a></td>
                     <td><a href="/instituicoes/edit/{{$event->cdInstituicao}}" class="btn btn-info edit-btn"
                            data-bs-toggle="tooltip" data-bs-title="Editar">
                             <ion-icon name="create-outline"></ion-icon>

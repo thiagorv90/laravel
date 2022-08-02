@@ -167,7 +167,7 @@
 
                     </div>
                 <br>
-                <input type="submit" class="btn btn-primary mb-2" value="Criar Evento">
+                <input type="submit" class="btn btn-primary mb-2" value="Alterar">
                 @endforeach
             </form>
     </div>
