@@ -32,7 +32,7 @@ class InstaciaController extends Controller
         $event->dsMandato = $request->dsMandato;
         $event->stAtivo = $request->stAtivo;
         $event->dsObjetivo = $request->dsObjetivo;
-       
+
         $event->tpPrioridade = $request->tpPrioridade;
         $event->dsAmeacas = $request->dsAmeacas;
         $event->dsOportunidades = $request->dsOportunidades;
@@ -77,7 +77,7 @@ class InstaciaController extends Controller
             ->get([
                 'instancias.nmInstancia', 'tema_representacoes.nmTema', 'instituicoes.nmInstituicao', 'representante_suplentes.dsemail', 'representante_suplentes.nmRepresentanteSuplente',
                 'instancias.tpFederalDistrital', 'instancias.tpPublicoPrivado', 'instancias.dsMandato', 'instancias.stAtivo', 'instancias.dsObjetivo', 'instancias.tpAtribuicoes',
-                'instancias.tpPrioridade', 'instancias.dsAmeacas', 'instancias.dsOportunidades', 'instancias.dsObservacao','boCaraterDaInstancia','dsAtoNormativo'
+                'instancias.tpPrioridade', 'instancias.dsAmeacas', 'instancias.dsOportunidades', 'instancias.dsObservacao', 'boCaraterDaInstancia', 'dsAtoNormativo'
             ]);
 
         return view('instancias.show', ['insta' => $insta]);
@@ -111,11 +111,11 @@ class InstaciaController extends Controller
         $manda = $request->input('dsMandato');
         $carater = $request->input('boCaraterDaInstancia');
         $ato = $request->input('dsAtoNormativo');
-       
+
 
         DB::update('update instancias set cdInstituicao = ?, cdTema = ?, nmInstancia = ?, tpFederalDistrital = ?, tpPublicoPrivado = ?, dsMandato = ?,
             stAtivo = ?, dsObjetivo = ?, tpPrioridade = ?, dsAmeacas = ?, dsOportunidades = ?, dsObservacao=?, boCaraterDaInstancia=?,dsAtoNormativo=?
-            where cdInstancia = ?', [$cd, $tema, $name, $fed, $pub, $mand, $ativo, $obj, $pri, $ame, $opor, $manda,$carater,$ato, $id]);
+            where cdInstancia = ?', [$cd, $tema, $name, $fed, $pub, $mand, $ativo, $obj, $pri, $ame, $opor, $manda, $carater, $ato, $id]);
 
         return redirect()->route('instancias', ['id' => $cd]);
     }
@@ -134,6 +134,34 @@ class InstaciaController extends Controller
             ->get();
 
         return view('/instancias/search-results', compact('events'));
+    }
+
+    public function relatorioFiltrado(Request $request)
+    {
+        $dataInicio = $request->input('dataInicio');
+        $dataFim = $request->input('dataFim');
+
+        if ($dataFim === null) {
+            $instancias = Instancia::join('representacoes as r', 'r.cdInstancia', '=', 'instancias.cdInstancia')
+                ->where('r.dtInicioVigencia', '>=', $dataInicio)
+                ->get();
+
+            return view('exportsView/instanciasPorVigencia/instanciaPorVigenciaFiltrada', ['instancias' => $instancias]);
+        } elseif ($dataInicio === null) {
+            $instancias = Instancia::join('representacoes as r', 'r.cdInstancia', '=', 'instancias.cdInstancia')
+                ->where('r.dtFimVigencia', '<=', $dataFim)
+                ->get();
+
+            return view('exportsView/instanciasPorVigencia/instanciaPorVigenciaFiltrada', ['instancias' => $instancias]);
+        }
+
+        $instancias = Instancia::join('representacoes as r', 'r.cdInstancia', '=', 'instancias.cdInstancia')
+            ->where('r.dtFimVigencia', '<=', $dataFim)
+            ->where('r.dtInicioVigencia', '>=', $dataInicio)
+            ->get();
+
+        return view('exportsView/instanciasPorVigencia/instanciaPorVigenciaFiltrada', ['instancias' => $instancias]);
+
     }
 
     public function instanciasExportView()
@@ -193,7 +221,7 @@ class InstaciaController extends Controller
         $instancias = Instancia::join('representacoes as r', 'r.cdInstancia', '=', 'instancias.cdInstancia')
             ->get();
 
-        return view('exportsView/instanciasPorVigencia', ['instancias' => $instancias]);
+        return view('exportsView/instanciasPorVigencia/instanciasPorVigencia', ['instancias' => $instancias]);
     }
 
     public function instanciasPorStatusExportView()

@@ -23,7 +23,6 @@ class TelefoneRepresentanteSuplenteController extends Controller
         return back();
     }
 
-
     public function telrepsupcreate($id)
     {
         $telefones = DB::table('representante_suplentes')->where('cdRepSup', '=', $id)->get();

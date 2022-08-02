@@ -17,7 +17,6 @@ class Representante_suplente extends Model
         return $this->hasOne('App\Models\Empresa');
     }
 
-
     public function telefone()
     {
         return $this->hasMany('App\Models\Telefone_representante_suplente');

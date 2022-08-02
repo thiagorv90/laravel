@@ -6,10 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 
 
-
-
-
-class admin 
+class admin
 {
     /**
      * Handle an incoming request.
@@ -20,11 +17,9 @@ class admin
      */
     public function handle(Request $request, Closure $next)
     {
-
         if (auth()->user()->statusadm != '1') {
             abort('403');
         }
-
 
         return $next($request);
     }
