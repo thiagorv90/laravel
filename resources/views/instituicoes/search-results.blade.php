@@ -5,7 +5,7 @@
 @section('content')
 
     <div id="event-create-container" class="col-md-6 offset-md-3">
-        <h1>Contatos</h1>
+        <h1>Instituições</h1>
 
 
         @if ($events->isEmpty())

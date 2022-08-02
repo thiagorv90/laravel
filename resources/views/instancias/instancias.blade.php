@@ -98,7 +98,7 @@
 
                             <div class="form-group">
                                 <label for="title">Atribuições:</label>
-                                <input placeholder="Atribuições..." type="text" class="form-control" id="tpAtribuicoes"
+                                <input placeholder="Atribuições..." type="number" class="form-control" id="tpAtribuicoes"
                                        name="tpAtribuicoes">
                             </div>
                             <div class="form-group">
@@ -214,7 +214,9 @@
                                        data-bs-toggle="tooltip" data-bs-title="Representante">
                                         <ion-icon name="reader-outline"></ion-icon>
                                     </a>
+
                                 </td>
+
                             </tr>
                         @endforeach
                         </tbody>
@@ -323,7 +325,7 @@
 
                             <div class="form-group">
                                 <label for="title">Atribuições:</label>
-                                <input placeholder="Atribuições..." type="text" class="form-control" id="tpAtribuicoes"
+                                <input placeholder="Atribuições..." type="number" class="form-control" id="tpAtribuicoes"
                                        name="tpAtribuicoes">
                             </div>
                             <div class="form-group">

@@ -32,7 +32,7 @@ class InstaciaController extends Controller
         $event->dsMandato = $request->dsMandato;
         $event->stAtivo = $request->stAtivo;
         $event->dsObjetivo = $request->dsObjetivo;
-        $event->tpAtribuicoes = $request->tpAtribuicoes;
+       
         $event->tpPrioridade = $request->tpPrioridade;
         $event->dsAmeacas = $request->dsAmeacas;
         $event->dsOportunidades = $request->dsOportunidades;
@@ -71,8 +71,8 @@ class InstaciaController extends Controller
     {
         $insta = Instancia::join('tema_representacoes', 'instancias.cdTema', '=', 'tema_representacoes.cdTema')
             ->join('instituicoes', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
-            ->join('representacoes', 'representacoes.cdInstancia', '=', 'instancias.cdInstancia')
-            ->join('representante_suplentes', 'representante_suplentes.cdRepSup', '=', 'representacoes.cdTitular')
+            ->leftjoin('representacoes', 'representacoes.cdInstancia', '=', 'instancias.cdInstancia')
+            ->leftjoin('representante_suplentes', 'representante_suplentes.cdRepSup', '=', 'representacoes.cdTitular')
             ->where('instancias.cdinstancia', '=', $cdInstancia)
             ->get([
                 'instancias.nmInstancia', 'tema_representacoes.nmTema', 'instituicoes.nmInstituicao', 'representante_suplentes.dsemail', 'representante_suplentes.nmRepresentanteSuplente',
@@ -105,17 +105,17 @@ class InstaciaController extends Controller
         $mand = $request->input('dsMandato');
         $ativo = $request->input('stAtivo');
         $obj = $request->input('dsObjetivo');
-        $atr = $request->input('tpAtribuicoes');
         $pri = $request->input('tpPrioridade');
         $ame = $request->input('dsAmeacas');
         $opor = $request->input('dsOportunidades');
         $manda = $request->input('dsMandato');
         $carater = $request->input('boCaraterDaInstancia');
         $ato = $request->input('dsAtoNormativo');
+       
 
         DB::update('update instancias set cdInstituicao = ?, cdTema = ?, nmInstancia = ?, tpFederalDistrital = ?, tpPublicoPrivado = ?, dsMandato = ?,
-            stAtivo = ?, dsObjetivo = ?, tpAtribuicoes = ?, tpPrioridade = ?, dsAmeacas = ?, dsOportunidades = ?, dsObservacao=?, boCaraterDaInstancia=?,dsAtoNormativo=?
-            where cdInstancia = ?', [$cd, $tema, $name, $fed, $pub, $mand, $ativo, $obj, $atr, $pri, $ame, $opor, $manda,$carater,$ato, $id]);
+            stAtivo = ?, dsObjetivo = ?, tpPrioridade = ?, dsAmeacas = ?, dsOportunidades = ?, dsObservacao=?, boCaraterDaInstancia=?,dsAtoNormativo=?
+            where cdInstancia = ?', [$cd, $tema, $name, $fed, $pub, $mand, $ativo, $obj, $pri, $ame, $opor, $manda,$carater,$ato, $id]);
 
         return redirect()->route('instancias', ['id' => $cd]);
     }
@@ -202,7 +202,6 @@ class InstaciaController extends Controller
 
         return view('exportsView/instanciasPorStatus', ['instancias' => $instancias]);
     }
-
 
     public function exportPorId()
     {

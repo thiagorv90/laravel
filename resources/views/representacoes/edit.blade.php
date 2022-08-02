@@ -88,11 +88,11 @@
                 </div>
                 <div class="form-group">
                         <label for="title">Data de Nomeação:</label>
-                        <input type="date" class="form-control" id="dtNomeacao" name="dtNomeacao"
+                        <input type="text" class="form-control" id="dtNomeacao" name="dtNomeacao"
                         value="{{$age->dtNomeacao}}">
                     </div>
                     <div class="form-group">
-                        <label for="title">Nomeação:</label>
+                        <label for="title"> Numero Nomeação:</label>
                         <input type="number" class="form-control" id="nuNomeacao" name="nuNomeacao"
                         value="{{$age->nuNomeacao}}">
                     </div>

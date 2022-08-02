@@ -3,13 +3,17 @@
 @section('title', 'Telefone Representante Suplente ')
 
 @section('content')
+
+
     @if (is_countable($selecionado) && count($selecionado) == 0)
+
         @foreach ($telefones as $telefone)
             <h3>Não ha telefone para este representante: {{$telefone->nmRepresentanteSuplente}}</h3>
             <h1>Crie telefone</h1>
 
             <div id="event-create-container" class="container">
                 <form action="telrepsup" method="post">
+
                     @csrf
                     <div class="form-group">
                         <label for="title">Telefone:</label>
@@ -40,8 +44,10 @@
             </div>
         @endforeach
     @else
+
             <h1>Contatos de </h1>
             <div class="container">
+
                 <table class="table">
                     <thead>
                     <tr>
@@ -51,7 +57,9 @@
                     </tr>
                     </thead>
                     <tbody>
+
                     @foreach ($selecionado as $event)
+
 
                     <tr>
                         <td scropt="row">{{$event->cdTelefone}}</td>
@@ -64,15 +72,17 @@
                             <form action="/telrepsup/edit/{{ $event->cdTelefone }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger delete-btn"
-                                        data-bs-toggle="tooltip" data-bs-title="Apagar">
+                                <button type="submit" class="btn btn-danger delete-btn show_confirm" title='Delete' id="del"
+                                 data-bs-toggle="tooltip" >
                                     <ion-icon name="trash-outline"></ion-icon>
                                 </button>
                             </form>
                         </td>
                     </tr>
 
+
                     @endforeach
+
 
 
                     </tbody>
@@ -117,6 +127,32 @@
             </div>
 
 
-    @endif
 
+
+    @endif
+    
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+<script type="text/javascript">
+ 
+     $('#show_confirm').click(function(event) {
+          var form =  $(this).closest('#del');
+          var name = $(this).data("name");
+          event.preventDefault();
+          swal({
+              title: `Are you sure you want to delete this record?`,
+              text: "If you delete this, it will be gone forever.",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              form.submit();
+            }
+          });
+      });
+  
+</script>
 @endsection

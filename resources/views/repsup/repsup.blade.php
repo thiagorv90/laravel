@@ -3,7 +3,36 @@
 @section('title', 'Representantes')
 
 @section('content')
+<h1>Representantes</h1>
+<div class="container mt-5">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">Opções</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach ($events as $event)
+                <tr>
+                    <td scropt="row">{{$event->nmRepresentanteSuplente}}</td>
+                    <td><a>{{ $event->dsEmail }}</a></td>
 
+                    <td><a href="/repsup/edit/{{$event->cdRepSup}}" class="btn btn-info edit-btn"
+                           data-bs-toggle="tooltip" data-bs-title="Editar">
+                            <ion-icon name="create-outline"></ion-icon>
+                        </a>
+                        <a href="/telrepsup/{{$event->cdRepSup}}" class="btn btn-info edit-btn"
+                           data-bs-toggle="tooltip" data-bs-title="Contato">
+                            <ion-icon name="call-outline"></ion-icon>
+                        </a>
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
     <h1>Crie Representante</h1>
 
     <div id="event-create-container" class="container">
@@ -73,38 +102,10 @@
                 <input type="date" class="form-control" id="dtNascimento" name="dtNascimento">
             </div>
             <br>
-            <input type="submit" class="btn btn-primary" value="Criar Representante">
+            <input type="submit" class="btn btn-primary mb-2" value="Criar Representante">
         </form>
     </div>
 
-    <div class="container mt-5">
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Opções</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach ($events as $event)
-                <tr>
-                    <td scropt="row">{{$event->cdRepSup}}</td>
-                    <td><a>{{ $event->nmRepresentanteSuplente }}</a></td>
-
-                    <td><a href="/repsup/edit/{{$event->cdRepSup}}" class="btn btn-info edit-btn"
-                           data-bs-toggle="tooltip" data-bs-title="Editar">
-                            <ion-icon name="create-outline"></ion-icon>
-                        </a>
-                        <a href="/telrepsup/{{$event->cdRepSup}}" class="btn btn-info edit-btn"
-                           data-bs-toggle="tooltip" data-bs-title="Contato">
-                            <ion-icon name="call-outline"></ion-icon>
-                        </a>
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
-    </div>
+    
 
 @endsection

@@ -30,7 +30,7 @@
     <nav class="navbar navbar-light bg-light fixed-top"
          style="background-image: linear-gradient(160deg, #743190 0%, #B67FB9 100%);">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/inicial">
+            <a class="navbar-brand" href="/dashboard">
                 <img src="/image/fibra1.png" alt="Fibra">
             </a>
 
@@ -57,14 +57,14 @@
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                             @if(auth()->user()->statusadm ==1)
 
-                                <li class="nav-item"><a class="nav-link" href="/register">Cadastrar</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/register">Cadastrar Usuário</a></li>
 
                                 <li class="nav-item"><a class="nav-link" href="/empresas">Empresas</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/escolaridade">Escolaridade</a></li>
 
-                                <li class="nav-item"><a class="nav-link" href="/instituicoes">Instituicoes</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/instituicoes">Instituições</a></li>
 
-                                <li class="nav-item"><a class="nav-link" href="/dashboard">Relatórios</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/reports">Relatórios</a></li>
 
                                 <li class="nav-item"><a class="nav-link" href="/repsup">Representantes</a></li>
 
@@ -73,7 +73,7 @@
                                 <li class="nav-item"><a class="nav-link" href="/tipoinsta">Tipo de Instancias</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/usuarios">Usuários</a></li>
                             @else
-                                <li class="nav-item"><a class="nav-link" href="/representacoes">Usuários</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/representacoes">Representações</a></li>
                             @endif
 
                         </ul>
