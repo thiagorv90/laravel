@@ -97,11 +97,7 @@
                                value="{{$instituicao->dsObjetivo}}"></input>
                     </div>
 
-                    <div class="form-group">
-                        <label for="title">Atribuições:</label>
-                        <input type="text" class="form-control" id="tpAtribuicoes" name="tpAtribuicoes"
-                               value="{{$instituicao->tpAtribuicoes}}">
-                    </div>
+                   
                     <div class="form-group">
                         <label for="title">Prioridade:</label>
                         <div class="form-check">

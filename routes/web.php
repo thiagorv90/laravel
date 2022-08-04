@@ -54,6 +54,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'admin'], function () {
         Route::view('/reports', 'reports');
 
+
         Route::get('instancias/show/{id}', [InstaciaController::class, 'show']);
         Route::get('instancias/edit/{cdInstancia}', [InstaciaController::class, 'edit']);
         Route::PUT('instancias/update/{cdInstancia}', [InstaciaController::class, 'update']);
@@ -97,7 +98,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::PUT('instituicoes/update/{id}', [InstituicoesController::class, 'updateInst']);
         Route::get('instituicoes/edit/{id}', [InstituicoesController::class, 'editInst']);
 
-        
+         Route::get('/download/{id}', [RepresentacoesController::class, 'download']);
         Route::post('repinsta/{id}', [RepresentacoesController::class, 'representacoesstore']);
         Route::get('repinsta/{id}', [RepresentacoesController::class, 'instareprescreate'])->name('repre');
         Route::PUT('representacoes/update/{id}', [RepresentacoesController::class, 'updateRep']);

@@ -12,7 +12,7 @@
                 <div id="event-create-container" class="container">
                     <form action="instancias" method="POST">
                         @csrf
-                        <div class="form-group">
+                        <div class="form-group" >
                             <label for="title">Nome:</label>
                             <input placeholder="Nome..." type="text" class="form-control" id="nmInstancia"
                                    name="nmInstancia">
@@ -96,11 +96,7 @@
                                           class="form-control"></textarea>
                             </div>
 
-                            <div class="form-group">
-                                <label for="title">Atribuições:</label>
-                                <input placeholder="Atribuições..." type="number" class="form-control" id="tpAtribuicoes"
-                                       name="tpAtribuicoes">
-                            </div>
+                            
                             <div class="form-group">
                                 <label for="title">Prioridade:</label>
                                 <div class="form-check">

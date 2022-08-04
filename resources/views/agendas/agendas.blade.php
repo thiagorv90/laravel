@@ -74,8 +74,10 @@
                         <label for="title">Resumo:</label>
                         <input type="textarea" class="form-control" id="dsResumo" name="dsResumo">
                     </div>
-                    <br>
-                    <input type="submit" class="btn btn-primary mb-2" value="Criar">
+                    <br><div class="container d-flex justify-content-between mt-2">
+                <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
+                <input type="submit" class="btn btn-primary mb-2" value="Criar">
+</div>
                 </form>
             </div>
             @endif
@@ -228,8 +230,12 @@
                             <label for="title">Resumo:</label>
                             <textarea type="textarea" class="form-control" id="dsResumo" name="dsResumo" placeholder="Resumo..."></textarea>
                         </div>
-                        <br>
+                        <br><div class="container d-flex justify-content-between mt-2">
                         <input type="submit" class="btn btn-primary mb-2" value="Criar">
+                        
+                <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
+                
+</div>
                     </form>
                 </div>
             @endif
