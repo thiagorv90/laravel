@@ -23,10 +23,8 @@ class InstituicoesController extends Controller
             ->where('nmInstituicao', 'like', "%$query%")
             ->get();
 
-
         return view('/instituicoes/search-results', compact('events'));
     }
-
 
     public function instituicoesstore(Request $request)
     {

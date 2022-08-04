@@ -27,7 +27,6 @@ class EventController extends Controller
         return redirect('/empresas');
     }
 
-
     public function updateEmp(Request $request, $emp)
     {
         $name = $request->input('nmEmpresa');
@@ -35,9 +34,6 @@ class EventController extends Controller
 
         return redirect('/empresas')->with('msg', 'evento alterado com sucesso');
     }
-
-
-    
 
     public function dashe()
     {

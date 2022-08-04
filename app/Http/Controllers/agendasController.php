@@ -36,7 +36,7 @@ class agendasController extends Controller
             ->join('representante_suplentes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
             ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
             ->where('representacoes.cdRepresentacao', '=', $id)
-            ->get(['cdAgenda','agendas.cdRepresentacao','dtAgenda','hrAgenda','agendas.stAgenda','dsAssunto','dsLocal','dsPauta','dsResumo','stSuplente','nmRepresentanteSuplente','nmInstancia']);
+            ->get(['cdAgenda', 'agendas.cdRepresentacao', 'dtAgenda', 'hrAgenda', 'agendas.stAgenda', 'dsAssunto', 'dsLocal', 'dsPauta', 'dsResumo', 'stSuplente', 'nmRepresentanteSuplente', 'nmInstancia']);
         $agendas = DB::table('representacoes')->where('cdRepresentacao', '=', $id)->get();
 
         return view('/agendas.agendas', ['agendas' => $agendas, 'selecionado' => $selecionado]);
@@ -46,7 +46,7 @@ class agendasController extends Controller
     {
         //$events=Instituicoe::find($id);
         $edit = agenda::join('representacoes', 'representacoes.cdRepresentacao', '=', 'agendas.cdRepresentacao')
-        ->join('representante_suplentes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
+            ->join('representante_suplentes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
             ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
             ->where('cdAgenda', '=', $id)
             ->get();
