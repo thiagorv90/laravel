@@ -3,7 +3,6 @@
 @section('title', 'Relatório de Instancias')
 
 @section('content')
-
     <div class="container d-flex align-items-center">
     <h2>Relatorio Por Vigencia do Mandato</h2>
         <a href="{{route('porVigencia')}}" class="btn btn-primary ms-2"

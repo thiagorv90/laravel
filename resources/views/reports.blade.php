@@ -4,6 +4,8 @@
 
 @section('content')
 
+
+
     <div class="container">
         <h1>Relatórios</h1>
         <div class="list-group">
@@ -26,6 +28,12 @@
             <a href="{{route('exportViewInstData')}}" class="list-group-item list-group-item-action">8. -- Por Data
                 --</a>
         </div>
+    </div>
+
+    <div class="container d-flex justify-content-between mt-2">
+        <a href="#" class="btn btn-info">Voltar</a>
+
+        <a href="#" class="btn btn-info">Enviar</a>
     </div>
 @endsection
 
