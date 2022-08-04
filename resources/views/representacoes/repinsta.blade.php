@@ -5,7 +5,7 @@
 @section('content')
 
 
-
+<div id="event-create-container" class="container">
     @if (is_countable($selecionado) && count($selecionado) == 0)
         @foreach ( $instancias as  $instancia)
 
@@ -13,9 +13,9 @@
 
             <div id="event-create-container" class="container">
                 <h1>Crie sua Representação</h1>
-                <form action="repinsta" method="POST">
+                <form action="repinsta" method="POST" enctype='multipart/form-data'>
                     @csrf
-                    <div class="form-group">
+                    <div class="form-group" style="display:none">
                         <label for="title">Instancia:</label>
                         <select name="cdInstancia" id="cdInstancia" class="form-control">
 
@@ -50,11 +50,11 @@
                     </div>
                     <div class="form-group">
                         <label for="title">Inicio da Vigência:</label>
-                        <input type="date" class="form-control" id="dtInicioVigencia" name="dtInicioVigencia">
+                        <input type="date" class="form-control" id="dtInicioVigencia" name="dtInicioVigencia" required>
                     </div>
                     <div class="form-group">
                         <label for="title">Fim da Vigência:</label>
-                        <input type="date" class="form-control" id="dtFimVigencia" name="dtFimVigencia">
+                        <input type="date" class="form-control" id="dtFimVigencia" name="dtFimVigencia" required>
                     </div>
                     <div class="form-group">
                         <label for="title">Designação:</label>
@@ -89,6 +89,10 @@
                         <label for="title">Nomeação:</label>
                         <input type="number" class="form-control" id="nuNomeacao" name="nuNomeacao">
                     </div>
+                    <div class="form-group">
+                                <label for="title">Documento:</label>
+                                <input type="file" class="form-control" id="fnNomeacao" name="fnNomeacao">
+                            </div>
                     <br>
                     <input type="submit" class="btn btn-primary mb-2" value="Criar">
                 </form>
@@ -141,9 +145,9 @@
 
                 <div id="event-create-container" class="container mt-5">
                     <h1>Crie sua Representação</h1>
-                    <form action="repinsta" method="POST">
+                    <form action="repinsta" method="POST" enctype='multipart/form-data'>
                         @csrf
-                        <div class="form-group">
+                        <div class="form-group" style="display:none">
                             <label for="title">Instância:</label>
                             <select name="cdInstancia" id="cdInstancia" class="form-control">
                                 @foreach ( $selecionado as $instancia)
@@ -178,11 +182,11 @@
                         </div>
                         <div class="form-group">
                             <label for="title">Inicio da Vigência:</label>
-                            <input type="date" class="form-control" id="dtInicioVigencia" name="dtInicioVigencia">
+                            <input type="date" class="form-control" id="dtInicioVigencia" name="dtInicioVigencia" required>
                         </div>
                         <div class="form-group">
                             <label for="title">Fim da Vigência:</label>
-                            <input type="date" class="form-control" id="dtFimVigencia" name="dtFimVigencia">
+                            <input type="date" class="form-control" id="dtFimVigencia" name="dtFimVigencia" required>
                         </div>
                         <div class="form-group">
                             <label for="title">Designação:</label>
@@ -217,6 +221,10 @@
                                 <label for="title">Nomeação:</label>
                                 <input type="number" class="form-control" id="nuNomeacao" name="nuNomeacao">
                             </div>
+                            <div class="form-group">
+                                <label for="title">Documento:</label>
+                                <input type="file" class="form-control" id="fnNomeacao" name="fnNomeacao">
+                            </div>
                         </div>
                         <br>
                         <input type="submit" class="btn btn-primary mb-2" value="Criar">
@@ -224,7 +232,7 @@
                 </div>
 
             @endif
-
+            </div>
 
 
 
