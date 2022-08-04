@@ -18,7 +18,6 @@ class InstanciaAtivaExport implements FromView, ShouldAutoSize, WithDrawings
      * @return \Illuminate\Support\Collection
      */
 
-
     public function view(): View
     {
         return view('exports.instanciasStatus', [

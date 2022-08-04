@@ -81,6 +81,7 @@ class RepresentacoesController extends Controller
             ->where('cdRepresentacao', '=', $id)
             ->get(['cdRepresentacao', 'nmRepresentanteSuplente', 'dtInicioVigencia', 'cdTitular', 'representacoes.cdInstancia', 'nmInstancia', 'representacoes.stAtivo'
         ,'cdSuplente','dtInicioVigencia','dtFimVigencia','dsDesignacao','dsNomeacao','dtNomeacao','nuNomeacao','fnNomeacao','dsOriginalNomeacao']);
+        
         // $insta = Instituicoe::join('tipo_instancias', 'tipo_instancias.cdTipoInstancia', '=','instituicoes.cdTipoInstituicao')->get();
         $rep = representante_suplente::orderBy('cdRepSup')
             ->get();
@@ -108,6 +109,8 @@ class RepresentacoesController extends Controller
 
             $requestImage->move(public_path('files'), $imageName);
 
+
+
             $data['fnNomeacao'] = $imageName;
 
         }
@@ -128,7 +131,7 @@ class RepresentacoesController extends Controller
             ->join('instituicoes', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
             ->leftjoin('agendas', 'agendas.cdRepresentacao', '=', 'representacoes.cdRepresentacao')
             ->where('instancias.cdInstancia', '=', $id)
-            ->get(['representacoes.cdRepresentacao', 'nmRepresentanteSuplente', 'dtInicioVigencia', 'cdTitular', 'representacoes.cdInstancia', 'nmInstancia','representacoes.stAtivo']);
+            ->get(['representacoes.cdRepresentacao', 'nmRepresentanteSuplente', 'dtInicioVigencia', 'cdTitular', 'representacoes.cdInstancia', 'nmInstancia', 'representacoes.stAtivo']);
 
         return view('representacoes/repinsta', ['selecionado' => $selecionado, 'instancias' => $instancias, 'events' => $events, 'representantes' => $representantes]);
     }
@@ -136,12 +139,13 @@ class RepresentacoesController extends Controller
     public function represcreate()
     {
         $representantes = DB::table('representante_suplentes')->join('representacoes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
-        ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
-        ->where('dsEmail','=', auth()->user()->email)->get();
-       
+            ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
+            ->where('dsEmail', '=', auth()->user()->email)->get();
+
 
         return view('representacoes/representacoes', ['representantes' => $representantes]);
     }
+
     public function download(Request $request, $id){
            
         //return response()->download('prjsgr1/storage/app/files/'.$id);
@@ -151,7 +155,6 @@ class RepresentacoesController extends Controller
        
          return \Response::download($file);
     }
-
 
 
     public function export()

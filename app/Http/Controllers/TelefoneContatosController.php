@@ -9,8 +9,6 @@ use App\Models\contato;
 
 class TelefoneContatosController extends Controller
 {
-
-
     public function telconstore(Request $request)
     {
         $event = new Telefone_contato;

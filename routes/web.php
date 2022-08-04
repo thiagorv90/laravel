@@ -47,7 +47,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('agendas/edit/{id}', [AgendasController::class, 'editAgen']);
     Route::PUT('agendas/update/{id}', [AgendasController::class, 'updateAgen']);
-   
+
     Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
@@ -98,7 +98,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::PUT('instituicoes/update/{id}', [InstituicoesController::class, 'updateInst']);
         Route::get('instituicoes/edit/{id}', [InstituicoesController::class, 'editInst']);
 
+
          Route::get('/download/{id}', [RepresentacoesController::class, 'download']);
+
         Route::post('repinsta/{id}', [RepresentacoesController::class, 'representacoesstore']);
         Route::get('repinsta/{id}', [RepresentacoesController::class, 'instareprescreate'])->name('repre');
         Route::PUT('representacoes/update/{id}', [RepresentacoesController::class, 'updateRep']);
@@ -162,5 +164,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('exportView/representantes/', [RepresentacoesController::class, 'representacoesExportView'])->name('exportViewRepresentacoes');
         Route::get('exportView/representacoesEmNumero/', [RepresentacoesController::class, 'representacoesPorNumeroExportView'])->name('exportViewRepresentacoesNum');
 
+        Route::get('exportView/instanciasPorVigenciaFiltrada/', [InstaciaController::class, 'relatorioFiltrado'])->name('filtradoInstanciaPorVigencia');
     });
 });

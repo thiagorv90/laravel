@@ -22,7 +22,6 @@ class UserController extends Controller
     }
 
 
-
     public function index()
     {
 
@@ -42,7 +41,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -53,25 +52,25 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show()
     {
-        $users  = DB::table('users')->get();
+        $users = DB::table('users')->get();
         return view('users.usuarios', compact('users'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $users  = DB::table('users')->where('id', '=', $id)->get();
-        $sele  = DB::table('users')->get();
+        $users = DB::table('users')->where('id', '=', $id)->get();
+        $sele = DB::table('users')->get();
 
         return view('users.edit', ['users' => $users, 'sele' => $sele]);
     }
@@ -79,8 +78,8 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -101,7 +100,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function search(Request $request)
@@ -113,8 +112,8 @@ class UserController extends Controller
         $query = $request->input('query');
 
         $users = DB::table('users')->where('name', 'like', "%$query%")->orWhere('email', 'like', "%$query%")->paginate(6);
-        
+
         return view('users/search-results', compact('users'));
-        
+
     }
 }
