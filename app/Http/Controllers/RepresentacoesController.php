@@ -18,7 +18,7 @@ class RepresentacoesController extends Controller
 
     public function representacoesstore(Request $request)
     {
-        
+
         $event = new Representacoe;
         $event->cdInstancia = $request->cdInstancia;
         $event->cdTitular = $request->cdTitular;
@@ -30,29 +30,29 @@ class RepresentacoesController extends Controller
         $event->stAtivo = $request->stAtivo;
         $event->dtNomeacao = $request->dtNomeacao;
         $event->nuNomeacao = $request->nuNomeacao;
-        
-        
-        
+
+
+
         if ($request->has('fnNomeacao')){
 
             $name = $request->file('fnNomeacao')->getClientOriginalName();
             $event->dsOriginalNomeacao = $name;
                 $requestImage = $request->fnNomeacao;
-                
+
                 $extension = $requestImage->extension();
-    
+
                 $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
-    
+
                 $requestImage->move(public_path('file'), $imageName);
-    
+
                 $event->fnNomeacao = $imageName;
 
-                
-        
+
+
         }
-       
+
         $event->save();
-        
+
         return back();
     }
 
@@ -80,8 +80,8 @@ class RepresentacoesController extends Controller
             ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
             ->where('cdRepresentacao', '=', $id)
             ->get(['cdRepresentacao', 'nmRepresentanteSuplente', 'dtInicioVigencia', 'cdTitular', 'representacoes.cdInstancia', 'nmInstancia', 'representacoes.stAtivo'
-        ,'cdSuplente','dtInicioVigencia','dtFimVigencia','dsDesignacao','dsNomeacao','dtNomeacao','nuNomeacao','fnNomeacao','dsOriginalNomeacao']);
-        
+        ,'cdSuplente','dtInicioVigencia','dtFimVigencia','dsDesignacao','dsNomeacao','dtNomeacao','nuNomeacao','fnNomeacao']);
+
         // $insta = Instituicoe::join('tipo_instancias', 'tipo_instancias.cdTipoInstancia', '=','instituicoes.cdTipoInstituicao')->get();
         $rep = Representante_suplente::orderBy('cdRepSup')
             ->get();
@@ -93,16 +93,16 @@ class RepresentacoesController extends Controller
 
     public function updateRep(Request $request, $id)
     {
-       
+
         $data = $request->all();
         $caminho = $data['cdInstancia'];
-        
+
         // Image Upload
         if($request->has('fnNomeacao')) {
             $name = $request->file('fnNomeacao')->getClientOriginalName();
             $requestImage = $request->fnNomeacao;
             $data['dsOriginalNomeacao'] = $name;
-            
+
             $extension = $requestImage->extension();
 
             $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
@@ -114,11 +114,11 @@ class RepresentacoesController extends Controller
             $data['fnNomeacao'] = $imageName;
 
         }
-       
-        Representacoe::find($request->id)->update($data);
-            
 
-           
+        Representacoe::find($request->id)->update($data);
+
+
+
     return redirect()->route('repre', ['id' => $caminho]);
     }
     public function instareprescreate($id)
@@ -129,7 +129,7 @@ class RepresentacoesController extends Controller
         $selecionado = Representacoe::join('representante_suplentes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
             ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
             ->join('instituicoes', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
-            
+
             ->where('instancias.cdInstancia', '=', $id)
             ->get(['representacoes.cdRepresentacao', 'nmRepresentanteSuplente', 'dtInicioVigencia', 'cdTitular', 'representacoes.cdInstancia', 'nmInstancia', 'representacoes.stAtivo']);
 
@@ -147,12 +147,12 @@ class RepresentacoesController extends Controller
     }
 
     public function download(Request $request, $id){
-           
+
         //return response()->download('prjsgr1/storage/app/files/'.$id);
-        
+
         $file = public_path()."/files/$id";
-        
-       
+
+
          return \Response::download($file);
     }
 

@@ -29,4 +29,5 @@
         @endforeach
         </tbody>
     </table>
+    <a href="/reports" class="btn btn-primary">Voltar</a>
 @endsection

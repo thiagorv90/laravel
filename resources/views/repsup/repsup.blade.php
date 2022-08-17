@@ -3,8 +3,8 @@
 @section('title', 'Representantes')
 
 @section('content')
-<h1>Representantes</h1>
-<div class="container mt-5">
+    <h1>Representantes</h1>
+    <div class="container mt-5">
         <table class="table">
             <thead>
             <tr>
@@ -50,7 +50,7 @@
             <div class="form-group">
                 <label for="title">Email Secundário:</label>
                 <input placeholder="Email Alternativo..." type="text" class="form-control" id="dsEmailAlternativo"
-                       name="dsEmailAlternativo" />
+                       name="dsEmailAlternativo"/>
             </div>
             <div class="form-group">
                 <label for="title">Profissão:</label>
@@ -102,10 +102,9 @@
                 <input type="date" class="form-control" id="dtNascimento" name="dtNascimento">
             </div>
             <br>
+
             <input type="submit" class="btn btn-primary mb-2" value="Criar Representante">
         </form>
     </div>
-
-    
 
 @endsection

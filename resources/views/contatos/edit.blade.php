@@ -7,7 +7,7 @@
     <div id="event-create-container" class="container">
 
         @foreach ($selecionado as $con)
-        <h1>Editar Contato</h1>
+            <h1>Editar Contato</h1>
             <form action="/contatos/update/{{ $con->cdContato}}" method="POST">
                 @csrf
 
@@ -79,9 +79,9 @@
                 </div>
 
                 <div class="container d-flex justify-content-between mt-2">
-                <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
-                <input type="submit" class="btn btn-primary mb-2" value="Alterar">
-</div>
+                    <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
+                    <input type="submit" class="btn btn-primary mb-2" value="Alterar">
+                </div>
             </form>
         @endforeach
 

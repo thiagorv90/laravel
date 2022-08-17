@@ -20,7 +20,8 @@
                     <td scropt="row">{{$event->nmInstancia}}</td>
                     <td><a>{{ $event->dtInicioVigencia }}</a></td>
                     <td>
-                        <a href="/agendas/{{$event->cdRepresentacao}}" class="btn btn-info edit-btn" data-bs-toggle="tooltip" data-bs-title="Agenda">
+                        <a href="/agendas/{{$event->cdRepresentacao}}" class="btn btn-info edit-btn"
+                           data-bs-toggle="tooltip" data-bs-title="Agenda">
                             <ion-icon name="book-outline"></ion-icon>
                         </a>
                 </tr>
@@ -28,7 +29,5 @@
             </tbody>
         </table>
     </div>
-
-
 
 @endsection

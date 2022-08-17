@@ -18,7 +18,7 @@ use App\Exports\InstanciasExport;
 use Maatwebsite\Excel\Facades\Excel;
 use DB;
 
-class InstaciaController extends Controller
+class InstanciaController extends Controller
 {
     public function storeinst(Request $request, $id)
     {
@@ -89,10 +89,10 @@ class InstaciaController extends Controller
             ->join('instituicoes', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
             ->where('instancias.cdinstancia', '=', $cdInstancia)
             ->get();
-        $tema = DB::table('tema_representacoes')->get();    
+        $tema = DB::table('tema_representacoes')->get();
         $lista = Instancia::orderBy('nmInstancia')
             ->get();
-        return view('instancias.edit', ['edit' => $edit, 'lista' => $lista,'tema'=>$tema]);
+        return view('instancias.edit', ['edit' => $edit, 'lista' => $lista, 'tema' => $tema]);
     }
 
     public function update(Request $request, $id)
@@ -136,20 +136,21 @@ class InstaciaController extends Controller
         return view('/instancias/search-results', compact('events'));
     }
 
-    function index(){
-            return view('typeahead_autocomplete');
+    function index()
+    {
+        return view('typeahead_autocomplete');
     }
 
     function action(request $request)
     {
         $data = $request->all();
 
-        $query =  $data['query'];
+        $query = $data['query'];
 
         $filter_data = Instancia::select('nmInstancia')
-                                ->where('nmInstancia',  'LIKE', '%'.$query.'%')->get();
+            ->where('nmInstancia', 'LIKE', '%' . $query . '%')->get();
 
-        return response()->json($filter_data);                        
+        return response()->json($filter_data);
 
     }
 
@@ -211,7 +212,7 @@ class InstaciaController extends Controller
         $instancias = Instancia::join('representacoes as r', 'r.cdInstancia', '=', 'instancias.cdInstancia')
             ->join('representante_suplentes as rs', 'rs.cdRepSup', '=', 'r.cdSuplente')
             ->join('representante_suplentes as rt', 'rt.cdRepSup', '=', 'r.cdTitular')
-            ->select(\Illuminate\Support\Facades\DB::raw('nmInstancia, tpAtribuicoes, tpPublicoPrivado, tpFederalDistrital, dsObjetivo,
+            ->select(\Illuminate\Support\Facades\DB::raw('nmInstancia, tpPublicoPrivado, tpFederalDistrital, dsObjetivo,
                 rs.nmRepresentanteSuplente as repSup, rt.nmRepresentanteSuplente as repTit'))
             ->get();
 
