@@ -106,14 +106,42 @@
                     <textarea type="textarea" class="form-control" id="dsResumo" name="dsResumo"
                            >{{$age->dsResumo}}</textarea>
                 </div>
+               
                 <br>
                 <div class="container d-flex justify-content-between mt-2">
                 <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
                 <input type="submit" class="btn btn-primary mb-2" value="Alterar">
 </div>
             </form>
-        @endforeach
-    </div>
+       <h1>Documentos da Agenda</h1>
+        @foreach ($anexo as $ane)
+                
+               
+        <form action="/agendas/files/{{$ane->nmAnexo}}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <div class="form-group">
+                                        <button type="submit" class="btn btn-danger delete-btn" data-bs-toggle="tooltip" data-bs-title="Deletar">
+                                            <ion-icon name="trash-outline"></ion-icon>
+                                        </button><label for="title">&nbsp;Arquivo:</label>
+                       <a href="{{url('/downloadAgen',urlencode($ane->nmAnexo))}}">{{$ane->nmOriginal}}</a>
+                       
+                       
+                      
+                   </div></form> @endforeach 
+                  
+                   
+                   <form action="/agendas/file/{{$age->cdAgenda}}" method="POST" enctype="multipart/form-data">
+                   @csrf
+                   
+
+                   <div class="form-group">
+                                <label for="title">Documento:</label>
+                                <input type="file" class="form-control" id="nmAnexo" name="nmAnexo[]" multiple>
+                            </div> <div class="container d-flex justify-content-between mt-2">
+                <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
+                <input type="submit" class="btn btn-primary mb-2" value="Incluir">  </div> </form> 
+    </div> @endforeach
 
 
 @endsection

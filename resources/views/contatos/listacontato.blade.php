@@ -19,6 +19,7 @@
             </tr>
             </thead>
             <tbody>
+           
             @foreach ($selecionado as $event)
 
                 <tr>
@@ -46,8 +47,11 @@
                 <input type="submit" class="btn btn-primary" value="Buscar" id="button-addon2">
             </div>
         </form>
-        <br>
-        <br>
+        
+        <div class="container d-flex justify-content-between mt-2">
+                <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
+         <br> <br>      
+</div>
         <br>
         <h1> Criar Contatos da Instância: {{$name->nmInstancia}}</h1>
         <div id="event-create-container" class="container">
@@ -56,9 +60,9 @@
                 @csrf
                 <div class="form-group">
                     <label for="title">Nome:</label>
-                    <input type="text" class="form-control" id="nmContato" name="nmContato">
+                    <input type="text" class="form-control" id="nmContato" name="nmContato" required>
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="display:none">
                     <label for="title">Instancia:</label>
                     <select name="cdInstancia" id="cdInstancia" class="form-select">
 
@@ -71,12 +75,12 @@
 
                 <div class="form-group">
                     <label for="title">Email:</label>
-                    <input type="text" class="form-control" id="dsEmail" name="dsEmail">
+                    <input type="text" class="form-control" id="dsEmail" name="dsEmail" required>
                 </div>
                 <div class="form-group">
                     <label for="title">Status:</label>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="1" checked>
+                        <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="1" >
                         <label class="form-check-label" for="stAtivo">
                             Ativo
                         </label>
@@ -93,7 +97,7 @@
                         <label for="title">Contato Representante:</label>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="tpContatoRepresentante"
-                                   id="tpContatoRepresentante" value="1" checked>
+                                   id="tpContatoRepresentante" value="1" >
                             <label class="form-check-label" for="tpContatoRepresentante">
                                 Sim
                             </label>
@@ -113,7 +117,10 @@
                     <input type="text" class="form-control" id="dsEmailAlternativo" name="dsEmailAlternativo">
                 </div>
                 <br>
-                <input type="submit" class="btn btn-primary mb-2" value="Criar">
+                <div class="container d-flex justify-content-between mt-2">
+                <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
+                <input type="submit" class="btn btn-primary mb-2" value="criar">
+</div>
             </form>
         </div>
 
@@ -128,9 +135,9 @@
                     @csrf
                     <div class="form-group">
                         <label for="title">Nome:</label>
-                        <input type="text" class="form-control" id="nmContato" name="nmContato">
+                        <input type="text" class="form-control" id="nmContato" name="nmContato" required>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" style="display:none">
                         <label for="title">Instancia:</label>
                         <select name="cdInstancia" id="cdInstancia" class="form-select">
 
@@ -142,12 +149,12 @@
                     </div>
                     <div class="form-group">
                         <label for="title">Email:</label>
-                        <input type="text" class="form-control" id="dsEmail" name="dsEmail">
+                        <input type="text" class="form-control" id="dsEmail" name="dsEmail" required>
                     </div>
                     <div class="form-group">
                         <label for="title">Status:</label>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="1" checked>
+                            <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="1">
                             <label class="form-check-label" for="stAtivo">
                                 Ativo
                             </label>
@@ -164,7 +171,7 @@
                             <label for="title">Contato Representante:</label>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="tpContatoRepresentante"
-                                       id="tpContatoRepresentante" value="1" checked>
+                                       id="tpContatoRepresentante" value="1" >
                                 <label class="form-check-label" for="tpContatoRepresentante">
                                     Sim
                                 </label>
@@ -184,7 +191,10 @@
                                        name="dsEmailAlternativo">
                             </div>
                             <br>
-                            <input type="submit" class="btn btn-primary mb-2" value="Criar">
+                            <div class="container d-flex justify-content-between mt-2">
+                <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
+                <input type="submit" class="btn btn-primary mb-2" value="criar">
+</div>
                 </form>
             </div>
             </div>

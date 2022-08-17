@@ -5,20 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class agenda extends Model
+class Agenda_anexo extends Model
 {
     protected $primaryKey = 'cdAgenda';
     use HasFactory;
-
+    protected $guarded = [];
     public $timestamps = false;
-    protected $dates = ['dtAgenda'];
+
 
     public function representacoe()
     {
-        return $this->hasMany('App\Models\Representacoe');
+        return $this->hasOne('App\Models\Agenda');
     }
-    public function anexos()
-    {
-        return $this->hasMany('App\Models\Agenda_anexos');
-    }
+
 }

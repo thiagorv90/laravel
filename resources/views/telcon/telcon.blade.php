@@ -21,16 +21,16 @@
                     @csrf
                     <div class="form-group">
                         <label for="title">DDD:</label>
-                        <input placeholder="DDD..." type="text" class="form-control" id="nuDDDTelefone"
+                        <input placeholder="DDD..." type="text" class="form-control" id="nuDDDTelefone" required
                                name="nuDDDTelefone">
                     </div>
                     <div class="form-group">
                         <label for="title">Telefone(somente números):</label>
-                        <input placeholder="Telefone..." type="text" class="form-control" id="nuTelefone"
+                        <input placeholder="Telefone..." type="text" class="form-control" id="nuTelefone" required
                                name="nuTelefone">
                     </div>
                     
-                    <div class="form-group">
+                    <div class="form-group" style="display:none">
                         <label for="title">Nome Contato: </label>
                         <select name="cdContatoTelefone" id="cdContatoTelefone" class="form-select">
                             <option value="{{$telefone->cdContato}}"> {{$telefone->nmContato}}</option>
@@ -39,7 +39,10 @@
 
                     <br>
 
-                    <input type="submit" class="btn btn-primary" value="Criar">
+                    <div class="container d-flex justify-content-between mt-2">
+                <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
+                <input type="submit" class="btn btn-primary mb-2" value="criar">
+</div>
                 </form>
             </div>
         @endforeach
@@ -83,11 +86,15 @@
                             </form>
                         </td>
                     </tr>
+                    
+</div>
                 @endforeach
                 
                 </tbody>
             </table>
-
+<div class="container d-flex justify-content-between mt-2">
+                <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
+</div>
         </div>
         <br>
         <br>
@@ -102,14 +109,14 @@
                 <div class="form-group">
 
                     <label for="title">Telefone:</label>
-                    <input placeholder="Telefone..." type="text" class="form-control" id="nuTelefone" name="nuTelefone">
+                    <input placeholder="Telefone..." type="text" class="form-control" id="nuTelefone" name="nuTelefone" required>
                 </div>
                 <div class="form-group">
                     <label for="title">DDD:</label>
-                    <input placeholder="DDD..." type="text" class="form-control" id="nuDDDTelefone"
+                    <input placeholder="DDD..." type="text" class="form-control" id="nuDDDTelefone" required
                            name="nuDDDTelefone">
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="display:none">
                     <label for="title">Contato:</label>
                     <select name="cdContatoTelefone" id="cdContatoTelefone" class="form-select">
                         @foreach ($telefones as $telefone)
@@ -119,7 +126,10 @@
                     </select>
                 </div>
 
-                <input type="submit" class="btn btn-primary mt-2" value="Criar">
+                <div class="container d-flex justify-content-between mt-2">
+                <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
+                <input type="submit" class="btn btn-primary mb-2" value="criar">
+</div>
             </form>
         </div>
 

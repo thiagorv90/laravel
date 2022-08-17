@@ -5,12 +5,18 @@
 @section('content')
 
     <div id="event-create-container" class="container">
-        <h1>Tema Representações</h1>
+        
 
         @if ($events->isEmpty())
             <h1>Não existe Temas de Representações com esse nome</h1>
+            <div class="container d-flex justify-content-between mt-2">
+                <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
+                
+                
+</div>
 
                 @else
+                <h1>Tema Representações</h1>
                     <table class="table">
                         <thead>
                         <tr>
@@ -30,6 +36,11 @@
                         @endforeach
                         </tbody>
                     </table>
+                    <div class="container d-flex justify-content-between mt-2">
+                <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
+                
+                
+</div>
         @endif
     </div>
 

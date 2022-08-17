@@ -5,11 +5,15 @@
 @section('content')
 
     <div id="event-create-container" class="col-md-6 offset-md-3">
-        <h1>Tipos de Instancia.</h1>
+        
 
         @if ($events->isEmpty())
-            <h1>Não existe Tipo de Instancias com esse nome
-                @else
+            <h1>Não existe Tipo de Instancias com esse nome.</h1>
+            <div class="container d-flex justify-content-between mt-2">
+                <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
+                
+</div>
+                @else<h1>Tipos de Instancia.</h1>
                     <table class="table">
                         <thead>
                         <tr>
@@ -29,6 +33,10 @@
                         @endforeach
                         </tbody>
                     </table>
+                    <div class="container d-flex justify-content-between mt-2">
+                <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
+                
+</div>
         @endif
     </div>
 

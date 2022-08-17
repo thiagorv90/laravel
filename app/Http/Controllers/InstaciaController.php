@@ -89,10 +89,10 @@ class InstaciaController extends Controller
             ->join('instituicoes', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
             ->where('instancias.cdinstancia', '=', $cdInstancia)
             ->get();
-
+        $tema = DB::table('tema_representacoes')->get();    
         $lista = Instancia::orderBy('nmInstancia')
             ->get();
-        return view('instancias.edit', ['edit' => $edit, 'lista' => $lista]);
+        return view('instancias.edit', ['edit' => $edit, 'lista' => $lista,'tema'=>$tema]);
     }
 
     public function update(Request $request, $id)
@@ -134,6 +134,23 @@ class InstaciaController extends Controller
             ->get();
 
         return view('/instancias/search-results', compact('events'));
+    }
+
+    function index(){
+            return view('typeahead_autocomplete');
+    }
+
+    function action(request $request)
+    {
+        $data = $request->all();
+
+        $query =  $data['query'];
+
+        $filter_data = Instancia::select('nmInstancia')
+                                ->where('nmInstancia',  'LIKE', '%'.$query.'%')->get();
+
+        return response()->json($filter_data);                        
+
     }
 
     public function relatorioFiltrado(Request $request)

@@ -5,7 +5,7 @@
 @section('content')
 
     <div id="event-create-container" class="container">
-
+        <h1>Instituições</h1>
         @foreach ($selecionado as $inst)
             <form action="/instituicoes/update/{{ $inst->cdInstituicao}}" method="POST">
                 @csrf
@@ -26,8 +26,10 @@
                         @endforeach
                     </select>
                 </div>
-                <br>
-                <input type="submit" class="btn btn-primary" value="Criar Evento">
+                <br><div class="container d-flex justify-content-between mt-2">
+                <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
+                <input type="submit" class="btn btn-primary mb-2" value="Alterar">
+</div>
             </form>
         @endforeach
 

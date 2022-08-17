@@ -5,9 +5,15 @@
 @section('content')
 
     <div id="event-create-container" class="col-md-6 offset-md-3">
-       
+    @if ($users->isEmpty())
+            <h1>Não existe usúario  com esse nome.</h1>
+            <div class="container d-flex justify-content-between mt-2">
+                <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
+                
+</div>
+            @else
         <div class="col-md-10 offset-md-1 dashboard-events-container">
-
+ 
             <table class="table">
                 <thead>
                 <tr>
@@ -31,8 +37,11 @@
                     </tr>
                 @endforeach
                 </tbody>
-            </table>
+            </table><div class="container d-flex justify-content-between mt-2">
+                <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
+                
+</div>
 
-        </div>
+        </div>@endif
     </div>
 @endsection

@@ -4,6 +4,7 @@
 
 @section('content')
 
+
     <div class="container">
         <h1>Criar Escolaridade</h1>
         <table class="table">
