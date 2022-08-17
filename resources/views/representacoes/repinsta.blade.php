@@ -94,7 +94,10 @@
                                 <input type="file" class="form-control" id="fnNomeacao" name="fnNomeacao">
                             </div>
                     <br>
-                    <input type="submit" class="btn btn-primary mb-2" value="Criar">
+                    <div class="container d-flex justify-content-between mt-2">
+                <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
+                <input type="submit" class="btn btn-primary mb-2" value="criar">
+</div>
                 </form>
             </div>
 
@@ -140,6 +143,10 @@
                         @endforeach
                         </tbody>
                     </table>
+                    <div class="container d-flex justify-content-between mt-2">
+                <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
+                <input type="submit" class="btn btn-primary mb-2" value="criar">
+</div>
 
                 </div>
 
@@ -227,7 +234,10 @@
                             </div>
                         </div>
                         <br>
-                        <input type="submit" class="btn btn-primary mb-2" value="Criar">
+                        <div class="container d-flex justify-content-between mt-2">
+                <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
+                <input type="submit" class="btn btn-primary mb-2" value="criar">
+</div>
                     </form>
                 </div>
 

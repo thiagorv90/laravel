@@ -50,7 +50,7 @@
             <div class="form-group">
                 <label for="title">Email Secundário:</label>
                 <input placeholder="Email Alternativo..." type="text" class="form-control" id="dsEmailAlternativo"
-                       name="dsEmailAlternativo" required/>
+                       name="dsEmailAlternativo" />
             </div>
             <div class="form-group">
                 <label for="title">Profissão:</label>

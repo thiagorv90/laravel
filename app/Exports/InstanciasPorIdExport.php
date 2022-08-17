@@ -38,7 +38,7 @@ class InstanciasPorIdExport implements FromView, ShouldAutoSize, WithDrawings
             'instancias' => Instancia::join('representacoes as r', 'r.cdInstancia', '=', 'instancias.cdInstancia')
                 ->join('representante_suplentes as rs', 'rs.cdRepSup', '=', 'r.cdSuplente')
                 ->join('representante_suplentes as rt', 'rt.cdRepSup', '=', 'r.cdTitular')
-                ->select(DB::raw('nmInstancia, tpAtribuicoes, tpPublicoPrivado, tpFederalDistrital, dsObjetivo,
+                ->select(DB::raw('nmInstancia, tpPublicoPrivado, tpFederalDistrital, dsObjetivo,
                 rs.nmRepresentanteSuplente as repSup, rt.nmRepresentanteSuplente as repTit'))
                 ->get()
         ]);

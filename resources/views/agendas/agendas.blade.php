@@ -10,7 +10,7 @@
             <h1>Criar Agenda</h1>
 
             <div id="event-create-container" class="container">
-                <form action="agendas" method="POST">
+                <form action="agendas" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="date">Data:</label>
@@ -36,20 +36,20 @@
                     <div class="form-group">
                             <label for="title">Status:</label>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="stAgenda" id="stAgenda" value="1">
+                                <input class="form-check-input" type="radio" name="stAgenda" id="stAgenda" value="1" checked>
                                 <label class="form-check-label" for="stAgenda">
                                     Ativo
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="stAgenda" id="stAgenda" value="0">
+                                <input class="form-check-input" type="radio" name="stAgenda" id="stAgenda" value="0" >
                                 <label class="form-check-label" for="stAgenda">
                                     Desativado
                                 </label>
                             </div>
                     <div class="form-group">
                         <label for="title">Local:</label>
-                        <input type="text" class="form-control" id="dsLocal" name="dsLocal">
+                        <input type="text" class="form-control" id="dsLocal" name="dsLocal" required>
                     </div>
                     <div class="form-group">
                             <label for="title">Status Suplente:</label>
@@ -68,12 +68,16 @@
                             </div>
                     <div class="form-group">
                         <label for="title">Pauta:</label>
-                        <input type="textarea" class="form-control" id="dsPauta" name="dsPauta">
+                        <input type="textarea" class="form-control" id="dsPauta" name="dsPauta" required>
                     </div>
                     <div class="form-group">
                         <label for="title">Resumo:</label>
                         <input type="textarea" class="form-control" id="dsResumo" name="dsResumo">
                     </div>
+                    <div class="form-group">
+                                <label for="title">Documento:</label>
+                                <input type="file" class="form-control"  name="nmAnexo[]" multiple>
+                            </div>
                     <br><div class="container d-flex justify-content-between mt-2">
                 <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
                 <input type="submit" class="btn btn-primary mb-2" value="Criar">
@@ -132,7 +136,7 @@
                 </div>
                 <br>
                 
-                <form action="/agendas/{{$event->cdAgenda}}/search" method="GET">
+                <form action="/agendas/{{$event->cdAgenda}}/search" method="GET" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="container">
@@ -155,7 +159,12 @@
                                 <input type="submit" class="btn btn-primary" value="Buscar" id="button-addon2">
                             </div>
 
-
+                            <div class="container d-flex justify-content-between mt-2">
+                        
+                        
+                <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
+                
+</div>
                         </div>
                     </div>
                 </form>
@@ -164,16 +173,16 @@
                 <h1>Agenda</h1>
 
                 <div id="event-create-container" class="container">
-                    <form action="agendas" method="POST">
+                    <form action="agendas" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="date">Data:</label>
                             <input type="date" class="form-control" id="dtAgenda" name="dtAgenda">
                         </div>
                         <div class="form-group">
-                            <label for="title">Representação: </label>
+                            <label for="title">Representante: </label>
                             <select name="cdRepresentacao" id="cdRepresentacao" class="form-control" >
-                                @foreach ($selecionado as $agenda)
+                                @foreach ($repes as $agenda)
                                     <option value="{{$agenda->cdRepresentacao}}"> {{$agenda->nmRepresentanteSuplente}}</option>
 
                                 @endforeach
@@ -190,7 +199,7 @@
                         <div class="form-group">
                             <label for="title">Status:</label>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="stAgenda" id="stAgenda" value="1">
+                                <input class="form-check-input" type="radio" name="stAgenda" id="stAgenda" value="1" checked>
                                 <label class="form-check-label" for="stAgenda">
                                     Ativo
                                 </label>
@@ -204,13 +213,13 @@
                             </div>
                         <div class="form-group">
                             <label for="title">Local:</label>
-                            <input type="text" class="form-control" id="dsLocal" name="dsLocal" placeholder="Local...">
+                            <input type="text" class="form-control" id="dsLocal" name="dsLocal" placeholder="Local..." required>
                         </div>
                         
                         <div class="form-group">
                             <label for="title">Status Suplente:</label>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="stSuplente" id="stSuplente" value="1">
+                                <input class="form-check-input" type="radio" name="stSuplente" id="stSuplente" value="1" required>
                                 <label class="form-check-label" for="stSuplente">
                                     Ativo
                                 </label>
@@ -224,12 +233,16 @@
                             </div>
                         <div class="form-group">
                             <label for="title">Pauta:</label>
-                            <input type="textarea" class="form-control" id="dsPauta" name="dsPauta" placeholder="Pauta...">
+                            <input type="textarea" class="form-control" id="dsPauta" name="dsPauta" placeholder="Pauta..." required>
                         </div>
                         <div class="form-group">
                             <label for="title">Resumo:</label>
                             <textarea type="textarea" class="form-control" id="dsResumo" name="dsResumo" placeholder="Resumo..."></textarea>
                         </div>
+                        <div class="form-group">
+                                <label for="title">Documento:</label>
+                                <input type="file" class="form-control" id="nmAnexo" name="nmAnexo[]" multiple>
+                            </div>
                         <br><div class="container d-flex justify-content-between mt-2">
                         <input type="submit" class="btn btn-primary mb-2" value="Criar">
                         

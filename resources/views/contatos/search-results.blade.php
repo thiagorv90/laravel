@@ -5,10 +5,14 @@
 @section('content')
 
     <div id="event-create-container" class="container">
-        <h1>Contatos</h1>
+        
         @if ($events->isEmpty())
-            <h1>Não existe contato desta instância
-                @else
+            <h1>Não existe contato desta instância</h1>
+            <div class="container d-flex justify-content-between mt-2">
+                <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
+                
+</div>
+                @else<h1>Contatos</h1>
                     <table class="table">
                         <thead>
                         <tr>
@@ -32,6 +36,10 @@
                         @endforeach
                         </tbody>
                     </table>
+                    <div class="container d-flex justify-content-between mt-2">
+                <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
+                
+</div>
         @endif
     </div>
 

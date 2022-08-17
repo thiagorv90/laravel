@@ -83,7 +83,7 @@ class RepresentacoesController extends Controller
         ,'cdSuplente','dtInicioVigencia','dtFimVigencia','dsDesignacao','dsNomeacao','dtNomeacao','nuNomeacao','fnNomeacao','dsOriginalNomeacao']);
         
         // $insta = Instituicoe::join('tipo_instancias', 'tipo_instancias.cdTipoInstancia', '=','instituicoes.cdTipoInstituicao')->get();
-        $rep = representante_suplente::orderBy('cdRepSup')
+        $rep = Representante_suplente::orderBy('cdRepSup')
             ->get();
         $insta = instancia::orderBy('nmInstancia')
             ->get();
@@ -129,7 +129,7 @@ class RepresentacoesController extends Controller
         $selecionado = Representacoe::join('representante_suplentes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
             ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
             ->join('instituicoes', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
-            ->leftjoin('agendas', 'agendas.cdRepresentacao', '=', 'representacoes.cdRepresentacao')
+            
             ->where('instancias.cdInstancia', '=', $id)
             ->get(['representacoes.cdRepresentacao', 'nmRepresentanteSuplente', 'dtInicioVigencia', 'cdTitular', 'representacoes.cdInstancia', 'nmInstancia', 'representacoes.stAtivo']);
 

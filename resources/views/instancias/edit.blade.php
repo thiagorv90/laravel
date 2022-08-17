@@ -11,26 +11,25 @@
 
                 @csrf
                 @method('PUT')
-                <div class="form-group">
+                <div class="form-group" >
                     <label for="title">Nome:</label>
                     <input type="text" class="form-control" id="nmInstancia" name="nmInstancia"
                            value="{{$instituicao->nmInstancia}}"></input>
                 </div>
-                <div class="form-group">
+                <div class="form-group"style="display:none">
                     <label for="title">Instituição: </label>
                     <select name="cdInstituicao" id="cdInstituicao" class="form-control">
-
+                        
                         <option value="{{$instituicao->cdInstituicao}}"> {{$instituicao->nmInstituicao}}</option>
-
-
+                       
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="title">Tema: </label>
                     <select name="cdTema" id="cdTema" class="form-control">
-
-                        <option value="{{$instituicao->cdTema}}"> {{$instituicao->nmTema}}</option>
-
+                        @foreach($tema as $tem)
+                        <option value="{{$tem->cdTema}}"> {{$tem->nmTema}}</option>
+                        @endforeach
 
                     </select>
                 </div>
@@ -162,8 +161,10 @@
                         </div>
 
                     </div>
-                <br>
+                <br><div class="container d-flex justify-content-between mt-2">
+                <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
                 <input type="submit" class="btn btn-primary mb-2" value="Alterar">
+</div>
                 @endforeach
             </form>
     </div>

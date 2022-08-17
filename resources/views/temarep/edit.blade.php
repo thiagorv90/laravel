@@ -16,9 +16,10 @@
                 <input type="text" class="form-control" id="nmTema" name="nmTema" value="{{$temarep->nmTema}}"></input>
             </div>
 
-            <br>
-            <input type="submit" class="btn btn-primary" value="Criar Evento">
-
+            <br><div class="container d-flex justify-content-between mt-2">
+                <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
+                <input type="submit" class="btn btn-primary mb-2" value="Alterar">
+</div>
         </form>
     </div>
 

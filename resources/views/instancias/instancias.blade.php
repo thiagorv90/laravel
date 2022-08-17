@@ -14,10 +14,10 @@
                         @csrf
                         <div class="form-group" >
                             <label for="title">Nome:</label>
-                            <input placeholder="Nome..." type="text" class="form-control" id="nmInstancia"
+                            <input placeholder="Nome..." type="text" class="form-control" id="nmInstancia" required
                                    name="nmInstancia">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="display:none">
                             <label for="title">Instituição: </label>
                             <select name="cdInstituicao" id="cdInstituicao" class="form-select">
                                 <option
@@ -164,7 +164,10 @@
 
                             </div>
                             <br>
-                            <input type="submit" class="btn btn-primary mb-2" value="Criar Instância">
+                            <div class="container d-flex justify-content-between mt-2">
+                <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
+                <input type="submit" class="btn btn-primary mb-2" value="criar">
+</div>
                     </form>
                 </div>
         </div>
@@ -207,7 +210,7 @@
                                         <ion-icon name="person-outline"></ion-icon>
                                     </a>
                                     <a href="/repinsta/{{$instancia->cdInstancia}}" class="btn btn-info edit-btn"
-                                       data-bs-toggle="tooltip" data-bs-title="Representante">
+                                       data-bs-toggle="tooltip" data-bs-title="Representação">
                                         <ion-icon name="reader-outline"></ion-icon>
                                     </a>
 
@@ -229,16 +232,20 @@
                             <input type="submit" class="btn btn-primary" value="Buscar" id="button-addon2">
                         </div>
                     </form>
+                    <div class="container d-flex justify-content-between mt-2">
+                <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
+                
+</div>
                     <br>
                     <h1>Crie uma instância</h1>
                     <form action="instancias" method="POST">
                         @csrf
                         <div class="form-group">
                             <label for="title">Nome:</label>
-                            <input placeholder="Nome..." type="text" class="form-control" id="nmInstancia"
+                            <input placeholder="Nome..." type="text" class="form-control" id="nmInstancia" required
                                    name="nmInstancia">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group"style="display:none">
                             <label for="title">Instituição: </label>
                             <select name="cdInstituicao" id="cdInstituicao" class="form-select">
                                 @foreach ($instituicaos as $instituicao)
@@ -391,11 +398,32 @@
 
                             </div>
                             <br>
-                            <input type="submit" class="btn btn-primary mb-2" value="Criar Instância">
+                            <div class="container d-flex justify-content-between mt-2">
+                <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
+                <input type="submit" class="btn btn-primary mb-2" value="criar">
+</div>
                     </form>
                 </div>
         </div>
         </div>
     @endif
+
+
+    <script>
+
+
+var path = "{{url('typeahead_autocomplete/action')}}";
+
+$('#nmInstancia').typeahead({
+     
+    source: function(query, process){
+        return$.get(path, {query:query},function(data){
+
+            return process(data);
+
+        });
+    }
+});
+        </script>
 
 @endsection

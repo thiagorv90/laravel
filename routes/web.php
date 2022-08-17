@@ -43,6 +43,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('representacoes', [RepresentacoesController::class, 'represcreate']);
     Route::get('agendas/{id}', [AgendasController::class, 'agendacreate'])->name('agendas');
     Route::post('agendas/{id}', [AgendasController::class, 'agendastore']);
+    
     Route::get('agendas/{id}/search', [AgendasController::class, 'search']);
 
     Route::get('agendas/edit/{id}', [AgendasController::class, 'editAgen']);
@@ -54,7 +55,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'admin'], function () {
         Route::view('/reports', 'reports');
 
-
+        Route::get('/typeahead_autocomplete',[InstanciaController::class, 'index']);
+        Route::get('/typeahead_autocomplete/action',[InstanciaController::class, 'action'])->name('typeahead_autocomplete.action');    
         Route::get('instancias/show/{id}', [InstaciaController::class, 'show']);
         Route::get('instancias/edit/{cdInstancia}', [InstaciaController::class, 'edit']);
         Route::PUT('instancias/update/{cdInstancia}', [InstaciaController::class, 'update']);
@@ -83,7 +85,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::PUT('contatos/update/{id}', [ContatoController::class, 'updateCon']);
         Route::get('contatos/listacontato/{id}', [ContatoController::class, 'contalista'])->name('contatos');
 
+        Route::post('/agendas/file/{id}', [AgendasController::class, 'agendafile']);
         Route::delete('/agendas/edit/{id}', [AgendasController::class, 'deleteAgen']);
+        Route::delete('/agendas/files/{id}', [AgendasController::class, 'deleteAgenImg']);
 
         Route::post('escolaridade', [EscolaridadeController::class, 'escolaridadestore']);
         Route::get('escolaridade', [EscolaridadeController::class, 'escolaridadeindex']);
@@ -100,6 +104,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
          Route::get('/download/{id}', [RepresentacoesController::class, 'download']);
+         Route::get('/downloadAgen/{id}', [AgendasController::class, 'downloadAgen']);
 
         Route::post('repinsta/{id}', [RepresentacoesController::class, 'representacoesstore']);
         Route::get('repinsta/{id}', [RepresentacoesController::class, 'instareprescreate'])->name('repre');

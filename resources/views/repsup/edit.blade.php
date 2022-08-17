@@ -12,7 +12,7 @@
                 @csrf
 
                 @method('PUT')
-                <div class="form-group">
+                <div class="form-group" style="display:none">
                     <label for="date">Nome:</label>
                     <input type="text" class="form-control" id="nmRepresentanteSuplente" name="nmRepresentanteSuplente"
                            value="{{$age->nmRepresentanteSuplente}}">
@@ -20,11 +20,11 @@
                 <div class="form-group">
                     <label for="title">Representacao:</label>
                     <select id="cdEmpresa" name="cdEmpresa" class="form-select">
-
+                        @foreach($lista as $emp)
                         <option value="{{$age->cdEmpresa}}">
-                            {{ $age->nmEmpresa }}
+                            {{ $emp->nmEmpresa }}
                         </option>
-
+                        @endforeach
                     </select>
                 </div>
                 <div class="form-group">
@@ -40,7 +40,7 @@
                 </div>
                 <div class="form-group">
                     <label for="title">Email:</label>
-                    <input type="text" class="form-control" id="dsEmail" name="dsEmail" value="{{$age->dsEmail}}">
+                    <input type="text" class="form-control" id="dsEmail" name="dsEmail" value="{{$age->dsEmail}}" required>
                 </div>
 
                 <div class="form-group">
@@ -82,8 +82,12 @@
                     <input type="textarea" class="form-control" id="dtNascimento" name="dtNascimento"
                            value="{{$age->dtNascimento}}">
                 </div>
-                <br>
-                <input type="submit" class="btn btn-primary mb-3" value="Alterar">
+                <br><div class="container d-flex justify-content-between mt-2">
+                        <input type="submit" class="btn btn-primary mb-2" value="Voltar">
+                        
+                <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
+                
+</div>
             </form>
             @endforeach
         </div>

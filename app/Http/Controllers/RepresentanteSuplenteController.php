@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Representante_suplente;
 use DB;
 use App\Models\Empresa;
-use App\Models\escolaridade;
+use App\Models\Escolaridade;
 use APP\Models\user;
-use App\Models\representacoe;
+use App\Models\Representacoe;
 
 
 class RepresentanteSuplenteController extends Controller
@@ -52,9 +52,9 @@ class RepresentanteSuplenteController extends Controller
             ->where('cdRepSup', '=', $id)
             ->get();
         // $insta = Instituicoe::join('tipo_instancias', 'tipo_instancias.cdTipoInstancia', '=','instituicoes.cdTipoInstituicao')->get();
-        $insta = empresa::orderBy('cdEmpresa')
+        $insta = Empresa::orderBy('cdEmpresa')
             ->get();
-        $escola = escolaridade::orderBy('cdEscolaridade')
+        $escola = Escolaridade::orderBy('cdEscolaridade')
             ->get();
         return view('repsup.edit', ['selecionado' => $edit, 'lista' => $insta, 'escola' => $escola]);
     }

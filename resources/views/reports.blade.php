@@ -30,10 +30,6 @@
         </div>
     </div>
 
-    <div class="container d-flex justify-content-between mt-2">
-        <a href="#" class="btn btn-info">Voltar</a>
-
-        <a href="#" class="btn btn-info">Enviar</a>
-    </div>
+   
 @endsection
 
