@@ -25,31 +25,31 @@ class agendasController extends Controller
         $event->dsPauta = $request->dsPauta;
         $event->dsResumo = $request->dsResumo;
         $event->stSuplente = $request->stSuplente;
-       
+
         $event->save();
-        
+
         if ($request->has('nmAnexo')){
-            
+
            for ($i =0; $i < count($request->allFiles()['nmAnexo']); $i++){
-               
-            
+
+
                 $file = $request->allfiles()['nmAnexo'][$i];
                 $name = $request->file()['nmAnexo'][$i]->getClientOriginalName();
                 $anexo =  new Agenda_anexo();
-               
-                
+
+
                     $explode = $file->store('public/files');
                    $certo = explode("s/", $explode);
-                   
+
 
                     $anexo->nmAnexo = $certo[1];
                     $anexo->nmOriginal  = $name;
                     $anexo->cdAgenda = $event->cdAgenda;
-                   
+
                     $anexo->save();
 
             }
-        
+
         }
 
 
@@ -57,29 +57,29 @@ class agendasController extends Controller
     }
     public function agendafile(Request $request, $id)
     {
-        
-           
+
+
            for ($i =0; $i < count($request->allFiles()['nmAnexo']); $i++){
-               
-            
+
+
                 $file = $request->allfiles()['nmAnexo'][$i];
                 $name = $request->file()['nmAnexo'][$i]->getClientOriginalName();
                 $anexo =  new Agenda_anexo();
-               
-                
+
+
                     $explode = $file->store('public/files');
                    $certo = explode("s/", $explode);
-                   
+
 
                     $anexo->nmAnexo = $certo[1];
                     $anexo->nmOriginal  = $name;
                     $anexo->cdAgenda = $id;
-                   
+
                     $anexo->save();
 
             }
-        
-        
+
+
 
 
         return back();
@@ -91,7 +91,8 @@ class agendasController extends Controller
             ->join('representante_suplentes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
             ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
             ->where('representacoes.cdRepresentacao', '=', $id)
-            ->get(['cdAgenda', 'agendas.cdRepresentacao', 'dtAgenda', 'hrAgenda', 'agendas.stAgenda', 'dsAssunto', 'dsLocal', 'dsPauta', 'dsResumo', 'stSuplente', 'nmRepresentanteSuplente', 'nmInstancia']);
+            ->get(['cdAgenda', 'agendas.cdRepresentacao', 'dtAgenda', 'hrAgenda', 'agendas.stAgenda', 'dsAssunto',
+                'dsLocal', 'dsPauta', 'dsResumo', 'stSuplente', 'nmRepresentanteSuplente', 'nmInstancia', 'representacoes.cdInstancia']);
         $agendas = DB::table('representacoes')->where('cdRepresentacao', '=', $id)->get();
         $repes = DB::table('representante_suplentes')->join('representacoes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')->get();
 
@@ -107,11 +108,11 @@ class agendasController extends Controller
             ->where('cdAgenda', '=', $id)
             ->get();
         // $insta = Instituicoe::join('tipo_instancias', 'tipo_instancias.cdTipoInstancia', '=','instituicoes.cdTipoInstituicao')->get();
-        
+
         $insta = Representacoe::orderBy('cdTitular')
             ->get();
-        $anexo = Agenda::join('agenda_anexos', 'agenda_anexos.cdAgenda', '=', 'agendas.cdAgenda')->where('agendas.cdAgenda', '=', $id) ->get();   
-        $anexoImg = Agenda::join('agenda_anexos', 'agenda_anexos.cdAgenda', '=', 'agendas.cdAgenda')->where('agendas.cdAgenda', '=', $id) ->get(['agenda_anexos.cdAgenda']);  
+        $anexo = Agenda::join('agenda_anexos', 'agenda_anexos.cdAgenda', '=', 'agendas.cdAgenda')->where('agendas.cdAgenda', '=', $id) ->get();
+        $anexoImg = Agenda::join('agenda_anexos', 'agenda_anexos.cdAgenda', '=', 'agendas.cdAgenda')->where('agendas.cdAgenda', '=', $id) ->get(['agenda_anexos.cdAgenda']);
         return view('agendas.edit', ['selecionado' => $edit, 'lista' => $insta,'anexo'=>$anexo,'anexoImg'=>$anexoImg]);
     }
 
@@ -133,28 +134,28 @@ class agendasController extends Controller
         return redirect()->route('agendas', ['id' => $cd]);
     }
     public function downloadAgen(Request $request, $id){
-           
+
         //return response()->download('prjsgr1/storage/app/files/'.$id);
-        
+
         $file = public_path()."/storage/files/$id";
-        
-       
+
+
          return \Response::download($file);
     }
     public function deleteAgenImg($id)
     {
         $file =  Agenda_anexo::where('nmAnexo',$id);
 
-        
-        
+
+
         unlink(public_path()."/storage/files/$id");
 
-       
-            Agenda_anexo::where('nmAnexo',$id)->delete();
-        
-        
 
-       
+            Agenda_anexo::where('nmAnexo',$id)->delete();
+
+
+
+
         // $deleted = DB::delete('delete from telefone_contatos where cdTelefone = ?', [$id]);
         return back();
     }

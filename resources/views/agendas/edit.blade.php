@@ -120,7 +120,7 @@
 
                 <br>
                 <div class="container d-flex justify-content-between mt-2">
-                    <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
+                    <a href="/agendas/{{ $age->cdRepresentacao }}" class="btn btn-info mb-2">Voltar</a>
                     <input type="submit" class="btn btn-primary mb-2" value="Alterar">
                 </div>
             </form>
@@ -153,7 +153,7 @@
                     <input type="file" class="form-control" id="nmAnexo" name="nmAnexo[]" multiple>
                 </div>
                 <div class="container d-flex justify-content-between mt-2">
-                    <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
+                    <a href="/agendas/{{ $age->cdRepresentacao }}" class="btn btn-info mb-2">Voltar</a>
                     <input type="submit" class="btn btn-primary mb-2" value="Incluir"></div>
             </form>
     </div> @endforeach

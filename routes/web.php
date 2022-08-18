@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\InstanciaController;
 use App\Http\Controllers\ContatoController;
-use App\Http\Controllers\AgendasController;
+use App\Http\Controllers\agendasController;
 use App\Http\Controllers\EscolaridadeController;
 use App\Http\Controllers\InstituicoesController;
 use App\Http\Controllers\RepresentacoesController;
@@ -41,13 +41,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('inicial', [InstanciaController::class, 'dash']);
     Route::get('representacoes', [RepresentacoesController::class, 'representacoescreate']);
     Route::get('representacoes', [RepresentacoesController::class, 'represcreate']);
-    Route::get('agendas/{id}', [AgendasController::class, 'agendacreate'])->name('agendas');
-    Route::post('agendas/{id}', [AgendasController::class, 'agendastore']);
+    Route::get('agendas/{id}', [agendasController::class, 'agendacreate'])->name('agendas');
+    Route::post('agendas/{id}', [agendasController::class, 'agendastore']);
 
-    Route::get('agendas/{id}/search', [AgendasController::class, 'search']);
+    Route::get('agendas/{id}/search', [agendasController::class, 'search']);
 
-    Route::get('agendas/edit/{id}', [AgendasController::class, 'editAgen']);
-    Route::PUT('agendas/update/{id}', [AgendasController::class, 'updateAgen']);
+    Route::get('agendas/edit/{id}', [agendasController::class, 'editAgen']);
+    Route::PUT('agendas/update/{id}', [agendasController::class, 'updateAgen']);
 
     Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
         return view('dashboard');
@@ -85,9 +85,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::PUT('contatos/update/{id}', [ContatoController::class, 'updateCon']);
         Route::get('contatos/listacontato/{id}', [ContatoController::class, 'contalista'])->name('contatos');
 
-        Route::post('/agendas/file/{id}', [AgendasController::class, 'agendafile']);
-        Route::delete('/agendas/edit/{id}', [AgendasController::class, 'deleteAgen']);
-        Route::delete('/agendas/files/{id}', [AgendasController::class, 'deleteAgenImg']);
+        Route::post('/agendas/file/{id}', [agendasController::class, 'agendafile']);
+        Route::delete('/agendas/edit/{id}', [agendasController::class, 'deleteAgen']);
+        Route::delete('/agendas/files/{id}', [agendasController::class, 'deleteAgenImg']);
 
         Route::post('escolaridade', [EscolaridadeController::class, 'escolaridadestore']);
         Route::get('escolaridade', [EscolaridadeController::class, 'escolaridadeindex']);
@@ -104,7 +104,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
          Route::get('/download/{id}', [RepresentacoesController::class, 'download']);
-         Route::get('/downloadAgen/{id}', [AgendasController::class, 'downloadAgen']);
+         Route::get('/downloadAgen/{id}', [agendasController::class, 'downloadAgen']);
 
         Route::post('repinsta/{id}', [RepresentacoesController::class, 'representacoesstore']);
         Route::get('repinsta/{id}', [RepresentacoesController::class, 'instareprescreate'])->name('repre');

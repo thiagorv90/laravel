@@ -3,9 +3,7 @@
 @section('title', 'Contatos Instancia')
 
 @section('content')
-
     @if (isset($selecionado) && $selecionado->count() > 0)
-
         @foreach ($nome as $name)
             <h1>Contatos da Instancia: {{$name->nmInstancia}}</h1>
         @endforeach
@@ -48,7 +46,7 @@
         </form>
 
         <div class="container d-flex justify-content-between mt-2">
-            <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
+            <a href="/instancias/{{ $event->cdInstituicao }}" class="btn btn-info mb-2">Voltar</a>
             <br> <br>
         </div>
         <br>
@@ -116,14 +114,12 @@
                     <input type="text" class="form-control" id="dsEmailAlternativo" name="dsEmailAlternativo">
                 </div>
                 <br>
-                {{ $name->cdInstancia }}
                 <div class="container d-flex justify-content-between mt-2">
-                    <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
+                    <a href="/instancias/{{ $event->cdInstituicao }}" class="btn btn-info mb-2">Voltar</a>
                     <input type="submit" class="btn btn-primary mb-2" value="Criar">
                 </div>
             </form>
         </div>
-
     @else
         @foreach ($nome as $contato)
             <h3>Não ha contato para esta instancia:{{$contato->nmInstancia}}</h3>

@@ -95,6 +95,7 @@
                     <h1>Agendas da representação:</h1>
                     <div class="container">
 
+
                         <table class="table">
                             <thead>
                             <tr>
@@ -106,8 +107,8 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                @foreach ($selecionado as $event)
+                            @foreach ($selecionado as $event)
+                                <tr>
                                     <td scropt="row">{{$event->nmInstancia}}</td>
                                     <td><a>{{$event->dsAssunto}}</a></td>
                                     <td><a>{{$event->dsPauta}}</a></td>
@@ -133,8 +134,9 @@
                                             </form>
                                         @endif
                                     </td>
-                                @endforeach
-                            </tr>
+                                </tr>
+                            @endforeach
+
                             </tbody>
                         </table>
                     </div>
@@ -165,7 +167,7 @@
                                     <input type="submit" class="btn btn-primary" value="Buscar" id="button-addon2">
                                 </div>
                                 <div class="container d-flex justify-content-between mt-2">
-                                    <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
+                                    <a href="/repinsta/{{ $event->cdInstancia }}" class="btn btn-info mb-2">Voltar</a>
                                 </div>
                             </div>
                         </div>
@@ -255,7 +257,7 @@
                                 </div>
                                 <br>
                                 <div class="container d-flex justify-content-between mt-2">
-                                    <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
+                                    <a href="/repinsta/{{ $event->cdInstancia }}" class="btn btn-info mb-2">Voltar</a>
                                     <input type="submit" class="btn btn-primary mb-2" value="Criar">
                                 </div>
                             </form>

@@ -13,12 +13,12 @@
 
                 @method('PUT')
                 <div class="form-group">
-                    <label for="title">Nome:</label>
+                    <label for="nmContato">Nome:</label>
                     <input type="text" class="form-control" id="nmContato" name="nmContato"
                            value="{{$con->nmContato}}"></input>
                 </div>
                 <div class="form-group">
-                    <label for="title">Instancia:</label>
+                    <label for="cdInstancia">Instancia:</label>
                     <select id="cdInstancia" name="cdInstancia" class="form-control">
 
                         <option value="{{$con->cdInstancia}}">
@@ -28,7 +28,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="title">Email:</label>
+                    <label for="dsEmail">Email:</label>
                     <input type="text" class="form-control" id="dsEmail" name="dsEmail"
                            value="{{$con->dsEmail}}"></input>
                 </div>
@@ -73,13 +73,13 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="title">dsEmailAlternativo:</label>
+                    <label for="dsEmailAlternativo">dsEmailAlternativo:</label>
                     <input type="text" class="form-control" id="dsEmailAlternativo" name="dsEmailAlternativo"
                            value="{{$con->dsEmailAlternativo}}"></input>
                 </div>
 
                 <div class="container d-flex justify-content-between mt-2">
-                    <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
+                    <a href="/contatos/listacontato/{{ $con->cdInstancia }}" class="btn btn-info mb-2">Voltar</a>
                     <input type="submit" class="btn btn-primary mb-2" value="Alterar">
                 </div>
             </form>
