@@ -106,7 +106,7 @@
             </div>
 
             @else
-
+                <h1>Representações</h1>
                 <div class="container">
 
 
@@ -115,6 +115,7 @@
                         <tr>
                             <th scope="col">Nome Titular</th>
                             <th scope="col">Incio Vigencia</th>
+                            <th scope="col">Instituições</th>
                             <th scope="col">Status</th>
                             <th scope="col">Opções</th>
 
@@ -126,6 +127,7 @@
 
                                 <td scropt="row">{{$event->nmRepresentanteSuplente}}</td>
                                 <td><a>{!! date('d/m/Y', strtotime($event->dtInicioVigencia)) !!}</a></td>
+                                <td scropt="row">{{$event->nmInstituicao}}</td>
                                 @if($event->stAtivo ==1)
                                     <td>Ativo</td>
                                 @else
