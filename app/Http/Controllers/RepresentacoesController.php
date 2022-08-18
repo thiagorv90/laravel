@@ -62,6 +62,7 @@ class RepresentacoesController extends Controller
     public function representacoesfile(Request $request, $id)
     {
 
+
         for ($i = 0; $i < count($request->allFiles()['nmAnexo']); $i++) {
 
 
@@ -80,11 +81,11 @@ class RepresentacoesController extends Controller
 
             $anexo->save();
 
-
         }
 
         return back();
     }
+   
 
 
     public function deleteRepreImg($id)
@@ -94,9 +95,7 @@ class RepresentacoesController extends Controller
 
         unlink(public_path() . "/storage/files/$id");
 
-
         Representacoes_anexo::where('nmAnexo', $id)->delete();
-
 
         // $deleted = DB::delete('delete from telefone_contatos where cdTelefone = ?', [$id]);
         return back();
@@ -179,9 +178,10 @@ class RepresentacoesController extends Controller
             ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
             ->join('instituicoes', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
             ->where('instancias.cdInstancia', '=', $id)
+
             ->get(['representacoes.cdRepresentacao', 'nmRepresentanteSuplente', 'dtInicioVigencia',
                 'cdTitular', 'representacoes.cdInstancia', 'nmInstancia', 'representacoes.stAtivo',
-                'instancias.cdInstituicao']);
+                'instancias.cdInstituicao','nmInstituicao']);
 
         return view('representacoes/repinsta', ['selecionado' => $selecionado, 'instancias' => $instancias, 'events' => $events, 'representantes' => $representantes]);
     }
