@@ -11,24 +11,24 @@
 
                 @csrf
                 @method('PUT')
-                <div class="form-group" >
+                <div class="form-group">
                     <label for="title">Nome:</label>
                     <input type="text" class="form-control" id="nmInstancia" name="nmInstancia"
                            value="{{$instituicao->nmInstancia}}"></input>
                 </div>
-                <div class="form-group"style="display:none">
+                <div class="form-group" style="display:none">
                     <label for="title">Instituição: </label>
                     <select name="cdInstituicao" id="cdInstituicao" class="form-control">
-                        
+
                         <option value="{{$instituicao->cdInstituicao}}"> {{$instituicao->nmInstituicao}}</option>
-                       
+
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="title">Tema: </label>
                     <select name="cdTema" id="cdTema" class="form-control">
                         @foreach($tema as $tem)
-                        <option value="{{$tem->cdTema}}"> {{$tem->nmTema}}</option>
+                            <option value="{{$tem->cdTema}}"> {{$tem->nmTema}}</option>
                         @endforeach
 
                     </select>
@@ -96,7 +96,7 @@
                                value="{{$instituicao->dsObjetivo}}"></input>
                     </div>
 
-                   
+
                     <div class="form-group">
                         <label for="title">Prioridade:</label>
                         <div class="form-check">
@@ -124,79 +124,87 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="title">Ameaças:</label>
+                    <label for="dsAmeacas">Ameaças:</label>
                     <input type="text" class="form-control" id="dsAmeacas" name="dsAmeacas"
                            value="{{$instituicao->dsAmeacas}}">
                 </div>
                 <div class="form-group">
-                    <label for="title">Oportunidades:</label>
+                    <label for="dsOportunidades">Oportunidades:</label>
                     <input type="text" class="form-control" id="dsOportunidades" name="dsOportunidades"
                            value="{{$instituicao->dsOportunidades}}">
                 </div>
                 <div class="form-group">
-                    <label for="title">Observação:</label>
+                    <label for="dsObservacao">Observação:</label>
                     <input type="text" class="form-control" id="dsObservacao" name="dsObservacao"
                            value="{{$instituicao->dsObservacao}}">
                 </div>
                 <div class="form-group">
-                        <label for="title">Ato Normativo:</label>
-                        <input placeholder="Observações..." type="text" class="form-control" id="dsAtoNormativo"
-                               name="dsAtoNormativo" value="{{$instituicao->dsAtoNormativo}}">
+                    <label for="dsAtoNormativo">Ato Normativo:</label>
+                    <input placeholder="Observações..." type="text" class="form-control" id="dsAtoNormativo"
+                           name="dsAtoNormativo" value="{{$instituicao->dsAtoNormativo}}">
+                </div>
+                <div class="form-group">
+                    <label for="title">Carater:</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="boCaraterDaInstancia"
+                               id="boCaraterDaInstancia"
+                               value="1" @if($instituicao->boCaraterDaInstancia ==1) checked @endif >
+                        <label class="form-check-label" for="boCaraterDaInstancia">
+                            Consultivo
+                        </label>
                     </div>
-                    <div class="form-group">
-                        <label for="title">Carater:</label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="boCaraterDaInstancia" id="boCaraterDaInstancia"
-                                   value="1"  @if($instituicao->boCaraterDaInstancia ==1) checked @endif >
-                            <label class="form-check-label" for="boCaraterDaInstancia">
-                                Consultivo
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="boCaraterDaInstancia" id="boCaraterDaInstancia"
-                                   value="0" @if($instituicao->boCaraterDaInstancia ==0) checked @endif >
-                            <label class="form-check-label" for="boCaraterDaInstancia">
-                                Deliberativo
-                            </label>
-                        </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="boCaraterDaInstancia"
+                               id="boCaraterDaInstancia"
+                               value="0" @if($instituicao->boCaraterDaInstancia ==0) checked @endif >
+                        <label class="form-check-label" for="boCaraterDaInstancia">
+                            Deliberativo
+                        </label>
+                    </div>
 
-                    </div>
-                <br><div class="container d-flex justify-content-between mt-2">
-                
-                <a href="/instancias/{{$instituicao->cdInstituicao}}" class="btn btn-info mb-2">Voltar</a>
-                <input type="submit" class="btn btn-primary mb-2" value="Alterar">
-</div>
-               
+                </div>
+                <br>
+                <div class="container d-flex justify-content-between mt-2">
+                    <a href="/instancias/{{$instituicao->cdInstituicao}}" class="btn btn-info mb-2">Voltar</a>
+                    <input type="submit" class="btn btn-primary mb-2" value="Alterar">
+                </div>
+                @endforeach
+
             </form>
             <h1>Documentos da Instancia</h1>
-        @foreach ($anexo as $ane)
-                
-               
-        <form action="/instancias/files/{{$ane->nmAnexo}}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <div class="form-group">
-                                        <button type="submit" class="btn btn-danger delete-btn" data-bs-toggle="tooltip" data-bs-title="Deletar">
-                                            <ion-icon name="trash-outline"></ion-icon>
-                                        </button><label for="title">&nbsp;Arquivo:</label>
-                       <a href="{{url('/downloadAgen',urlencode($ane->nmAnexo))}}">{{$ane->nmOriginal}}</a>
-                       
-                       
-                      
-                   </div></form> @endforeach 
-                  
-                   
-                   <form action="/instancias/file/{{$instituicao->cdInstancia}}" method="POST" enctype="multipart/form-data">
-                   @csrf
-                   
+            @foreach ($anexo as $ane)
 
-                   <div class="form-group">
-                                <label for="title">Documentos:</label>
-                                <input type="file" class="form-control" id="nmAnexo" name="nmAnexo[]" multiple>
-                            </div> <div class="container d-flex justify-content-between mt-2">
-                <a href="/instancias/{{$instituicao->cdInstituicao}}" class="btn btn-info mb-2">Voltar</a>
-                <input type="submit" class="btn btn-primary mb-2" value="Incluir">  </div> </form> 
-    </div> @endforeach
+                <form action="/instancias/files/{{$ane->nmAnexo}}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-danger delete-btn" data-bs-toggle="tooltip"
+                                data-bs-title="Deletar">
+                            <ion-icon name="trash-outline"></ion-icon>
+                        </button>
+                        <label for="title">&nbsp;Arquivo:</label>
+                        <a href="{{url('/downloadAgen',urlencode($ane->nmAnexo))}}">{{$ane->nmOriginal}}</a>
+
+
+                    </div>
+                </form>
+            @endforeach
+
+
+            <form action="/instancias/file/{{$instituicao->cdInstancia}}" method="POST" enctype="multipart/form-data">
+                @csrf
+
+
+                <div class="form-group">
+                    <label for="title">Documentos:</label>
+                    <input type="file" class="form-control" id="nmAnexo" name="nmAnexo[]" multiple>
+                </div>
+                <div class="container d-flex justify-content-between mt-2">
+                    <a href="/instancias/{{$instituicao->cdInstituicao}}" class="btn btn-info mb-2">Voltar</a>
+                    <input type="submit" class="btn btn-primary mb-2" value="Incluir"></div>
+            </form>
+    </div>
+    @endforeach
     </div>
 
 @endsection

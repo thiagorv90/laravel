@@ -29,12 +29,13 @@
 <header class="cabecalho">
     <nav class="navbar navbar-light bg-light fixed-top"
          style="background-image: linear-gradient(160deg, #743190 0%, #B67FB9 100%);">
-        <div class="container-fluid">
+        <div class="container d-flex justify-content-between align-items-center">
             <a class="navbar-brand" href="/dashboard">
                 <img src="/image/fibra1.png" alt="Fibra">
             </a>
 
-            <h1 class="text-white">SGR - Sistema de Gestão de Representações</h1>
+            <h1 class="text-white align-self-center">SGR - Sistema de Gestão de Representações</h1>
+            <h5 class="text-white align-self-center">Olá, <strong>{{ auth()->user()->name }}</strong>!</h5>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
                     aria-controls="offcanvasNavbar">
@@ -48,34 +49,37 @@
                     <a class="navbar-brand" href="/inicial">
                         <img src="/image/fibra.png" alt="Fibra">
                     </a>
+                    <h5>Olá, <strong>{{ auth()->user()->name }}</strong>!</h5>
+
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                             aria-label="Close"></button>
+
                 </div>
 
                 <div class="offcanvas-body">
                     <div class="container">
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                             @if(auth()->user()->statusadm ==1)
-
-                                <li class="nav-item"><a class="nav-link" href="/register">Cadastrar Usuário</a></li>
-
+                                <li class="nav-item fw-bold">Principais</li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
                                 <li class="nav-item"><a class="nav-link" href="/empresas">Empresas</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/escolaridade">Escolaridade</a></li>
-
-                                <li class="nav-item"><a class="nav-link" href="/instituicoes">Instituições</a></li>
-
-                                <li class="nav-item"><a class="nav-link" href="/reports">Relatórios</a></li>
-
                                 <li class="nav-item"><a class="nav-link" href="/repsup">Representantes</a></li>
-
                                 <li class="nav-item"><a class="nav-link" href="/temarep">Tema Representação</a></li>
-
                                 <li class="nav-item"><a class="nav-link" href="/tipoinsta">Tipo de Instancias</a></li>
+                                <li class="nav-item fw-bold mt-5">Outros</li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li class="nav-item"><a class="nav-link" href="/register">Cadastrar Usuário</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/instituicoes">Instituições</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/reports">Relatórios</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/usuarios">Usuários</a></li>
                             @else
                                 <li class="nav-item"><a class="nav-link" href="/representacoes">Representações</a></li>
                             @endif
-
                         </ul>
                     </div>
 

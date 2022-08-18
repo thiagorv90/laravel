@@ -7,7 +7,7 @@
     <form action="autenrep" method="get">
         @csrf
         <div class="form-group">
-            <label for="title">cdInstancia</label>
+            <label for="cdInstancia">cdInstancia</label>
             <select name="cdInstancia" id="cdInstancia" class="form-control">
                 @foreach ( $events as $event)
                     <option value="{{$event->name}}"> {{$event->name}}</option>

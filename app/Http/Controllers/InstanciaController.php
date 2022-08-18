@@ -19,7 +19,7 @@ use App\Exports\InstanciasExport;
 use Maatwebsite\Excel\Facades\Excel;
 use DB;
 
-class InstaciaController extends Controller
+class InstanciaController extends Controller
 {
     public function storeinst(Request $request, $id)
     {
@@ -40,57 +40,58 @@ class InstaciaController extends Controller
         $event->dsObservacao = $request->dsObservacao;
         $event->dsAtoNormativo = $request->dsAtoNormativo;
         $event->boCaraterDaInstancia = $request->boCaraterDaInstancia;
-       
+
         $event->save();
-        if ($request->has('nmAnexo')){
-            
-            for ($i =0; $i < count($request->allFiles()['nmAnexo']); $i++){
-                
-             
-                 $file = $request->allfiles()['nmAnexo'][$i];
-                 $name = $request->file()['nmAnexo'][$i]->getClientOriginalName();
-                 $anexo =  new Instancia_anexo();
-                
-                 
-                     $explode = $file->store('public/files');
-                    $certo = explode("s/", $explode);
-                    
- 
-                     $anexo->nmAnexo = $certo[1];
-                     $anexo->nmOriginal  = $name;
-                     $anexo->cdInstancia = $event->cdInstancia;
-                    
-                     $anexo->save();
- 
-             }
+        if ($request->has('nmAnexo')) {
+
+            for ($i = 0; $i < count($request->allFiles()['nmAnexo']); $i++) {
+
+
+                $file = $request->allfiles()['nmAnexo'][$i];
+                $name = $request->file()['nmAnexo'][$i]->getClientOriginalName();
+                $anexo = new Instancia_anexo();
+
+
+                $explode = $file->store('public/files');
+                $certo = explode("s/", $explode);
+
+
+                $anexo->nmAnexo = $certo[1];
+                $anexo->nmOriginal = $name;
+                $anexo->cdInstancia = $event->cdInstancia;
+
+                $anexo->save();
+
             }
+        }
 
         return back();
     }
+
     public function instanciafile(Request $request, $id)
     {
-        
-            
-            for ($i =0; $i < count($request->allFiles()['nmAnexo']); $i++){
-                
-             
-                 $file = $request->allfiles()['nmAnexo'][$i];
-                 $name = $request->file()['nmAnexo'][$i]->getClientOriginalName();
-                 $anexo =  new Instancia_anexo();
-                
-                 
-                     $explode = $file->store('public/files');
-                    $certo = explode("s/", $explode);
-                    
- 
-                     $anexo->nmAnexo = $certo[1];
-                     $anexo->nmOriginal  = $name;
-                     $anexo->cdInstancia = $id;
-                    
-                     $anexo->save();
- 
-             
-            }
+
+
+        for ($i = 0; $i < count($request->allFiles()['nmAnexo']); $i++) {
+
+
+            $file = $request->allfiles()['nmAnexo'][$i];
+            $name = $request->file()['nmAnexo'][$i]->getClientOriginalName();
+            $anexo = new Instancia_anexo();
+
+
+            $explode = $file->store('public/files');
+            $certo = explode("s/", $explode);
+
+
+            $anexo->nmAnexo = $certo[1];
+            $anexo->nmOriginal = $name;
+            $anexo->cdInstancia = $id;
+
+            $anexo->save();
+
+
+        }
 
         return back();
     }
@@ -109,19 +110,19 @@ class InstaciaController extends Controller
     }
 
 
-
     public function edit($cdInstancia)
     {
         $edit = Instancia::join('tema_representacoes', 'instancias.cdTema', '=', 'tema_representacoes.cdTema')
             ->join('instituicoes', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
             ->where('instancias.cdinstancia', '=', $cdInstancia)
             ->get();
-        $tema = DB::table('tema_representacoes')->get();    
+        $tema = DB::table('tema_representacoes')->get();
         $lista = Instancia::orderBy('nmInstancia')
             ->get();
-            $anexo = Instancia::join('instancia_anexos', 'instancia_anexos.cdInstancia', '=', 'instancias.cdInstancia')->where('instancias.cdInstancia', '=', $cdInstancia) ->get();   
-              
-        return view('instancias.edit', ['edit' => $edit, 'lista' => $lista,'tema'=>$tema,'anexo'=>$anexo]);
+
+        $anexo = Instancia::join('instancia_anexos', 'instancia_anexos.cdInstancia', '=', 'instancias.cdInstancia')->where('instancias.cdInstancia', '=', $cdInstancia)->get();
+
+        return view('instancias.edit', ['edit' => $edit, 'lista' => $lista, 'tema' => $tema, 'anexo' => $anexo]);
     }
 
     public function update(Request $request, $id)
@@ -148,20 +149,18 @@ class InstaciaController extends Controller
 
         return redirect()->route('instancias', ['id' => $cd]);
     }
+
     public function deleteInstnImg($id)
     {
-        $file =  Instancia_anexo::where('nmAnexo',$id);
+        $file = Instancia_anexo::where('nmAnexo', $id);
 
-        
-        
-        unlink(public_path()."/storage/files/$id");
 
-       
-        Instancia_anexo::where('nmAnexo',$id)->delete();
-        
-        
+        unlink(public_path() . "/storage/files/$id");
 
-       
+
+        Instancia_anexo::where('nmAnexo', $id)->delete();
+
+
         // $deleted = DB::delete('delete from telefone_contatos where cdTelefone = ?', [$id]);
         return back();
     }
@@ -182,20 +181,21 @@ class InstaciaController extends Controller
         return view('/instancias/search-results', compact('events'));
     }
 
-    function index(){
-            return view('typeahead_autocomplete');
+    function index()
+    {
+        return view('typeahead_autocomplete');
     }
 
     function action(request $request)
     {
         $data = $request->all();
 
-        $query =  $data['query'];
+        $query = $data['query'];
 
         $filter_data = Instancia::select('nmInstancia')
-                                ->where('nmInstancia',  'LIKE', '%'.$query.'%')->get();
+            ->where('nmInstancia', 'LIKE', '%' . $query . '%')->get();
 
-        return response()->json($filter_data);                        
+        return response()->json($filter_data);
 
     }
 
@@ -257,7 +257,7 @@ class InstaciaController extends Controller
         $instancias = Instancia::join('representacoes as r', 'r.cdInstancia', '=', 'instancias.cdInstancia')
             ->join('representante_suplentes as rs', 'rs.cdRepSup', '=', 'r.cdSuplente')
             ->join('representante_suplentes as rt', 'rt.cdRepSup', '=', 'r.cdTitular')
-            ->select(\Illuminate\Support\Facades\DB::raw('nmInstancia, tpAtribuicoes, tpPublicoPrivado, tpFederalDistrital, dsObjetivo,
+            ->select(\Illuminate\Support\Facades\DB::raw('nmInstancia, tpPublicoPrivado, tpFederalDistrital, dsObjetivo,
                 rs.nmRepresentanteSuplente as repSup, rt.nmRepresentanteSuplente as repTit'))
             ->get();
 

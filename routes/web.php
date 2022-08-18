@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 use App\Http\Controllers\EventController;
-use App\Http\Controllers\InstaciaController;
+use App\Http\Controllers\InstanciaController;
 use App\Http\Controllers\ContatoController;
-use App\Http\Controllers\AgendasController;
+use App\Http\Controllers\agendasController;
 use App\Http\Controllers\EscolaridadeController;
 use App\Http\Controllers\InstituicoesController;
 use App\Http\Controllers\RepresentacoesController;
@@ -34,20 +34,17 @@ Route::get('/', function () {
     return view('auth/login');
 });
 
-
-
-
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('inicial', [InstaciaController::class, 'dash']);
+    Route::get('inicial', [InstanciaController::class, 'dash']);
     Route::get('representacoes', [RepresentacoesController::class, 'representacoescreate']);
     Route::get('representacoes', [RepresentacoesController::class, 'represcreate']);
-    Route::get('agendas/{id}', [AgendasController::class, 'agendacreate'])->name('agendas');
-    Route::post('agendas/{id}', [AgendasController::class, 'agendastore']);
-    
-    Route::get('agendas/{id}/search', [AgendasController::class, 'search']);
+    Route::get('agendas/{id}', [agendasController::class, 'agendacreate'])->name('agendas');
+    Route::post('agendas/{id}', [agendasController::class, 'agendastore']);
 
-    Route::get('agendas/edit/{id}', [AgendasController::class, 'editAgen']);
-    Route::PUT('agendas/update/{id}', [AgendasController::class, 'updateAgen']);
+    Route::get('agendas/{id}/search', [agendasController::class, 'search']);
+
+    Route::get('agendas/edit/{id}', [agendasController::class, 'editAgen']);
+    Route::PUT('agendas/update/{id}', [agendasController::class, 'updateAgen']);
 
     Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
         return view('dashboard');
@@ -55,14 +52,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'admin'], function () {
         Route::view('/reports', 'reports');
 
-        Route::get('/typeahead_autocomplete',[InstaciaController::class, 'index']);
-        Route::get('/typeahead_autocomplete/action',[InstaciaController::class, 'action'])->name('typeahead_autocomplete.action');    
-        Route::get('instancias/show/{id}', [InstaciaController::class, 'show']);
-        Route::get('instancias/edit/{cdInstancia}', [InstaciaController::class, 'edit']);
-        Route::PUT('instancias/update/{cdInstancia}', [InstaciaController::class, 'update']);
-        Route::get('/instancias/{id}/search', [InstaciaController::class, 'search']);        
-        Route::post('/instancias/file/{id}', [InstaciaController::class, 'instanciafile']);       
-        Route::delete('/instancias/files/{id}', [InstaciaController::class, 'deleteInstnImg']);
+        Route::get('/typeahead_autocomplete',[InstanciaController::class, 'index']);
+        Route::get('/typeahead_autocomplete/action',[InstanciaController::class, 'action'])->name('typeahead_autocomplete.action');
+        Route::get('instancias/show/{id}', [InstanciaController::class, 'show']);
+        Route::get('instancias/edit/{cdInstancia}', [InstanciaController::class, 'edit']);
+        Route::PUT('instancias/update/{cdInstancia}', [InstanciaController::class, 'update']);
+        Route::get('/instancias/{id}/search', [InstanciaController::class, 'search']);
+
 
         Route::get('/usuarios', [UserController::class, 'show']);
         Route::get('/usuarios/edit/{id}', [UserController::class, 'edit']);
@@ -75,10 +71,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('empresas/edit/{emp}', [EventController::class, 'editEmp']);
         Route::get('empresas/{id}/search', [EventController::class, 'search']);
 
-        Route::post('inicial/', [InstaciaController::class, 'searchinst']);
-        Route::post('instancias/{id}', [InstaciaController::class, 'storeinst']);
-        Route::get('instancias/{id}', [InstaciaController::class, 'instacreate'])->name('instancias');
-        Route::get('/dashboard/export/{id}', [InstaciaController::class, 'export'])->name('excel');
+        Route::post('inicial/', [InstanciaController::class, 'searchinst']);
+        Route::post('instancias/{id}', [InstanciaController::class, 'storeinst']);
+        Route::get('instancias/{id}', [InstanciaController::class, 'instacreate'])->name('instancias');
+        Route::get('/dashboard/export/{id}', [InstanciaController::class, 'export'])->name('excel');
 
         Route::get('/contatos/{id}/search', [ContatoController::class, 'search'])->name('searchco');
         Route::post('contatos/listacontato/{id}', [ContatoController::class, 'contastore']);
@@ -86,6 +82,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('contatos/edit/{id}', [ContatoController::class, 'editCon']);
         Route::PUT('contatos/update/{id}', [ContatoController::class, 'updateCon']);
         Route::get('contatos/listacontato/{id}', [ContatoController::class, 'contalista'])->name('contatos');
+
 
         Route::post('/agendas/file/{id}', [AgendasController::class, 'agendafile']);
         Route::delete('/agendas/edit/{id}', [AgendasController::class, 'deleteAgen']);
@@ -97,7 +94,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::PUT('escolaridade/update/{id}', [EscolaridadeController::class, 'updateEsc']);
         Route::get('escolaridade/edit/{id}', [EscolaridadeController::class, 'editEsc']);
         Route::get('escolaridade/{id}/search', [EscolaridadeController::class, 'search']);
-        
+
 
         Route::get('/instituicoes/{id}/search', [InstituicoesController::class, 'search'])->name('searchinst');
         Route::post('instituicoes', [InstituicoesController::class, 'instituicoesstore']);
@@ -108,13 +105,13 @@ Route::group(['middleware' => 'auth'], function () {
 
 
          Route::get('/download/{id}', [RepresentacoesController::class, 'download']);
-         Route::get('/downloadAgen/{id}', [AgendasController::class, 'downloadAgen']);
+         Route::get('/downloadAgen/{id}', [agendasController::class, 'downloadAgen']);
 
         Route::post('repinsta/{id}', [RepresentacoesController::class, 'representacoesstore']);
         Route::get('repinsta/{id}', [RepresentacoesController::class, 'instareprescreate'])->name('repre');
         Route::PUT('representacoes/update/{id}', [RepresentacoesController::class, 'updateRep']);
         Route::get('representacoes/edit/{id}', [RepresentacoesController::class, 'editRep']);
-        Route::post('/representacoes/file/{id}', [RepresentacoesController::class, 'representacoesfile']);       
+        Route::post('/representacoes/file/{id}', [RepresentacoesController::class, 'representacoesfile']);
         Route::delete('/representacoes/files/{id}', [RepresentacoesController::class, 'deleteRepreImg']);
 
         Route::post('repsup', [RepresentanteSuplenteController::class, 'repsupstore']);
@@ -122,7 +119,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('selerepsup/{id}', [RepresentanteSuplenteController::class, 'selerepsup']);
         Route::PUT('repsup/update/{id}', [RepresentanteSuplenteController::class, 'updateRepSup']);
         Route::get('repsup/edit/{id}', [RepresentanteSuplenteController::class, 'editRepSup']);
-        Route::post('/repsup/file/{id}', [RepresentanteSuplenteController::class, 'repsupfile']);       
+        Route::post('/repsup/file/{id}', [RepresentanteSuplenteController::class, 'repsupfile']);
         Route::delete('/repsup/files/{id}', [RepresentanteSuplenteController::class, 'deleteRepImg']);
 
         Route::post('/telcon/{id}', [TelefoneContatosController::class, 'telconstore']);
@@ -158,25 +155,27 @@ Route::group(['middleware' => 'auth'], function () {
 
 
         Route::get('export/representacoes/', [RepresentacoesController::class, 'export'])->name('porRepresentante');
-        Route::get('export/instancias/', [InstaciaController::class, 'exportPorId'])->name('porInstancia');
+        Route::get('export/instancias/', [InstanciaController::class, 'exportPorId'])->name('porInstancia');
         Route::get('export/repEmNumeros/', [RepresentacoesController::class, 'exportRepEmNumeros'])->name('repEmNumeros');
-        Route::get('export/instanciasPorStatus', [InstaciaController::class, 'exportPorStatus'])->name('porStatus');
-        Route::get('export/instanciasPorTema', [InstaciaController::class, 'exportPorTema'])->name('porTema');
-        Route::get('export/instanciasPorPrioridade', [InstaciaController::class, 'exportPorPrioridade'])->name('porPrioridade');
-        Route::get('export/instanciasPorVigencia', [InstaciaController::class, 'exportPorVigencia'])->name('porVigencia');
-        Route::get('export/instanciasPorData', [InstaciaController::class, 'exportPorData'])->name('porData');
+        Route::get('export/instanciasPorStatus', [InstanciaController::class, 'exportPorStatus'])->name('porStatus');
+        Route::get('export/instanciasPorTema', [InstanciaController::class, 'exportPorTema'])->name('porTema');
+        Route::get('export/instanciasPorPrioridade', [InstanciaController::class, 'exportPorPrioridade'])->name('porPrioridade');
+        Route::get('export/instanciasPorVigencia', [InstanciaController::class, 'exportPorVigencia'])->name('porVigencia');
+        Route::get('export/instanciasPorData', [InstanciaController::class, 'exportPorData'])->name('porData');
 
 
-        Route::get('exportView/instancias/', [InstaciaController::class, 'instanciasExportView'])->name('exportViewInstancias');
-        Route::get('exportView/instanciasData/', [InstaciaController::class, 'instanciasDataExportView'])->name('exportViewInstData');
-        Route::get('exportView/instanciasPorId/', [InstaciaController::class, 'instanciasPorIdExportView'])->name('exportViewInstId');
-        Route::get('exportView/instanciasPorPrioridade/', [InstaciaController::class, 'instanciasPorPrioridadeExportView'])->name('exportViewInstPrioridade');
-        Route::get('exportView/instanciasPorTema/', [InstaciaController::class, 'instanciasPorTemaView'])->name('exportViewInstTema');
-        Route::get('exportView/instanciasPorVigencia/', [InstaciaController::class, 'instanciasPorVigenciaView'])->name('exportViewInstVigencia');
-        Route::get('exportView/instanciasPorStatus/', [InstaciaController::class, 'instanciasPorStatusExportView'])->name('exportViewInstStatus');
+        Route::get('exportView/instancias/', [InstanciaController::class, 'instanciasExportView'])->name('exportViewInstancias');
+        Route::get('exportView/instanciasData/', [InstanciaController::class, 'instanciasDataExportView'])->name('exportViewInstData');
+        Route::get('exportView/instanciasPorId/', [InstanciaController::class, 'instanciasPorIdExportView'])->name('exportViewInstId');
+        Route::get('exportView/instanciasPorPrioridade/', [InstanciaController::class, 'instanciasPorPrioridadeExportView'])->name('exportViewInstPrioridade');
+        Route::get('exportView/instanciasPorTema/', [InstanciaController::class, 'instanciasPorTemaView'])->name('exportViewInstTema');
+        Route::get('exportView/instanciasPorVigencia/', [InstanciaController::class, 'instanciasPorVigenciaView'])->name('exportViewInstVigencia');
+        Route::get('exportView/instanciasPorStatus/', [InstanciaController::class, 'instanciasPorStatusExportView'])->name('exportViewInstStatus');
         Route::get('exportView/representantes/', [RepresentacoesController::class, 'representacoesExportView'])->name('exportViewRepresentacoes');
         Route::get('exportView/representacoesEmNumero/', [RepresentacoesController::class, 'representacoesPorNumeroExportView'])->name('exportViewRepresentacoesNum');
 
-        Route::get('exportView/instanciasPorVigenciaFiltrada/', [InstaciaController::class, 'relatorioFiltrado'])->name('filtradoInstanciaPorVigencia');
+        Route::get('exportView/instanciasPorVigenciaFiltrada/', [InstanciaController::class, 'relatorioFiltrado'])->name('filtradoInstanciaPorVigencia');
     });
+
+
 });

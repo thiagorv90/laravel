@@ -5,7 +5,7 @@
 @section('content')
 
     <div class="container">
-    <h1>Temas</h1>
+        <h1>Temas</h1>
         <table class="table">
             <thead>
             <tr>
@@ -29,21 +29,21 @@
             </tbody>
         </table>
 
-    <br>
-    @if (!$tema_representacoe->isEmpty())
-        <form action="/temarep/{{$event->cdTema}}/search" method="GET">
-            @csrf
-            <div class="input-group mb-3">
-                <input placeholder="Buscar Tema..." type="text" class="form-control" id="query"
-                       name="query"
-                       aria-label="Buscar Tema" aria-describedby="button-addon2" required/>
-                <input type="submit" class="btn btn-primary" value="Buscar" id="button-addon2">
-            </div>
-        </form>
-    @endif
-    <br>
+        <br>
+        @if (!$tema_representacoe->isEmpty())
+            <form action="/temarep/{{$event->cdTema}}/search" method="GET">
+                @csrf
+                <div class="input-group mb-3">
+                    <input placeholder="Buscar Tema..." type="text" class="form-control" id="query"
+                           name="query"
+                           aria-label="Buscar Tema" aria-describedby="button-addon2" required/>
+                    <input type="submit" class="btn btn-primary" value="Buscar" id="button-addon2">
+                </div>
+            </form>
+        @endif
+        <br>
 
-    <h1>Crie Tema</h1>
+        <h1>Crie Tema</h1>
 
         <form action="/temarep" method="POST">
             @csrf
