@@ -10,6 +10,7 @@ use App\Exports\InstanciaPorVigenciaExport;
 use App\Exports\InstanciasPorIdExport;
 use Illuminate\Http\Request;
 use App\Models\Instancia;
+use App\Models\Instancia_anexo;
 use App\Models\Representacoe;
 use App\Models\Tema_representacoe;
 use App\Models\Instituicoe;
@@ -41,6 +42,57 @@ class InstanciaController extends Controller
         $event->boCaraterDaInstancia = $request->boCaraterDaInstancia;
 
         $event->save();
+        if ($request->has('nmAnexo')) {
+
+            for ($i = 0; $i < count($request->allFiles()['nmAnexo']); $i++) {
+
+
+                $file = $request->allfiles()['nmAnexo'][$i];
+                $name = $request->file()['nmAnexo'][$i]->getClientOriginalName();
+                $anexo = new Instancia_anexo();
+
+
+                $explode = $file->store('public/files');
+                $certo = explode("s/", $explode);
+
+
+                $anexo->nmAnexo = $certo[1];
+                $anexo->nmOriginal = $name;
+                $anexo->cdInstancia = $event->cdInstancia;
+
+                $anexo->save();
+
+            }
+        }
+
+        return back();
+    }
+
+    public function instanciafile(Request $request, $id)
+    {
+
+
+        for ($i = 0; $i < count($request->allFiles()['nmAnexo']); $i++) {
+
+
+            $file = $request->allfiles()['nmAnexo'][$i];
+            $name = $request->file()['nmAnexo'][$i]->getClientOriginalName();
+            $anexo = new Instancia_anexo();
+
+
+            $explode = $file->store('public/files');
+            $certo = explode("s/", $explode);
+
+
+            $anexo->nmAnexo = $certo[1];
+            $anexo->nmOriginal = $name;
+            $anexo->cdInstancia = $id;
+
+            $anexo->save();
+
+
+        }
+
         return back();
     }
 
@@ -57,31 +109,6 @@ class InstanciaController extends Controller
         return view('instancias.instancias', ['instancias' => $insta, 'temas' => $temas, 'instituicaos' => $instituicaos]);
     }
 
-    public function dash()
-    {
-        $insta = Instancia::join('tema_representacoes', 'instancias.cdTema', '=', 'tema_representacoes.cdTema')
-            ->join('instituicoes', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
-            ->join('representacoes', 'representacoes.cdInstancia', '=', 'instancias.cdInstancia')
-            ->join('representante_suplentes', 'representante_suplentes.cdRepSup', '=', 'representacoes.cdTitular')->get();
-
-        return view('inicial', ['instancias' => $insta]);
-    }
-
-    public function show($cdInstancia)
-    {
-        $insta = Instancia::join('tema_representacoes', 'instancias.cdTema', '=', 'tema_representacoes.cdTema')
-            ->join('instituicoes', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
-            ->leftjoin('representacoes', 'representacoes.cdInstancia', '=', 'instancias.cdInstancia')
-            ->leftjoin('representante_suplentes', 'representante_suplentes.cdRepSup', '=', 'representacoes.cdTitular')
-            ->where('instancias.cdinstancia', '=', $cdInstancia)
-            ->get([
-                'instancias.nmInstancia', 'tema_representacoes.nmTema', 'instituicoes.nmInstituicao', 'representante_suplentes.dsemail', 'representante_suplentes.nmRepresentanteSuplente',
-                'instancias.tpFederalDistrital', 'instancias.tpPublicoPrivado', 'instancias.dsMandato', 'instancias.stAtivo', 'instancias.dsObjetivo', 'instancias.tpAtribuicoes',
-                'instancias.tpPrioridade', 'instancias.dsAmeacas', 'instancias.dsOportunidades', 'instancias.dsObservacao', 'boCaraterDaInstancia', 'dsAtoNormativo'
-            ]);
-
-        return view('instancias.show', ['insta' => $insta]);
-    }
 
     public function edit($cdInstancia)
     {
@@ -92,7 +119,10 @@ class InstanciaController extends Controller
         $tema = DB::table('tema_representacoes')->get();
         $lista = Instancia::orderBy('nmInstancia')
             ->get();
-        return view('instancias.edit', ['edit' => $edit, 'lista' => $lista, 'tema' => $tema]);
+
+        $anexo = Instancia::join('instancia_anexos', 'instancia_anexos.cdInstancia', '=', 'instancias.cdInstancia')->where('instancias.cdInstancia', '=', $cdInstancia)->get();
+
+        return view('instancias.edit', ['edit' => $edit, 'lista' => $lista, 'tema' => $tema, 'anexo' => $anexo]);
     }
 
     public function update(Request $request, $id)
@@ -118,6 +148,21 @@ class InstanciaController extends Controller
             where cdInstancia = ?', [$cd, $tema, $name, $fed, $pub, $mand, $ativo, $obj, $pri, $ame, $opor, $manda, $carater, $ato, $id]);
 
         return redirect()->route('instancias', ['id' => $cd]);
+    }
+
+    public function deleteInstnImg($id)
+    {
+        $file = Instancia_anexo::where('nmAnexo', $id);
+
+
+        unlink(public_path() . "/storage/files/$id");
+
+
+        Instancia_anexo::where('nmAnexo', $id)->delete();
+
+
+        // $deleted = DB::delete('delete from telefone_contatos where cdTelefone = ?', [$id]);
+        return back();
     }
 
     public function search(Request $request, $id)

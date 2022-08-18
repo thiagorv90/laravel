@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Representante_suplente;
+use App\Models\Representante_suplentes_anexo;
 use DB;
 use App\Models\Empresa;
 use App\Models\Escolaridade;
@@ -32,6 +33,74 @@ class RepresentanteSuplenteController extends Controller
         $event->dtNascimento = $request->dtNascimento;
         $event->save();
 
+        if ($request->has('nmAnexo')) {
+
+            for ($i = 0; $i < count($request->allFiles()['nmAnexo']); $i++) {
+
+
+                $file = $request->allfiles()['nmAnexo'][$i];
+                $name = $request->file()['nmAnexo'][$i]->getClientOriginalName();
+                $anexo = new Representante_suplentes_anexo();
+
+
+                $explode = $file->store('public/files');
+                $certo = explode("s/", $explode);
+
+
+                $anexo->nmAnexo = $certo[1];
+                $anexo->nmOriginal = $name;
+                $anexo->cdRepSup = $event->cdRepSup;
+
+                $anexo->save();
+
+            }
+
+        }
+
+
+        return back();
+    }
+
+    public function repsupfile(Request $request, $id)
+    {
+
+
+        for ($i = 0; $i < count($request->allFiles()['nmAnexo']); $i++) {
+
+
+            $file = $request->allfiles()['nmAnexo'][$i];
+            $name = $request->file()['nmAnexo'][$i]->getClientOriginalName();
+            $anexo = new Representante_suplentes_anexo();
+
+
+            $explode = $file->store('public/files');
+            $certo = explode("s/", $explode);
+
+
+            $anexo->nmAnexo = $certo[1];
+            $anexo->nmOriginal = $name;
+            $anexo->cdRepSup = $id;
+
+            $anexo->save();
+
+        }
+
+
+        return back();
+    }
+
+    public function deleteRepImg($id)
+    {
+        $file = Representante_suplentes_anexo::where('nmAnexo', $id);
+
+
+        unlink(public_path() . "/storage/files/$id");
+
+
+        Representante_suplentes_anexo::where('nmAnexo', $id)->delete();
+
+
+        // $deleted = DB::delete('delete from telefone_contatos where cdTelefone = ?', [$id]);
         return back();
     }
 
@@ -56,7 +125,8 @@ class RepresentanteSuplenteController extends Controller
             ->get();
         $escola = Escolaridade::orderBy('cdEscolaridade')
             ->get();
-        return view('repsup.edit', ['selecionado' => $edit, 'lista' => $insta, 'escola' => $escola]);
+        $anexo = Representante_suplente::join('representante_suplentes_anexos', 'representante_suplentes_anexos.cdRepSup', '=', 'representante_suplentes.cdRepSup')->where('representante_suplentes.cdRepSup', '=', $id)->get();
+        return view('repsup.edit', ['selecionado' => $edit, 'lista' => $insta, 'escola' => $escola, 'anexo' => $anexo]);
     }
 
     public function updateRepSup(Request $request, $id)

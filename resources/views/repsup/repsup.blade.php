@@ -35,8 +35,8 @@
     </div>
     <h1>Crie Representante</h1>
 
-    <div id="event-create-container" class="container">
-        <form action="/repsup" method="POST">
+    <div id="event-create-container" class="container" >
+        <form action="/repsup" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label for="title">Nome:</label>
@@ -101,6 +101,10 @@
                 <label for="title">Data de Nascimento:</label>
                 <input type="date" class="form-control" id="dtNascimento" name="dtNascimento">
             </div>
+            <div class="form-group">
+                                <label for="title">Documentos:</label>
+                                <input type="file" class="form-control"  name="nmAnexo[]" multiple>
+                            </div>
             <br>
 
             <input type="submit" class="btn btn-primary mb-2" value="Criar Representante">

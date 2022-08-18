@@ -143,10 +143,8 @@
                 </form>
             @endforeach
 
-
             <form action="/agendas/file/{{$age->cdAgenda}}" method="POST" enctype="multipart/form-data">
                 @csrf
-
 
                 <div class="form-group">
                     <label for="title">Documento:</label>
@@ -156,6 +154,7 @@
                     <a href="/agendas/{{ $age->cdRepresentacao }}" class="btn btn-info mb-2">Voltar</a>
                     <input type="submit" class="btn btn-primary mb-2" value="Incluir"></div>
             </form>
-    </div> @endforeach
+    </div>
+    @endforeach
 
 @endsection
