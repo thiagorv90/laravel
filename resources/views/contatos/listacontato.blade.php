@@ -21,7 +21,7 @@
             <tbody>
            
             @foreach ($selecionado as $event)
-
+  
                 <tr>
                     <td><a>{{ $event->nmContato }}</a></td>
                     <td><a href="/contatos/edit/{{$event->cdContato}}" class="btn btn-info edit-btn"

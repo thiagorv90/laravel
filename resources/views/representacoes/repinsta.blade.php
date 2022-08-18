@@ -86,12 +86,16 @@
                         <input type="date" class="form-control" id="dtNomeacao" name="dtNomeacao">
                     </div>
                     <div class="form-group">
-                        <label for="title">Nomeação:</label>
+                        <label for="title">Número Nomeação:</label>
                         <input type="number" class="form-control" id="nuNomeacao" name="nuNomeacao">
                     </div>
                     <div class="form-group">
-                                <label for="title">Documento:</label>
-                                <input type="file" class="form-control" id="fnNomeacao" name="fnNomeacao">
+                                <label for="title">Detalhes Nomeação:</label>
+                                <input type="text" class="form-control" id="fnNomeacao" name="fnNomeacao">
+                            </div>
+                            <div class="form-group">
+                                <label for="title">Documentos:</label>
+                                <input type="file" class="form-control"  name="nmAnexo[]" multiple>
                             </div>
                     <br>
                     <div class="container d-flex justify-content-between mt-2">
@@ -110,7 +114,7 @@
                         <thead>
                         <tr>
                             <th scope="col">Nome Titular</th>
-                            <th scope="col">Incio</th>
+                            <th scope="col">Incio Vigencia</th>
                             <th scope="col">Status</th>
                             <th scope="col">Opções</th>
 
@@ -121,7 +125,7 @@
                             <tr>
 
                                 <td scropt="row">{{$event->nmRepresentanteSuplente}}</td>
-                                <td><a>{{ $event->dtInicioVigencia }}</a></td>
+                                <td><a>{!! date('d/m/Y', strtotime($event->dtInicioVigencia)) !!}</a></td>
                                 @if($event->stAtivo ==1)
                                     <td>Ativo</td>
                                 @else
@@ -229,8 +233,12 @@
                                 <input type="number" class="form-control" id="nuNomeacao" name="nuNomeacao">
                             </div>
                             <div class="form-group">
-                                <label for="title">Documento:</label>
-                                <input type="file" class="form-control" id="fnNomeacao" name="fnNomeacao">
+                                <label for="title">Detalhes Nomeação:</label>
+                                <input type="text" class="form-control" id="fnNomeacao" name="fnNomeacao">
+                            </div>
+                            <div class="form-group">
+                                <label for="title">Documentos:</label>
+                                <input type="file" class="form-control"  name="nmAnexo[]" multiple>
                             </div>
                         </div>
                         <br>

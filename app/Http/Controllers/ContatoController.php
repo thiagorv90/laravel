@@ -38,9 +38,9 @@ class ContatoController extends Controller
     public function contalista($id)
     {
         $contatos = DB::table('instancias')->join('contatos', 'contatos.cdInstancia', '=', 'instancias.cdInstancia')->where('instancias.cdInstancia', '=', $id)->get();
-        $edit = contato::join('instancias', 'contatos.cdInstancia', '=', 'instancias.cdInstancia')
+        $edit = Contato::join('instancias', 'contatos.cdInstancia', '=', 'instancias.cdInstancia')->join('instituicoes','instituicoes.cdInstituicao','=','instancias.cdInstituicao')
             ->where('contatos.cdInstancia', '=', $id)
-            ->get();
+            ->get(['cdContato','instancias.cdInstancia','nmInstancia','nmContato','instancias.cdInstituicao']);
         $nome = DB::table('instancias')->where('instancias.cdInstancia', '=', $id)->get(['nmInstancia', 'cdInstancia']);
         return view('contatos.listacontato', ['selecionado' => $edit, 'contatos' => $contatos, 'nome' => $nome]);
 

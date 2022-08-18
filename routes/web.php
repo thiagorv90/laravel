@@ -55,12 +55,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'admin'], function () {
         Route::view('/reports', 'reports');
 
-        Route::get('/typeahead_autocomplete',[InstanciaController::class, 'index']);
-        Route::get('/typeahead_autocomplete/action',[InstanciaController::class, 'action'])->name('typeahead_autocomplete.action');    
+        Route::get('/typeahead_autocomplete',[InstaciaController::class, 'index']);
+        Route::get('/typeahead_autocomplete/action',[InstaciaController::class, 'action'])->name('typeahead_autocomplete.action');    
         Route::get('instancias/show/{id}', [InstaciaController::class, 'show']);
         Route::get('instancias/edit/{cdInstancia}', [InstaciaController::class, 'edit']);
         Route::PUT('instancias/update/{cdInstancia}', [InstaciaController::class, 'update']);
-        Route::get('/instancias/{id}/search', [InstaciaController::class, 'search']);
+        Route::get('/instancias/{id}/search', [InstaciaController::class, 'search']);        
+        Route::post('/instancias/file/{id}', [InstaciaController::class, 'instanciafile']);       
+        Route::delete('/instancias/files/{id}', [InstaciaController::class, 'deleteInstnImg']);
 
         Route::get('/usuarios', [UserController::class, 'show']);
         Route::get('/usuarios/edit/{id}', [UserController::class, 'edit']);
@@ -88,12 +90,14 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/agendas/file/{id}', [AgendasController::class, 'agendafile']);
         Route::delete('/agendas/edit/{id}', [AgendasController::class, 'deleteAgen']);
         Route::delete('/agendas/files/{id}', [AgendasController::class, 'deleteAgenImg']);
+        Route::get('/dashboard', [AgendasController::class, 'dashboard']);
 
         Route::post('escolaridade', [EscolaridadeController::class, 'escolaridadestore']);
         Route::get('escolaridade', [EscolaridadeController::class, 'escolaridadeindex']);
         Route::PUT('escolaridade/update/{id}', [EscolaridadeController::class, 'updateEsc']);
         Route::get('escolaridade/edit/{id}', [EscolaridadeController::class, 'editEsc']);
         Route::get('escolaridade/{id}/search', [EscolaridadeController::class, 'search']);
+        
 
         Route::get('/instituicoes/{id}/search', [InstituicoesController::class, 'search'])->name('searchinst');
         Route::post('instituicoes', [InstituicoesController::class, 'instituicoesstore']);
@@ -110,12 +114,16 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('repinsta/{id}', [RepresentacoesController::class, 'instareprescreate'])->name('repre');
         Route::PUT('representacoes/update/{id}', [RepresentacoesController::class, 'updateRep']);
         Route::get('representacoes/edit/{id}', [RepresentacoesController::class, 'editRep']);
+        Route::post('/representacoes/file/{id}', [RepresentacoesController::class, 'representacoesfile']);       
+        Route::delete('/representacoes/files/{id}', [RepresentacoesController::class, 'deleteRepreImg']);
 
         Route::post('repsup', [RepresentanteSuplenteController::class, 'repsupstore']);
         Route::get('repsup', [RepresentanteSuplenteController::class, 'repsupcreate']);
         Route::get('selerepsup/{id}', [RepresentanteSuplenteController::class, 'selerepsup']);
         Route::PUT('repsup/update/{id}', [RepresentanteSuplenteController::class, 'updateRepSup']);
         Route::get('repsup/edit/{id}', [RepresentanteSuplenteController::class, 'editRepSup']);
+        Route::post('/repsup/file/{id}', [RepresentanteSuplenteController::class, 'repsupfile']);       
+        Route::delete('/repsup/files/{id}', [RepresentanteSuplenteController::class, 'deleteRepImg']);
 
         Route::post('/telcon/{id}', [TelefoneContatosController::class, 'telconstore']);
         Route::get('/telcon/{id}', [TelefoneContatosController::class, 'telconcreate'])->name('telcon');
