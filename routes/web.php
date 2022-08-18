@@ -38,13 +38,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('inicial', [InstanciaController::class, 'dash']);
     Route::get('representacoes', [RepresentacoesController::class, 'representacoescreate']);
     Route::get('representacoes', [RepresentacoesController::class, 'represcreate']);
-    Route::get('agendas/{id}', [agendasController::class, 'agendacreate'])->name('agendas');
-    Route::post('agendas/{id}', [agendasController::class, 'agendastore']);
+    Route::get('agendas/{id}', [AgendasController::class, 'agendacreate'])->name('agendas');
+    Route::post('agendas/{id}', [AgendasController::class, 'agendastore']);
 
-    Route::get('agendas/{id}/search', [agendasController::class, 'search']);
+    Route::get('agendas/{id}/search', [AgendasController::class, 'search']);
 
-    Route::get('agendas/edit/{id}', [agendasController::class, 'editAgen']);
-    Route::PUT('agendas/update/{id}', [agendasController::class, 'updateAgen']);
+    Route::get('agendas/edit/{id}', [AgendasController::class, 'editAgen']);
+    Route::PUT('agendas/update/{id}', [AgendasController::class, 'updateAgen']);
 
     Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
         return view('dashboard');
@@ -105,7 +105,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
          Route::get('/download/{id}', [RepresentacoesController::class, 'download']);
-         Route::get('/downloadAgen/{id}', [agendasController::class, 'downloadAgen']);
+         Route::get('/downloadAgen/{id}', [AgendasController::class, 'downloadAgen']);
 
         Route::post('repinsta/{id}', [RepresentacoesController::class, 'representacoesstore']);
         Route::get('repinsta/{id}', [RepresentacoesController::class, 'instareprescreate'])->name('repre');
