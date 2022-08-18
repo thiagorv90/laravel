@@ -3,9 +3,7 @@
 @section('title', 'Contatos Instancia')
 
 @section('content')
-
     @if (isset($selecionado) && $selecionado->count() > 0)
-
         @foreach ($nome as $name)
             <h1>Contatos da Instancia: {{$name->nmInstancia}}</h1>
         @endforeach
@@ -19,9 +17,8 @@
             </tr>
             </thead>
             <tbody>
-           
+
             @foreach ($selecionado as $event)
-  
                 <tr>
                     <td><a>{{ $event->nmContato }}</a></td>
                     <td><a href="/contatos/edit/{{$event->cdContato}}" class="btn btn-info edit-btn"
@@ -47,11 +44,11 @@
                 <input type="submit" class="btn btn-primary" value="Buscar" id="button-addon2">
             </div>
         </form>
-        
+
         <div class="container d-flex justify-content-between mt-2">
-                <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
-         <br> <br>      
-</div>
+            <a href="/instancias/{{ $event->cdInstituicao }}" class="btn btn-info mb-2">Voltar</a>
+            <br> <br>
+        </div>
         <br>
         <h1> Criar Contatos da Instância: {{$name->nmInstancia}}</h1>
         <div id="event-create-container" class="container">
@@ -74,13 +71,13 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="title">Email:</label>
+                    <label for="dsEmail">Email:</label>
                     <input type="text" class="form-control" id="dsEmail" name="dsEmail" required>
                 </div>
                 <div class="form-group">
                     <label for="title">Status:</label>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="1" >
+                        <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="1">
                         <label class="form-check-label" for="stAtivo">
                             Ativo
                         </label>
@@ -97,7 +94,7 @@
                         <label for="title">Contato Representante:</label>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="tpContatoRepresentante"
-                                   id="tpContatoRepresentante" value="1" >
+                                   id="tpContatoRepresentante" value="1">
                             <label class="form-check-label" for="tpContatoRepresentante">
                                 Sim
                             </label>
@@ -113,17 +110,16 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="title">Email Secundário:</label>
+                    <label for="dsEmailAlternativo">Email Secundário:</label>
                     <input type="text" class="form-control" id="dsEmailAlternativo" name="dsEmailAlternativo">
                 </div>
                 <br>
                 <div class="container d-flex justify-content-between mt-2">
-                <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
-                <input type="submit" class="btn btn-primary mb-2" value="criar">
-</div>
+                    <a href="/instancias/{{ $event->cdInstituicao }}" class="btn btn-info mb-2">Voltar</a>
+                    <input type="submit" class="btn btn-primary mb-2" value="Criar">
+                </div>
             </form>
         </div>
-
     @else
         @foreach ($nome as $contato)
             <h3>Não ha contato para esta instancia:{{$contato->nmInstancia}}</h3>
@@ -134,17 +130,13 @@
                 <form action="listacontatos/" method="POST">
                     @csrf
                     <div class="form-group">
-                        <label for="title">Nome:</label>
+                        <label for="nmContato">Nome:</label>
                         <input type="text" class="form-control" id="nmContato" name="nmContato" required>
                     </div>
                     <div class="form-group" style="display:none">
-                        <label for="title">Instancia:</label>
+                        <label for="cdInstancia">Instancia:</label>
                         <select name="cdInstancia" id="cdInstancia" class="form-select">
-
-
                             <option value="{{$contato->cdInstancia}}"> {{$contato->nmInstancia}}</option>
-
-
                         </select>
                     </div>
                     <div class="form-group">
@@ -171,7 +163,7 @@
                             <label for="title">Contato Representante:</label>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="tpContatoRepresentante"
-                                       id="tpContatoRepresentante" value="1" >
+                                       id="tpContatoRepresentante" value="1">
                                 <label class="form-check-label" for="tpContatoRepresentante">
                                     Sim
                                 </label>
@@ -192,12 +184,12 @@
                             </div>
                             <br>
                             <div class="container d-flex justify-content-between mt-2">
-                <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
-                <input type="submit" class="btn btn-primary mb-2" value="criar">
-</div>
+                                <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
+                                <input type="submit" class="btn btn-primary mb-2" value="Criar">
+                            </div>
+                        </div>
+                    </div>
                 </form>
-            </div>
-            </div>
             </div>
         @endforeach
     @endif

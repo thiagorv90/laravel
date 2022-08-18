@@ -19,7 +19,6 @@ class RepresentacoesController extends Controller
 
     public function representacoesstore(Request $request)
     {
-        
         $event = new Representacoe;
         $event->cdInstancia = $request->cdInstancia;
         $event->cdTitular = $request->cdTitular;
@@ -31,72 +30,73 @@ class RepresentacoesController extends Controller
         $event->stAtivo = $request->stAtivo;
         $event->dtNomeacao = $request->dtNomeacao;
         $event->nuNomeacao = $request->nuNomeacao;
-              
+
         $event->save();
-        if ($request->has('nmAnexo')){
-            
-            for ($i =0; $i < count($request->allFiles()['nmAnexo']); $i++){
-                
-             
-                 $file = $request->allfiles()['nmAnexo'][$i];
-                 $name = $request->file()['nmAnexo'][$i]->getClientOriginalName();
-                 $anexo =  new Representacoes_anexo();
-                
-                 
-                     $explode = $file->store('public/files');
-                    $certo = explode("s/", $explode);
-                    
- 
-                     $anexo->nmAnexo = $certo[1];
-                     $anexo->nmOriginal  = $name;
-                     $anexo->cdRepresentacao = $event->cdRepresentacao;
-                    
-                     $anexo->save();
- 
-             }
-         
-         }
-        
+        if ($request->has('nmAnexo')) {
+
+            for ($i = 0; $i < count($request->allFiles()['nmAnexo']); $i++) {
+
+
+                $file = $request->allfiles()['nmAnexo'][$i];
+                $name = $request->file()['nmAnexo'][$i]->getClientOriginalName();
+                $anexo = new Representacoes_anexo();
+
+
+                $explode = $file->store('public/files');
+                $certo = explode("s/", $explode);
+
+
+                $anexo->nmAnexo = $certo[1];
+                $anexo->nmOriginal = $name;
+                $anexo->cdRepresentacao = $event->cdRepresentacao;
+
+                $anexo->save();
+
+            }
+
+        }
+
         return back();
     }
 
     public function representacoesfile(Request $request, $id)
     {
-        
-            for ($i =0; $i < count($request->allFiles()['nmAnexo']); $i++){
-                
-             
-                 $file = $request->allfiles()['nmAnexo'][$i];
-                 $name = $request->file()['nmAnexo'][$i]->getClientOriginalName();
-                 $anexo =  new Representacoes_anexo();
-                
-                 
-                     $explode = $file->store('public/files');
-                    $certo = explode("s/", $explode);
-                    
- 
-                     $anexo->nmAnexo = $certo[1];
-                     $anexo->nmOriginal  = $name;
-                     $anexo->cdRepresentacao = $id;
-                    
-                     $anexo->save();
- 
-         
-         }
-        
+
+
+        for ($i = 0; $i < count($request->allFiles()['nmAnexo']); $i++) {
+
+
+            $file = $request->allfiles()['nmAnexo'][$i];
+            $name = $request->file()['nmAnexo'][$i]->getClientOriginalName();
+            $anexo = new Representacoes_anexo();
+
+
+            $explode = $file->store('public/files');
+            $certo = explode("s/", $explode);
+
+
+            $anexo->nmAnexo = $certo[1];
+            $anexo->nmOriginal = $name;
+            $anexo->cdRepresentacao = $id;
+
+            $anexo->save();
+
+        }
+
         return back();
     }
    
 
-    
+
     public function deleteRepreImg($id)
     {
-        $file =  Representacoes_anexo::where('nmAnexo',$id);
+        $file = Representacoes_anexo::where('nmAnexo', $id);
 
-        unlink(public_path()."/storage/files/$id");
 
-        Representacoes_anexo::where('nmAnexo',$id)->delete();
-    
+        unlink(public_path() . "/storage/files/$id");
+
+        Representacoes_anexo::where('nmAnexo', $id)->delete();
+
         // $deleted = DB::delete('delete from telefone_contatos where cdTelefone = ?', [$id]);
         return back();
     }
@@ -125,8 +125,9 @@ class RepresentacoesController extends Controller
         $edit = Representacoe::join('representante_suplentes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
             ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
             ->where('cdRepresentacao', '=', $id)
-            ->get(['cdRepresentacao', 'nmRepresentanteSuplente', 'dtInicioVigencia', 'cdTitular', 'representacoes.cdInstancia', 'nmInstancia', 'representacoes.stAtivo'
-        ,'cdSuplente','dtInicioVigencia','dtFimVigencia','dsDesignacao','dsNomeacao','dtNomeacao','nuNomeacao','fnNomeacao']);
+            ->get(['cdRepresentacao', 'nmRepresentanteSuplente', 'dtInicioVigencia', 'cdTitular',
+                'representacoes.cdInstancia', 'nmInstancia', 'representacoes.stAtivo', 'cdSuplente', 'dtInicioVigencia',
+                'dtFimVigencia', 'dsDesignacao', 'dsNomeacao', 'dtNomeacao', 'nuNomeacao', 'fnNomeacao']);
         $anexo = Representacoe::join('representacoes_anexos', 'representacoes.cdRepresentacao', '=', 'representacoes_anexos.cdRepresentacao')->get();
         // $insta = Instituicoe::join('tipo_instancias', 'tipo_instancias.cdTipoInstancia', '=','instituicoes.cdTipoInstituicao')->get();
         $rep = Representante_suplente::orderBy('cdRepSup')
@@ -134,21 +135,21 @@ class RepresentacoesController extends Controller
         $insta = instancia::orderBy('nmInstancia')
             ->get();
 
-        return view('representacoes.edit', ['selecionado' => $edit, 'lista' => $insta, 'rep' => $rep,'anexo'=>$anexo]);
+        return view('representacoes.edit', ['selecionado' => $edit, 'lista' => $insta, 'rep' => $rep, 'anexo' => $anexo]);
     }
 
     public function updateRep(Request $request, $id)
     {
-       
+
         $data = $request->all();
         $caminho = $data['cdInstancia'];
-        
+
         // Image Upload
-        if($request->has('fnNomeacao')) {
+        if ($request->has('fnNomeacao')) {
             $name = $request->file('fnNomeacao')->getClientOriginalName();
             $requestImage = $request->fnNomeacao;
             $data['dsOriginalNomeacao'] = $name;
-            
+
             $extension = $requestImage->extension();
 
             $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
@@ -156,28 +157,31 @@ class RepresentacoesController extends Controller
             $requestImage->move(public_path('files'), $imageName);
 
 
-
             $data['fnNomeacao'] = $imageName;
 
         }
-       
-        Representacoe::find($request->id)->update($data);
-            
 
-           
-    return redirect()->route('repre', ['id' => $caminho]);
+        Representacoe::find($request->id)->update($data);
+
+
+        return redirect()->route('repre', ['id' => $caminho]);
     }
+
     public function instareprescreate($id)
     {
         $representantes = DB::table('representante_suplentes')->get();
         $events = Representacoe::all();
-        $instancias = DB::table('instancias')->where('instancias.cdInstancia', '=', $id)->get();
+        $instancias = DB::table('instancias')
+            ->where('instancias.cdInstancia', '=', $id)
+            ->get();
         $selecionado = Representacoe::join('representante_suplentes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
             ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
             ->join('instituicoes', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
-            
             ->where('instancias.cdInstancia', '=', $id)
-            ->get(['representacoes.cdRepresentacao', 'nmRepresentanteSuplente', 'dtInicioVigencia', 'cdTitular', 'representacoes.cdInstancia', 'nmInstancia', 'representacoes.stAtivo','nmInstituicao']);
+
+            ->get(['representacoes.cdRepresentacao', 'nmRepresentanteSuplente', 'dtInicioVigencia',
+                'cdTitular', 'representacoes.cdInstancia', 'nmInstancia', 'representacoes.stAtivo',
+                'instancias.cdInstituicao','nmInstituicao']);
 
         return view('representacoes/repinsta', ['selecionado' => $selecionado, 'instancias' => $instancias, 'events' => $events, 'representantes' => $representantes]);
     }
@@ -192,14 +196,15 @@ class RepresentacoesController extends Controller
         return view('representacoes/representacoes', ['representantes' => $representantes]);
     }
 
-    public function download(Request $request, $id){
-           
+    public function download(Request $request, $id)
+    {
+
         //return response()->download('prjsgr1/storage/app/files/'.$id);
-        
-        $file = public_path()."/files/$id";
-        
-       
-         return \Response::download($file);
+
+        $file = public_path() . "/files/$id";
+
+
+        return \Response::download($file);
     }
 
 

@@ -28,7 +28,11 @@ class TelefoneContatosController extends Controller
             ->where('cdContato', '=', $id)
             ->get();
 
-        return view('telcon/telcon', ['telefones' => $telefones, 'events' => $events, 'selecionado' => $selecionado]);
+        return view('telcon/telcon', [
+            'telefones' => $telefones,
+            'events' => $events,
+            'selecionado' => $selecionado,
+        ]);
     }
 
     public function editTel($id)

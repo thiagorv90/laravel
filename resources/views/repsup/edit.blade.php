@@ -21,9 +21,9 @@
                     <label for="title">Representacao:</label>
                     <select id="cdEmpresa" name="cdEmpresa" class="form-select">
                         @foreach($lista as $emp)
-                        <option value="{{$age->cdEmpresa}}">
-                            {{ $emp->nmEmpresa }}
-                        </option>
+                            <option value="{{$age->cdEmpresa}}">
+                                {{ $emp->nmEmpresa }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -40,7 +40,8 @@
                 </div>
                 <div class="form-group">
                     <label for="title">Email:</label>
-                    <input type="text" class="form-control" id="dsEmail" name="dsEmail" value="{{$age->dsEmail}}" required>
+                    <input type="text" class="form-control" id="dsEmail" name="dsEmail" value="{{$age->dsEmail}}"
+                           required>
                 </div>
 
                 <div class="form-group">
@@ -82,12 +83,13 @@
                     <input type="textarea" class="form-control" id="dtNascimento" name="dtNascimento"
                            value="{{$age->dtNascimento}}">
                 </div>
-                <br><div class="container d-flex justify-content-between mt-2">
-                        <input type="submit" class="btn btn-primary mb-2" value="Voltar">
-                        
-                <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
-                
-</div>
+                <br>
+                <div class="container d-flex justify-content-between mt-2">
+                    <a href="/repsup" class="btn btn-info mb-2">Voltar</a>
+
+                    <input type="submit" class="btn btn-primary mb-2" value="Alterar">
+
+                </div>
             </form>
             <h1>Documentos do(a) Representante</h1>
         @foreach ($anexo as $ane)

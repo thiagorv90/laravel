@@ -42,7 +42,9 @@ class ContatoController extends Controller
             ->where('contatos.cdInstancia', '=', $id)
             ->get(['cdContato','instancias.cdInstancia','nmInstancia','nmContato','instancias.cdInstituicao']);
         $nome = DB::table('instancias')->where('instancias.cdInstancia', '=', $id)->get(['nmInstancia', 'cdInstancia']);
-        return view('contatos.listacontato', ['selecionado' => $edit, 'contatos' => $contatos, 'nome' => $nome]);
+        $instancia = DB::table('instancias')->where('instancias.cdInstancia', '=', $id)->get(['nmInstancia', 'cdInstancia']);
+
+        return view('contatos.listacontato', ['selecionado' => $edit, 'contatos' => $contatos, 'nome' => $nome, 'instancia' => $instancia]);
 
     }
 
@@ -51,7 +53,6 @@ class ContatoController extends Controller
         $edit = contato::join('instancias', 'contatos.cdInstancia', '=', 'instancias.cdInstancia')
             ->where('cdContato', '=', $id)
             ->get(['nmContato', 'contatos.cdInstancia', 'dsEmail', 'nmInstancia', 'contatos.stAtivo', 'tpContatoRepresentante', 'dsEmailAlternativo', 'contatos.cdContato']);
-
 
         return view('contatos.edit', ['selecionado' => $edit]);
     }
@@ -79,11 +80,10 @@ class ContatoController extends Controller
 
         $query = $request->input('query');
         $events = DB::table('contatos')
-            ->select('nmContato', 'cdContato')
+            ->select('nmContato', 'cdContato', 'cdInstancia')
             ->where('nmContato', 'like', "%$query%")
             ->where('cdInstancia', '=', $id)
             ->get();
-
 
         return view('/contatos/search-results', compact('events'));
     }
