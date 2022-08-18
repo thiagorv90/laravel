@@ -136,7 +136,7 @@
                    
 
                    <div class="form-group">
-                                <label for="title">Documento:</label>
+                                <label for="title">Documentos:</label>
                                 <input type="file" class="form-control" id="nmAnexo" name="nmAnexo[]" multiple>
                             </div> <div class="container d-flex justify-content-between mt-2">
                 <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>

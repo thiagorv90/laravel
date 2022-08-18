@@ -8,6 +8,7 @@ use App\Models\Agenda_anexo;
 use DB;
 use App\Models\Representacoe;
 use App\Exports\InstaciasExport;
+use Carbon\Carbon;
 
 class agendasController extends Controller
 {
@@ -78,11 +79,31 @@ class agendasController extends Controller
                     $anexo->save();
 
             }
-        
-        
-
-
         return back();
+    }
+    public function dashboard(){
+        $teste=  Agenda::whereBetween('dtAgenda', 
+        [Carbon::now('America/Sao_Paulo')->startOfWeek(), Carbon::now('America/Sao_Paulo')->endOfWeek()]
+    )->get(['dtAgenda']);
+    
+
+
+        $selecionado = Agenda::join('representacoes', 'representacoes.cdRepresentacao', '=', 'agendas.cdRepresentacao')
+            ->join('representante_suplentes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
+            ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')->whereBetween('dtAgenda', 
+            [Carbon::now('America/Sao_Paulo')->startOfWeek(), Carbon::now('America/Sao_Paulo')->endOfWeek()]
+        )
+        ->get();
+        $mes = Agenda::join('representacoes', 'representacoes.cdRepresentacao', '=', 'agendas.cdRepresentacao')
+        ->join('representante_suplentes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
+        ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')->whereBetween('dtAgenda', 
+        [Carbon::now('America/Sao_Paulo')->startOfMonth(), Carbon::now('America/Sao_Paulo')->endOfMonth()]
+    )
+    ->get();
+    
+    
+  
+            return view('/dashboard', ['selecionado' => $selecionado,'mes'=>$mes]);
     }
 
     public function agendacreate($id)
@@ -93,7 +114,8 @@ class agendasController extends Controller
             ->where('representacoes.cdRepresentacao', '=', $id)
             ->get(['cdAgenda', 'agendas.cdRepresentacao', 'dtAgenda', 'hrAgenda', 'agendas.stAgenda', 'dsAssunto', 'dsLocal', 'dsPauta', 'dsResumo', 'stSuplente', 'nmRepresentanteSuplente', 'nmInstancia']);
         $agendas = DB::table('representacoes')->where('cdRepresentacao', '=', $id)->get();
-        $repes = DB::table('representante_suplentes')->join('representacoes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')->get();
+        $repes = DB::table('representante_suplentes')->join('representacoes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')->where('cdRepresentacao', '=', $id)->get();
+        
 
         return view('/agendas.agendas', ['agendas' => $agendas, 'selecionado' => $selecionado,'repes'=>$repes]);
     }
@@ -162,6 +184,11 @@ class agendasController extends Controller
 
     public function deleteAgen($id)
     {
+       $links= Agenda_anexo::where('cdAgenda',$id)->get();
+       
+       foreach ($links as $link){
+        unlink(public_path()."/storage/files/$link->nmAnexo");
+       }
         Agenda_anexo::where('cdAgenda',$id)->delete();
         Agenda::find($id)->delete();
         // $deleted = DB::delete('delete from telefone_contatos where cdTelefone = ?', [$id]);

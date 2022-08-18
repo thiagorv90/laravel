@@ -10,7 +10,7 @@
                 <h3>Não ha instancia para a Instituição: {{$instituicao->nmInstituicao}}</h3>
                 <h1>Crie uma instância</h1>
                 <div id="event-create-container" class="container">
-                    <form action="instancias" method="POST">
+                    <form action="instancias" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group" >
                             <label for="title">Nome:</label>
@@ -161,6 +161,10 @@
                                         Deliberativo
                                     </label>
                                 </div>
+                                <div class="form-group">
+                                <label for="title">Documentos:</label>
+                                <input type="file" class="form-control"  name="nmAnexo[]" multiple>
+                            </div>
 
                             </div>
                             <br>
@@ -238,7 +242,7 @@
 </div>
                     <br>
                     <h1>Crie uma instância</h1>
-                    <form action="instancias" method="POST">
+                    <form action="instancias" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="title">Nome:</label>
@@ -395,6 +399,10 @@
                                         Deliberativo
                                     </label>
                                 </div>
+                                <div class="form-group">
+                                <label for="title">Documentos:</label>
+                                <input type="file" class="form-control"  name="nmAnexo[]" multiple>
+                            </div>
 
                             </div>
                             <br>
@@ -409,21 +417,5 @@
     @endif
 
 
-    <script>
-
-
-var path = "{{url('typeahead_autocomplete/action')}}";
-
-$('#nmInstancia').typeahead({
-     
-    source: function(query, process){
-        return$.get(path, {query:query},function(data){
-
-            return process(data);
-
-        });
-    }
-});
-        </script>
 
 @endsection

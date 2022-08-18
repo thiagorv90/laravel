@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Agenda_anexo extends Model
+class Representante_suplentes_anexo extends Model
 {
     protected $primaryKey = 'cdAnexo';
     use HasFactory;
@@ -15,7 +15,7 @@ class Agenda_anexo extends Model
 
     public function representacoe()
     {
-        return $this->hasOne('App\Models\Agenda');
+        return $this->hasOne('App\Models\Representante_suplentes');
     }
 
 }

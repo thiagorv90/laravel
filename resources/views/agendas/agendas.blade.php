@@ -8,7 +8,7 @@
         @foreach ($agendas as $agenda)
             <h3>Não há nada agendado para esta representação</h3>
             <h1>Criar Agenda</h1>
-
+            @endforeach
             <div id="event-create-container" class="container">
                 <form action="agendas" method="POST" enctype="multipart/form-data">
                     @csrf
@@ -17,14 +17,14 @@
                         <input type="date" class="form-control" id="dtAgenda" name="dtAgenda">
                     </div>
                     <div class="form-group">
-                        <label for="title">Representação: </label>
-                        <select name="cdRepresentacao" id="cdRepresentacao" class="form-select">
+                            <label for="title">Representante: </label>
+                            <select name="cdRepresentacao" id="cdRepresentacao" class="form-control" disabled>
+                                @foreach ($repes as $agenda)
+                                    <option value="{{$agenda->cdRepresentacao}}"> {{$agenda->nmRepresentanteSuplente}}</option>
 
-                            <option value="{{$agenda->cdRepresentacao}}"> {{$agenda->cdTitular}}</option>
-
-                            @endforeach
-                        </select>
-                    </div>
+                                @endforeach
+                            </select>
+                        </div>
                     <div class="form-group">
                         <label for="title">Hora:</label>
                         <input type="time" class="form-control" id="hrAgenda" name="hrAgenda">
@@ -75,13 +75,13 @@
                         <input type="textarea" class="form-control" id="dsResumo" name="dsResumo">
                     </div>
                     <div class="form-group">
-                                <label for="title">Documento:</label>
+                                <label for="title">Documentos:</label>
                                 <input type="file" class="form-control"  name="nmAnexo[]" multiple>
                             </div>
                     <br><div class="container d-flex justify-content-between mt-2">
                 <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
                 <input type="submit" class="btn btn-primary mb-2" value="Criar">
-</div>
+</div></div>
                 </form>
             </div>
             @endif
@@ -181,7 +181,7 @@
                         </div>
                         <div class="form-group">
                             <label for="title">Representante: </label>
-                            <select name="cdRepresentacao" id="cdRepresentacao" class="form-control" >
+                            <select name="cdRepresentacao" id="cdRepresentacao" class="form-control" disabled>
                                 @foreach ($repes as $agenda)
                                     <option value="{{$agenda->cdRepresentacao}}"> {{$agenda->nmRepresentanteSuplente}}</option>
 
