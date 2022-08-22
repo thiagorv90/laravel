@@ -27,6 +27,8 @@
                 Vigência de Mandato --</a>
             <a href="{{route('exportViewInstData')}}" class="list-group-item list-group-item-action">8. -- Por Data
                 --</a>
+                <a href="{{route('exportViewAgendas')}}" class="list-group-item list-group-item-action">9. --
+                Agendas --</a>
         </div>
     </div>
 

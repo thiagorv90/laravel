@@ -121,7 +121,7 @@
                 <br>
                 <div class="container d-flex justify-content-between mt-2">
                     <a href="/agendas/{{ $age->cdRepresentacao }}" class="btn btn-info mb-2">Voltar</a>
-                    <input type="submit" class="btn btn-primary mb-2" value="Alterar">
+                    <input type="submit" class="btn btn-primary mb-2" value="Salvar">
                 </div>
             </form>
             <h1>Documentos da Agenda</h1>
@@ -131,10 +131,12 @@
                     @csrf
                     @method('DELETE')
                     <div class="form-group">
+                    @if(auth()->user()->statusadm ==1)
                         <button type="submit" class="btn btn-danger delete-btn" data-bs-toggle="tooltip"
                                 data-bs-title="Deletar">
                             <ion-icon name="trash-outline"></ion-icon>
                         </button>
+                        @endif
                         <label for="title">&nbsp;Arquivo:</label>
                         <a href="{{url('/downloadAgen',urlencode($ane->nmAnexo))}}">{{$ane->nmOriginal}}</a>
 
@@ -145,7 +147,7 @@
 
             <form action="/agendas/file/{{$age->cdAgenda}}" method="POST" enctype="multipart/form-data">
                 @csrf
-
+                @if(auth()->user()->statusadm ==1)
                 <div class="form-group">
                     <label for="title">Documento:</label>
                     <input type="file" class="form-control" id="nmAnexo" name="nmAnexo[]" multiple>
@@ -153,7 +155,8 @@
                 <div class="container d-flex justify-content-between mt-2">
                     <a href="/agendas/{{ $age->cdRepresentacao }}" class="btn btn-info mb-2">Voltar</a>
                     <input type="submit" class="btn btn-primary mb-2" value="Incluir"></div>
-            </form>
+            @endif
+                </form>
     </div>
     @endforeach
 

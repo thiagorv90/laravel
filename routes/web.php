@@ -162,8 +162,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('export/instanciasPorPrioridade', [InstanciaController::class, 'exportPorPrioridade'])->name('porPrioridade');
         Route::get('export/instanciasPorVigencia', [InstanciaController::class, 'exportPorVigencia'])->name('porVigencia');
         Route::get('export/instanciasPorData', [InstanciaController::class, 'exportPorData'])->name('porData');
+        Route::get('export/agendas/', [AgendasController::class, 'export'])->name('porAgendas');
+        Route::get('export/agendasFiltrada/', [AgendasController::class, 'exportfiltrada'])->name('porFiltroAgendas');
 
-
+        Route::get('exportView/agendas', [AgendasController::class, 'exportViewAgendas'])->name('exportViewAgendas');
         Route::get('exportView/instancias/', [InstanciaController::class, 'instanciasExportView'])->name('exportViewInstancias');
         Route::get('exportView/instanciasData/', [InstanciaController::class, 'instanciasDataExportView'])->name('exportViewInstData');
         Route::get('exportView/instanciasPorId/', [InstanciaController::class, 'instanciasPorIdExportView'])->name('exportViewInstId');
@@ -175,6 +177,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('exportView/representacoesEmNumero/', [RepresentacoesController::class, 'representacoesPorNumeroExportView'])->name('exportViewRepresentacoesNum');
 
         Route::get('exportView/instanciasPorVigenciaFiltrada/', [InstanciaController::class, 'relatorioFiltrado'])->name('filtradoInstanciaPorVigencia');
+        Route::get('exportView/agendaFiltrada/', [AgendasController::class, 'relatorioFiltrado'])->name('filtradoAgenda');
     });
 
 
