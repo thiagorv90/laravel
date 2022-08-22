@@ -116,4 +116,15 @@ class UserController extends Controller
         return view('users/search-results', compact('users'));
 
     }
+
+    static function userFirstAndLastName(): string
+    {
+        $name = auth()->user()->name;
+
+        $namesArray = explode(' ', $name);
+        $firstName = reset($namesArray);
+        $lastName = end($namesArray);
+
+        return $firstName . " " . $lastName;
+    }
 }
