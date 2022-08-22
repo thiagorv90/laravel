@@ -9,6 +9,9 @@ use DB;
 use App\Models\Representacoe;
 use App\Exports\InstaciasExport;
 use Carbon\Carbon;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\AgendaExport;
+use App\Exports\AgendaFiltradaExport;
 
 class AgendasController extends Controller
 {
@@ -85,10 +88,7 @@ class AgendasController extends Controller
 
     public function dashboard()
     {
-        $teste = Agenda::whereBetween('dtAgenda',
-            [Carbon::now('America/Sao_Paulo')->startOfWeek(), Carbon::now('America/Sao_Paulo')->endOfWeek()]
-        )->get(['dtAgenda']);
-
+       
 
         $selecionado = Agenda::join('representacoes', 'representacoes.cdRepresentacao', '=', 'agendas.cdRepresentacao')
             ->join('representante_suplentes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
@@ -222,4 +222,47 @@ class AgendasController extends Controller
 
         return view('/agendas/search-results', compact('events'));
     }
+    public function export(Request $request)
+    {
+        
+        return (new AgendaExport)->download('agendas.xlsx');
+    }
+    public function exportfiltrada(Request $request)
+    {
+        $dataInicio = $request->input('dataInicio');
+        $dataFim = $request->input('dataFim');
+        
+        return (new AgendaFiltradaExport($dataInicio, $dataFim))->download('agendas.xlsx');
+    }
+    public function exportViewAgendas ()
+    {
+        $agendas = Agenda::join('representacoes', 'agendas.cdRepresentacao', '=', 'representacoes.cdRepresentacao')
+        ->join('instancias', 'instancias.cdInstancia', '=','representacoes.cdInstancia')
+        ->join('instituicoes','instituicoes.cdInstituicao','instancias.cdInstituicao')
+        ->join('representante_suplentes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
+            ->get();
+
+        return view('exportsView/agendas', ['agendas' => $agendas]);
+    }
+
+    public function relatorioFiltrado(Request $request)
+    {
+        $dataInicio = $request->input('dataInicio');
+        $dataFim = $request->input('dataFim');
+
+       
+        $agendas = Agenda::join('representacoes', 'representacoes.cdRepresentacao', '=', 'agendas.cdRepresentacao')
+        ->join('representante_suplentes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
+        
+        ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
+        ->join('instituicoes','instituicoes.cdInstituicao','instancias.cdInstituicao')->whereBetween('dtAgenda',[$dataInicio,  $dataFim]         
+        )
+        ->get();
+        
+        
+            return view('exportsView/agendaFiltrada', ['agendas'=> $agendas,'dataInicio'=>$dataInicio,'dataFim'=>$dataFim]);
+        }
+
+
+
 }
