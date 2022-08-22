@@ -246,7 +246,7 @@ class InstanciaController extends Controller
     {
         $instancias = Instancia::join('representacoes as r', 'r.cdInstancia', '=', 'instancias.cdInstancia')
             ->join('representante_suplentes as rt', 'rt.cdRepSup', '=', 'r.cdTitular')
-            ->join('agendas as a', 'a.cdAgenda', '=', 'r.cdRepresentacao')
+            ->join('agendas as a', 'a.cdRepresentacao', '=', 'r.cdRepresentacao')
             ->get();
 
         return view('exportsView/instanciasPorData', ['instancias' => $instancias]);
