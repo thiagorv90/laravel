@@ -30,6 +30,7 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\Admin\UserController;
 
 require_once __DIR__ . '/jetstream.php';
+
 Route::get('/', function () {
     return view('auth/login');
 });
@@ -49,6 +50,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
     Route::group(['middleware' => 'admin'], function () {
         Route::view('/reports', 'reports');
 

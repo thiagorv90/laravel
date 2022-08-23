@@ -24,7 +24,7 @@
             <td>{{ $instancia->dsDesignacao }}</td>
             <td>{!! date('d/m/Y', strtotime($instancia->dtInicioVigencia)) !!}</td>
             <td>{!! date('d/m/Y', strtotime($instancia->dtFimVigencia)) !!}</td>
-            
+
         </tr>
     @endforeach
     </tbody>

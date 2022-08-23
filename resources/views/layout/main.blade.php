@@ -35,7 +35,8 @@
             </a>
 
             <h3 class="text-white align-self-center">SGR - Sistema de Gestão de Representações</h3>
-            <h5 class="text-white align-self-center">Olá, <strong>{{ \App\Http\Controllers\Admin\UserController::userFirstAndLastName() }}</strong>!</h5>
+            <h5 class="text-white align-self-center">Olá,
+                <strong>{{ \App\Http\Controllers\Admin\UserController::userFirstAndLastName() }}</strong>!</h5>
 
 
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
@@ -57,7 +58,7 @@
                     </button>
 
                 </div>
-               
+
                 <div class="offcanvas-body">
                     <div class="container">
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
@@ -95,9 +96,9 @@
                             @csrf
                             <button class="btn btn-danger" type="submit">Logout</button>
                         </form>
-                        
+
                     </div>
-                    
+
                 </div>
             </div>
         </div>

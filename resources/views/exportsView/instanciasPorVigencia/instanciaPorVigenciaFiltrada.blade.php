@@ -6,25 +6,25 @@
 
     <div class="container d-flex align-items-center">
         <h2>Relatorio Por Vigencia do Mandato</h2></div>
-        {{$dataInicio}}
-        <form action="{{route('porVigencia')}}" method="GET">
-        
-<div class="input-group mb-2 inicio" style="display:none">
-    <label for="dataInicio" class="input-group-text">De: </label>
-    <input type="date" class="form-control" name="dataInicio" id="inicio-vigencia" value={{$dataInicio}}>
-</div>
+    {{$dataInicio}}
+    <form action="{{route('porVigencia')}}" method="GET">
 
-<div class="input-group mb-2"style="display:none">
-    <label for="dataFim" class="input-group-text">Até</label>
-    <input type="date" class="form-control" name="dataFim" id="fim-vigencia"  value={{$dataFim}}>
-</div>
+        <div class="input-group mb-2 inicio" style="display:none">
+            <label for="dataInicio" class="input-group-text">De: </label>
+            <input type="date" class="form-control" name="dataInicio" id="inicio-vigencia" value={{$dataInicio}}>
+        </div>
 
-<button type="submit" class="btn btn-primary mb-2" data-bs-toggle="tooltip"
-                                            data-bs-title="Download">
-                                        <ion-icon name="arrow-down-outline"></ion-icon>
-                                    </button>
+        <div class="input-group mb-2" style="display:none">
+            <label for="dataFim" class="input-group-text">Até</label>
+            <input type="date" class="form-control" name="dataFim" id="fim-vigencia" value={{$dataFim}}>
+        </div>
 
-</form>
+        <button type="submit" class="btn btn-primary mb-2" data-bs-toggle="tooltip"
+                data-bs-title="Download">
+            <ion-icon name="arrow-down-outline"></ion-icon>
+        </button>
+
+    </form>
 
 
     <form action="{{route('filtradoInstanciaPorVigencia')}}" method="GET">
@@ -55,9 +55,10 @@
         @foreach($instancias as $instancia)
             <tr>
                 <td>{{ $instancia->nmInstancia }}</td>
-                <td><strong>{!! date('d/m/Y', strtotime($instancia->dtInicioVigencia)) !!}</strong> até <strong>{!! date('d/m/Y', strtotime($instancia->dtFimVigencia)) !!}
-                    
-                </strong></td>
+                <td><strong>{!! date('d/m/Y', strtotime($instancia->dtInicioVigencia)) !!}</strong> até
+                    <strong>{!! date('d/m/Y', strtotime($instancia->dtFimVigencia)) !!}
+
+                    </strong></td>
                 <td>{{ $instancia->dsDesignacao }}</td>
             </tr>
         @endforeach
