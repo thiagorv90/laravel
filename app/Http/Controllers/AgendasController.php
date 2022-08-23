@@ -104,7 +104,7 @@ class AgendasController extends Controller
             ->get();
 
 
-        return view('/dashboard', ['selecionado' => $selecionado, 'mes' => $mes]);
+        return view('/dashboard', ['selecionado'=>$selecionado,'mes'=>$mes]);
     }
 
     public function agendacreate($id)
