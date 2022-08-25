@@ -14,7 +14,8 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 class AgendaExport implements FromView, ShouldAutoSize, WithDrawings
 {
     use Exportable;
-       /**
+
+    /**
      * @return \Illuminate\Support\Collection
      */
 
@@ -22,9 +23,9 @@ class AgendaExport implements FromView, ShouldAutoSize, WithDrawings
     {
         return view('exports.agendasPorData', [
             'agendas' => Agenda::join('representacoes', 'agendas.cdRepresentacao', '=', 'representacoes.cdRepresentacao')
-            ->join('instancias', 'instancias.cdInstancia', '=','representacoes.cdInstancia')
-            ->join('instituicoes','instituicoes.cdInstituicao','instancias.cdInstituicao')
-            ->join('representante_suplentes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
+                ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
+                ->join('instituicoes', 'instituicoes.cdInstituicao', 'instancias.cdInstituicao')
+                ->join('representante_suplentes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
                 ->get()
         ]);
     }

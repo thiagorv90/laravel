@@ -9,10 +9,11 @@ class Representacoe extends Model
 {
     protected $primaryKey = 'cdRepresentacao';
     use HasFactory;
+
     protected $guarded = [];
     public $timestamps = false;
     protected $dates = ['dtInicioVigencia'];
-    protected $dateend=['dtFimVigencia'];
+    protected $dateend = ['dtFimVigencia'];
     protected $casts = [
         'items' => 'array'
     ];

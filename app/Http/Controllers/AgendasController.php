@@ -88,7 +88,7 @@ class AgendasController extends Controller
 
     public function dashboard()
     {
-       
+
 
         $selecionado = Agenda::join('representacoes', 'representacoes.cdRepresentacao', '=', 'agendas.cdRepresentacao')
             ->join('representante_suplentes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
@@ -104,7 +104,7 @@ class AgendasController extends Controller
             ->get();
 
 
-        return view('/dashboard', ['selecionado'=>$selecionado,'mes'=>$mes]);
+        return view('/dashboard', ['selecionado' => $selecionado, 'mes' => $mes]);
     }
 
     public function agendacreate($id)
@@ -222,24 +222,27 @@ class AgendasController extends Controller
 
         return view('/agendas/search-results', compact('events'));
     }
+
     public function export(Request $request)
     {
-        
+
         return (new AgendaExport)->download('agendas.xlsx');
     }
+
     public function exportfiltrada(Request $request)
     {
         $dataInicio = $request->input('dataInicio');
         $dataFim = $request->input('dataFim');
-        
+
         return (new AgendaFiltradaExport($dataInicio, $dataFim))->download('agendas.xlsx');
     }
-    public function exportViewAgendas ()
+
+    public function exportViewAgendas()
     {
         $agendas = Agenda::join('representacoes', 'agendas.cdRepresentacao', '=', 'representacoes.cdRepresentacao')
-        ->join('instancias', 'instancias.cdInstancia', '=','representacoes.cdInstancia')
-        ->join('instituicoes','instituicoes.cdInstituicao','instancias.cdInstituicao')
-        ->join('representante_suplentes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
+            ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
+            ->join('instituicoes', 'instituicoes.cdInstituicao', 'instancias.cdInstituicao')
+            ->join('representante_suplentes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
             ->get();
 
         return view('exportsView/agendas', ['agendas' => $agendas]);
@@ -250,19 +253,17 @@ class AgendasController extends Controller
         $dataInicio = $request->input('dataInicio');
         $dataFim = $request->input('dataFim');
 
-       
-        $agendas = Agenda::join('representacoes', 'representacoes.cdRepresentacao', '=', 'agendas.cdRepresentacao')
-        ->join('representante_suplentes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
-        
-        ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
-        ->join('instituicoes','instituicoes.cdInstituicao','instancias.cdInstituicao')->whereBetween('dtAgenda',[$dataInicio,  $dataFim]         
-        )
-        ->get();
-        
-        
-            return view('exportsView/agendaFiltrada', ['agendas'=> $agendas,'dataInicio'=>$dataInicio,'dataFim'=>$dataFim]);
-        }
 
+        $agendas = Agenda::join('representacoes', 'representacoes.cdRepresentacao', '=', 'agendas.cdRepresentacao')
+            ->join('representante_suplentes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
+            ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
+            ->join('instituicoes', 'instituicoes.cdInstituicao', 'instancias.cdInstituicao')->whereBetween('dtAgenda', [$dataInicio, $dataFim]
+            )
+            ->get();
+
+
+        return view('exportsView/agendaFiltrada', ['agendas' => $agendas, 'dataInicio' => $dataInicio, 'dataFim' => $dataFim]);
+    }
 
 
 }

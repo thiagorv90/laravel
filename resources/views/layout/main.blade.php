@@ -48,7 +48,7 @@
                  aria-labelledby="offcanvasNavbarLabel">
 
                 <div class="offcanvas-header">
-                    <a class="navbar-brand" href="/inicial">
+                    <a class="navbar-brand" href="/dashboard">
                         <img src="/image/fibra.png" alt="Fibra">
                     </a>
                     <h5>

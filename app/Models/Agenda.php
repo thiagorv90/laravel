@@ -17,6 +17,7 @@ class agenda extends Model
     {
         return $this->hasMany('App\Models\Representacoe');
     }
+
     public function anexos()
     {
         return $this->hasMany('App\Models\Agenda_anexos');

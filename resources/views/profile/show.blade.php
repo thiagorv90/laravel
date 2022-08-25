@@ -7,7 +7,7 @@
         @endif
 
         @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
-                @livewire('profile.update-password-form')
+            @livewire('profile.update-password-form')
             <x-jet-section-border></x-jet-section-border>
         @endif
     </div>

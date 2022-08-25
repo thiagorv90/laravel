@@ -242,13 +242,13 @@
                            name="nmInstancia">
                 </div>
                 <div class="form-group">
-            <label for="title">Tema:</label>
-            <select name="cdTema" id="cdTema" class="form-select">
-                @foreach ($temas as $tema)
-                    <option value="{{$tema->cdTema}}"> {{$tema->nmTema}}</option>
-                @endforeach
-            </select>
-        </div>
+                    <label for="title">Tema:</label>
+                    <select name="cdTema" id="cdTema" class="form-select">
+                        @foreach ($temas as $tema)
+                            <option value="{{$tema->cdTema}}"> {{$tema->nmTema}}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <div class="form-group" style="display:none">
                     <label for="title">Instituição: </label>
                     <select name="cdInstituicao" id="cdInstituicao" class="form-select">
@@ -256,7 +256,7 @@
                             <option
                                 value="{{$instituicao->cdInstituicao}}"> {{$instituicao->nmInstituicao}}
                             </option>
-                            @endforeach
+                        @endforeach
                     </select>
                 </div>
                 <div class="form-group">
@@ -403,9 +403,8 @@
                     </div>
             </form>
         </div>
-</div>
-       
-        
+        </div>
+
     @endif
 
 @endsection

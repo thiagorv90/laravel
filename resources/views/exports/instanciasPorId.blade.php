@@ -15,7 +15,7 @@
         <th scope="col"><strong>ClassificacaoPP</strong></th>
         <th scope="col"><strong>ClassificacaoDF</strong></th>
         <th scope="col"><strong>Objetivo</strong></th>
-        
+
     </tr>
     </thead>
     <tbody>
@@ -39,7 +39,7 @@
                 @endif
             </td>
             <td>{{ $instancia->dsObjetivo }}</td>
-            
+
         </tr>
     @endforeach
     </tbody>

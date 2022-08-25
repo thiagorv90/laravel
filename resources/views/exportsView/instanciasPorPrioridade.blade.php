@@ -20,9 +20,12 @@
             <tr>
                 <td>{{ $instancia->nmInstancia }}</td>
                 <td>
-                    @if($instancia->tpPrioridade == 1) Baixa
-                    @elseif($instancia->tpPrioridade == 2) Media
-                    @else Alta
+                    @if($instancia->tpPrioridade == 1)
+                        Baixa
+                    @elseif($instancia->tpPrioridade == 2)
+                        Media
+                    @else
+                        Alta
                     @endif
                 </td>
             </tr>

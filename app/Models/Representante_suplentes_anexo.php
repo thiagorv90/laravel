@@ -9,6 +9,7 @@ class Representante_suplentes_anexo extends Model
 {
     protected $primaryKey = 'cdAnexo';
     use HasFactory;
+
     protected $guarded = [];
     public $timestamps = false;
 
