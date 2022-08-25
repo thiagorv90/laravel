@@ -85,7 +85,6 @@ class RepresentacoesController extends Controller
 
         return back();
     }
-   
 
 
     public function deleteRepreImg($id)
@@ -178,10 +177,9 @@ class RepresentacoesController extends Controller
             ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
             ->join('instituicoes', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
             ->where('instancias.cdInstancia', '=', $id)
-
             ->get(['representacoes.cdRepresentacao', 'nmRepresentanteSuplente', 'dtInicioVigencia',
                 'cdTitular', 'representacoes.cdInstancia', 'nmInstancia', 'representacoes.stAtivo',
-                'instancias.cdInstituicao','nmInstituicao']);
+                'instancias.cdInstituicao', 'nmInstituicao']);
 
         return view('representacoes/repinsta', ['selecionado' => $selecionado, 'instancias' => $instancias, 'events' => $events, 'representantes' => $representantes]);
     }

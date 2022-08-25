@@ -4,41 +4,40 @@
 
 @section('content')
 
-
     <h1>Relatorio de Agendas</h1>
     <form action="{{route('porFiltroAgendas')}}" method="GET">
 
-<div class="input-group mb-2 inicio" style="display:none">
-    <label for="dataInicio" class="input-group-text">Inicio da Vigência: </label>
-    <input type="date" class="form-control" name="dataInicio" id="inicio-vigencia" value={{$dataInicio}}>
-</div>
+        <div class="input-group mb-2 inicio" style="display:none">
+            <label for="dataInicio" class="input-group-text">Inicio da Vigência: </label>
+            <input type="date" class="form-control" name="dataInicio" id="inicio-vigencia" value={{$dataInicio}}>
+        </div>
 
-<div class="input-group mb-2"style="display:none">
-    <label for="dataFim" class="input-group-text">Data Final</label>
-    <input type="date" class="form-control" name="dataFim" id="fim-vigencia"  value={{$dataFim}}>
-</div>
+        <div class="input-group mb-2" style="display:none">
+            <label for="dataFim" class="input-group-text">Data Final</label>
+            <input type="date" class="form-control" name="dataFim" id="fim-vigencia" value={{$dataFim}}>
+        </div>
 
-<button type="submit" class="btn btn-primary" data-bs-toggle="tooltip"
-                                            data-bs-title="Deletar">
-                                        <ion-icon name="arrow-down-outline"></ion-icon>
-                                    </button>
+        <button type="submit" class="btn btn-primary" data-bs-toggle="tooltip"
+                data-bs-title="Deletar">
+            <ion-icon name="arrow-down-outline"></ion-icon>
+        </button>
 
-</form>
+    </form>
     <form action="{{route('filtradoAgenda')}}" method="GET">
 
-<div class="input-group mb-2 inicio">
-    <label for="dataInicio" class="input-group-text">Inicio da Vigência: </label>
-    <input type="date" class="form-control" name="dataInicio" id="inicio-vigencia">
-</div>
+        <div class="input-group mb-2 inicio">
+            <label for="dataInicio" class="input-group-text">Inicio da Vigência: </label>
+            <input type="date" class="form-control" name="dataInicio" id="inicio-vigencia">
+        </div>
 
-<div class="input-group mb-2">
-    <label for="dataFim" class="input-group-text">Data Final</label>
-    <input type="date" class="form-control" name="dataFim" id="fim-vigencia">
-</div>
+        <div class="input-group mb-2">
+            <label for="dataFim" class="input-group-text">Data Final</label>
+            <input type="date" class="form-control" name="dataFim" id="fim-vigencia">
+        </div>
 
 
-<input type="submit" class="btn btn-primary" value="Filtrar" id="butao-filtrar">
-</form>
+        <input type="submit" class="btn btn-primary" value="Filtrar" id="butao-filtrar">
+    </form>
     <table class="table">
         <thead>
         <tr>
@@ -55,7 +54,7 @@
                 <td>{{ $agenda->nmInstituicao }}</td>
                 <td>{{ $agenda->nmRepresentanteSuplente }}</td>
                 <td scope="col">{!! date('d/m/Y', strtotime($agenda->dtAgenda)) !!}</td>
-                    <td scope="col">{!! date('G:i', strtotime($agenda->hrAgenda)) !!}</td>
+                <td scope="col">{!! date('G:i', strtotime($agenda->hrAgenda)) !!}</td>
                 <td>{{ $agenda->dsAssunto }}</td>
             </tr>
         @endforeach

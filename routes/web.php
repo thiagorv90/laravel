@@ -37,7 +37,7 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
 
-    
+
     Route::get('representacoes', [RepresentacoesController::class, 'representacoescreate']);
     Route::get('representacoes', [RepresentacoesController::class, 'represcreate']);
     Route::get('agendas/{id}', [AgendasController::class, 'agendacreate'])->name('agendas');
@@ -48,16 +48,15 @@ Route::middleware('auth')->group(function () {
     Route::get('agendas/edit/{id}', [AgendasController::class, 'editAgen']);
     Route::PUT('agendas/update/{id}', [AgendasController::class, 'updateAgen']);
     Route::get('/download/{id}', [RepresentacoesController::class, 'download']);
-         Route::get('/downloadAgen/{id}', [AgendasController::class, 'downloadAgen']);
+    Route::get('/downloadAgen/{id}', [AgendasController::class, 'downloadAgen']);
 
     Route::group(['middleware' => 'admin'], function () {
         Route::view('/reports', 'reports');
         Route::get('inicial', [InstanciaController::class, 'dash']);
-      
-    
 
-        Route::get('/typeahead_autocomplete',[InstanciaController::class, 'index']);
-        Route::get('/typeahead_autocomplete/action',[InstanciaController::class, 'action'])->name('typeahead_autocomplete.action');
+
+        Route::get('/typeahead_autocomplete', [InstanciaController::class, 'index']);
+        Route::get('/typeahead_autocomplete/action', [InstanciaController::class, 'action'])->name('typeahead_autocomplete.action');
         Route::get('instancias/show/{id}', [InstanciaController::class, 'show']);
         Route::get('instancias/edit/{cdInstancia}', [InstanciaController::class, 'edit']);
         Route::PUT('instancias/update/{cdInstancia}', [InstanciaController::class, 'update']);
@@ -79,7 +78,7 @@ Route::middleware('auth')->group(function () {
         Route::post('instancias/{id}', [InstanciaController::class, 'storeinst']);
         Route::get('instancias/{id}', [InstanciaController::class, 'instacreate'])->name('instancias');
         Route::post('/instancias/file/{id}', [InstanciaController::class, 'instanciafile']);
-        
+
         Route::delete('/instancias/files/{id}', [InstanciaController::class, 'deleteInstnImg']);
         Route::get('/dashboard/export/{id}', [InstanciaController::class, 'export'])->name('excel');
 
@@ -94,7 +93,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/agendas/file/{id}', [AgendasController::class, 'agendafile']);
         Route::delete('/agendas/edit/{id}', [AgendasController::class, 'deleteAgen']);
         Route::delete('/agendas/files/{id}', [AgendasController::class, 'deleteAgenImg']);
-        
+
 
         Route::post('escolaridade', [EscolaridadeController::class, 'escolaridadestore']);
         Route::get('escolaridade', [EscolaridadeController::class, 'escolaridadeindex']);
@@ -110,8 +109,6 @@ Route::middleware('auth')->group(function () {
         Route::PUT('instituicoes/update/{id}', [InstituicoesController::class, 'updateInst']);
         Route::get('instituicoes/edit/{id}', [InstituicoesController::class, 'editInst']);
 
-
-        
 
         Route::post('repinsta/{id}', [RepresentacoesController::class, 'representacoesstore']);
         Route::get('repinsta/{id}', [RepresentacoesController::class, 'instareprescreate'])->name('repre');
@@ -154,7 +151,6 @@ Route::middleware('auth')->group(function () {
         Route::get('tipoinsta/edit/{id}', [TipoInstanciaController::class, 'editTipo']);
         Route::get('/tipoinsta/{id}/search', [TipoInstanciaController::class, 'search'])->name('searchtipinst');
 
-      
 
         Route::get('export/representacoes/', [RepresentacoesController::class, 'export'])->name('porRepresentante');
         Route::get('export/instancias/', [InstanciaController::class, 'exportPorId'])->name('porInstancia');

@@ -19,6 +19,7 @@
                            data-bs-toggle="tooltip" data-bs-title="Editar">
                             <ion-icon name="create-outline"></ion-icon>
                         </a>
+                    </td>
                 </tr>
             @endforeach
             </tbody>

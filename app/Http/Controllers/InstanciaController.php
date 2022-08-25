@@ -209,18 +209,18 @@ class InstanciaController extends Controller
                 ->where('r.dtInicioVigencia', '>=', $dataInicio)
                 ->get();
 
-            return view('exportsView/instanciasPorVigencia/instanciaPorVigenciaFiltrada', ['instancias'=>$instancias,'dataInicio'=>$dataInicio,'dataFim'=>$dataFim]);
+            return view('exportsView/instanciasPorVigencia/instanciaPorVigenciaFiltrada', ['instancias' => $instancias, 'dataInicio' => $dataInicio, 'dataFim' => $dataFim]);
         } elseif ($dataInicio === null) {
             $instancias = Instancia::join('representacoes as r', 'r.cdInstancia', '=', 'instancias.cdInstancia')
                 ->where('r.dtFimVigencia', '<=', $dataFim)
                 ->get();
 
-            return view('exportsView/instanciasPorVigencia/instanciaPorVigenciaFiltrada', ['instancias'=>$instancias,'dataInicio'=>$dataInicio,'dataFim'=>$dataFim]);
+            return view('exportsView/instanciasPorVigencia/instanciaPorVigenciaFiltrada', ['instancias' => $instancias, 'dataInicio' => $dataInicio, 'dataFim' => $dataFim]);
         } elseif ($dataInicio === null && $dataFim === null) {
             $instancias = Instancia::join('representacoes as r', 'r.cdInstancia', '=', 'instancias.cdInstancia')
                 ->get();
 
-            return view('exportsView/instanciasPorVigencia/instanciaPorVigenciaFiltrada', ['instancias'=>$instancias,'dataInicio'=>$dataInicio,'dataFim'=>$dataFim]);
+            return view('exportsView/instanciasPorVigencia/instanciaPorVigenciaFiltrada', ['instancias' => $instancias, 'dataInicio' => $dataInicio, 'dataFim' => $dataFim]);
         }
 
         $instancias = Instancia::join('representacoes as r', 'r.cdInstancia', '=', 'instancias.cdInstancia')
@@ -228,7 +228,7 @@ class InstanciaController extends Controller
             ->where('r.dtInicioVigencia', '>=', $dataInicio)
             ->get();
 
-        return view('exportsView/instanciasPorVigencia/instanciaPorVigenciaFiltrada', ['instancias'=>$instancias,'dataInicio'=>$dataInicio,'dataFim'=>$dataFim]);
+        return view('exportsView/instanciasPorVigencia/instanciaPorVigenciaFiltrada', ['instancias' => $instancias, 'dataInicio' => $dataInicio, 'dataFim' => $dataFim]);
 
     }
 
@@ -323,7 +323,7 @@ class InstanciaController extends Controller
     {
         $dataInicio = $request->input('dataInicio');
         $dataFim = $request->input('dataFim');
-        
+
         return (new InstanciaPorVigenciaExport($dataInicio, $dataFim))->download('instanciaPorVigencia.xlsx');
     }
 

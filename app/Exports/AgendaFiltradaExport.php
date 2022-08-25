@@ -16,17 +16,18 @@ use Illuminate\Http\Request;
 class AgendaFiltradaExport implements FromView, ShouldAutoSize, WithDrawings
 {
     use Exportable;
-       /**
+
+    /**
      * @return \Illuminate\Support\Collection
      */
 
-    
-    public function __construct($dataInicio, $dataFim) 
+
+    public function __construct($dataInicio, $dataFim)
     {
         $this->dataInicio = $dataInicio;
         $this->dataFim = $dataFim;
 
-       
+
     }
 
     public function view(): View
@@ -36,15 +37,13 @@ class AgendaFiltradaExport implements FromView, ShouldAutoSize, WithDrawings
         // $dataFim = $request->input('dataFim');
 
         return view('exports.agendaFiltrada', [
-            'agendas' =>  Agenda::join('representacoes', 'representacoes.cdRepresentacao', '=', 'agendas.cdRepresentacao')
-        ->join('representante_suplentes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
-        
-        ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
-        ->join('instituicoes','instituicoes.cdInstituicao','instancias.cdInstituicao')->whereBetween('dtAgenda',[$this->dataInicio,  $this->dataFim] )        
-        
-        ->get()
+            'agendas' => Agenda::join('representacoes', 'representacoes.cdRepresentacao', '=', 'agendas.cdRepresentacao')
+                ->join('representante_suplentes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
+                ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
+                ->join('instituicoes', 'instituicoes.cdInstituicao', 'instancias.cdInstituicao')->whereBetween('dtAgenda', [$this->dataInicio, $this->dataFim])
+                ->get()
         ]);
-    
+
     }
 
     public function drawings()

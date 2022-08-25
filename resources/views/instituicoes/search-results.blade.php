@@ -10,7 +10,6 @@
             <h1>Não existe Instituições com esse nome</h1>
             <div class="container d-flex justify-content-between mt-2">
                 <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
-
             </div>
         @else
             <h1>Instituições</h1>

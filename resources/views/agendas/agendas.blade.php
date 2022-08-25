@@ -6,10 +6,10 @@
     @if (is_countable($selecionado) && count($selecionado) == 0)
 
         @if(auth()->user()->statusadm ==1)
-            
-                <h3>Não há nada agendado para esta representação</h3>
-                <h1>Criar Agenda</h1>
-           
+
+            <h3>Não há nada agendado para esta representação</h3>
+            <h1>Criar Agenda</h1>
+
             <div id="event-create-container" class="container">
                 <form action="agendas" method="POST" enctype="multipart/form-data">
                     @csrf
@@ -90,7 +90,7 @@
                     </div>
                 </form>
             </div>
-     @endif
+        @endif
     @else
 
         <h1>Agendas da representação:</h1>
@@ -242,11 +242,11 @@
                         </div>
                         <div class="form-group">
                             <label for="title">Pauta:</label>
-                            <textarea   class="form-control" id="dsPauta" name="dsPauta" required></textarea >
+                            <textarea class="form-control" id="dsPauta" name="dsPauta" required></textarea>
                         </div>
                         <div class="form-group">
                             <label for="title">Resumo:</label>
-                            <textarea   class="form-control" id="dsResumo" name="dsResumo"></textarea >
+                            <textarea class="form-control" id="dsResumo" name="dsResumo"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="title">Documento:</label>
@@ -260,9 +260,9 @@
                     </div>
                 </form>
             </div>
-       
-    @endif
-            
+
         @endif
 
-        @endsection
+    @endif
+
+@endsection
