@@ -30,6 +30,7 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\Admin\UserController;
 
 require_once __DIR__ . '/jetstream.php';
+
 Route::get('/', function () {
     return view('auth/login');
 });
@@ -48,7 +49,6 @@ Route::middleware('auth')->group(function () {
     Route::PUT('agendas/update/{id}', [AgendasController::class, 'updateAgen']);
     Route::get('/download/{id}', [RepresentacoesController::class, 'download']);
          Route::get('/downloadAgen/{id}', [AgendasController::class, 'downloadAgen']);
-
 
     Route::group(['middleware' => 'admin'], function () {
         Route::view('/reports', 'reports');
