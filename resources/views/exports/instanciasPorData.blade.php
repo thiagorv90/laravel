@@ -21,7 +21,7 @@
     @foreach($instancias as $instancia)
         <tr>
             <td>{{ $instancia->nmInstancia }}</td>
-            <td>{{ $instancia->dtAgenda }}</td>
+            <td>{!! date('d/m/Y', strtotime($instancia->dtAgenda)) !!}</td>
             <td>{{ $instancia->dsLocal }}</td>
             <td>{{ \Illuminate\Support\Str::of($instancia->hrAgenda)->limit(5, '') }}</td>
             <td>{{ $instancia->dsPauta }}</td>

@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\InstanciaController;
 use App\Http\Controllers\ContatoController;
-use App\Http\Controllers\agendasController;
+use App\Http\Controllers\AgendasController;
 use App\Http\Controllers\EscolaridadeController;
 use App\Http\Controllers\InstituicoesController;
 use App\Http\Controllers\RepresentacoesController;
@@ -34,23 +34,27 @@ Route::get('/', function () {
     return view('auth/login');
 });
 
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('inicial', [InstanciaController::class, 'dash']);
+Route::middleware('auth')->group(function () {
+
+    
     Route::get('representacoes', [RepresentacoesController::class, 'representacoescreate']);
     Route::get('representacoes', [RepresentacoesController::class, 'represcreate']);
     Route::get('agendas/{id}', [AgendasController::class, 'agendacreate'])->name('agendas');
     Route::post('agendas/{id}', [AgendasController::class, 'agendastore']);
-
+    Route::get('/dashboard', [AgendasController::class, 'dashboard']);
     Route::get('agendas/{id}/search', [AgendasController::class, 'search']);
 
     Route::get('agendas/edit/{id}', [AgendasController::class, 'editAgen']);
     Route::PUT('agendas/update/{id}', [AgendasController::class, 'updateAgen']);
+    Route::get('/download/{id}', [RepresentacoesController::class, 'download']);
+         Route::get('/downloadAgen/{id}', [AgendasController::class, 'downloadAgen']);
 
-    Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+
     Route::group(['middleware' => 'admin'], function () {
         Route::view('/reports', 'reports');
+        Route::get('inicial', [InstanciaController::class, 'dash']);
+      
+    
 
         Route::get('/typeahead_autocomplete',[InstanciaController::class, 'index']);
         Route::get('/typeahead_autocomplete/action',[InstanciaController::class, 'action'])->name('typeahead_autocomplete.action');
@@ -74,6 +78,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('inicial/', [InstanciaController::class, 'searchinst']);
         Route::post('instancias/{id}', [InstanciaController::class, 'storeinst']);
         Route::get('instancias/{id}', [InstanciaController::class, 'instacreate'])->name('instancias');
+        Route::post('/instancias/file/{id}', [InstanciaController::class, 'instanciafile']);
+        
+        Route::delete('/instancias/files/{id}', [InstanciaController::class, 'deleteInstnImg']);
         Route::get('/dashboard/export/{id}', [InstanciaController::class, 'export'])->name('excel');
 
         Route::get('/contatos/{id}/search', [ContatoController::class, 'search'])->name('searchco');
@@ -87,7 +94,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/agendas/file/{id}', [AgendasController::class, 'agendafile']);
         Route::delete('/agendas/edit/{id}', [AgendasController::class, 'deleteAgen']);
         Route::delete('/agendas/files/{id}', [AgendasController::class, 'deleteAgenImg']);
-        Route::get('/dashboard', [AgendasController::class, 'dashboard']);
+        
 
         Route::post('escolaridade', [EscolaridadeController::class, 'escolaridadestore']);
         Route::get('escolaridade', [EscolaridadeController::class, 'escolaridadeindex']);
@@ -104,8 +111,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('instituicoes/edit/{id}', [InstituicoesController::class, 'editInst']);
 
 
-         Route::get('/download/{id}', [RepresentacoesController::class, 'download']);
-         Route::get('/downloadAgen/{id}', [AgendasController::class, 'downloadAgen']);
+        
 
         Route::post('repinsta/{id}', [RepresentacoesController::class, 'representacoesstore']);
         Route::get('repinsta/{id}', [RepresentacoesController::class, 'instareprescreate'])->name('repre');
@@ -148,11 +154,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('tipoinsta/edit/{id}', [TipoInstanciaController::class, 'editTipo']);
         Route::get('/tipoinsta/{id}/search', [TipoInstanciaController::class, 'search'])->name('searchtipinst');
 
-        Route::view('autenrep', 'autenrep');
-
-        Route::get('autenrep', [authrepController::class, 'authindex']);
-        Route::get('autenrep', [authrepController::class, 'authcreate']);
-
+      
 
         Route::get('export/representacoes/', [RepresentacoesController::class, 'export'])->name('porRepresentante');
         Route::get('export/instancias/', [InstanciaController::class, 'exportPorId'])->name('porInstancia');
@@ -179,6 +181,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('exportView/instanciasPorVigenciaFiltrada/', [InstanciaController::class, 'relatorioFiltrado'])->name('filtradoInstanciaPorVigencia');
         Route::get('exportView/agendaFiltrada/', [AgendasController::class, 'relatorioFiltrado'])->name('filtradoAgenda');
     });
-
-
 });
+
+

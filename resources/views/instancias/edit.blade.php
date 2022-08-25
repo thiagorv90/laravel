@@ -204,7 +204,7 @@
                     <input type="submit" class="btn btn-primary mb-2" value="Incluir"></div>
             </form>
     </div>
-    @endforeach
+    
     </div>
 
 @endsection

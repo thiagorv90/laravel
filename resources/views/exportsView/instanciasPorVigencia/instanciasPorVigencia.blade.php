@@ -5,7 +5,7 @@
 @section('content')
     <div class="container d-flex align-items-center">
     <h2>Relatorio Por Vigencia do Mandato</h2>
-        <a href="{{route('porVigencia')}}" class="btn btn-primary ms-2"
+        <a href="{{route('porVigencia')}}" class="btn btn-primary ms-2 mb-2"
            data-bs-toggle="tooltip" data-bs-title="Download">
             <ion-icon name="arrow-down-outline"></ion-icon>
         </a>
@@ -15,12 +15,12 @@
         <form action="{{route('filtradoInstanciaPorVigencia')}}" method="GET">
 
             <div class="input-group mb-2 inicio">
-                <label for="dataInicio" class="input-group-text">Inicio da Vigência: </label>
+                <label for="dataInicio" class="input-group-text">De: </label>
                 <input type="date" class="form-control" name="dataInicio" id="inicio-vigencia">
             </div>
 
             <div class="input-group mb-2">
-                <label for="dataFim" class="input-group-text">Data Final</label>
+                <label for="dataFim" class="input-group-text">Até</label>
                 <input type="date" class="form-control" name="dataFim" id="fim-vigencia">
             </div>
 
@@ -40,7 +40,7 @@
         @foreach($instancias as $instancia)
             <tr>
                 <td>{{ $instancia->nmInstancia }}</td>
-                <td><strong>{{ $instancia->dtInicioVigencia }}</strong> até <strong>{{ $instancia->dtFimVigencia }}</strong></td>
+                <td><strong>{!! date('d/m/Y', strtotime($instancia->dtInicioVigencia)) !!}</strong> até <strong>{!! date('d/m/Y', strtotime($instancia->dtFimVigencia)) !!}</strong></td>
                 <td>{{ $instancia->dsDesignacao }}</td>
             </tr>
         @endforeach
