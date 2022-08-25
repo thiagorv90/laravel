@@ -85,11 +85,11 @@
             <tbody>
             @foreach ($selecionado as $sel)
                 <tr>
-                    <td scope="col">{{$sel->nmRepresentanteSuplente}}</td>
-                    <td scope="col">{{ $sel->nmInstancia }}</td>
-                    <td scope="col">{!! date('d/m/Y', strtotime($sel->dtAgenda)) !!}</td>
-                    <td scope="col">{!! date('G:i', strtotime($sel->hrAgenda)) !!}</td>
-                    <td scope="col">{{ $sel->dsAssunto }}</td>
+                    <td>{{$sel->nmRepresentanteSuplente}}</td>
+                    <td>{{ $sel->nmInstancia }}</td>
+                    <td>{!! date('d/m/Y', strtotime($sel->dtAgenda)) !!}</td>
+                    <td>{!! date('G:i', strtotime($sel->hrAgenda)) !!}</td>
+                    <td>{{ $sel->dsAssunto }}</td>
 
                 </tr>
             @endforeach
@@ -115,8 +115,8 @@
                 <tr>
                     <td>{{$me->nmRepresentanteSuplente}}</td>
                     <td><a>{{ $me->nmInstancia }}</a></td>
-                    <td scope="col">{!! date('d/m/Y', strtotime($me->dtAgenda)) !!}</td>
-                    <td scope="col">{!! date('G:i', strtotime($me->hrAgenda)) !!}</td>
+                    <td>{!! date('d/m/Y', strtotime($me->dtAgenda)) !!}</td>
+                    <td>{!! date('G:i', strtotime($me->hrAgenda)) !!}</td>
                     <td><a>{{ $me->dsAssunto }}</a></td>
 
                 </tr>

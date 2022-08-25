@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\AgendaReuniao;
 use Illuminate\Http\Request;
 use App\Models\Agenda;
 use App\Models\Agenda_anexo;
@@ -265,5 +266,64 @@ class AgendasController extends Controller
         return view('exportsView/agendaFiltrada', ['agendas' => $agendas, 'dataInicio' => $dataInicio, 'dataFim' => $dataFim]);
     }
 
+    private function retornaDiaDeHoje()
+    {
+        date_default_timezone_set('America/Sao_Paulo');
+        setlocale(LC_ALL, 'pt_BR.utf-8', 'ptb', 'pt_BR', 'portuguese-brazil', 'portuguese-brazilian', 'bra', 'brazil', 'br');
+        setlocale(LC_TIME, 'pt_BR.utf-8', 'ptb', 'pt_BR', 'portuguese-brazil', 'portuguese-brazilian', 'bra', 'brazil', 'br');
 
+
+        return Carbon::now();
+    }
+
+    private function retornaSemanaAtual()
+    {
+        $diaDeHoje = $this->retornaDiaDeHoje();
+
+        $iniSemana = $diaDeHoje->startOfWeek()->format('Y-m-d');
+        $fimSemana = $diaDeHoje->endOfWeek()->format('Y-m-d');
+
+        return [$iniSemana, $fimSemana];
+    }
+
+    private function retornaMesAtual()
+    {
+        $iniMes = new Carbon('first day of this month');
+        $fimMes = new Carbon('last day of this month');
+
+        return [$iniMes->toDateString(), $fimMes->toDateString()];
+    }
+
+    public function exportAgendaReuniao()
+    {
+        return (new AgendaReuniao())->download('agendaReunioes.xlsx');
+    }
+
+    public function exportViewAgendasReuniao()
+    {
+        $semana = $this->retornaSemanaAtual();
+        $mes = $this->retornaMesAtual();
+
+
+        $agendas = Agenda::orderBy('dtAgenda')->get();
+
+        $agendasDia = Agenda::orderBy('dtAgenda')->where('dtAgenda', $this->retornaDiaDeHoje())
+            ->get();
+
+        $agendasSemana = Agenda::orderBy('dtAgenda')
+            ->whereBetween('dtAgenda', [$semana[0], $semana[1]])
+            ->get();
+
+        $agendasMensal = Agenda::orderBy('dtAgenda')
+            ->whereBetween('dtAgenda', [$mes[0], $mes[1]])
+            ->get();
+
+
+        return view('exportsView/agendaReuniao', [
+            'agendas' => $agendas,
+            'agendasDia' => $agendasDia,
+            'agendasSemana' => $agendasSemana,
+            'agendasMes' => $agendasMensal
+        ]);
+    }
 }
