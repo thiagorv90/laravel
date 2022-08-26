@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\AgendaReuniao;
+use App\Utils\DatasEPeriodos;
 use Illuminate\Http\Request;
 use App\Models\Agenda;
 use App\Models\Agenda_anexo;
@@ -266,48 +267,37 @@ class AgendasController extends Controller
         return view('exportsView/agendaFiltrada', ['agendas' => $agendas, 'dataInicio' => $dataInicio, 'dataFim' => $dataFim]);
     }
 
-    private function retornaDiaDeHoje()
-    {
-        date_default_timezone_set('America/Sao_Paulo');
-        setlocale(LC_ALL, 'pt_BR.utf-8', 'ptb', 'pt_BR', 'portuguese-brazil', 'portuguese-brazilian', 'bra', 'brazil', 'br');
-        setlocale(LC_TIME, 'pt_BR.utf-8', 'ptb', 'pt_BR', 'portuguese-brazil', 'portuguese-brazilian', 'bra', 'brazil', 'br');
-
-
-        return Carbon::now();
-    }
-
-    private function retornaSemanaAtual()
-    {
-        $diaDeHoje = $this->retornaDiaDeHoje();
-
-        $iniSemana = $diaDeHoje->startOfWeek()->format('Y-m-d');
-        $fimSemana = $diaDeHoje->endOfWeek()->format('Y-m-d');
-
-        return [$iniSemana, $fimSemana];
-    }
-
-    private function retornaMesAtual()
-    {
-        $iniMes = new Carbon('first day of this month');
-        $fimMes = new Carbon('last day of this month');
-
-        return [$iniMes->toDateString(), $fimMes->toDateString()];
-    }
-
     public function exportAgendaReuniao()
     {
         return (new AgendaReuniao())->download('agendaReunioes.xlsx');
     }
 
+    public function exportAgendaReuniaoDiaria()
+    {
+        return (new AgendaReuniao('Dia'))->download('agendaReunioes.xlsx');
+    }
+
+    public function exportAgendaReuniaoSemanal()
+    {
+        return (new AgendaReuniao('Semana'))->download('agendaReunioes.xlsx');
+    }
+
+    public function exportAgendaReuniaoMensal()
+    {
+        return (new AgendaReuniao('Mes'))->download('agendaReunioes.xlsx');
+    }
+
     public function exportViewAgendasReuniao()
     {
-        $semana = $this->retornaSemanaAtual();
-        $mes = $this->retornaMesAtual();
+        $semana = DatasEPeriodos::retornaSemanaAtual();
+        $mes = DatasEPeriodos::retornaMesAtual();
 
 
-        $agendas = Agenda::orderBy('dtAgenda')->get();
+        $agendas = Agenda::orderBy('dtAgenda')
+            ->get();
 
-        $agendasDia = Agenda::orderBy('dtAgenda')->where('dtAgenda', $this->retornaDiaDeHoje())
+        $agendasDia = Agenda::orderBy('dtAgenda')
+            ->where('dtAgenda', DatasEPeriodos::retornaDiaDeHoje())
             ->get();
 
         $agendasSemana = Agenda::orderBy('dtAgenda')
