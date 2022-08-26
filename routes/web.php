@@ -176,6 +176,12 @@ Route::middleware('auth')->group(function () {
 
         Route::get('exportView/instanciasPorVigenciaFiltrada/', [InstanciaController::class, 'relatorioFiltrado'])->name('filtradoInstanciaPorVigencia');
         Route::get('exportView/agendaFiltrada/', [AgendasController::class, 'relatorioFiltrado'])->name('filtradoAgenda');
+
+        Route::get('export/agendaReuniao', [AgendasController::class, 'exportAgendaReuniao'])->name('exportAgendaReuniao');
+        Route::get('export/agendaReuniaoDiaria', [AgendasController::class, 'exportAgendaReuniaoDiaria'])->name('exportAgendaReuniaoDiaria');
+        Route::get('export/agendaReuniaoSemanal', [AgendasController::class, 'exportAgendaReuniaoSemanal'])->name('exportAgendaReuniaoSemanal');
+        Route::get('export/agendaReuniaoMensal', [AgendasController::class, 'exportAgendaReuniaoMensal'])->name('exportAgendaReuniaoMensal');
+        Route::get('exportView/agendaReuniao', [AgendasController::class, 'exportViewAgendasReuniao'])->name('agendaReuniao');
     });
 });
 
