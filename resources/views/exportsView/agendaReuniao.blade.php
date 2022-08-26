@@ -20,22 +20,22 @@
         <ion-icon name="arrow-down-outline"></ion-icon>
     </a>
 
-    <form action="" id="periodoForm" class="form-check">
+    <form id="periodoForm" class="form-check">
         <input class="form-check-input" type="radio" name="periodoFormRadio" id="radioDia" value="Dia">
         <label class="form-check-label" for="radioDia">
-            Dia
+            Diária
         </label>
         <br>
         <input class="form-check-input" type="radio" name="periodoFormRadio" id="radioSemana" value="Semana">
         <label class="form-check-label" for="radioSemana">
-            Semana
+            Semanal
         </label>
         <br>
         <input class="form-check-input" type="radio" name="periodoFormRadio" id="radioMensal" value="Mes">
         <label class="form-check-label" for="radioMensal">
             Mensal
         </label>
-    </form action="">
+    </form>
 
     <div id="agendaDia">
         <table class="table">
