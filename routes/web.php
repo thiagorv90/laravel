@@ -54,7 +54,7 @@ Route::middleware('auth')->group(function () {
         Route::view('/reports', 'reports');
         Route::get('inicial', [InstanciaController::class, 'dash']);
 
-
+        
         Route::get('/typeahead_autocomplete', [InstanciaController::class, 'index']);
         Route::get('/typeahead_autocomplete/action', [InstanciaController::class, 'action'])->name('typeahead_autocomplete.action');
         Route::get('instancias/show/{id}', [InstanciaController::class, 'show']);
@@ -65,6 +65,7 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/usuarios', [UserController::class, 'show']);
         Route::get('/usuarios/edit/{id}', [UserController::class, 'edit']);
+        Route::delete('/usuarios/edit/{id}', [UserController::class, 'delete']);
         Route::PUT('/usuarios/update/{id}', [UserController::class, 'update']);
         Route::get('/usuarios/search', [UserController::class, 'search'])->name('searchusu');
 
@@ -102,7 +103,9 @@ Route::middleware('auth')->group(function () {
         Route::get('escolaridade/{id}/search', [EscolaridadeController::class, 'search']);
 
 
-        Route::get('/instituicoes/{id}/search', [InstituicoesController::class, 'search'])->name('searchinst');
+        Route::get('/instituicoes/{id}/search', [InstituicoesController::class, 'search']);
+        
+        Route::get('/instituicoes/searchinsta', [InstituicoesController::class, 'insta']);
         Route::post('instituicoes', [InstituicoesController::class, 'instituicoesstore']);
         Route::get('instituicoes', [InstituicoesController::class, 'instituicoesindex']);
         Route::get('instituicoes', [InstituicoesController::class, 'instituicoescreate']);
@@ -122,8 +125,10 @@ Route::middleware('auth')->group(function () {
         Route::get('selerepsup/{id}', [RepresentanteSuplenteController::class, 'selerepsup']);
         Route::PUT('repsup/update/{id}', [RepresentanteSuplenteController::class, 'updateRepSup']);
         Route::get('repsup/edit/{id}', [RepresentanteSuplenteController::class, 'editRepSup']);
+        Route::delete('repsup/edit/{id}', [RepresentanteSuplenteController::class, 'deleteRep']);
         Route::post('/repsup/file/{id}', [RepresentanteSuplenteController::class, 'repsupfile']);
         Route::delete('/repsup/files/{id}', [RepresentanteSuplenteController::class, 'deleteRepImg']);
+        Route::get('/repsup/search', [RepresentanteSuplenteController::class, 'search']);
 
         Route::post('/telcon/{id}', [TelefoneContatosController::class, 'telconstore']);
         Route::get('/telcon/{id}', [TelefoneContatosController::class, 'telconcreate'])->name('telcon');

@@ -10,12 +10,12 @@
     <form action="{{route('filtradoAgenda')}}" method="GET">
 
         <div class="input-group mb-2 inicio">
-            <label for="dataInicio" class="input-group-text">Inicio da Vigência: </label>
+            <label for="dataInicio" class="input-group-text">De: </label>
             <input type="date" class="form-control" name="dataInicio" id="inicio-vigencia">
         </div>
 
         <div class="input-group mb-2">
-            <label for="dataFim" class="input-group-text">Data Final</label>
+            <label for="dataFim" class="input-group-text">Até:</label>
             <input type="date" class="form-control" name="dataFim" id="fim-vigencia">
         </div>
 

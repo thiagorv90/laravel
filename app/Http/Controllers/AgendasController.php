@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use App\Models\Agenda;
 use App\Models\Agenda_anexo;
 use DB;
 use App\Models\Representacoe;
+use App\Models\Representante_suplente;
+use App\Models\Instancia;
 use App\Exports\InstaciasExport;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Facades\Excel;
@@ -55,11 +58,19 @@ class AgendasController extends Controller
             }
 
         }
+        
+        $mail = Agenda::join('representacoes', 'representacoes.cdRepresentacao', '=', 'agendas.cdRepresentacao')
+        ->join('representante_suplentes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
+        ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
+        ->leftjoin('representante_suplentes as s', 'representacoes.cdSuplente', '=', 's.cdRepSup')
+        ->where('agendas.cdAgenda', '=', $event->cdAgenda)->first(['representante_suplentes.nmRepresentanteSuplente as representante','representante_suplentes.dsEmail as emailrepre','s.nmRepresentanteSuplente',
+        's.dsEmail','instancias.nmInstancia','agendas.dtAgenda','agendas.hrAgenda','agendas.dsAssunto','agendas.dsLocal','agendas.dsPauta','agendas.dsResumo']);
 
-
+     
+       // mail::send( new \App\Mail\AgendaMail($mail));
         return back();
     }
-
+    
     public function agendafile(Request $request, $id)
     {
 
@@ -88,20 +99,20 @@ class AgendasController extends Controller
 
     public function dashboard()
     {
-
-
+       
         $selecionado = Agenda::join('representacoes', 'representacoes.cdRepresentacao', '=', 'agendas.cdRepresentacao')
             ->join('representante_suplentes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
             ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')->whereBetween('dtAgenda',
-                [Carbon::now('America/Sao_Paulo')->startOfWeek(), Carbon::now('America/Sao_Paulo')->endOfWeek()]
+                [Carbon::now()->startOfWeek(carbon::MONDAY), Carbon::now()->endOfWeek(carbon::FRIDAY)]
             )
             ->get();
+           
         $mes = Agenda::join('representacoes', 'representacoes.cdRepresentacao', '=', 'agendas.cdRepresentacao')
             ->join('representante_suplentes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
             ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')->whereBetween('dtAgenda',
-                [Carbon::now('America/Sao_Paulo')->startOfMonth(), Carbon::now('America/Sao_Paulo')->endOfMonth()]
+                [Carbon::now('America/Sao_Paulo')->startOfMonth (), Carbon::now('America/Sao_Paulo')->endOfMonth()]
             )
-            ->get();
+            ->get(['nmRepresentanteSuplente','nmInstancia','dtAgenda','hrAgenda','dsAssunto','cdAgenda','agendas.cdRepresentacao']);
 
 
         return view('/dashboard', ['selecionado' => $selecionado, 'mes' => $mes]);
@@ -109,6 +120,7 @@ class AgendasController extends Controller
 
     public function agendacreate($id)
     {
+        
         $selecionado = Agenda::join('representacoes', 'representacoes.cdRepresentacao', '=', 'agendas.cdRepresentacao')
             ->join('representante_suplentes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
             ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')

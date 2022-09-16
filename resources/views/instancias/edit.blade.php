@@ -27,17 +27,21 @@
                 <div class="form-group">
                     <label for="title">Tema: </label>
                     <select name="cdTema" id="cdTema" class="form-control">
-                        @foreach($tema as $tem)
+                    <option value="{{$instituicao->cdTema}}"> {{$instituicao->nmTema}}</option>
+                    @foreach($tema as $tem)
                             <option value="{{$tem->cdTema}}"> {{$tem->nmTema}}</option>
                         @endforeach
 
                     </select>
                 </div>
-                <div class="form-group">
-                    <label for="title">Mandato:</label>
-                    <input type="text" class="form-control" id="dsMandato" name="dsMandato"
-                           value="{{$instituicao->dsMandato}}">
-                </div>
+               
+               
+                        <div class="form-group" id="Mandato" >
+                            <label for="dsMandato">Mandato:</label>
+                            <input placeholder="Mandato..." type="text" class="form-control" id="dsMandato" value="{{$instituicao->dsMandato}}"
+                                   name="dsMandato">
+                        </div>
+                       
                 <div class="form-group">
                     <label for="title">Classificação:</label>
                     <div class="form-check">
@@ -92,8 +96,8 @@
 
                     <div class="form-group">
                         <label for="title">Descrição Objetivo:</label>
-                        <input name="dsObjetivo" id="dsObjetivo" class="form-control"
-                               value="{{$instituicao->dsObjetivo}}"></input>
+                        <textarea name="dsObjetivo" id="dsObjetivo" class="form-control"
+                              >{{$instituicao->dsObjetivo}}</textarea>
                     </div>
 
 
@@ -135,13 +139,13 @@
                 </div>
                 <div class="form-group">
                     <label for="dsObservacao">Observação:</label>
-                    <input type="text" class="form-control" id="dsObservacao" name="dsObservacao"
-                           value="{{$instituicao->dsObservacao}}">
+                    <textarea type="text" class="form-control" id="dsObservacao" name="dsObservacao"
+                           >{{$instituicao->dsObservacao}}</textarea>
                 </div>
                 <div class="form-group">
                     <label for="dsAtoNormativo">Ato Normativo:</label>
-                    <input placeholder="Observações..." type="text" class="form-control" id="dsAtoNormativo"
-                           name="dsAtoNormativo" value="{{$instituicao->dsAtoNormativo}}">
+                    <textarea placeholder="Observações..." type="text" class="form-control" id="dsAtoNormativo"
+                           name="dsAtoNormativo" >{{$instituicao->dsAtoNormativo}}</textarea>
                 </div>
                 <div class="form-group">
                     <label for="title">Carater:</label>
@@ -161,12 +165,20 @@
                             Deliberativo
                         </label>
                     </div>
+                    <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="boCaraterDaInstancia"
+                                           id="boCaraterDaInstancia"
+                                           value="2" @if($instituicao->boCaraterDaInstancia ==2) checked @endif >
+                                    <label class="form-check-label" for="boCaraterDaInstancia">
+                                    Consultivo/Deliberativo
+                                    </label>
+                                </div>
 
                 </div>
                 <br>
                 <div class="container d-flex justify-content-between mt-2">
                     <a href="/instancias/{{$instituicao->cdInstituicao}}" class="btn btn-info mb-2">Voltar</a>
-                    <input type="submit" class="btn btn-primary mb-2" value="Alterar">
+                    <input type="submit" class="btn btn-primary mb-2" value="Salvar">
                 </div>
                 @endforeach
 

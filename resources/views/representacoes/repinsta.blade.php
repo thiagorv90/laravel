@@ -70,6 +70,14 @@
                             <input type="text" class="form-control" id="dsNomeacao" name="dsNomeacao">
                         </div>
                         <div class="form-group">
+                            <label for="title">Designação Suplente:</label>
+                            <input type="text" class="form-control" id="dsDesignacao" name="dsDesignacaoSuplente">
+                        </div>
+                        <div class="form-group">
+                            <label for="title">Nomeação Suplente:</label>
+                            <input type="text" class="form-control" id="dsNomeacao" name="dsNomacaoSuplente">
+                        </div>
+                        <div class="form-group">
                             <label for="title">Status:</label>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="1"
@@ -113,7 +121,8 @@
                 @else
 
                     <div class="container">
-
+                            <h1>Representações</h1>
+                            <a href="/instituicoes" >{{$bread->nmInstituicao}}</a>><a href="/instancias/{{$bread->cdInstituicao}}">{{$bread->nmInstancia}}</a>
 
                         <table class="table">
                             <thead>
@@ -205,12 +214,12 @@
                                 <label for="title">Inicio da Vigência:</label>
                                 <input type="date" class="form-control" id="dtInicioVigencia"
                                        name="dtInicioVigencia"
-                                       required>
+                                       >
                             </div>
                             <div class="form-group">
                                 <label for="title">Fim da Vigência:</label>
                                 <input type="date" class="form-control" id="dtFimVigencia" name="dtFimVigencia"
-                                       required>
+                                       >
                             </div>
                             <div class="form-group">
                                 <label for="title">Designação:</label>
@@ -220,6 +229,14 @@
                                 <label for="title">Nomeação:</label>
                                 <input type="text" class="form-control" id="dsNomeacao" name="dsNomeacao">
                             </div>
+                            <div class="form-group">
+                            <label for="title">Designação Suplente:</label>
+                            <input type="text" class="form-control" id="dsDesignacao" name="dsDesignacaoSuplente">
+                        </div>
+                        <div class="form-group">
+                            <label for="title">Nomeação Suplente:</label>
+                            <input type="text" class="form-control" id="dsNomacaoSuplente" name="dsNomacaoSuplente">
+                        </div>
                             <div class="form-group">
                                 <label for="title">Status:</label>
                                 <div class="form-check">
@@ -243,7 +260,7 @@
                                     <input type="date" class="form-control" id="dtNomeacao" name="dtNomeacao">
                                 </div>
                                 <div class="form-group">
-                                    <label for="title">Nomeação:</label>
+                                    <label for="title">Número Nomeação:</label>
                                     <input type="number" class="form-control" id="nuNomeacao" name="nuNomeacao">
                                 </div>
                                 <div class="form-group">
@@ -257,6 +274,7 @@
 
                             </div>
                             <br>
+</div>
 
                             <div class="container d-flex justify-content-between mt-2">
                                 <a href="/instancias/{{ $event->cdInstituicao }}"
@@ -265,7 +283,9 @@
                             </div>
                         </form>
                     </div>
+</div>
     </div>
+</div>
 
     @endif
 

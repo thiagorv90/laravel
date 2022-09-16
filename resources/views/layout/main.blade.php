@@ -63,20 +63,22 @@
                     <div class="container">
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                             @if(auth()->user()->statusadm ==1)
-                                <li class="nav-item fw-bold">Principais</li>
+                                <li class="nav-item fw-bold">Cadastros</li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
+                                <li class="nav-item"><a class="nav-link" href="/register">Cadastrar Usuário</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/empresas">Empresas</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/escolaridade">Escolaridade</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/repsup">Representantes</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/temarep">Tema Representação</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/tipoinsta">Tipo de Instancias</a></li>
+
                                 <li class="nav-item fw-bold mt-5">Outros</li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li class="nav-item"><a class="nav-link" href="/register">Cadastrar Usuário</a></li>
+                                
                                 <li class="nav-item"><a class="nav-link" href="/instituicoes">Instituições</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/reports">Relatórios</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/usuarios">Usuários</a></li>

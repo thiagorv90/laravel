@@ -28,6 +28,13 @@ class UserController extends Controller
         return view('admin.users.index');
     }
 
+    public function delete($id)
+    {
+        User::find($id)->delete();
+        // $deleted = DB::delete('delete from telefone_contatos where cdTelefone = ?', [$id]);
+        return back();
+    }
+
     /**
      * Show the form for creating a new resource.
      *

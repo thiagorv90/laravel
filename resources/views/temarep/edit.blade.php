@@ -19,7 +19,7 @@
             <br>
             <div class="container d-flex justify-content-between mt-2">
                 <a href="/temarep" class="btn btn-info mb-2">Voltar</a>
-                <input type="submit" class="btn btn-primary mb-2" value="Alterar">
+                <input type="submit" class="btn btn-primary mb-2" value="Salvar">
             </div>
         </form>
     </div>

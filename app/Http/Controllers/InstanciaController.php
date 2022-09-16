@@ -40,21 +40,18 @@ class InstanciaController extends Controller
         $event->dsObservacao = $request->dsObservacao;
         $event->dsAtoNormativo = $request->dsAtoNormativo;
         $event->boCaraterDaInstancia = $request->boCaraterDaInstancia;
+       
 
         $event->save();
         if ($request->has('nmAnexo')) {
 
             for ($i = 0; $i < count($request->allFiles()['nmAnexo']); $i++) {
 
-
                 $file = $request->allfiles()['nmAnexo'][$i];
                 $name = $request->file()['nmAnexo'][$i]->getClientOriginalName();
                 $anexo = new Instancia_anexo();
-
-
                 $explode = $file->store('public/files');
                 $certo = explode("s/", $explode);
-
 
                 $anexo->nmAnexo = $certo[1];
                 $anexo->nmOriginal = $name;
@@ -98,15 +95,18 @@ class InstanciaController extends Controller
 
     public function instacreate($id)
     {
+        $bread = DB::table('instituicoes')->leftjoin('instancias', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')->where('instituicoes.cdInstituicao', '=', $id)->first();
         $instituicaos = DB::table('instituicoes')->where('instituicoes.cdInstituicao', '=', $id)->get();
         $temas = DB::table('tema_representacoes')->get();
         $insta = Instancia::join('tema_representacoes', 'instancias.cdTema', '=', 'tema_representacoes.cdTema')
             ->join('instituicoes', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
             ->leftjoin('representacoes', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
             ->leftjoin('representante_suplentes', 'representacoes.cdTitular', '=', 'cdRepsup')
-            ->where('instancias.cdInstituicao', '=', $id)->get(['instancias.cdInstancia', 'nmInstancia', 'nmTema', 'nmRepresentanteSuplente', 'instancias.cdInstituicao', 'instancias.stAtivo']);
+            ->leftjoin('representante_suplentes as s', 'representacoes.cdSuplente', '=', 's.cdRepSup')
+            ->where('instancias.cdInstituicao', '=', $id)->get(['instancias.cdInstancia', 'nmInstancia', 'nmTema', 'representante_suplentes.nmRepresentanteSuplente as representante','s.nmRepresentanteSuplente',
+             'instancias.cdInstituicao', 'instancias.stAtivo']);
 
-        return view('instancias.instancias', ['instancias' => $insta, 'temas' => $temas, 'instituicaos' => $instituicaos]);
+        return view('instancias.instancias', ['instancias' => $insta, 'temas' => $temas, 'instituicaos' => $instituicaos,'bread'=>$bread]);
     }
 
 
@@ -116,7 +116,7 @@ class InstanciaController extends Controller
             ->join('instituicoes', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
             ->where('instancias.cdinstancia', '=', $cdInstancia)
             ->get();
-        $tema = DB::table('tema_representacoes')->get();
+        $tema=DB::table('tema_representacoes')->get();
         $lista = Instancia::orderBy('nmInstancia')
             ->get();
 
@@ -141,6 +141,7 @@ class InstanciaController extends Controller
         $manda = $request->input('dsMandato');
         $carater = $request->input('boCaraterDaInstancia');
         $ato = $request->input('dsAtoNormativo');
+      
 
 
         DB::update('update instancias set cdInstituicao = ?, cdTema = ?, nmInstancia = ?, tpFederalDistrital = ?, tpPublicoPrivado = ?, dsMandato = ?,

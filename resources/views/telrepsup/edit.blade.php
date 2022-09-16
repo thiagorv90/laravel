@@ -35,7 +35,7 @@
                     @endforeach
                 </select>
                 <br>
-                <input type="submit" class="btn btn-primary" value="Alterar">
+                <input type="submit" class="btn btn-primary" value="Salvar">
             </form>
         @endforeach
 

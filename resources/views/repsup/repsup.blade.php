@@ -3,6 +3,7 @@
 @section('title', 'Representantes')
 
 @section('content')
+
     <h1>Representantes</h1>
     <div class="container mt-5">
         <table class="table">
@@ -10,28 +11,60 @@
             <tr>
                 <th scope="col">Nome</th>
                 <th scope="col">E-mail</th>
+                <th scope="col">Telefone</th>
                 <th scope="col">Opções</th>
             </tr>
             </thead>
             <tbody>
+                
             @foreach ($events as $event)
+            
+           <?php $var = explode("/", $event->TELEFONES);
+
+           
+         
+        ?>
                 <tr>
                     <td scropt="row">{{$event->nmRepresentanteSuplente}}</td>
-                    <td><a>{{ $event->dsEmail }}</a></td>
+                    <td>{{ $event->dsEmail }}</a></td>
+                    <td>@foreach($var as $va){{$va}}<br>  @endforeach </td>
+                    
+                    
 
-                    <td><a href="/repsup/edit/{{$event->cdRepSup}}" class="btn btn-info edit-btn"
+                    <td class="d-flex ">
+                        <a href="/repsup/edit/{{$event->cdRepSup}}" class="btn btn-info edit-btn"
                            data-bs-toggle="tooltip" data-bs-title="Editar">
                             <ion-icon name="create-outline"></ion-icon>
                         </a>
-                        <a href="/telrepsup/{{$event->cdRepSup}}" class="btn btn-info edit-btn"
+                        <a href="/telrepsup/{{$event->cdRepSup}}" class="btn btn-info edit-btn ms-1"
                            data-bs-toggle="tooltip" data-bs-title="Contato">
                             <ion-icon name="call-outline"></ion-icon>
                         </a>
+                        <form action="/repsup/edit/{{$event->cdRepSup}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger delete-btn ms-1" data-bs-toggle="tooltip"
+                                            data-bs-title="Deletar">
+                                        <ion-icon name="trash-outline"></ion-icon>
+                                    </button>
+                                </form>
                     </td>
                 </tr>
             @endforeach
             </tbody>
         </table>
+        {{$events->links()}}
+        <br>
+        <form action="/repsup/search" method="GET">
+                @csrf
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" value="" name="query" id="query"
+                           placeholder="Buscar Representante..."
+                           aria-label="Buscar Representante" aria-describedby="button-addon2" required/>
+                    <input type="submit" class="btn btn-primary" value="Buscar" id="button-addon2">
+                </div>
+            </form>
+            <br>
     </div>
     <h1>Crie Representante</h1>
 
@@ -42,6 +75,10 @@
                 <label for="title">Nome:</label>
                 <input placeholder="Nome..." type="text" class="form-control" id="nmRepresentanteSuplente"
                        name="nmRepresentanteSuplente" required/>
+            </div>
+            <div class="form-group">
+                <label for="title">Data de Nascimento:</label>
+                <input type="date" class="form-control" id="dtNascimento" name="dtNascimento">
             </div>
             <div class="form-group">
                 <label for="title">Email Principal:</label>
@@ -93,14 +130,36 @@
             </div>
             <div class="form-group">
                 <label for="title"> Endereço:</label>
-                <textarea placeholder="Endereço..." name="dsEndereco" id="dsEndereco" class="form-control"
-                          required></textarea>
+                <input placeholder="Endereço..." name="dsEndereco" id="dsEndereco" class="form-control"
+                         >
+            </div>
+           
+            
+            <div class="form-group">
+                <label for="title"> Bairo:</label>
+                <input placeholder="Bairro..." name="dsBairro" id="dsBairro" class="form-control"
+                          >
+            </div>
+            <div class="form-group">
+                <label for="title"> Cidade:</label>
+                <input placeholder="Cidade..." name="dsCidade" id="dsCidade" class="form-control"
+                         >
+            </div>
+            <div class="form-group">
+                <label for="title"> CEP:</label>
+                <input placeholder="CEP..." name="dsCEP" id="dsCEP" class="form-control"
+                          >
             </div>
 
             <div class="form-group">
                 <label for="title">Data de Nascimento:</label>
                 <input type="date" class="form-control" id="dtNascimento" name="dtNascimento">
             </div>
+            <div class="form-group">
+                    <label for="title">Observação:</label>
+                    <textarea type="text" class="form-control" id="dsObservacao" name="dsObservacao" 
+                           ></textarea>
+                </div>
             <div class="form-group">
                 <label for="title">Documentos:</label>
                 <input type="file" class="form-control" name="nmAnexo[]" multiple>

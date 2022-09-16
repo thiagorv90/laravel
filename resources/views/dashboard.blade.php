@@ -71,7 +71,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <label class="switch"><input type="checkbox"><span class="slider round hide-off"></span></label>
     <div id="semana" class="container mt-5">
-
+            
         <table class="table">
             <thead>
             <tr>
@@ -90,6 +90,10 @@
                     <td scope="col">{!! date('d/m/Y', strtotime($sel->dtAgenda)) !!}</td>
                     <td scope="col">{!! date('G:i', strtotime($sel->hrAgenda)) !!}</td>
                     <td scope="col">{{ $sel->dsAssunto }}</td>
+                    <td><a href="/agendas/edit/{{$sel->cdAgenda}}" class="btn btn-info edit-btn"
+                                           data-bs-toggle="tooltip" data-bs-title="Agenda">
+                                            <ion-icon name="book-outline"></ion-icon>
+                                        </a></td>
 
                 </tr>
             @endforeach
@@ -118,6 +122,10 @@
                     <td scope="col">{!! date('d/m/Y', strtotime($me->dtAgenda)) !!}</td>
                     <td scope="col">{!! date('G:i', strtotime($me->hrAgenda)) !!}</td>
                     <td><a>{{ $me->dsAssunto }}</a></td>
+                    <td><a href="/agendas/edit/{{$me->cdAgenda}}" class="btn btn-info edit-btn"
+                                           data-bs-toggle="tooltip" data-bs-title="Agenda">
+                                            <ion-icon name="book-outline"></ion-icon>
+                                        </a></td>
 
                 </tr>
             @endforeach

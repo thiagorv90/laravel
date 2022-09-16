@@ -30,6 +30,8 @@ class RepresentacoesController extends Controller
         $event->stAtivo = $request->stAtivo;
         $event->dtNomeacao = $request->dtNomeacao;
         $event->nuNomeacao = $request->nuNomeacao;
+        $event->dsNomacaoSuplente = $request->dsNomacaoSuplente;
+        $event->dsDesignacaoSuplente = $request->dsDesignacaoSuplente;
 
         $event->save();
         if ($request->has('nmAnexo')) {
@@ -104,13 +106,14 @@ class RepresentacoesController extends Controller
     public function representacoescreate()
     {
         $email = auth()->user()->email;
-        $representantes = DB::table('representante_suplentes')
-            ->join('users', 'email', '=', 'dsEmail')
-            ->join('representacoes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
+        
+            $representantes = DB::table('agendas')
+            ->join('representacoes', 'representacoes.cdRepresentacao', '=', 'agendas.cdRepresentacao')
+            ->join('representante_suplentes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
             ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
-            ->join('agendas', 'agendas.cdrepresentacao', '=', 'representacoes.cdRepresentacao')
-            ->where('dsEmail', 'like', "$email")
-            ->get();
+            ->leftjoin('representante_suplentes as s', 'representacoes.cdSuplente', '=', 's.cdRepSup')
+            ->where('dsEmail', 'like', "$email")->orwhere('representante_suplentes.dsEmail as emailrepre','Like',"$email")->get();
+    
 
         $events = Representacoe::all();
         $instancias = DB::table('instancias')->get();
@@ -126,7 +129,7 @@ class RepresentacoesController extends Controller
             ->where('cdRepresentacao', '=', $id)
             ->get(['cdRepresentacao', 'nmRepresentanteSuplente', 'dtInicioVigencia', 'cdTitular',
                 'representacoes.cdInstancia', 'nmInstancia', 'representacoes.stAtivo', 'cdSuplente', 'dtInicioVigencia',
-                'dtFimVigencia', 'dsDesignacao', 'dsNomeacao', 'dtNomeacao', 'nuNomeacao', 'fnNomeacao']);
+                'dtFimVigencia', 'dsDesignacao', 'dsNomeacao', 'dtNomeacao', 'nuNomeacao', 'fnNomeacao','dsDesignacaoSuplente','dsNomacaoSuplente']);
         $anexo = Representacoe::join('representacoes_anexos', 'representacoes.cdRepresentacao', '=', 'representacoes_anexos.cdRepresentacao')->get();
         // $insta = Instituicoe::join('tipo_instancias', 'tipo_instancias.cdTipoInstancia', '=','instituicoes.cdTipoInstituicao')->get();
         $rep = Representante_suplente::orderBy('cdRepSup')
@@ -168,6 +171,8 @@ class RepresentacoesController extends Controller
 
     public function instareprescreate($id)
     {
+        $bread = DB::table('instituicoes')->leftjoin('instancias', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
+        ->leftjoin('representacoes', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')->where('instancias.cdInstancia', '=', $id)->first(['nmInstituicao','nmInstancia','instancias.cdInstituicao']);
         $representantes = DB::table('representante_suplentes')->get();
         $events = Representacoe::all();
         $instancias = DB::table('instancias')
@@ -181,7 +186,7 @@ class RepresentacoesController extends Controller
                 'cdTitular', 'representacoes.cdInstancia', 'nmInstancia', 'representacoes.stAtivo',
                 'instancias.cdInstituicao', 'nmInstituicao']);
 
-        return view('representacoes/repinsta', ['selecionado' => $selecionado, 'instancias' => $instancias, 'events' => $events, 'representantes' => $representantes]);
+        return view('representacoes/repinsta', ['selecionado' => $selecionado, 'instancias' => $instancias, 'events' => $events, 'representantes' => $representantes,'bread'=>$bread]);
     }
 
     public function represcreate()

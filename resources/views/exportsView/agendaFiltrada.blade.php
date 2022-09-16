@@ -8,12 +8,12 @@
     <form action="{{route('porFiltroAgendas')}}" method="GET">
 
         <div class="input-group mb-2 inicio" style="display:none">
-            <label for="dataInicio" class="input-group-text">Inicio da Vigência: </label>
+            <label for="dataInicio" class="input-group-text">De: </label>
             <input type="date" class="form-control" name="dataInicio" id="inicio-vigencia" value={{$dataInicio}}>
         </div>
 
         <div class="input-group mb-2" style="display:none">
-            <label for="dataFim" class="input-group-text">Data Final</label>
+            <label for="dataFim" class="input-group-text">Até:</label>
             <input type="date" class="form-control" name="dataFim" id="fim-vigencia" value={{$dataFim}}>
         </div>
 
