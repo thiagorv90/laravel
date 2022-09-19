@@ -4,8 +4,6 @@
 
 @section('content')
 
-
-
     <div class="container">
         <h1>Relatórios</h1>
         <div class="list-group">
@@ -27,11 +25,11 @@
                 Vigência de Mandato --</a>
             <a href="{{route('exportViewInstData')}}" class="list-group-item list-group-item-action">8. -- Por Data
                 --</a>
-                <a href="{{route('exportViewAgendas')}}" class="list-group-item list-group-item-action">9. --
+            <a href="{{route('exportViewAgendas')}}" class="list-group-item list-group-item-action">9. --
                 Agendas --</a>
+            <a href="{{route('agendaReuniao')}}" class="list-group-item list-group-item-action">10. -- Agenda Reunioes --</a>
         </div>
     </div>
 
-   
 @endsection
 

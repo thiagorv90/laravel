@@ -94,7 +94,6 @@
                                            data-bs-toggle="tooltip" data-bs-title="Agenda">
                                             <ion-icon name="book-outline"></ion-icon>
                                         </a></td>
-
                 </tr>
             @endforeach
             </tbody>
@@ -119,8 +118,8 @@
                 <tr>
                     <td>{{$me->nmRepresentanteSuplente}}</td>
                     <td><a>{{ $me->nmInstancia }}</a></td>
-                    <td scope="col">{!! date('d/m/Y', strtotime($me->dtAgenda)) !!}</td>
-                    <td scope="col">{!! date('G:i', strtotime($me->hrAgenda)) !!}</td>
+                    <td>{!! date('d/m/Y', strtotime($me->dtAgenda)) !!}</td>
+                    <td>{!! date('G:i', strtotime($me->hrAgenda)) !!}</td>
                     <td><a>{{ $me->dsAssunto }}</a></td>
                     <td><a href="/agendas/edit/{{$me->cdAgenda}}" class="btn btn-info edit-btn"
                                            data-bs-toggle="tooltip" data-bs-title="Agenda">

@@ -53,8 +53,8 @@
             <tr>
                 <td>{{ $agenda->nmInstituicao }}</td>
                 <td>{{ $agenda->nmRepresentanteSuplente }}</td>
-                <td scope="col">{!! date('d/m/Y', strtotime($agenda->dtAgenda)) !!}</td>
-                <td scope="col">{!! date('G:i', strtotime($agenda->hrAgenda)) !!}</td>
+                <td>{!! date('d/m/Y', strtotime($agenda->dtAgenda)) !!}</td>
+                <td>{!! date('G:i', strtotime($agenda->hrAgenda)) !!}</td>
                 <td>{{ $agenda->dsAssunto }}</td>
             </tr>
         @endforeach

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Mail;
+use App\Exports\AgendaReuniao;
+use App\Utils\DatasEPeriodos;
 use Illuminate\Http\Request;
 use App\Models\Agenda;
 use App\Models\Agenda_anexo;
@@ -277,5 +279,53 @@ class AgendasController extends Controller
         return view('exportsView/agendaFiltrada', ['agendas' => $agendas, 'dataInicio' => $dataInicio, 'dataFim' => $dataFim]);
     }
 
+    public function exportAgendaReuniao()
+    {
+        return (new AgendaReuniao())->download('agendaReunioes.xlsx');
+    }
 
+    public function exportAgendaReuniaoDiaria()
+    {
+        return (new AgendaReuniao('Dia'))->download('agendaReunioes.xlsx');
+    }
+
+    public function exportAgendaReuniaoSemanal()
+    {
+        return (new AgendaReuniao('Semana'))->download('agendaReunioes.xlsx');
+    }
+
+    public function exportAgendaReuniaoMensal()
+    {
+        return (new AgendaReuniao('Mes'))->download('agendaReunioes.xlsx');
+    }
+
+    public function exportViewAgendasReuniao()
+    {
+        $semana = DatasEPeriodos::retornaSemanaAtual();
+        $mes = DatasEPeriodos::retornaMesAtual();
+
+
+        $agendas = Agenda::orderBy('dtAgenda')
+            ->get();
+
+        $agendasDia = Agenda::orderBy('dtAgenda')
+            ->where('dtAgenda', DatasEPeriodos::retornaDiaDeHoje())
+            ->get();
+
+        $agendasSemana = Agenda::orderBy('dtAgenda')
+            ->whereBetween('dtAgenda', [$semana[0], $semana[1]])
+            ->get();
+
+        $agendasMensal = Agenda::orderBy('dtAgenda')
+            ->whereBetween('dtAgenda', [$mes[0], $mes[1]])
+            ->get();
+
+
+        return view('exportsView/agendaReuniao', [
+            'agendas' => $agendas,
+            'agendasDia' => $agendasDia,
+            'agendasSemana' => $agendasSemana,
+            'agendasMes' => $agendasMensal
+        ]);
+    }
 }
