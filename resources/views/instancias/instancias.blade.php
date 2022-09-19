@@ -9,6 +9,7 @@
             @foreach ($instituicaos as $instituicao)
                 <h3>Não ha instancia para a Instituição: {{$instituicao->nmInstituicao}}</h3>
                 <h1>Crie uma instância</h1>
+                <a href="/instituicoes" >{{$bread->nmInstituicao}}</a>
                 <div id="event-create-container" class="container">
                     <form action="instancias" method="POST" enctype="multipart/form-data">
                         @csrf
@@ -32,11 +33,13 @@
                                 @endforeach
                             </select>
                         </div>
+                        
                         <div class="form-group">
-                            <label for="dsMandato">Mandato:</label>
+                            <label for="dsMandato">Tempo de Mandato:</label>
                             <input placeholder="Mandato..." type="text" class="form-control" id="dsMandato"
                                    name="dsMandato">
                         </div>
+                        
                         <div class="form-group">
                             <label for="title">Status:</label>
                             <div class="form-check">
@@ -134,13 +137,13 @@
                             </div>
                             <div class="form-group">
                                 <label for="dsObservacao">Observação:</label>
-                                <input placeholder="Observações..." type="text" class="form-control" id="dsObservacao"
-                                       name="dsObservacao">
+                                <textarea placeholder="Observações..." type="text" class="form-control" id="dsObservacao"
+                                       name="dsObservacao"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="dsAtoNormativo">Ato Normativo:</label>
-                                <input placeholder="Observações..." type="text" class="form-control" id="dsAtoNormativo"
-                                       name="dsAtoNormativo">
+                                <textarea placeholder="Observações..." type="text" class="form-control" id="dsAtoNormativo"
+                                       name="dsAtoNormativo"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="title">Carater:</label>
@@ -158,6 +161,14 @@
                                            value="0">
                                     <label class="form-check-label" for="boCaraterDaInstancia">
                                         Deliberativo
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="boCaraterDaInstancia"
+                                           id="boCaraterDaInstancia"
+                                           value="2">
+                                    <label class="form-check-label" for="boCaraterDaInstancia">
+                                    Consultivo/Deliberativo
                                     </label>
                                 </div>
                                 <div class="form-group">
@@ -178,6 +189,7 @@
         @endforeach
     @else
         <h1>Instâncias</h1>
+        <a href="/instituicoes" >{{$bread->nmInstituicao}}</a>
         <div>
             <table class="table">
                 <thead>
@@ -190,12 +202,12 @@
                 </tr>
                 </thead>
                 <tbody>
-
+                
                 @foreach($instancias as $instancia)
                     <tr>
                         <td><a>{{ $instancia->nmInstancia }}</a></td>
                         <td>{{$instancia->nmTema}}</td>
-                        <td>{{$instancia->nmRepresentanteSuplente}}</td>
+                        <td>{{$instancia->representante}}<br>{{$instancia->nmRepresentanteSuplente}}</td>
                         @if($instancia->stAtivo ==1)
                             <td>Ativo</td>
                         @else
@@ -234,7 +246,7 @@
             </div>
             <br>
             <h1>Crie uma instância</h1>
-            <form action="instancias" method="POST">
+            <form action="instancias" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="title">Nome:</label>
@@ -259,11 +271,13 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="form-group">
-                    <label for="title">Mandato:</label>
-                    <input placeholder="Mandato..." type="text" class="form-control" id="dsMandato"
-                           name="dsMandato">
-                </div>
+                
+                        <div class="form-group" id="Mandato">
+                            <label for="dsMandato">Tempo de Mandato:</label>
+                            <input placeholder="Mandato..." type="text" class="form-control" id="dsMandato"
+                                   name="dsMandato">
+                        </div>
+                        
                 <div class="form-group">
                     <label for="title">Classificação:</label>
                     <div class="form-check">
@@ -364,13 +378,13 @@
                     </div>
                     <div class="form-group">
                         <label for="title">Observação:</label>
-                        <input placeholder="Observações..." type="text" class="form-control" id="dsObservacao"
-                               name="dsObservacao">
+                        <textarea placeholder="Observações..." type="text" class="form-control" id="dsObservacao"
+                               name="dsObservacao"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="title">Ato Normativo:</label>
-                        <input placeholder="Observações..." type="text" class="form-control" id="dsAtoNormativo"
-                               name="dsAtoNormativo">
+                        <textarea placeholder="Observações..." type="text" class="form-control" id="dsAtoNormativo"
+                               name="dsAtoNormativo"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="title">Carater:</label>
@@ -390,6 +404,14 @@
                                 Deliberativo
                             </label>
                         </div>
+                        <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="boCaraterDaInstancia"
+                                           id="boCaraterDaInstancia"
+                                           value="2">
+                                    <label class="form-check-label" for="boCaraterDaInstancia">
+                                    Consultivo/Deliberativo
+                                    </label>
+                                </div>
                         <div class="form-group">
                             <label for="title">Documentos:</label>
                             <input type="file" class="form-control" name="nmAnexo[]" multiple>

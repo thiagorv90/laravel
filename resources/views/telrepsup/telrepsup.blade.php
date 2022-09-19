@@ -13,19 +13,19 @@
             <div id="event-create-container" class="container">
                 <form action="telrepsup" method="post">
 
-                    @csrf
+                    @csrf   <div class="form-group">
+                        <label for="title">DDD:</label>
+                        <input placeholder="DDD..." type="text" class="form-control" id="nuDDDTelefone"
+                               name="nuDDDTelefone">
+                    </div>
                     <div class="form-group">
                         <label for="title">Telefone:</label>
                         <input placeholder="Telefone..." type="text" class="form-control" id="nuTelefone"
                                name="nuTelefone">
                     </div>
-                    <div class="form-group">
-                        <label for="title">DDD:</label>
-                        <input placeholder="DDD..." type="text" class="form-control" id="nuDDDTelefone"
-                               name="nuDDDTelefone">
-                    </div>
+                 
 
-                    <div class="form-group">
+                    <div class="form-group" style="display:none">
                         <label for="title">Representante:</label>
                         <select name="cdRepSup" id="cdRepSup" class="form-select">
                             <option value="{{$telefone->cdRepSup}}"> {{$telefone->nmRepresentanteSuplente}}</option>
@@ -54,7 +54,7 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th scope="col">ID</th>
+                    
                     <th scope="col">Telefone</th>
                     <th scope="col">Opções</th>
                 </tr>
@@ -64,7 +64,7 @@
                 @foreach ($selecionado as $event)
 
                     <tr>
-                        <td scropt="row">{{$event->cdTelefone}}</td>
+                        
                         <td><a>{{ $event->nuTelefone }}</a></td>
                         <td class="d-flex">
                             <a href="/telrepsup/edit/{{$event->cdTelefone}}" class="btn btn-info edit-btn me-2"
@@ -108,7 +108,7 @@
                            name="nuTelefone">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" style="display:none">
                     <label for="title">Representante:</label>
                     <select name="cdRepSup" id="cdRepSup" class="form-select">
                         @foreach ($telefones as $telefone)

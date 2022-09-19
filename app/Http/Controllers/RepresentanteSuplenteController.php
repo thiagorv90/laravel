@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Representante_suplente;
+use App\Models\Vw_representatentes;
 use App\Models\Representante_suplentes_anexo;
+use App\Models\Telefone_representante_suplente;
 use DB;
 use App\Models\Empresa;
 use App\Models\Escolaridade;
 use APP\Models\user;
 use App\Models\Representacoe;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 
 class RepresentanteSuplenteController extends Controller
@@ -31,6 +34,12 @@ class RepresentanteSuplenteController extends Controller
         $event->cdEmpresa = $request->cdEmpresa;
         $event->dsEndereco = $request->dsEndereco;
         $event->dtNascimento = $request->dtNascimento;
+        
+        $event->dsBairro = $request->dsBairro;
+        $event->dsCidade = $request->dsCidade;
+        $event->dsCEP = $request->dsCEP;
+        
+
         $event->save();
 
         if ($request->has('nmAnexo')) {
@@ -88,6 +97,18 @@ class RepresentanteSuplenteController extends Controller
 
         return back();
     }
+    public function deleteRep($id)
+    {
+        $links = Representante_suplentes_anexo::where('cdRepSup', $id)->get();
+
+        foreach ($links as $link) {
+            unlink(public_path() . "/storage/files/$link->nmAnexo");
+        }
+        Representante_suplentes_anexo::where('cdRepSup', $id)->delete();
+        Representante_suplente::find($id)->delete();
+        // $deleted = DB::delete('delete from telefone_contatos where cdTelefone = ?', [$id]);
+        return back();
+    }
 
     public function deleteRepImg($id)
     {
@@ -106,11 +127,36 @@ class RepresentanteSuplenteController extends Controller
 
     public function repsupcreate()
     {
-        $events = Representante_suplente::all();
+        $events= DB::table('vw_representantes')->simplepaginate(5);
+      
+        
+      
+       //$teste = $events->simplepaginate(6);
+      //  $events = $events->select('0 as telefones');
+      // $events = $events->addSelect(DB::raw("'' as telefones"))->get();
+      // $events = $events->addSelect(DB::raw("'' as telefones"));
+       
+       
+       
+        //$events = Representante_suplente::leftjoin('telefone_representante_suplentes', 'representante_suplentes.cdRepSup','=', 'telefone_representante_suplentes.cdRepSup')->select('nmRepresentanteSuplente','dsEmail','nuTelefone','representante_suplentes.cdRepSup')->simplepaginate(5);
         $dados = DB::table('users')->get();
         $empresas = DB::table('empresas')->get();
         $escolaridades = DB::table('escolaridades')->get();
-        return view('repsup/repsup', compact('empresas', 'escolaridades', 'dados', 'events'));
+        
+        return view('repsup/repsup', ['empresas'=>$empresas, 'escolaridades'=>$escolaridades, 'dados'=>$dados, 'events'=>$events]);
+    }
+    public function search(Request $request)
+    {
+        $request->validate([
+            'query' => 'required',
+        ]);
+
+        $query = $request->input('query');
+        $events= DB::table('vw_representantes')
+            ->where('nmRepresentanteSuplente', 'like', "%$query%")
+            ->get();
+
+        return view('/repsup/search-results', compact('events'));
     }
 
     public function editRepSup($id)
@@ -140,10 +186,15 @@ class RepresentanteSuplenteController extends Controller
         $empresa = $request->input('cdEmpresa');
         $ende = $request->input('dsEndereco');
         $data = $request->input('dtNascimento');
+        $obs = $request->input('dsObservacao');
+        $bairro = $request->input('dsBairro');
+        $cidade = $request->input('dsCidade');
+        $cep = $request->input('dsCEP');
+        
 
         DB::update('update representante_suplentes set  nmRepresentanteSuplente = ?, dsEmail = ?, dsEmailAlternativo = ?,
-        stAtivo = ?, dsProfissao = ?, cdEscolaridade = ?, cdEmpresa = ?, dsEndereco = ?, dtNascimento =?
-        where cdRepSup = ?', [$nome, $email, $emaila, $sta, $prof, $escola, $empresa, $ende, $data, $id]);
+        stAtivo = ?, dsProfissao = ?, cdEscolaridade = ?, cdEmpresa = ?, dsEndereco = ?, dtNascimento =?, dsObservacao=?,dsBairro = ?, dsCidade =?,dsCEP=?
+        where cdRepSup = ?', [$nome, $email, $emaila, $sta, $prof, $escola, $empresa, $ende, $data,$obs,$bairro,$cidade,$cep, $id]);
 
         return redirect('/repsup')->with('msg', 'evento alterado com sucesso');
     }
@@ -161,4 +212,5 @@ class RepresentanteSuplenteController extends Controller
             ->get();
         return view('repsup.selerepsup', ['events' => $events, 'dados' => $dados, 'empresas' => $empresas, 'escolaridades' => $escolaridades, 'selecionado' => $selecionado]);
     }
+    
 }

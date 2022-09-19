@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Telefone_contato;
 use DB;
-use App\Models\contato;
+use App\Models\Contato;
 
 class TelefoneContatosController extends Controller
 {

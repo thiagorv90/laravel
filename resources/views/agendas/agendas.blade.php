@@ -19,7 +19,7 @@
                     </div>
                     <div class="form-group">
                         <label for="title">Representante: </label>
-                        <select name="cdRepresentacao" id="cdRepresentacao" class="form-control" disabled>
+                        <select name="cdRepresentacao" id="cdRepresentacao" class="form-control" >
                             @foreach ($repes as $agenda)
                                 <option
                                     value="{{$agenda->cdRepresentacao}}"> {{$agenda->nmRepresentanteSuplente}}</option>
@@ -189,7 +189,7 @@
                     </div>
                     <div class="form-group">
                         <label for="title">Representante: </label>
-                        <select name="cdRepresentacao" id="cdRepresentacao" class="form-control" disabled>
+                        <select name="cdRepresentacao" id="cdRepresentacao" class="form-control" >
                             @foreach ($repes as $agenda)
                                 <option
                                     value="{{$agenda->cdRepresentacao}}"> {{$agenda->nmRepresentanteSuplente}}</option>
@@ -208,7 +208,7 @@
                         <label for="title">Status:</label>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="stAgenda" id="stAgenda" value="1"
-                                   checked>
+                                   checked >
                             <label class="form-check-label" for="stAgenda">
                                 Ativo
                             </label>
@@ -227,7 +227,7 @@
                             <label for="title">Status Suplente:</label>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="stSuplente" id="stSuplente"
-                                       value="1">
+                                       value="1" required>
                                 <label class="form-check-label" for="stSuplente">
                                     Ativo
                                 </label>

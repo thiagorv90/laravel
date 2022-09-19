@@ -28,8 +28,10 @@
                     </td>
                 </tr>
             @endforeach
+            
             </tbody>
         </table>
+        {{$events->links()}}
 
         <br>
         @if (!$events->isEmpty())
@@ -39,6 +41,16 @@
                     <input type="text" class="form-control" value="" name="query" id="query"
                            placeholder="Buscar Instituição..."
                            aria-label="Buscar Instituição" aria-describedby="button-addon2" required/>
+                    <input type="submit" class="btn btn-primary" value="Buscar" id="button-addon2">
+                </div>
+            </form>
+            
+            <form action="/instituicoes/searchinsta" method="GET">
+                @csrf
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" value="" name="query" id="query"
+                           placeholder="Buscar Instancia..."
+                           aria-label="Buscar Instancia" aria-describedby="button-addon2" required/>
                     <input type="submit" class="btn btn-primary" value="Buscar" id="button-addon2">
                 </div>
             </form>

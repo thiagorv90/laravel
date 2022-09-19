@@ -29,10 +29,19 @@
                     <td><a>{{ $user->email }}</a></td>
 
                     <td>
-                        <a href="/usuarios/edit/{{$user->id}}" class="btn btn-info edit-btn"
+                       <div class="d-flex justify-content-between"> <a href="/usuarios/edit/{{$user->id}}" class="btn btn-info edit-btn"
                            data-bs-toggle="tooltip" data-bs-title="Editar">
                             <ion-icon name="create-outline"></ion-icon>
                         </a>
+                    
+                    <form action="/usuarios/edit/{{$user->id}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger delete-btn" data-bs-toggle="tooltip"
+                                            data-bs-title="Deletar">
+                                        <ion-icon name="trash-outline"></ion-icon>
+                                    </button>
+                                </form></div>
                     </td>
                 </tr>
             @endforeach

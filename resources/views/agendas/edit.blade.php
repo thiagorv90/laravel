@@ -147,15 +147,15 @@
 
             <form action="/agendas/file/{{$age->cdAgenda}}" method="POST" enctype="multipart/form-data">
                 @csrf
-                @if(auth()->user()->statusadm ==1)
+                
                     <div class="form-group">
                         <label for="title">Documento:</label>
                         <input type="file" class="form-control" id="nmAnexo" name="nmAnexo[]" multiple>
                     </div>
                     <div class="container d-flex justify-content-between mt-2">
                         <a href="/agendas/{{ $age->cdRepresentacao }}" class="btn btn-info mb-2">Voltar</a>
-                        <input type="submit" class="btn btn-primary mb-2" value="Incluir"></div>
-                @endif
+                        <input type="submit" class="btn btn-primary mb-2" value="Salvar"></div>
+                
             </form>
     </div>
     @endforeach

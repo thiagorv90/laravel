@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Instituicoe;
 use DB;
 use App\Models\Tipo_instancia;
+use Illuminate\Container\Container;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 
 class InstituicoesController extends Controller
 {
@@ -25,6 +28,21 @@ class InstituicoesController extends Controller
 
         return view('/instituicoes/search-results', compact('events'));
     }
+    public function insta(Request $request)
+    {
+        $request->validate([
+            'query' => 'required',
+        ]);
+        
+        $query = $request->input('query');
+        $events = DB::table('instancias')
+            ->select('nmInstancia', 'cdInstancia')
+            ->where('nmInstancia', 'like', "%$query%")
+           
+            ->get();
+
+        return view('/instancias/search-results', compact('events'));
+    }
 
     public function instituicoesstore(Request $request)
     {
@@ -39,7 +57,7 @@ class InstituicoesController extends Controller
     public function instituicoescreate()
     {
         $instituicoes = DB::table('tipo_instancias')->get();
-        $events = DB::table('instituicoes')->join('tipo_instancias', 'tipo_instancias.cdTipoInstancia', '=', 'instituicoes.cdTipoInstituicao')->get();
+        $events = DB::table('instituicoes')->join('tipo_instancias', 'tipo_instancias.cdTipoInstancia', '=', 'instituicoes.cdTipoInstituicao')->simplepaginate(5);
         return view('instituicoes/instituicoes', compact('instituicoes', 'events'));
     }
 

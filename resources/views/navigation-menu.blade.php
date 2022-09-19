@@ -29,12 +29,15 @@
 <header class="cabecalho">
     <nav class="navbar navbar-light bg-light fixed-top"
          style="background-image: linear-gradient(160deg, #743190 0%, #B67FB9 100%);">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/inicial">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="navbar-brand" href="/dashboard">
                 <img src="/image/fibra1.png" alt="Fibra">
             </a>
 
-            <h1 class="text-white">SGR - Sistema de Gestão de Representações</h1>
+            <h3 class="text-white align-self-center">SGR - Sistema de Gestão de Representações</h3>
+            <h5 class="text-white align-self-center">Olá,
+                <strong>{{ \App\Http\Controllers\Admin\UserController::userFirstAndLastName() }}</strong>!</h5>
+
 
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
                     aria-controls="offcanvasNavbar">
@@ -45,35 +48,42 @@
                  aria-labelledby="offcanvasNavbarLabel">
 
                 <div class="offcanvas-header">
-                    <a class="navbar-brand" href="/inicial">
+                    <a class="navbar-brand" href="/dashboard">
                         <img src="/image/fibra.png" alt="Fibra">
                     </a>
-                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                            aria-label="Close"></button>
+                    <h5>
+                        Olá, <strong>{{ \App\Http\Controllers\Admin\UserController::userFirstAndLastName() }}</strong>!
+                    </h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close">
+                    </button>
+
                 </div>
 
                 <div class="offcanvas-body">
                     <div class="container">
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                             @if(auth()->user()->statusadm ==1)
-
-                                <li class="nav-item"><a class="nav-link" href="/register">Cadastrar</a></li>
-
+                                <li class="nav-item fw-bold">Cadastros</li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
                                 <li class="nav-item"><a class="nav-link" href="/empresas">Empresas</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/escolaridade">Escolaridade</a></li>
-
-                                <li class="nav-item"><a class="nav-link" href="/instituicoes">Instituicoes</a></li>
-
                                 <li class="nav-item"><a class="nav-link" href="/repsup">Representantes</a></li>
-
                                 <li class="nav-item"><a class="nav-link" href="/temarep">Tema Representação</a></li>
-
                                 <li class="nav-item"><a class="nav-link" href="/tipoinsta">Tipo de Instancias</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/register">Cadastrar Usuário</a></li>
+                                <li class="nav-item fw-bold mt-5">Outros</li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                
+                                <li class="nav-item"><a class="nav-link" href="/instituicoes">Instituições</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/reports">Relatórios</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/usuarios">Usuários</a></li>
                             @else
-                                <li class="nav-item"><a class="nav-link" href="/representacoes">Usuários</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/representacoes">Representações</a></li>
                             @endif
-
                         </ul>
                     </div>
 
@@ -87,7 +97,9 @@
                             @csrf
                             <button class="btn btn-danger" type="submit">Logout</button>
                         </form>
+
                     </div>
+
                 </div>
             </div>
         </div>
@@ -118,6 +130,12 @@
         integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous">
 </script>
 <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
+
+<script>
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+</script>
+
 </body>
 
 

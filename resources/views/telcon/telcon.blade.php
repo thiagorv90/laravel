@@ -7,6 +7,7 @@
     <div class="container">
         @if (is_countable($selecionado) && count($selecionado) == 0)
             <h3>Não ha telefones para esse contato</h3>
+           
             @foreach ($telefones as $telefone)
 
                 <h1>Crie Contato Telefonico para: {{$telefone->nmContato}}</h1>
@@ -36,7 +37,7 @@
                         <br>
 
                         <div class="container d-flex justify-content-between mt-2">
-                            <a href="/contatos/listacontato/{{ $event->cdInstancia }}"
+                            <a href="/contatos/listacontato/{{ $telefone->cdInstancia }}"
                                class="btn btn-info mb-2">Voltar</a>
                             <input type="submit" class="btn btn-primary mb-2" value="Criar">
                         </div>

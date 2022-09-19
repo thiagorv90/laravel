@@ -64,11 +64,7 @@
                     <input type="text" class="form-control" id="dtFimVigencia" name="dtFimVigencia"
                            value="{{$age->dtFimVigencia}}">
                 </div>
-                <div class="form-group">
-                    <label for="title">Designação:</label>
-                    <input type="text" class="form-control" id="dsDesignacao" name="dsDesignacao"
-                           value="{{$age->dsDesignacao}}">
-                </div>
+                
                 <div class="form-group">
                     <label for="title">Status:</label>
                     <div class="form-check">
@@ -88,41 +84,40 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="title">Designação:</label>
+                    <input type="text" class="form-control" id="dsDesignacao" name="dsDesignacao"
+                           value="{{$age->dsDesignacao}}">
+                </div>
+                <div class="form-group">
                     <label for="title">Nomeacao: </label>
                     <input type="textarea" class="form-control" id="dsNomeacao" name="dsNomeacao"
                            value="{{$age->dsNomeacao}}">
                 </div>
+                <div class="form-group">
+                            <label for="title">Designação Suplente:</label>
+                            <input type="text" class="form-control" id="dsDesignacao" name="dsDesignacaoSuplente"  value="{{$age->dsDesignacaoSuplente}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="title">Nomeação Suplente:</label>
+                            <input type="text" class="form-control" id="dsNomeacao" name="dsNomacaoSuplente"  value="{{$age->dsNomacaoSuplente}}">
+                        </div>
                 <div class="form-group">
                     <label for="title">Data de Nomeação:</label>
                     <input type="text" class="form-control" id="dtNomeacao" name="dtNomeacao"
                            value="{{$age->dtNomeacao}}">
                 </div>
                 <div class="form-group">
-                    <label for="title"> Numero Nomeação:</label>
+                    <label for="title"> Número Nomeação:</label>
                     <input type="number" class="form-control" id="nuNomeacao" name="nuNomeacao"
                            value="{{$age->nuNomeacao}}">
                 </div>
 
 
-                <div class="form-group">
-
-                    <label for="title"> Arquivo Nomeação:</label>
-                    <a href="{{url('/download',urlencode($age->fnNomeacao))}}">{{$age->dsOriginalNomeacao}}</a>
-                    <input type="file" class="form-control" id="fnNomeacao" name="fnNomeacao"
-                           value="{{$age->fnNomeacao}}" placeholder="teste">
-                </div>
-                <div class="form-group" style="display:none">
-
-                    <label for="title"> Arquivo Nomeação:</label>
-                    <input type="text" class="form-control" id="dsOriginalNomeacao" name="dsOriginalNomeacao"
-                           @if ($age->dsOriginalNomeacao !='')
-                               value="{{$age->dsOriginalNomeacao}}" @else value="0" @endif>
-                </div>
-
+                
 
                 <div class="container d-flex justify-content-between mt-2">
                     <a href="/repinsta/ {{ $age->cdInstancia }}" class="btn btn-info mb-2">Voltar</a>
-                    <input type="submit" class="btn btn-primary mb-2" value="Alterar">
+                    <input type="submit" class="btn btn-primary mb-2" value="Salvar">
                 </div>
             </form>
     </div>

@@ -32,7 +32,7 @@
                     </select>
 
                 </div>
-                <input type="submit" class="btn btn-primary mt-2" value="Alterar">
+                <input type="submit" class="btn btn-primary mt-2" value="Salvar">
 
             </form>
         @endforeach
