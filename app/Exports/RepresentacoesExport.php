@@ -4,7 +4,7 @@ namespace App\Exports;
 
 use App\Models\Representacoe;
 use Maatwebsite\Excel\Concerns\FromCollection;
-
+use App\Models\Representante_suplente;
 use Illuminate\Contracts\View\view;
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Database\Eloquent\Collection;
@@ -28,8 +28,8 @@ class RepresentacoesExport implements FromView, ShouldAutoSize, WithDrawings
     {
         //Falta terminar a querry
         return view('exports.representacoes', [
-            'representacoes' => Representacoe::join('instancias', 'representacoes.cdInstancia', '=', 'instancias.cdInstancia')
-                ->join('representante_suplentes', 'representante_suplentes.cdRepSup', '=', 'representacoes.cdTitular')
+            'representacoes' => Representante_suplente::leftjoin('representacoes', 'representante_suplentes.cdRepSup', '=', 'representacoes.cdTitular')
+                ->leftjoin('instancias', 'representacoes.cdInstancia', '=', 'instancias.cdInstancia')
                 ->get()
 
         ]);

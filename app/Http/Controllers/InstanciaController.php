@@ -101,9 +101,8 @@ class InstanciaController extends Controller
         $insta = Instancia::join('tema_representacoes', 'instancias.cdTema', '=', 'tema_representacoes.cdTema')
             ->join('instituicoes', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
             ->leftjoin('representacoes', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
-            ->leftjoin('representante_suplentes', 'representacoes.cdTitular', '=', 'cdRepsup')
-            ->leftjoin('representante_suplentes as s', 'representacoes.cdSuplente', '=', 's.cdRepSup')
-            ->where('instancias.cdInstituicao', '=', $id)->get(['instancias.cdInstancia', 'nmInstancia', 'nmTema', 'representante_suplentes.nmRepresentanteSuplente as representante','s.nmRepresentanteSuplente',
+            
+            ->where('instancias.cdInstituicao', '=', $id)->get(['instancias.cdInstancia', 'nmInstancia', 'nmTema',
              'instancias.cdInstituicao', 'instancias.stAtivo']);
 
         return view('instancias.instancias', ['instancias' => $insta, 'temas' => $temas, 'instituicaos' => $instituicaos,'bread'=>$bread]);

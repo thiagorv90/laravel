@@ -116,12 +116,16 @@ Route::middleware('auth')->group(function () {
         Route::post('repinsta/{id}', [RepresentacoesController::class, 'representacoesstore']);
         Route::get('repinsta/{id}', [RepresentacoesController::class, 'instareprescreate'])->name('repre');
         Route::PUT('representacoes/update/{id}', [RepresentacoesController::class, 'updateRep']);
-        Route::get('representacoes/edit/{id}', [RepresentacoesController::class, 'editRep']);
+        Route::get('representacoes/edit/{id}', [RepresentacoesController::class, 'editRep'])->name('editrepre');
+        Route::post('representacoes/edit/{id}', [RepresentacoesController::class, 'addrepre']);
+        Route::delete('representacoes/edit/{id}', [RepresentacoesController::class, 'delrepre']);
         Route::post('/representacoes/file/{id}', [RepresentacoesController::class, 'representacoesfile']);
         Route::delete('/representacoes/files/{id}', [RepresentacoesController::class, 'deleteRepreImg']);
+        Route::post('/representacoes/representantes/{id}', [RepresentacoesController::class, 'createrep']);
+        Route::delete('/representacoes/representantes/{id}', [RepresentacoesController::class, 'deleterep']);
 
         Route::post('repsup', [RepresentanteSuplenteController::class, 'repsupstore']);
-        Route::get('repsup', [RepresentanteSuplenteController::class, 'repsupcreate']);
+        Route::get('repsup', [RepresentanteSuplenteController::class, 'repsupcreate'])->name('representantes');
         Route::get('selerepsup/{id}', [RepresentanteSuplenteController::class, 'selerepsup']);
         Route::PUT('repsup/update/{id}', [RepresentanteSuplenteController::class, 'updateRepSup']);
         Route::get('repsup/edit/{id}', [RepresentanteSuplenteController::class, 'editRepSup']);

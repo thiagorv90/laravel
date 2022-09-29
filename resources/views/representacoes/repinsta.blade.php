@@ -26,30 +26,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="title">Titular:</label>
-                            <select name="cdTitular" id="cdTitular" class="form-control">
-                                @foreach ( $representantes as $representante)
-                                    <option
-                                        value="{{$representante->cdRepSup}}"> {{$representante->nmRepresentanteSuplente}}</option>
-
-                                @endforeach
-                            </select>
-
-                        </div>
-                        <div class="form-group">
-                            <label for="title">Suplente:</label>
-                            <select name="cdSuplente" id="cdSuplente" class="form-control">
-
-                                <option value="">Não</option>
-                                @foreach ($representantes as $representante)
-                                    <option
-                                        value="{{$representante->cdRepSup}}"> {{$representante->nmRepresentanteSuplente}}</option>
-
-                                @endforeach
-                            </select>
-
-                        </div>
+                       
                         <div class="form-group">
                             <label for="title">Inicio da Vigência:</label>
                             <input type="date" class="form-control" id="dtInicioVigencia" name="dtInicioVigencia"
@@ -75,7 +52,7 @@
                         </div>
                         <div class="form-group">
                             <label for="title">Nomeação Suplente:</label>
-                            <input type="text" class="form-control" id="dsNomeacao" name="dsNomacaoSuplente">
+                            <input type="text" class="form-control" id="dsNomeacao" name="dsNomeacaoSuplente">
                         </div>
                         <div class="form-group">
                             <label for="title">Status:</label>
@@ -185,31 +162,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label for="title">Titular:</label>
-                                <select name="cdTitular" id="cdTitular" class="form-control">
-                                    @foreach ( $representantes as $representante)
-
-                                        <option
-                                            value="{{$representante->cdRepSup}}"> {{$representante->nmRepresentanteSuplente}}</option>
-
-                                    @endforeach
-                                </select>
-
-                            </div>
-                            <div class="form-group">
-                                <label for="title">Suplente:</label>
-                                <select name="cdSuplente" id="cdSuplente" class="form-control">
-
-                                    <option value="">Não</option>
-                                    @foreach ($representantes as $representante)
-                                        <option
-                                            value="{{$representante->cdRepSup}}"> {{$representante->nmRepresentanteSuplente}}</option>
-
-                                    @endforeach
-                                </select>
-
-                            </div>
+                         
                             <div class="form-group">
                                 <label for="title">Inicio da Vigência:</label>
                                 <input type="date" class="form-control" id="dtInicioVigencia"
@@ -235,7 +188,7 @@
                         </div>
                         <div class="form-group">
                             <label for="title">Nomeação Suplente:</label>
-                            <input type="text" class="form-control" id="dsNomacaoSuplente" name="dsNomacaoSuplente">
+                            <input type="text" class="form-control" id="dsNomacaoSuplente" name="dsNomeacaoSuplente">
                         </div>
                             <div class="form-group">
                                 <label for="title">Status:</label>
@@ -279,7 +232,7 @@
                             <div class="container d-flex justify-content-between mt-2">
                                 <a href="/instancias/{{ $event->cdInstituicao }}"
                                    class="btn btn-info mb-2">Voltar</a>
-                                <input type="submit" class="btn btn-primary mb-2" value="criar">
+                                <input type="submit" class="btn btn-primary mb-2" value="Próximo">
                             </div>
                         </form>
                     </div>

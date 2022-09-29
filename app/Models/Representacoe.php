@@ -25,7 +25,7 @@ class Representacoe extends Model
 
     public function representante()
     {
-        return $this->hasOne('App\Models\Representante_suplente', 'id', 'cdTitular');
+        return $this->hasMany('App\Models\Representacao_representante', 'id', 'cdTitular');
     }
 
     public function suplente()

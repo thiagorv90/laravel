@@ -67,7 +67,7 @@ class RepresentanteSuplenteController extends Controller
         }
 
 
-        return back();
+        return redirect()->route('representantes');
     }
 
     public function repsupfile(Request $request, $id)
@@ -104,8 +104,9 @@ class RepresentanteSuplenteController extends Controller
         foreach ($links as $link) {
             unlink(public_path() . "/storage/files/$link->nmAnexo");
         }
+        
         Representante_suplentes_anexo::where('cdRepSup', $id)->delete();
-        Representante_suplente::find($id)->delete();
+        Representante_suplente::where('cdRepSup', $id)->delete();
         // $deleted = DB::delete('delete from telefone_contatos where cdTelefone = ?', [$id]);
         return back();
     }
@@ -127,18 +128,10 @@ class RepresentanteSuplenteController extends Controller
 
     public function repsupcreate()
     {
-        $events= DB::table('vw_representantes')->simplepaginate(5);
-      
-        
-      
-       //$teste = $events->simplepaginate(6);
-      //  $events = $events->select('0 as telefones');
-      // $events = $events->addSelect(DB::raw("'' as telefones"))->get();
-      // $events = $events->addSelect(DB::raw("'' as telefones"));
+        $events= DB::table('vw_representantes')->orderby('nmRepresentanteSuplente')->simplepaginate(10);
+ 
        
        
-       
-        //$events = Representante_suplente::leftjoin('telefone_representante_suplentes', 'representante_suplentes.cdRepSup','=', 'telefone_representante_suplentes.cdRepSup')->select('nmRepresentanteSuplente','dsEmail','nuTelefone','representante_suplentes.cdRepSup')->simplepaginate(5);
         $dados = DB::table('users')->get();
         $empresas = DB::table('empresas')->get();
         $escolaridades = DB::table('escolaridades')->get();

@@ -9,6 +9,53 @@
 
             <h3>Não há nada agendado para esta representação</h3>
             <h1>Criar Agenda</h1>
+            
+        <div class="container">
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Nome Instancia</th>
+                    <th scope="col">Assunto</th>
+                    <th scope="col">Data Agenda</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Opções</th>
+
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr>
+                    @foreach ($selecionado as $event)
+                        <td scropt="row">{{$event->nmInstancia}}</td>
+                        <td><a>{{$event->dsAssunto}}</a></td>
+                        <td><a>{!! date('d/m/Y', strtotime($event->dtAgenda)) !!}</a></td>
+                        @if($event->stAgenda ==1)
+                            <td>Ativo</td>
+                        @else
+                            <td>Desativado</td>
+                        @endif
+
+                        <td class="opcoes-agenda d-flex">
+                            <a href="/agendas/edit/{{$event->cdAgenda}}" class="btn btn-info edit-btn me-2"
+                               data-bs-toggle="tooltip" data-bs-title="Editar">
+                                <ion-icon name="create-outline"></ion-icon>
+                            </a>
+                            @if(auth()->user()->statusadm ==1)
+                                <form action="/agendas/edit/{{ $event->cdAgenda }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger delete-btn" data-bs-toggle="tooltip"
+                                            data-bs-title="Deletar">
+                                        <ion-icon name="trash-outline"></ion-icon>
+                                    </button>
+                                </form>
+                            @endif
+                        </td>
+                </tr>
+                @endforeach
+                </tbody>
+            </table>
 
             <div id="event-create-container" class="container">
                 <form action="agendas" method="POST" enctype="multipart/form-data">
@@ -94,6 +141,7 @@
     @else
 
         <h1>Agendas da representação:</h1>
+        <a href="/instituicoes" >{{$bread->nmInstituicao}}</a>><a href="/instancias/{{$bread->cdInstituicao}}">{{$bread->nmInstancia}}</a>><a href="/repinsta/{{$bread->cdRepresentacao}}"{{$bread->nmRepresentanteSuplente}}
         <div class="container">
 
             <table class="table">
@@ -179,7 +227,7 @@
         <br>
         @if(auth()->user()->statusadm ==1)
             <h1>Agenda</h1>
-
+            
             <div id="event-create-container" class="container">
                 <form action="agendas" method="POST" enctype="multipart/form-data">
                     @csrf
