@@ -3,13 +3,28 @@
 @section('title', 'Criar Representação')
 
 @section('content')
+<style>
+    a{
+        text-decoration: none;
+        color: #6f42c1;
+    }
+    a:hover{
+        color: #452680;
+         
+    }
+</style>
 
     <div id="event-create-container" class="container">
+        <!--Alerta-->  <!--Alerta--> <!--Alerta--> 
         @if (is_countable($selecionado) && count($selecionado) == 0)
-            @foreach ( $instancias as  $instancia)
-
-                <h3>Não ha representações para esta instancia:</h3>
-
+            @foreach ( $instancias as  $instancia) 
+            <div class="alert alert-secondary d-flex align-items-center mt-4 mb-3 " role="alert">      
+                <div>
+                    <h6>Não existem representações para esta instancia.</h6>  
+                    <p>Caso precise, use o formulário abaixo para criar 
+                    ou <a href="../instituicoes/instituicoes." class="alert-link">clique aqui</a> para voltar ao inicio.</p>   
+                </div>
+                 </div>
 
 
 
@@ -114,8 +129,17 @@
                             <tbody>
                             @foreach ($selecionado as $event)
                                 <tr>
+                                    <?php $var = explode("/", $event->representantes);
 
-                                    <td scropt="row">{{$event->nmRepresentanteSuplente}}</td>
+
+
+           
+
+         
+
+                                    ?>
+                                    
+                                                                        <td scropt="row">@foreach($var as $va){{$va}}<br>  @endforeach </td>
                                     <td><a>{!! date('d/m/Y', strtotime($event->dtInicioVigencia)) !!}</a></td>
                                     @if($event->stAtivo ==1)
                                         <td>Ativo</td>
@@ -141,7 +165,7 @@
                         </table>
                         <div class="container d-flex justify-content-between mt-2">
                             <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
-                            <input type="submit" class="btn btn-primary mb-2" value="criar">
+                            <input type="submit" class="btn btn-primary mb-2" value="Criar">
                         </div>
 
                     </div>
@@ -230,7 +254,7 @@
 </div>
 
                             <div class="container d-flex justify-content-between mt-2">
-                                <a href="/instancias/{{ $event->cdInstituicao }}"
+                                <a href="/instancias/{{$bread->cdInstituicao}}"
                                    class="btn btn-info mb-2">Voltar</a>
                                 <input type="submit" class="btn btn-primary mb-2" value="Próximo">
                             </div>

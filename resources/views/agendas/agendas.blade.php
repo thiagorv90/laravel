@@ -3,11 +3,29 @@
 @section('title', 'Agendas')
 
 @section('content')
+
+<style>
+    a{
+        text-decoration: none;
+        color: #6f42c1;
+    }
+    a:hover{
+        color: #452680;
+    }
+</style>
+
     @if (is_countable($selecionado) && count($selecionado) == 0)
 
         @if(auth()->user()->statusadm ==1)
 
-            <h3>Não há nada agendado para esta representação</h3>
+             <!--Alerta-->       
+             <div class="alert alert-secondary d-flex align-items-center mt-4 mb-3" role="alert">      
+                <div>
+                    <h6>Não há nada agendado para esta representação</h6>
+                    <p>Caso precise, use o formulário abaixo para criar.
+                </div>
+            </div>
+            
             <h1>Criar Agenda</h1>
             
         <div class="container">
@@ -140,8 +158,18 @@
         @endif
     @else
 
+                        <!--Alert para requisitar representante-->
+    <div class="alert alert-secondary d-flex align-items-center mt-4 mb-3" role="alert">      
+        <div>
+            <h6><b>OBS: </b>Para criar uma agenda é necessário que haja um <b>Representante</b>.</h6>
+        </div>
+    </div>    
+
         <h1>Agendas da representação:</h1>
-        <a href="/instituicoes" >{{$bread->nmInstituicao}}</a>><a href="/instancias/{{$bread->cdInstituicao}}">{{$bread->nmInstancia}}</a>><a href="/repinsta/{{$bread->cdRepresentacao}}"{{$bread->nmRepresentanteSuplente}}
+        <a href="/instituicoes" >{{$bread->nmInstituicao}}</a> /
+        <a href="/instancias/{{$bread->cdInstituicao}}">{{$bread->nmInstancia}}</a> /
+        <a href="/repinsta/{{$bread->cdRepresentacao}}">{{$bread->nmRepresentanteSuplente}}</a>
+
         <div class="container">
 
             <table class="table">
