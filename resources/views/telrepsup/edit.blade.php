@@ -8,7 +8,7 @@
         @foreach ($selecionado as $tel)
             <form action="/telrepsup/update/{{ $tel->cdTelefone}}" method="POST">
                 @csrf
-
+                <h1>Editar telefone</h1>
                 @method('PUT')
                 <div class="form-group">
                     <label for="title">Numero:</label>
@@ -21,11 +21,25 @@
                     <input type="text" class="form-control" id="nuDDDTelefone" name="nuDDDTelefone"
                            value="{{$tel->nuDDDTelefone}}"/>
                 </div>
+                
                 <div class="form-group">
                     <label for="title">Tipo:</label>
-                    <input type="text" class="form-control" id="tpTelefone" name="tpTelefone"
-                           value="{{$tel->tpTelefone}}"/>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="tpTelefone"
+                               id="tpTelefone" value="1"  @if($tel->tpTelefone ==1) checked @endif >
+                        <label class="form-check-label" for="tpTelefone">
+                            Celular
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="tpTelefone"
+                               id="tpTelefone" value="0"  @if($tel->tpTelefone ==0) checked @endif >
+                        <label class="form-check-label" for="tpTelefone">
+                            Fixo
+                        </label>
+                    </div>
                 </div>
+                <div style="display:none">
                 <label for="title">Nome:</label>
                 <select id="cdRepSup" name="cdRepSup" class="form-select">
                     @foreach($lista as $i)
@@ -34,6 +48,7 @@
                         </option>
                     @endforeach
                 </select>
+</div>
                 <br>
                 <input type="submit" class="btn btn-primary" value="Salvar">
             </form>

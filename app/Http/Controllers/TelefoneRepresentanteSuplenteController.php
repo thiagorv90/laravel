@@ -26,12 +26,13 @@ class TelefoneRepresentanteSuplenteController extends Controller
     public function telrepsupcreate($id)
     {
         $telefones = DB::table('representante_suplentes')->where('cdRepSup', '=', $id)->get();
+        $nome = DB::table('representante_suplentes')->where('cdRepSup', '=', $id)->first();
         $events = Telefone_representante_suplente::all();
         $selecionado = Telefone_representante_suplente::join('representante_suplentes', 'representante_suplentes.cdRepSup', '=', 'telefone_representante_suplentes.cdRepSup')
             ->where('representante_suplentes.cdRepSup', '=', $id)
             ->get();
 
-        return view('telrepsup/telrepsup', ['telefones' => $telefones, 'events' => $events, 'selecionado' => $selecionado]);
+        return view('telrepsup/telrepsup', ['telefones' => $telefones, 'events' => $events, 'selecionado' => $selecionado,'nome'=>$nome]);
     }
 
     public function editTrel($id)
@@ -54,8 +55,9 @@ class TelefoneRepresentanteSuplenteController extends Controller
         $tp = $request->input('tpTelefone');
 
         DB::update('update Telefone_representante_suplentes set cdRepSup = ?, nuDDDTelefone = ?, nuTelefone = ?, tpTelefone=? where cdTelefone = ?', [$cd, $name, $nu, $tp, $id]);
-
-        return redirect('/telrepsup')->with('msg', 'evento alterado com sucesso');
+      
+        
+        return redirect()->route('representantes');
     }
 
     public function deleteTrel($id)

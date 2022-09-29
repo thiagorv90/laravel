@@ -151,10 +151,7 @@
                           >
             </div>
 
-            <div class="form-group">
-                <label for="title">Data de Nascimento:</label>
-                <input type="date" class="form-control" id="dtNascimento" name="dtNascimento">
-            </div>
+           
             <div class="form-group">
                     <label for="title">Observação:</label>
                     <textarea type="text" class="form-control" id="dsObservacao" name="dsObservacao" 

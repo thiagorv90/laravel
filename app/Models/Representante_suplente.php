@@ -24,7 +24,7 @@ class Representante_suplente extends Model
 
     public function representacoes()
     {
-        return $this->hasMany('App\Models\Representacoes');
+        return $this->hasMany('App\Models\Representacao_representante');
     }
 
     public function usuario()

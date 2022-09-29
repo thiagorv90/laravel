@@ -32,13 +32,22 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="title">Tipo:</label>
-                        <select name="tpTelefone" id="tpTelefone" class="form-select">
-                            <option value="0">Celular</option>
-                            <option value="1">Fixo</option>
-                        </select>
+                    <label for="title">Tipo:</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="tpTelefone"
+                               id="tpTelefone" value="1">
+                        <label class="form-check-label" for="tpTelefone">
+                            Celular
+                        </label>
                     </div>
-
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="tpTelefone"
+                               id="tpTelefone" value="0">
+                        <label class="form-check-label" for="tpTelefone">
+                            Fixo
+                        </label>
+                    </div>
+                </div>
                     <div class="container d-flex justify-content-between mt-3">
                         <a href="/repsup" class="btn btn-info">Voltar</a>
                         <input type="submit" class="btn btn-primary" value="Criar Telefone">
@@ -48,7 +57,7 @@
         @endforeach
     @else
 
-        <h1>Contatos de </h1>
+        <h1>Contatos de {{$nome->nmRepresentanteSuplente}}</h1>
         <div class="container">
 
             <table class="table">
@@ -118,10 +127,20 @@
                 </div>
                 <div class="form-group">
                     <label for="title">Tipo:</label>
-                    <select name="tpTelefone" id="tpTelefone" class="form-select">
-                        <option value="0">Celular</option>
-                        <option value="1">Fixo</option>
-                    </select>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="tpTelefone"
+                               id="tpTelefone" value="1">
+                        <label class="form-check-label" for="tpTelefone">
+                            Celular
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="tpTelefone"
+                               id="tpTelefone" value="0">
+                        <label class="form-check-label" for="tpTelefone">
+                            Fixo
+                        </label>
+                    </div>
                 </div>
 
                 <div class="container d-flex justify-content-between mt-3">

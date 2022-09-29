@@ -207,7 +207,7 @@
                     <tr>
                         <td><a>{{ $instancia->nmInstancia }}</a></td>
                         <td>{{$instancia->nmTema}}</td>
-                        <td>{{$instancia->representante}}<br>{{$instancia->nmRepresentanteSuplente}}</td>
+                       
                         @if($instancia->stAtivo ==1)
                             <td>Ativo</td>
                         @else
