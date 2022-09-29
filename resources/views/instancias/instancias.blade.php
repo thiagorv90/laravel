@@ -3,6 +3,17 @@
 @section('title', 'Instancias')
 
 @section('content')
+
+<style>
+    a{
+        text-decoration: none;
+        color: #6f42c1;
+    }
+    a:hover{
+        color: #452680;
+    }
+</style>
+
     @if (is_countable($instancias) && count($instancias) == 0)
 
         <div class="container">

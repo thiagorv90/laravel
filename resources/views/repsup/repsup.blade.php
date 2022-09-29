@@ -3,7 +3,16 @@
 @section('title', 'Representantes')
 
 @section('content')
-
+<!--Estilo dos links do breadgrumps-->
+<style>
+    a{
+        text-decoration: none;
+        color: #6f42c1;
+    }
+    a:hover{                              
+        color: #452680;
+    }
+</style>
     <h1>Representantes</h1>
     <div class="container mt-5">
         <table class="table">
@@ -40,14 +49,11 @@
                            data-bs-toggle="tooltip" data-bs-title="Contato">
                             <ion-icon name="call-outline"></ion-icon>
                         </a>
-                        <form action="/repsup/edit/{{$event->cdRepSup}}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger delete-btn ms-1" data-bs-toggle="tooltip"
-                                            data-bs-title="Deletar">
-                                        <ion-icon name="trash-outline"></ion-icon>
-                                    </button>
-                                </form>
+                           <!-- Botão que chama a modal -->
+                           <button type="button" class="btn btn-danger delete-btn ms-1" data-bs-toggle="modal"
+                           data-bs-target="#exampleModal" >
+                            <ion-icon name="trash-outline"></ion-icon>                                  
+                          </button>    
                     </td>
                 </tr>
             @endforeach
@@ -166,5 +172,43 @@
             <input type="submit" class="btn btn-primary mb-2" value="Criar Representante">
         </form>
     </div>
+
+    <!-- Modal ---> 
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false" data-bs-id="{{$event->cdRepSup}}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title" id="exampleModalLabel">Alerta</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                          
+          </button>
+        </div>
+        <div class="modal-body">
+          A exclusão é permanente. Deseja prosseguir? {{$event->cdRepSup}}
+        </div>
+        <div class="modal-footer">
+            <form action="/repsup/edit/{{$event->cdRepSup}}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-danger delete-btn ms-1" data-bs-toggle="tooltip"data-bs-title="Deletar" >Excluir</button>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+    <!--Script do Modal-->
+<script>
+    $('#exampleModal').on('show.bs.modal', function (event){
+        var button = $(event.relatedTarget);
+        var recipientId = button.data('id');
+        console.log(recipientId);
+
+        var modal = $(this);
+        modal.find('#repID').val(recipientId);
+    })
+</script>
 
 @endsection

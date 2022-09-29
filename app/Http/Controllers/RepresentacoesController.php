@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Exports\RepresentacoesExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Auth\Access\Response;
+use App\Models\Vw_representacoe;
 
 class RepresentacoesController extends Controller
 {
@@ -346,19 +347,7 @@ return back()->withInput(['selecionado' => $edit, 'lista' => $insta,  'anexo' =>
         $instancias = DB::table('instancias')
             ->where('instancias.cdInstancia', '=', $id)
             ->get();
-        $selecionado = DB::select('select DISTINCT R.dtInicioVigencia, replace(replace(STUFF
-        (
-        (SELECT   "/" +  nmRepresentanteSuplente +
-        CASE RR.stTitularidade
-        WHEN 1 THEN " (Titular) "
-        ELSE " (Suplente) "
-        END
-           from representante_suplentes B
-           INNER JOIN representacao_representantes RR
-           ON RR.cdRepSup = B.cdRepSup
-           WHERE ISNULL(RR.cdRepresentacao, "") = ISNULL(R.cdRepresentacao, "")
-           FOR XML PATH("")), 1, 1, ""), "&lt;", "<"), "&gt;", ">") AS representantes
-             FROM            representacoes as R')->get();
+             $selecionado = DB::table('vw_representacoes')->where('cdInstancia', '=', $id)->get();
         return view('representacoes/repinsta', ['selecionado' => $selecionado, 'instancias' => $instancias, 'events' => $events, 'representantes' => $representantes,'bread'=>$bread]);
     }
 
