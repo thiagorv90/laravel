@@ -40,6 +40,7 @@ class InstanciaController extends Controller
         $event->dsObservacao = $request->dsObservacao;
         $event->dsAtoNormativo = $request->dsAtoNormativo;
         $event->boCaraterDaInstancia = $request->boCaraterDaInstancia;
+        $event->dsSite = $request->dsSite;
        
 
         $event->save();
@@ -140,12 +141,13 @@ class InstanciaController extends Controller
         $manda = $request->input('dsMandato');
         $carater = $request->input('boCaraterDaInstancia');
         $ato = $request->input('dsAtoNormativo');
+        $site = $request->input('dsSite');
       
 
 
         DB::update('update instancias set cdInstituicao = ?, cdTema = ?, nmInstancia = ?, tpFederalDistrital = ?, tpPublicoPrivado = ?, dsMandato = ?,
-            stAtivo = ?, dsObjetivo = ?, tpPrioridade = ?, dsAmeacas = ?, dsOportunidades = ?, dsObservacao=?, boCaraterDaInstancia=?,dsAtoNormativo=?
-            where cdInstancia = ?', [$cd, $tema, $name, $fed, $pub, $mand, $ativo, $obj, $pri, $ame, $opor, $manda, $carater, $ato, $id]);
+            stAtivo = ?, dsObjetivo = ?, tpPrioridade = ?, dsAmeacas = ?, dsOportunidades = ?, dsObservacao=?, boCaraterDaInstancia=?,dsAtoNormativo=?, dsSite=?
+            where cdInstancia = ?', [$cd, $tema, $name, $fed, $pub, $mand, $ativo, $obj, $pri, $ame, $opor, $manda, $carater, $ato,$site, $id]);
 
         return redirect()->route('instancias', ['id' => $cd]);
     }

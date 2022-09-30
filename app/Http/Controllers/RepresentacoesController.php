@@ -6,6 +6,7 @@ use App\Exports\RepresentacaoNumerosExport;
 use Illuminate\Http\Request;
 use App\Models\Representacoe;
 use App\Models\Representacoes_anexo;
+use App\Models\Vw_representacoe;
 use DB;
 use App\Models\Representante_suplente;
 use App\Models\Representacao_representante;
@@ -346,19 +347,7 @@ return back()->withInput(['selecionado' => $edit, 'lista' => $insta,  'anexo' =>
         $instancias = DB::table('instancias')
             ->where('instancias.cdInstancia', '=', $id)
             ->get();
-        $selecionado = DB::select('select DISTINCT R.dtInicioVigencia, replace(replace(STUFF
-        (
-        (SELECT   "/" +  nmRepresentanteSuplente +
-        CASE RR.stTitularidade
-        WHEN 1 THEN " (Titular) "
-        ELSE " (Suplente) "
-        END
-           from representante_suplentes B
-           INNER JOIN representacao_representantes RR
-           ON RR.cdRepSup = B.cdRepSup
-           WHERE ISNULL(RR.cdRepresentacao, "") = ISNULL(R.cdRepresentacao, "")
-           FOR XML PATH("")), 1, 1, ""), "&lt;", "<"), "&gt;", ">") AS representantes
-             FROM            representacoes as R')->get();
+        $selecionado = DB::table('vw_representacoes')->where('cdInstancia', '=', $id)->get();
         return view('representacoes/repinsta', ['selecionado' => $selecionado, 'instancias' => $instancias, 'events' => $events, 'representantes' => $representantes,'bread'=>$bread]);
     }
 

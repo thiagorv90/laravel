@@ -61,12 +61,12 @@ class AgendasController extends Controller
 
         }
         
-        $mail = Agenda::join('representacoes', 'representacoes.cdRepresentacao', '=', 'agendas.cdRepresentacao')
+        /*$mail = Agenda::join('representacoes', 'representacoes.cdRepresentacao', '=', 'agendas.cdRepresentacao')
         ->join('representante_suplentes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
         ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
         ->leftjoin('representante_suplentes as s', 'representacoes.cdSuplente', '=', 's.cdRepSup')
         ->where('agendas.cdAgenda', '=', $event->cdAgenda)->first(['representante_suplentes.nmRepresentanteSuplente as representante','representante_suplentes.dsEmail as emailrepre','s.nmRepresentanteSuplente',
-        's.dsEmail','instancias.nmInstancia','agendas.dtAgenda','agendas.hrAgenda','agendas.dsAssunto','agendas.dsLocal','agendas.dsPauta','agendas.dsResumo']);
+        's.dsEmail','instancias.nmInstancia','agendas.dtAgenda','agendas.hrAgenda','agendas.dsAssunto','agendas.dsLocal','agendas.dsPauta','agendas.dsResumo']);*/
 
      
        // mail::send( new \App\Mail\AgendaMail($mail));
@@ -129,15 +129,14 @@ class AgendasController extends Controller
         ->join('representacao_representantes','representacao_representantes.cdRepresentacao','=','representacoes.cdRepresentacao')
             ->join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
         ->leftjoin('agendas','agendas.cdRepresentacao','=','representacoes.cdRepresentacao')->where('representacoes.cdRepresentacao', '=', $id)
-        ->first(['nmInstituicao','nmInstancia','instancias.cdInstituicao','nmRepresentanteSuplente','representacoes.cdRepresentacao']);
-        
+        ->first(['nmInstituicao','nmInstancia','instancias.cdInstituicao','nmRepresentanteSuplente','representacoes.cdRepresentacao','instancias.cdInstancia']);
+       
         $selecionado = Agenda::join('representacoes', 'representacoes.cdRepresentacao', '=', 'agendas.cdRepresentacao')
-        ->join('representacao_representantes', 'representacoes.cdRepresentacao', '=', 'representacao_representantes.cdRepresentacao')
-            ->join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
-            ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
+                    ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
             ->where('representacoes.cdRepresentacao', '=', $id)
             ->get(['cdAgenda', 'agendas.cdRepresentacao', 'dtAgenda', 'hrAgenda', 'agendas.stAgenda', 'dsAssunto',
-                'dsLocal', 'dsPauta', 'dsResumo', 'stSuplente', 'nmRepresentanteSuplente', 'nmInstancia', 'representacoes.cdInstancia']);
+                'dsLocal', 'dsPauta', 'dsResumo', 'stSuplente', 'nmInstancia', 'representacoes.cdInstancia']);
+                
         $agendas = DB::table('representacoes')->where('cdRepresentacao', '=', $id)->get();
         $repes = DB::table('representante_suplentes')->join('representacao_representantes', 'representacao_representantes.cdRepSUp', '=', 'representante_suplentes.cdRepSup')
         ->join('representacoes','representacoes.cdRepresentacao','=','representacao_representantes.cdRepresentacao')->where('representacoes.cdRepresentacao', '=', $id)->get();

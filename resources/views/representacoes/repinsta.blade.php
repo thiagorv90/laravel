@@ -114,8 +114,12 @@
                             <tbody>
                             @foreach ($selecionado as $event)
                                 <tr>
+                                <?php $var = explode("/", $event->representantes);
 
-                                    <td scropt="row">{{$event->nmRepresentanteSuplente}}</td>
+           
+         
+?>
+                                    <td scropt="row">@foreach($var as $va){{$va}}<br>  @endforeach </td>
                                     <td><a>{!! date('d/m/Y', strtotime($event->dtInicioVigencia)) !!}</a></td>
                                     @if($event->stAtivo ==1)
                                         <td>Ativo</td>
@@ -139,6 +143,7 @@
                             @endforeach
                             </tbody>
                         </table>
+
                         <div class="container d-flex justify-content-between mt-2">
                             <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
                             <input type="submit" class="btn btn-primary mb-2" value="criar">
@@ -230,7 +235,7 @@
 </div>
 
                             <div class="container d-flex justify-content-between mt-2">
-                                <a href="/instancias/{{ $event->cdInstituicao }}"
+                                <a href="/instancias/{{$bread->cdInstituicao}}"
                                    class="btn btn-info mb-2">Voltar</a>
                                 <input type="submit" class="btn btn-primary mb-2" value="Próximo">
                             </div>

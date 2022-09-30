@@ -271,6 +271,11 @@
                         @endforeach
                     </select>
                 </div>
+                <div class="form-group" id="Mandato">
+                            <label for="dsMandato">Site:</label>
+                            <input placeholder="Site..." type="text" class="form-control" id="dsSite"
+                                   name="dsSite">
+                        </div>
                 
                         <div class="form-group" id="Mandato">
                             <label for="dsMandato">Tempo de Mandato:</label>
