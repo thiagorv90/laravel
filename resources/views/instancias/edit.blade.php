@@ -34,6 +34,11 @@
 
                     </select>
                 </div>
+                <div class="form-group" id="Mandato" >
+                            <label for="dsSite">Mandato:</label>
+                            <input placeholder="Site..." type="text" class="form-control" id="dsSite" value="{{$instituicao->dsSite}}"
+                                   name="dsSite">
+                        </div>
                
                
                         <div class="form-group" id="Mandato" >

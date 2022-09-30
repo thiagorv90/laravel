@@ -6,6 +6,7 @@ use App\Exports\RepresentacaoNumerosExport;
 use Illuminate\Http\Request;
 use App\Models\Representacoe;
 use App\Models\Representacoes_anexo;
+use App\Models\Vw_representacoe;
 use DB;
 use App\Models\Representante_suplente;
 use App\Models\Representacao_representante;
@@ -347,7 +348,8 @@ return back()->withInput(['selecionado' => $edit, 'lista' => $insta,  'anexo' =>
         $instancias = DB::table('instancias')
             ->where('instancias.cdInstancia', '=', $id)
             ->get();
-             $selecionado = DB::table('vw_representacoes')->where('cdInstancia', '=', $id)->get();
+        $selecionado = DB::table('vw_representacoes')->where('cdInstancia', '=', $id)->get();
+
         return view('representacoes/repinsta', ['selecionado' => $selecionado, 'instancias' => $instancias, 'events' => $events, 'representantes' => $representantes,'bread'=>$bread]);
     }
 

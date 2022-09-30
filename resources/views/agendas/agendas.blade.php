@@ -82,7 +82,7 @@
                         <label for="date">Data:</label>
                         <input type="date" class="form-control" id="dtAgenda" name="dtAgenda">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" style= "display:none">
                         <label for="title">Representante: </label>
                         <select name="cdRepresentacao" id="cdRepresentacao" class="form-control" >
                             @foreach ($repes as $agenda)
@@ -166,6 +166,7 @@
     </div>    
 
         <h1>Agendas da representação:</h1>
+
         <a href="/instituicoes" >{{$bread->nmInstituicao}}</a> /
         <a href="/instancias/{{$bread->cdInstituicao}}">{{$bread->nmInstancia}}</a> /
         <a href="/repinsta/{{$bread->cdRepresentacao}}">{{$bread->nmRepresentanteSuplente}}</a>
@@ -263,13 +264,13 @@
                         <label for="date">Data:</label>
                         <input type="date" class="form-control" id="dtAgenda" name="dtAgenda">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" style= "display:none">
                         <label for="title">Representante: </label>
                         <select name="cdRepresentacao" id="cdRepresentacao" class="form-control" >
-                            @foreach ($repes as $agenda)
+                            
                                 <option
-                                    value="{{$agenda->cdRepresentacao}}"> {{$agenda->nmRepresentanteSuplente}}</option>
-                            @endforeach
+                                    value="{{$bread->cdRepresentacao}}"> {{$bread->cdRepresentacao}}</option>
+                            
                         </select>
                     </div>
                     <div class="form-group">
