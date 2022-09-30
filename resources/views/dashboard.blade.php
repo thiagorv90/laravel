@@ -70,8 +70,18 @@
     <h3 id="me" style="display:none">Agendas do Mês</h3>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <label class="switch"><input type="checkbox"><span class="slider round hide-off"></span></label>
+    
     <div id="semana" class="container mt-5">
-            
+        
+        @if (is_countable($selecionado) && count($selecionado)  == 0)                     
+            <div class="alert alert-danger d-flex align-items-center mt-4 mb-3" role="alert">      
+                <div>
+                    <h6>Não existem agendas marcadas nesta semana.</h6>   <!--Alerta-->   
+                </div>
+            </div>                    
+        @else
+
+        
         <table class="table">
             <thead>
             <tr>
@@ -98,10 +108,19 @@
             @endforeach
             </tbody>
         </table>
+        @endif
     </div>
 
 
     <div id="mes" class="container mt-5" style="display:none">
+
+        @if (is_countable($mes) && count($mes)  == 0)                     
+        <div class="alert alert-danger d-flex align-items-center mt-4 mb-3 " role="alert">      
+           <div>
+               <h6>Não existem agendas marcadas para este mês.</h6>   <!--Alerta-->   
+           </div>
+            </div>                    
+        @else
 
         <table class="table">
             <thead>
@@ -130,6 +149,7 @@
             @endforeach
             </tbody>
         </table>
+        @endif
     </div>
 
     <script>

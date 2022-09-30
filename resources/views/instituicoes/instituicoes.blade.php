@@ -3,6 +3,17 @@
 @section('title', 'Instituições')
 
 @section('content')
+
+<style>
+    a{
+        text-decoration: none;
+        color: #6f42c1;
+    }
+    a:hover{
+        color: #452680;
+    }
+</style>
+
     <div class="container">
         <h1>Instituições</h1>
         <table class="table">

@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Exports\RepresentacoesExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Auth\Access\Response;
+use App\Models\Vw_representacoe;
 
 class RepresentacoesController extends Controller
 {
@@ -348,6 +349,7 @@ return back()->withInput(['selecionado' => $edit, 'lista' => $insta,  'anexo' =>
             ->where('instancias.cdInstancia', '=', $id)
             ->get();
         $selecionado = DB::table('vw_representacoes')->where('cdInstancia', '=', $id)->get();
+
         return view('representacoes/repinsta', ['selecionado' => $selecionado, 'instancias' => $instancias, 'events' => $events, 'representantes' => $representantes,'bread'=>$bread]);
     }
 
