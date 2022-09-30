@@ -34,69 +34,53 @@ class RepresentanteSuplenteController extends Controller
         $event->cdEmpresa = $request->cdEmpresa;
         $event->dsEndereco = $request->dsEndereco;
         $event->dtNascimento = $request->dtNascimento;
-        
+
         $event->dsBairro = $request->dsBairro;
         $event->dsCidade = $request->dsCidade;
         $event->dsCEP = $request->dsCEP;
-        
+
 
         $event->save();
 
         if ($request->has('nmAnexo')) {
-
             for ($i = 0; $i < count($request->allFiles()['nmAnexo']); $i++) {
-
-
                 $file = $request->allfiles()['nmAnexo'][$i];
                 $name = $request->file()['nmAnexo'][$i]->getClientOriginalName();
                 $anexo = new Representante_suplentes_anexo();
 
-
                 $explode = $file->store('public/files');
                 $certo = explode("s/", $explode);
-
 
                 $anexo->nmAnexo = $certo[1];
                 $anexo->nmOriginal = $name;
                 $anexo->cdRepSup = $event->cdRepSup;
 
                 $anexo->save();
-
             }
-
         }
-
 
         return redirect()->route('representantes');
     }
 
     public function repsupfile(Request $request, $id)
     {
-
-
         for ($i = 0; $i < count($request->allFiles()['nmAnexo']); $i++) {
-
-
             $file = $request->allfiles()['nmAnexo'][$i];
             $name = $request->file()['nmAnexo'][$i]->getClientOriginalName();
             $anexo = new Representante_suplentes_anexo();
 
-
             $explode = $file->store('public/files');
             $certo = explode("s/", $explode);
-
 
             $anexo->nmAnexo = $certo[1];
             $anexo->nmOriginal = $name;
             $anexo->cdRepSup = $id;
 
             $anexo->save();
-
         }
-
-
         return back();
     }
+
     public function deleteRep($id)
     {
         $links = Representante_suplentes_anexo::where('cdRepSup', $id)->get();
@@ -104,7 +88,7 @@ class RepresentanteSuplenteController extends Controller
         foreach ($links as $link) {
             unlink(public_path() . "/storage/files/$link->nmAnexo");
         }
-        
+
         Representante_suplentes_anexo::where('cdRepSup', $id)->delete();
         Representante_suplente::where('cdRepSup', $id)->delete();
         // $deleted = DB::delete('delete from telefone_contatos where cdTelefone = ?', [$id]);
@@ -115,12 +99,9 @@ class RepresentanteSuplenteController extends Controller
     {
         $file = Representante_suplentes_anexo::where('nmAnexo', $id);
 
-
         unlink(public_path() . "/storage/files/$id");
 
-
         Representante_suplentes_anexo::where('nmAnexo', $id)->delete();
-
 
         // $deleted = DB::delete('delete from telefone_contatos where cdTelefone = ?', [$id]);
         return back();
@@ -128,16 +109,15 @@ class RepresentanteSuplenteController extends Controller
 
     public function repsupcreate()
     {
-        $events= DB::table('vw_representantes')->orderby('nmRepresentanteSuplente')->simplepaginate(10);
- 
-       
-       
+        $events = DB::table('vw_representantes')->orderby('nmRepresentanteSuplente')->simplepaginate(10);
+
         $dados = DB::table('users')->get();
         $empresas = DB::table('empresas')->get();
         $escolaridades = DB::table('escolaridades')->get();
-        
-        return view('repsup/repsup', ['empresas'=>$empresas, 'escolaridades'=>$escolaridades, 'dados'=>$dados, 'events'=>$events]);
+
+        return view('repsup/repsup', ['empresas' => $empresas, 'escolaridades' => $escolaridades, 'dados' => $dados, 'events' => $events]);
     }
+
     public function search(Request $request)
     {
         $request->validate([
@@ -145,7 +125,7 @@ class RepresentanteSuplenteController extends Controller
         ]);
 
         $query = $request->input('query');
-        $events= DB::table('vw_representantes')
+        $events = DB::table('vw_representantes')
             ->where('nmRepresentanteSuplente', 'like', "%$query%")
             ->get();
 
@@ -183,11 +163,10 @@ class RepresentanteSuplenteController extends Controller
         $bairro = $request->input('dsBairro');
         $cidade = $request->input('dsCidade');
         $cep = $request->input('dsCEP');
-        
 
         DB::update('update representante_suplentes set  nmRepresentanteSuplente = ?, dsEmail = ?, dsEmailAlternativo = ?,
         stAtivo = ?, dsProfissao = ?, cdEscolaridade = ?, cdEmpresa = ?, dsEndereco = ?, dtNascimento =?, dsObservacao=?,dsBairro = ?, dsCidade =?,dsCEP=?
-        where cdRepSup = ?', [$nome, $email, $emaila, $sta, $prof, $escola, $empresa, $ende, $data,$obs,$bairro,$cidade,$cep, $id]);
+        where cdRepSup = ?', [$nome, $email, $emaila, $sta, $prof, $escola, $empresa, $ende, $data, $obs, $bairro, $cidade, $cep, $id]);
 
         return redirect('/repsup')->with('msg', 'evento alterado com sucesso');
     }
@@ -205,5 +184,5 @@ class RepresentanteSuplenteController extends Controller
             ->get();
         return view('repsup.selerepsup', ['events' => $events, 'dados' => $dados, 'empresas' => $empresas, 'escolaridades' => $escolaridades, 'selecionado' => $selecionado]);
     }
-    
+
 }

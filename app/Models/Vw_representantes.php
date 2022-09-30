@@ -8,5 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Vw_representantes extends Model
 {
     use HasFactory;
-    public $table ='VW_representantes';
+
+    public $table = 'VW_representantes';
 }

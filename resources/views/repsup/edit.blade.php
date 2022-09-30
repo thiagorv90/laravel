@@ -12,7 +12,7 @@
                 @csrf
 
                 @method('PUT')
-                <div class="form-group" >
+                <div class="form-group">
                     <label for="date">Nome:</label>
                     <input type="text" class="form-control" id="nmRepresentanteSuplente" name="nmRepresentanteSuplente"
                            value="{{$age->nmRepresentanteSuplente}}">
@@ -22,7 +22,7 @@
                     <input type="date" class="form-control" id="dtNascimento" name="dtNascimento"
                            value="{{$age->dtNascimento}}">
                 </div>
-                
+
                 <div class="form-group">
                     <label for="title">Escolaridade:</label>
                     <select id="cdEscolaridade" name="cdEscolaridade" class="form-select">
@@ -79,34 +79,34 @@
                         </label>
                     </div>
                 </div>
-                
+
                 <div class="form-group">
-                <label for="title">Endereço:</label>
-                <input  name="dsEndereco" id="dsEndereco" class="form-control" value="{{$age->dsEndereco}}"
-                         >
-            </div>
-            
-            
-            <div class="form-group">
-                <label for="title"> Bairro:</label>
-                <input  name="dsBairro" id="dsBairro" class="form-control" value="{{$age->dsBairro}}"
-                          >
-            </div>
-            <div class="form-group">
-                <label for="title"> Cidade:</label>
-                <input  name="dsCidade" id="dsCidade" class="form-control" value="{{$age->dsCidade}}"
-                         >
-            </div>
-            <div class="form-group">
-                <label for="title"> CEP:</label>
-                <input  name="dsCEP" id="dsCEP" class="form-control" value="{{$age->dsCEP}}"
-                          >
-            </div>
-               
+                    <label for="title">Endereço:</label>
+                    <input name="dsEndereco" id="dsEndereco" class="form-control" value="{{$age->dsEndereco}}"
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label for="title"> Bairro:</label>
+                    <input name="dsBairro" id="dsBairro" class="form-control" value="{{$age->dsBairro}}"
+                    >
+                </div>
+                <div class="form-group">
+                    <label for="title"> Cidade:</label>
+                    <input name="dsCidade" id="dsCidade" class="form-control" value="{{$age->dsCidade}}"
+                    >
+                </div>
+                <div class="form-group">
+                    <label for="title"> CEP:</label>
+                    <input name="dsCEP" id="dsCEP" class="form-control" value="{{$age->dsCEP}}"
+                    >
+                </div>
+
                 <div class="form-group">
                     <label for="title">Observação:</label>
-                    <textarea type="text" class="form-control" id="dsObservacao" name="dsObservacao" 
-                           >{{$age->dsObservacao}}</textarea>
+                    <textarea type="text" class="form-control" id="dsObservacao" name="dsObservacao"
+                    >{{$age->dsObservacao}}</textarea>
                 </div>
                 <br>
                 <div class="container d-flex justify-content-between mt-2">

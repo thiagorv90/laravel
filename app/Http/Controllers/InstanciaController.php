@@ -41,7 +41,7 @@ class InstanciaController extends Controller
         $event->dsAtoNormativo = $request->dsAtoNormativo;
         $event->boCaraterDaInstancia = $request->boCaraterDaInstancia;
         $event->dsSite = $request->dsSite;
-       
+
 
         $event->save();
         if ($request->has('nmAnexo')) {
@@ -102,11 +102,10 @@ class InstanciaController extends Controller
         $insta = Instancia::join('tema_representacoes', 'instancias.cdTema', '=', 'tema_representacoes.cdTema')
             ->join('instituicoes', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
             ->leftjoin('representacoes', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
-            
             ->where('instancias.cdInstituicao', '=', $id)->get(['instancias.cdInstancia', 'nmInstancia', 'nmTema',
-             'instancias.cdInstituicao', 'instancias.stAtivo']);
+                'instancias.cdInstituicao', 'instancias.stAtivo']);
 
-        return view('instancias.instancias', ['instancias' => $insta, 'temas' => $temas, 'instituicaos' => $instituicaos,'bread'=>$bread]);
+        return view('instancias.instancias', ['instancias' => $insta, 'temas' => $temas, 'instituicaos' => $instituicaos, 'bread' => $bread]);
     }
 
 
@@ -116,7 +115,7 @@ class InstanciaController extends Controller
             ->join('instituicoes', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
             ->where('instancias.cdinstancia', '=', $cdInstancia)
             ->get();
-        $tema=DB::table('tema_representacoes')->get();
+        $tema = DB::table('tema_representacoes')->get();
         $lista = Instancia::orderBy('nmInstancia')
             ->get();
 
@@ -142,12 +141,11 @@ class InstanciaController extends Controller
         $carater = $request->input('boCaraterDaInstancia');
         $ato = $request->input('dsAtoNormativo');
         $site = $request->input('dsSite');
-      
 
 
         DB::update('update instancias set cdInstituicao = ?, cdTema = ?, nmInstancia = ?, tpFederalDistrital = ?, tpPublicoPrivado = ?, dsMandato = ?,
             stAtivo = ?, dsObjetivo = ?, tpPrioridade = ?, dsAmeacas = ?, dsOportunidades = ?, dsObservacao=?, boCaraterDaInstancia=?,dsAtoNormativo=?, dsSite=?
-            where cdInstancia = ?', [$cd, $tema, $name, $fed, $pub, $mand, $ativo, $obj, $pri, $ame, $opor, $manda, $carater, $ato,$site, $id]);
+            where cdInstancia = ?', [$cd, $tema, $name, $fed, $pub, $mand, $ativo, $obj, $pri, $ame, $opor, $manda, $carater, $ato, $site, $id]);
 
         return redirect()->route('instancias', ['id' => $cd]);
     }

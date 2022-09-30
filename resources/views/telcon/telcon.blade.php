@@ -7,7 +7,7 @@
     <div class="container">
         @if (is_countable($selecionado) && count($selecionado) == 0)
             <h3>Não ha telefones para esse contato</h3>
-           
+
             @foreach ($telefones as $telefone)
 
                 <h1>Crie Contato Telefonico para: {{$telefone->nmContato}}</h1>

@@ -27,26 +27,28 @@
                 <div class="form-group">
                     <label for="title">Tema: </label>
                     <select name="cdTema" id="cdTema" class="form-control">
-                    <option value="{{$instituicao->cdTema}}"> {{$instituicao->nmTema}}</option>
-                    @foreach($tema as $tem)
+                        <option value="{{$instituicao->cdTema}}"> {{$instituicao->nmTema}}</option>
+                        @foreach($tema as $tem)
                             <option value="{{$tem->cdTema}}"> {{$tem->nmTema}}</option>
                         @endforeach
 
                     </select>
                 </div>
-                <div class="form-group" id="Mandato" >
-                            <label for="dsSite">Mandato:</label>
-                            <input placeholder="Site..." type="text" class="form-control" id="dsSite" value="{{$instituicao->dsSite}}"
-                                   name="dsSite">
-                        </div>
-               
-               
-                        <div class="form-group" id="Mandato" >
-                            <label for="dsMandato">Mandato:</label>
-                            <input placeholder="Mandato..." type="text" class="form-control" id="dsMandato" value="{{$instituicao->dsMandato}}"
-                                   name="dsMandato">
-                        </div>
-                       
+                <div class="form-group" id="Mandato">
+                    <label for="dsSite">Mandato:</label>
+                    <input placeholder="Site..." type="text" class="form-control" id="dsSite"
+                           value="{{$instituicao->dsSite}}"
+                           name="dsSite">
+                </div>
+
+
+                <div class="form-group" id="Mandato">
+                    <label for="dsMandato">Mandato:</label>
+                    <input placeholder="Mandato..." type="text" class="form-control" id="dsMandato"
+                           value="{{$instituicao->dsMandato}}"
+                           name="dsMandato">
+                </div>
+
                 <div class="form-group">
                     <label for="title">Classificação:</label>
                     <div class="form-check">
@@ -102,7 +104,7 @@
                     <div class="form-group">
                         <label for="title">Descrição Objetivo:</label>
                         <textarea name="dsObjetivo" id="dsObjetivo" class="form-control"
-                              >{{$instituicao->dsObjetivo}}</textarea>
+                        >{{$instituicao->dsObjetivo}}</textarea>
                     </div>
 
 
@@ -145,12 +147,12 @@
                 <div class="form-group">
                     <label for="dsObservacao">Observação:</label>
                     <textarea type="text" class="form-control" id="dsObservacao" name="dsObservacao"
-                           >{{$instituicao->dsObservacao}}</textarea>
+                    >{{$instituicao->dsObservacao}}</textarea>
                 </div>
                 <div class="form-group">
                     <label for="dsAtoNormativo">Ato Normativo:</label>
                     <textarea placeholder="Observações..." type="text" class="form-control" id="dsAtoNormativo"
-                           name="dsAtoNormativo" >{{$instituicao->dsAtoNormativo}}</textarea>
+                              name="dsAtoNormativo">{{$instituicao->dsAtoNormativo}}</textarea>
                 </div>
                 <div class="form-group">
                     <label for="title">Carater:</label>
@@ -171,13 +173,13 @@
                         </label>
                     </div>
                     <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="boCaraterDaInstancia"
-                                           id="boCaraterDaInstancia"
-                                           value="2" @if($instituicao->boCaraterDaInstancia ==2) checked @endif >
-                                    <label class="form-check-label" for="boCaraterDaInstancia">
-                                    Consultivo/Deliberativo
-                                    </label>
-                                </div>
+                        <input class="form-check-input" type="radio" name="boCaraterDaInstancia"
+                               id="boCaraterDaInstancia"
+                               value="2" @if($instituicao->boCaraterDaInstancia ==2) checked @endif >
+                        <label class="form-check-label" for="boCaraterDaInstancia">
+                            Consultivo/Deliberativo
+                        </label>
+                    </div>
 
                 </div>
                 <br>

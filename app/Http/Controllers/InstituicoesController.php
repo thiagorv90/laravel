@@ -28,17 +28,17 @@ class InstituicoesController extends Controller
 
         return view('/instituicoes/search-results', compact('events'));
     }
+
     public function insta(Request $request)
     {
         $request->validate([
             'query' => 'required',
         ]);
-        
+
         $query = $request->input('query');
         $events = DB::table('instancias')
             ->select('nmInstancia', 'cdInstancia')
             ->where('nmInstancia', 'like', "%$query%")
-           
             ->get();
 
         return view('/instancias/search-results', compact('events'));

@@ -70,85 +70,84 @@
     <h3 id="me" style="display:none">Agendas do Mês</h3>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <label class="switch"><input type="checkbox"><span class="slider round hide-off"></span></label>
-    
+
     <div id="semana" class="container mt-5">
-        
-        @if (is_countable($selecionado) && count($selecionado)  == 0)                     
-            <div class="alert alert-danger d-flex align-items-center mt-4 mb-3" role="alert">      
+
+        @if (is_countable($selecionado) && count($selecionado)  == 0)
+            <div class="alert alert-danger d-flex align-items-center mt-4 mb-3" role="alert">
                 <div>
-                    <h6>Não existem agendas marcadas nesta semana.</h6>   <!--Alerta-->   
+                    <h6>Não existem agendas marcadas nesta semana.</h6>   <!--Alerta-->
                 </div>
-            </div>                    
+            </div>
         @else
 
-        
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">Representante</th>
-                <th scope="col">Nome da Instancia</th>
-                <th scope="col">Data da Agenda</th>
-                <th scope="col">Hora da Agenda</th>
-                <th scope="col">Assunto da Agenda</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach ($selecionado as $sel)
+            <table class="table">
+                <thead>
                 <tr>
-                    <td scope="col">{{$sel->nmRepresentanteSuplente}}</td>
-                    <td scope="col">{{ $sel->nmInstancia }}</td>
-                    <td scope="col">{!! date('d/m/Y', strtotime($sel->dtAgenda)) !!}</td>
-                    <td scope="col">{!! date('G:i', strtotime($sel->hrAgenda)) !!}</td>
-                    <td scope="col">{{ $sel->dsAssunto }}</td>
-                    <td><a href="/agendas/edit/{{$sel->cdAgenda}}" class="btn btn-info edit-btn"
-                                           data-bs-toggle="tooltip" data-bs-title="Agenda">
-                                            <ion-icon name="book-outline"></ion-icon>
-                                        </a></td>
+                    <th scope="col">Representante</th>
+                    <th scope="col">Nome da Instancia</th>
+                    <th scope="col">Data da Agenda</th>
+                    <th scope="col">Hora da Agenda</th>
+                    <th scope="col">Assunto da Agenda</th>
                 </tr>
-            @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                @foreach ($selecionado as $sel)
+                    <tr>
+                        <td scope="col">{{$sel->nmRepresentanteSuplente}}</td>
+                        <td scope="col">{{ $sel->nmInstancia }}</td>
+                        <td scope="col">{!! date('d/m/Y', strtotime($sel->dtAgenda)) !!}</td>
+                        <td scope="col">{!! date('G:i', strtotime($sel->hrAgenda)) !!}</td>
+                        <td scope="col">{{ $sel->dsAssunto }}</td>
+                        <td><a href="/agendas/edit/{{$sel->cdAgenda}}" class="btn btn-info edit-btn"
+                               data-bs-toggle="tooltip" data-bs-title="Agenda">
+                                <ion-icon name="book-outline"></ion-icon>
+                            </a></td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
         @endif
     </div>
 
 
     <div id="mes" class="container mt-5" style="display:none">
 
-        @if (is_countable($mes) && count($mes)  == 0)                     
-        <div class="alert alert-danger d-flex align-items-center mt-4 mb-3 " role="alert">      
-           <div>
-               <h6>Não existem agendas marcadas para este mês.</h6>   <!--Alerta-->   
-           </div>
-            </div>                    
+        @if (is_countable($mes) && count($mes)  == 0)
+            <div class="alert alert-danger d-flex align-items-center mt-4 mb-3 " role="alert">
+                <div>
+                    <h6>Não existem agendas marcadas para este mês.</h6>   <!--Alerta-->
+                </div>
+            </div>
         @else
 
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">Representante</th>
-                <th scope="col">Nome da Instancia</th>
-                <th scope="col">Data da Agenda</th>
-                <th scope="col">Hora da Agenda</th>
-                <th scope="col">Assunto da Agenda</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach ($mes as $me)
+            <table class="table">
+                <thead>
                 <tr>
-                    <td>{{$me->nmRepresentanteSuplente}}</td>
-                    <td><a>{{ $me->nmInstancia }}</a></td>
-                    <td>{!! date('d/m/Y', strtotime($me->dtAgenda)) !!}</td>
-                    <td>{!! date('G:i', strtotime($me->hrAgenda)) !!}</td>
-                    <td><a>{{ $me->dsAssunto }}</a></td>
-                    <td><a href="/agendas/edit/{{$me->cdAgenda}}" class="btn btn-info edit-btn"
-                                           data-bs-toggle="tooltip" data-bs-title="Agenda">
-                                            <ion-icon name="book-outline"></ion-icon>
-                                        </a></td>
-
+                    <th scope="col">Representante</th>
+                    <th scope="col">Nome da Instancia</th>
+                    <th scope="col">Data da Agenda</th>
+                    <th scope="col">Hora da Agenda</th>
+                    <th scope="col">Assunto da Agenda</th>
                 </tr>
-            @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                @foreach ($mes as $me)
+                    <tr>
+                        <td>{{$me->nmRepresentanteSuplente}}</td>
+                        <td><a>{{ $me->nmInstancia }}</a></td>
+                        <td>{!! date('d/m/Y', strtotime($me->dtAgenda)) !!}</td>
+                        <td>{!! date('G:i', strtotime($me->hrAgenda)) !!}</td>
+                        <td><a>{{ $me->dsAssunto }}</a></td>
+                        <td><a href="/agendas/edit/{{$me->cdAgenda}}" class="btn btn-info edit-btn"
+                               data-bs-toggle="tooltip" data-bs-title="Agenda">
+                                <ion-icon name="book-outline"></ion-icon>
+                            </a></td>
+
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
         @endif
     </div>
 

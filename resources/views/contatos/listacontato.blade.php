@@ -7,7 +7,8 @@
         @foreach ($nome as $name)
             <h1>Contatos da Instancia: {{$name->nmInstancia}}</h1>
         @endforeach
-        <a href="/instituicoes" >{{$bread->nmInstituicao}}</a>><a href="/instancias/{{$bread->cdInstituicao}}">{{$bread->nmInstancia}}</a>
+        <a href="/instituicoes">{{$bread->nmInstituicao}}</a>><a
+            href="/instancias/{{$bread->cdInstituicao}}">{{$bread->nmInstancia}}</a>
 
         <table class="table">
 
@@ -122,12 +123,12 @@
             </form>
         </div>
     @else
-    
-       
-            <h3>Não ha contato para esta instancia:</h3>
-            <a href="/instituicoes" >{{$bread->nmInstituicao}}</a>><a href="/instancias/{{$bread->cdInstituicao}}">{{$bread->nmInstancia}}</a>
-            
-             @foreach ($nome as $contato)
+
+        <h3>Não ha contato para esta instancia:</h3>
+        <a href="/instituicoes">{{$bread->nmInstituicao}}</a>><a
+            href="/instancias/{{$bread->cdInstituicao}}">{{$bread->nmInstancia}}</a>
+
+        @foreach ($nome as $contato)
             <h1> Criar Contatos para a Instancia {{$contato->nmInstancia}}</h1>
             <div id="event-create-container" class="container">
 

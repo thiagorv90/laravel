@@ -78,7 +78,7 @@
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                
+
                                 <li class="nav-item"><a class="nav-link" href="/instituicoes">Instituições</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/reports">Relatórios</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/usuarios">Usuários</a></li>

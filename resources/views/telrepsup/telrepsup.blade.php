@@ -13,7 +13,8 @@
             <div id="event-create-container" class="container">
                 <form action="telrepsup" method="post">
 
-                    @csrf   <div class="form-group">
+                    @csrf
+                    <div class="form-group">
                         <label for="title">DDD:</label>
                         <input placeholder="DDD..." type="text" class="form-control" id="nuDDDTelefone"
                                name="nuDDDTelefone">
@@ -23,7 +24,7 @@
                         <input placeholder="Telefone..." type="text" class="form-control" id="nuTelefone"
                                name="nuTelefone">
                     </div>
-                 
+
 
                     <div class="form-group" style="display:none">
                         <label for="title">Representante:</label>
@@ -32,22 +33,22 @@
                         </select>
                     </div>
                     <div class="form-group">
-                    <label for="title">Tipo:</label>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="tpTelefone"
-                               id="tpTelefone" value="1">
-                        <label class="form-check-label" for="tpTelefone">
-                            Celular
-                        </label>
+                        <label for="title">Tipo:</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tpTelefone"
+                                   id="tpTelefone" value="1">
+                            <label class="form-check-label" for="tpTelefone">
+                                Celular
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tpTelefone"
+                                   id="tpTelefone" value="0">
+                            <label class="form-check-label" for="tpTelefone">
+                                Fixo
+                            </label>
+                        </div>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="tpTelefone"
-                               id="tpTelefone" value="0">
-                        <label class="form-check-label" for="tpTelefone">
-                            Fixo
-                        </label>
-                    </div>
-                </div>
                     <div class="container d-flex justify-content-between mt-3">
                         <a href="/repsup" class="btn btn-info">Voltar</a>
                         <input type="submit" class="btn btn-primary" value="Criar Telefone">
@@ -63,7 +64,7 @@
             <table class="table">
                 <thead>
                 <tr>
-                    
+
                     <th scope="col">Telefone</th>
                     <th scope="col">Opções</th>
                 </tr>
@@ -73,7 +74,7 @@
                 @foreach ($selecionado as $event)
 
                     <tr>
-                        
+
                         <td><a>{{ $event->nuTelefone }}</a></td>
                         <td class="d-flex">
                             <a href="/telrepsup/edit/{{$event->cdTelefone}}" class="btn btn-info edit-btn me-2"

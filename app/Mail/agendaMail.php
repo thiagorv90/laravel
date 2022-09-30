@@ -14,7 +14,9 @@ use App\Models\Representacoe;
 class AgendaMail extends Mailable
 {
     use Queueable, SerializesModels;
-private $mail;
+
+    private $mail;
+
     /**
      * Create a new message instance.
      *
@@ -22,9 +24,9 @@ private $mail;
      */
     public function __construct($mail)
     {
-       
+
         $this->mail = $mail;
-       
+
     }
 
     /**
@@ -38,6 +40,6 @@ private $mail;
         $this->to($this->mail->emailrepre);
         $this->to($this->mail->dsEmail);
         $this->cc(auth()->user()->email);
-        return $this->markdown('mail.agendaMail',['mail' => $this->mail]);
+        return $this->markdown('mail.agendaMail', ['mail' => $this->mail]);
     }
 }

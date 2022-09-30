@@ -27,7 +27,8 @@
                 --</a>
             <a href="{{route('exportViewAgendas')}}" class="list-group-item list-group-item-action">9. --
                 Agendas --</a>
-            <a href="{{route('agendaReuniao')}}" class="list-group-item list-group-item-action">10. -- Agenda Reunioes --</a>
+            <a href="{{route('agendaReuniao')}}" class="list-group-item list-group-item-action">10. -- Agenda Reunioes
+                --</a>
         </div>
     </div>
 
