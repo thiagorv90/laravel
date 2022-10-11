@@ -240,6 +240,15 @@
                                data-bs-toggle="tooltip" data-bs-title="Representação">
                                 <ion-icon name="reader-outline"></ion-icon>
                             </a>
+                            <form action="/instancias/{{$instancia->cdInstancia}}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger delete-btn"
+                                                        data-bs-toggle="tooltip"
+                                                        data-bs-title="Deletar">
+                                                    <ion-icon name="trash-outline"></ion-icon>
+                                                </button>
+                                            </form>
                         </td>
                     </tr>
                 @endforeach

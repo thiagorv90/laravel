@@ -79,7 +79,7 @@ Route::middleware('auth')->group(function () {
         Route::post('instancias/{id}', [InstanciaController::class, 'storeinst']);
         Route::get('instancias/{id}', [InstanciaController::class, 'instacreate'])->name('instancias');
         Route::post('/instancias/file/{id}', [InstanciaController::class, 'instanciafile']);
-
+        Route::delete('/instancias/{id}', [InstanciaController::class, 'deleteInsta']);
         Route::delete('/instancias/files/{id}', [InstanciaController::class, 'deleteInstnImg']);
         Route::get('/dashboard/export/{id}', [InstanciaController::class, 'export'])->name('excel');
 
@@ -123,6 +123,8 @@ Route::middleware('auth')->group(function () {
         Route::delete('/representacoes/files/{id}', [RepresentacoesController::class, 'deleteRepreImg']);
         Route::post('/representacoes/representantes/{id}', [RepresentacoesController::class, 'createrep']);
         Route::delete('/representacoes/representantes/{id}', [RepresentacoesController::class, 'deleterep']);
+        Route::get('/getEmployeeDetails/{empid}', [RepresentacoesController::class, 'repreinfo'])->name('getEmployeeDetails');
+        Route::post('/representacoes/representantes/add/{id}', [RepresentacoesController::class, 'editrepre']);
 
         Route::post('repsup', [RepresentanteSuplenteController::class, 'repsupstore']);
         Route::get('repsup', [RepresentanteSuplenteController::class, 'repsupcreate'])->name('representantes');

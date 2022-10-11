@@ -4,20 +4,32 @@
 
 @section('content')
 
+
+<style>
+    a{
+        text-decoration: none;
+        color: #6f42c1;
+    }
+    a:hover{
+        color: #452680;
+         
+    }
+</style>
+
     <div id="event-create-container" class="container">
         <h1>Editar Representacão</h1>
-        <a href="/instituicoes">{{$bread->nmInstituicao}}</a>><a
-            href="/instancias/{{$bread->cdInstituicao}}">{{$bread->nmInstancia}}</a>
+       
         <div class="container">
 
 
-            <table class="table">
+            <table class="table"  id='empTable'>
                 <thead>
                 <tr>
                     <th scope="col">Nome:</th>
-                    <th scope="col">Status</th>
+                    <th scope="col">Tiluridade</th>
+                    <th scope="col">Inicio Nomeação</th>
+                    <th scope="col">Ativo</th>
                     <th scope="col">Opções</th>
-
                 </tr>
                 </thead>
                 <tbody>
@@ -25,24 +37,39 @@
                 @foreach ($representantes as $incluido)
                     <tr>
 
-                        <td scropt="row">{{$incluido->nmRepresentanteSuplente}}</td>
+                        <td scropt="row">{{$incluido->nmRepresentanteSuplente}}</td>  
 
-                        @if($incluido->stTitularidade ==1)
+                        @if($incluido->stRepresentante ==1)
                             <td>Titular</td>
                         @else
                             <td>Suplente</td>
 
                         @endif
+                         <td>{!! date('d/m/Y', strtotime($incluido->dtInicioNomeacao)) !!}</td>
+                        
+                         @if($incluido->stTitularidade ==1)
+                            <td>Ativo</td>
+                        @else
+                            <td>Inativo</td>
 
-                        <td>
+                        @endif
+                        <td> 
+                             <!-- Botão que chama a modal -->
+                             <button  class="btn btn-info edit-btn viewdetails" data-id='{{ $incluido->cdRepSup }}' data-bs-toggle="tooltip" data-bs-title="Editar">
+                                            <ion-icon name="create-outline"></ion-icon></button>     
+                                           
+                                        </a>                                                    
+                                                 
                             <form action="/representacoes/edit/{{$incluido->cdRepSup}}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger delete-btn" data-bs-toggle="tooltip"
+                                <button type="submit" class="btn btn-danger delete-btn ml-2" data-bs-toggle="tooltip"
                                         data-bs-title="Deletar">
                                     <ion-icon name="trash-outline"></ion-icon>
                                 </button>
                             </form>
+
+                            
                         </td>
                     </tr>
                 @endforeach
@@ -67,20 +94,24 @@
                 <div class="form-group">
                     <label for="title">Status:</label>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="stTitularidade" id="stTitularidade"
+                        <input class="form-check-input" type="radio" name="stRepresentante" id="stRepresentante"
                                value="1">
-                        <label class="form-check-label" for="stTitularidade">
-                            Representante
+                        <label class="form-check-label" for="stRepresentante">
+                            Titular
                         </label>
                     </div>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="stTitularidade" id="stTitularidade" value="0">
-                    <label class="form-check-label" for="stTitularidade">
+                    <input class="form-check-input" type="radio" name="stRepresentante" id="stRepresentante" value="0">
+                    <label class="form-check-label" for="stRepresentante">
                         Suplente
                     </label>
                 </div>
-
+                <div class="form-group">
+                                    <label for="title">Data de Nomeação:</label>
+                                    <input type="date" class="form-control" id="dtInicioNomeacao" name="dtInicioNomeacao">
+                                </div>
+<br>
                 <input type="submit" class="btn btn-primary mb-2" value="Incluir">
             </form>
 
@@ -144,7 +175,7 @@
                                value="{{$age->dsDesignacao}}">
                     </div>
                     <div class="form-group">
-                        <label for="title">Nomeacao: </label>
+                        <label for="title">Nomeação: </label>
                         <input type="textarea" class="form-control" id="dsNomeacao" name="dsNomeacao"
                                value="{{$age->dsNomeacao}}">
                     </div>
@@ -153,16 +184,8 @@
                         <input type="text" class="form-control" id="dsDesignacao" name="dsDesignacaoSuplente"
                                value="{{$age->dsDesignacaoSuplente}}">
                     </div>
-                    <div class="form-group">
-                        <label for="title">Nomeação Suplente:</label>
-                        <input type="text" class="form-control" id="dsNomeacao" name="dsNomacaoSuplente"
-                               value="{{$age->dsNomacaoSuplente}}">
-                    </div>
-                    <div class="form-group">
-                        <label for="title">Data de Nomeação:</label>
-                        <input type="text" class="form-control" id="dtNomeacao" name="dtNomeacao"
-                               value="{{$age->dtNomeacao}}">
-                    </div>
+                    
+                  
                     <div class="form-group">
                         <label for="title"> Número Nomeação:</label>
                         <input type="number" class="form-control" id="nuNomeacao" name="nuNomeacao"
@@ -209,5 +232,68 @@
             <input type="submit" class="btn btn-primary mb-2" value="Incluir"></div>
     </form>
     </div> @endforeach
+    
+    <!-- Modal --->
+    <div class="container" >
+      <!-- Modal -->
+      <div class="modal fade" id="empModal" >
+         <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h4 class="modal-title">Representante</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+               </div>
+               <div class="modal-body"id="tblempinfo">
+                 
+               </div>
+               <div class="modal-footer">
+                   <button id="certo" type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+               </div>
+            </div>
+         </div>
+   </div>
+    
+
+    <!--Script do Modal-->
+    <script type='text/javascript'>
+        
+   $(document).ready(function(){
+
+    $('#empTable').on('click','.viewdetails',function(){
+        
+    
+        var empid = $(this).attr('data-id');
+       
+          if(empid > 0){
+             
+             // AJAX request
+             var url = "{{ route('getEmployeeDetails',[':empid']) }}";
+             url = url.replace(':empid',empid);
+            
+             // Empty modal data
+             $('#tblempinfo tbody').empty();
+             
+             $.ajax({
+                 url: url,
+                 dataType: 'json',
+                 success: function(response){
+                   
+                     // Add employee details
+                     $('#tblempinfo').html(response.html);
+                    
+                     // Display Modal
+                     $('#empModal').modal('show'); 
+                    
+                 }
+             });
+          }
+      });
+
+   });
+   </script>
+
+
 
 @endsection
