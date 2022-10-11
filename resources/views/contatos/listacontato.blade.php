@@ -3,6 +3,16 @@
 @section('title', 'Contatos Instancia')
 
 @section('content')
+<style>
+    a{
+        text-decoration: none;
+        color: #6f42c1;
+    }
+    a:hover{
+        color: #452680;
+         
+    }
+</style>
     @if (isset($selecionado) && $selecionado->count() > 0)
         @foreach ($nome as $name)
             <h1>Contatos da Instancia: {{$name->nmInstancia}}</h1>

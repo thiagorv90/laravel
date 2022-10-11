@@ -3,7 +3,16 @@
 @section('title', 'Editando Representações')
 
 @section('content')
-
+<style>
+    a{
+        text-decoration: none;
+        color: #6f42c1;
+    }
+    a:hover{
+        color: #452680;
+         
+    }
+</style>
 
 <style>
     a{
@@ -59,7 +68,7 @@
                                             <ion-icon name="create-outline"></ion-icon></button>     
                                            
                                         </a>                                                    
-                                                 
+                                               
                             <form action="/representacoes/edit/{{$incluido->cdRepSup}}" method="POST">
                                 @csrf
                                 @method('DELETE')
@@ -102,6 +111,7 @@
                     </div>
                 </div>
                 <div class="form-check">
+
                     <input class="form-check-input" type="radio" name="stRepresentante" id="stRepresentante" value="0">
                     <label class="form-check-label" for="stRepresentante">
                         Suplente
@@ -200,7 +210,7 @@
                 </form>
     </div>
     <h1>Documentos da Representação</h1>
-    @foreach ($anexo as $ane)
+    @foreach ($anexo as $ane)0
 
         <form action="/representacoes/files/{{$ane->nmAnexo}}" method="POST">
             @csrf
@@ -231,6 +241,8 @@
             <a href="/representacoes/{{$age->cdInstancia}}" class="btn btn-info mb-2">Voltar</a>
             <input type="submit" class="btn btn-primary mb-2" value="Incluir"></div>
     </form>
+
+    
     </div> @endforeach
     
     <!-- Modal --->
@@ -286,6 +298,68 @@
                      // Display Modal
                      $('#empModal').modal('show'); 
                     
+                 }
+             });
+          }
+      });
+
+   });
+   </script>
+
+
+
+
+
+      <!-- Modal -->
+      <div class="modal fade" id="empModal"  aria-labelledby="exampleModalLabel" aria-hidden="false"  >
+         <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h4 class="modal-title">Editar Representante</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+               </div>
+               <div class="modal-body">
+                
+                <table class="w-100" id="tblempinfo">
+                    <tbody></tbody>
+                 </table>
+
+               </div>
+               <div class="modal-footer">
+                   <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+               </div>
+            </div>
+         </div>
+   </div>
+ 
+
+    <!--Script do Modal-->
+    <script type='text/javascript'>
+   $(document).ready(function(){
+
+      $('#empModal').on('click','.viewdetails',function(){
+          var empid = $(this).attr('data-id');
+
+          if(empid > 0){
+
+             // AJAX request
+             var url = "{{ route('getEmployeeDetails',[':empid']) }}";
+             url = url.replace(':empid',empid);
+
+             // Empty modal data
+             $('#tblempinfo tbody').empty();
+
+             $.ajax({
+                 url: url,
+                 dataType: 'json',
+                 success: function(response){
+
+                     // Add employee details
+                     $('#tblempinfo tbody').html(response.html);
+
+                     // Display Modal
+                     $('#empModal').modal('show'); 
                  }
              });
           }

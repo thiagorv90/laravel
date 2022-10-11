@@ -174,7 +174,6 @@
                     <a href="/repinsta/{{$bread->cdInstancia}}">Representações</a>
 
                     <div class="container">
-
                         <table class="table">
                             <thead>
                             <tr>
@@ -220,7 +219,6 @@
                             @endforeach
                             </tbody>
                         </table>
-
                     </div>
                     <br>
 

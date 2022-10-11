@@ -18,7 +18,7 @@
     <div id="event-create-container" class="container">
         <!--Alerta-->  <!--Alerta--> <!--Alerta-->
         @if (is_countable($selecionado) && count($selecionado) == 0)
-            @foreach ( $instancias as  $instancia)
+           @foreach ( $instancias as  $instancia)
                 <div class="alert alert-secondary d-flex align-items-center mt-4 mb-3 " role="alert">
                     <div>
                         <h6>Não existem representações para esta instancia.</h6>

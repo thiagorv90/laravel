@@ -124,7 +124,9 @@ Route::middleware('auth')->group(function () {
         Route::post('/representacoes/representantes/{id}', [RepresentacoesController::class, 'createrep']);
         Route::delete('/representacoes/representantes/{id}', [RepresentacoesController::class, 'deleterep']);
         Route::get('/getEmployeeDetails/{empid}', [RepresentacoesController::class, 'repreinfo'])->name('getEmployeeDetails');
+
         Route::post('/representacoes/representantes/add/{id}', [RepresentacoesController::class, 'editrepre']);
+
 
         Route::post('repsup', [RepresentanteSuplenteController::class, 'repsupstore']);
         Route::get('repsup', [RepresentanteSuplenteController::class, 'repsupcreate'])->name('representantes');

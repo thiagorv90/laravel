@@ -97,13 +97,29 @@
     </div>
 
 
-    <!--Script do Modal-->
-    <script>
-        $('#exampleModal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget);
-            var recipientId = button.data('id');
-            console.log(recipientId);
 
+<div>
+    <a href="" wire:click.prevent="showModal" class="px-5 py-2 bg-red-600 text-white rounded">
+        Cancelar
+    </a>
+</div>
+
+<x-jet-confirmation-modal wire:model="showJetstream">
+
+
+
+
+
+
+
+
+
+<!--Script do Modal-->
+<script>
+    $('#exampleModal').on('show.bs.modal', function (event){
+        var button = $(event.relatedTarget);
+        var recipientId = button.data('id');
+        console.log(recipientId);
             var modal = $(this);
             modal.find('#repID').val(recipientId);
         })

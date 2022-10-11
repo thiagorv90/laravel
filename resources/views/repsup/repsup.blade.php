@@ -187,10 +187,11 @@
 
 
             <div class="form-group">
-                <label for="title">Observação:</label>
-                <textarea type="text" class="form-control" id="dsObservacao" name="dsObservacao"
-                ></textarea>
-            </div>
+                    <label for="title">Observação:</label>
+                    <textarea  type="text" rows="10" class="form-control" id="dsObservacao" name="dsObservacao" 
+                           ></textarea>
+                </div>
+
             <div class="form-group">
                 <label for="title">Documentos:</label>
                 <input type="file" class="form-control" name="nmAnexo[]" multiple>
