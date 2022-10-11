@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Representacao_representante extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'cdRepSup';
+    protected $fillable = ['cdRepSup']; 
 
     public function representacoes()
     {

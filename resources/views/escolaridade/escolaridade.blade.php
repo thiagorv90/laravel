@@ -18,7 +18,8 @@
                 <tr>
                     <td scropt="row">{{$event->cdEscolaridade}}</td>
                     <td><a>{{ $event->dsEscolaridade }}</a></td>
-                    <td><a href="/escolaridade/edit/{{$event->cdEscolaridade}}" class="btn btn-info edit-btn"
+                    <td>
+                        <a href="/escolaridade/edit/{{$event->cdEscolaridade}}" class="btn btn-info edit-btn"
                            data-bs-toggle="tooltip" data-bs-title="Editar">
                             <ion-icon name="create-outline"></ion-icon>
                         </a>

@@ -3,28 +3,30 @@
 @section('title', 'Criar Representação')
 
 @section('content')
-<style>
-    a{
-        text-decoration: none;
-        color: #6f42c1;
-    }
-    a:hover{
-        color: #452680;
-         
-    }
-</style>
+    <style>
+        a {
+            text-decoration: none;
+            color: #6f42c1;
+        }
+
+        a:hover {
+            color: #452680;
+
+        }
+    </style>
 
     <div id="event-create-container" class="container">
-        <!--Alerta-->  <!--Alerta--> <!--Alerta--> 
+        <!--Alerta-->  <!--Alerta--> <!--Alerta-->
         @if (is_countable($selecionado) && count($selecionado) == 0)
-            @foreach ( $instancias as  $instancia) 
-            <div class="alert alert-secondary d-flex align-items-center mt-4 mb-3 " role="alert">      
-                <div>
-                    <h6>Não existem representações para esta instancia.</h6>  
-                    <p>Caso precise, use o formulário abaixo para criar 
-                    ou <a href="/instituicoes/" class="alert-link">clique aqui</a> para voltar ao inicio.</p>   
+           @foreach ( $instancias as  $instancia)
+                <div class="alert alert-secondary d-flex align-items-center mt-4 mb-3 " role="alert">
+                    <div>
+                        <h6>Não existem representações para esta instancia.</h6>
+                        <p>Caso precise, use o formulário abaixo para criar
+                            ou <a href="../instituicoes/instituicoes." class="alert-link">clique aqui</a> para voltar ao
+                            inicio.</p>
+                    </div>
                 </div>
-                 </div>
 
 
 
@@ -41,7 +43,7 @@
                                 @endforeach
                             </select>
                         </div>
-                       
+
                         <div class="form-group">
                             <label for="title">Inicio da Vigência:</label>
                             <input type="date" class="form-control" id="dtInicioVigencia" name="dtInicioVigencia"
@@ -67,7 +69,7 @@
                         </div>
                         <div class="form-group">
                             <label for="title">Nomeação Suplente:</label>
-                            <input type="text" class="form-control" id="dsNomeacao" name="dsNomeacaoSuplente">
+                            <input type="text" class="form-control" id="dsNomeacaoSuplente" name="dsNomeacaoSuplente">
                         </div>
                         <div class="form-group">
                             <label for="title">Status:</label>
@@ -113,8 +115,9 @@
                 @else
 
                     <div class="container">
-                            <h1>Representações</h1>
-                            <a href="/instituicoes" >{{$bread->nmInstituicao}}</a>><a href="/instancias/{{$bread->cdInstituicao}}">{{$bread->nmInstancia}}</a>
+                        <h1>Representações</h1>
+                        <a href="/instituicoes">{{$bread->nmInstituicao}}</a>><a
+                            href="/instancias/{{$bread->cdInstituicao}}">{{$bread->nmInstancia}}</a>
 
                         <table class="table">
                             <thead>
@@ -129,17 +132,20 @@
                             <tbody>
                             @foreach ($selecionado as $event)
                                 <tr>
+
                                     <?php $var = explode("/", $event->representantes);
 
 
 
-           
 
-         
+
+
 
                                     ?>
-                                    
-                                                                        <td scropt="row">@foreach($var as $va){{$va}}<br>  @endforeach </td>
+
+                                    <td scropt="row">@foreach($var as $va)
+                                            {{$va}}<br>
+                                        @endforeach </td>
                                     <td><a>{!! date('d/m/Y', strtotime($event->dtInicioVigencia)) !!}</a></td>
                                     @if($event->stAtivo ==1)
                                         <td>Ativo</td>
@@ -163,9 +169,10 @@
                             @endforeach
                             </tbody>
                         </table>
+
                         <div class="container d-flex justify-content-between mt-2">
-                            <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
-                            <input type="submit" class="btn btn-primary mb-2" value="Criar">
+                            <a href="/instancias/{{$bread->cdInstituicao}}" class="btn btn-info mb-2">Voltar</a>
+                            
                         </div>
 
                     </div>
@@ -186,17 +193,17 @@
                                     @endforeach
                                 </select>
                             </div>
-                         
+
                             <div class="form-group">
                                 <label for="title">Inicio da Vigência:</label>
                                 <input type="date" class="form-control" id="dtInicioVigencia"
                                        name="dtInicioVigencia"
-                                       >
+                                >
                             </div>
                             <div class="form-group">
                                 <label for="title">Fim da Vigência:</label>
                                 <input type="date" class="form-control" id="dtFimVigencia" name="dtFimVigencia"
-                                       >
+                                >
                             </div>
                             <div class="form-group">
                                 <label for="title">Designação:</label>
@@ -207,13 +214,10 @@
                                 <input type="text" class="form-control" id="dsNomeacao" name="dsNomeacao">
                             </div>
                             <div class="form-group">
-                            <label for="title">Designação Suplente:</label>
-                            <input type="text" class="form-control" id="dsDesignacao" name="dsDesignacaoSuplente">
-                        </div>
-                        <div class="form-group">
-                            <label for="title">Nomeação Suplente:</label>
-                            <input type="text" class="form-control" id="dsNomacaoSuplente" name="dsNomeacaoSuplente">
-                        </div>
+                                <label for="title">Designação Suplente:</label>
+                                <input type="text" class="form-control" id="dsDesignacao" name="dsDesignacaoSuplente">
+                            </div>
+                           
                             <div class="form-group">
                                 <label for="title">Status:</label>
                                 <div class="form-check">
@@ -232,10 +236,7 @@
                                         Desativado
                                     </label>
                                 </div>
-                                <div class="form-group">
-                                    <label for="title">Data de Nomeação:</label>
-                                    <input type="date" class="form-control" id="dtNomeacao" name="dtNomeacao">
-                                </div>
+                               
                                 <div class="form-group">
                                     <label for="title">Número Nomeação:</label>
                                     <input type="number" class="form-control" id="nuNomeacao" name="nuNomeacao">
@@ -251,18 +252,18 @@
 
                             </div>
                             <br>
-</div>
-
-                            <div class="container d-flex justify-content-between mt-2">
-                                <a href="/instancias/{{$bread->cdInstituicao}}"
-                                   class="btn btn-info mb-2">Voltar</a>
-                                <input type="submit" class="btn btn-primary mb-2" value="Próximo">
-                            </div>
-                        </form>
                     </div>
-</div>
+
+                    <div class="container d-flex justify-content-between mt-2">
+                        <a href="/instancias/{{$bread->cdInstituicao}}"
+                           class="btn btn-info mb-2">Voltar</a>
+                        <input type="submit" class="btn btn-primary mb-2" value="Próximo">
+                    </div>
+                    </form>
     </div>
-</div>
+    </div>
+    </div>
+    </div>
 
     @endif
 

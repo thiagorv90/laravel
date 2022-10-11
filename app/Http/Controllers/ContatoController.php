@@ -44,10 +44,10 @@ class ContatoController extends Controller
         $nome = DB::table('instancias')->where('instancias.cdInstancia', '=', $id)->get(['nmInstancia', 'cdInstancia']);
         $instancia = DB::table('instancias')->where('instancias.cdInstancia', '=', $id)->get(['nmInstancia', 'cdInstancia']);
         $bread = DB::table('instituicoes')->join('instancias', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')->leftjoin('contatos', 'contatos.cdInstancia', '=', 'instancias.cdInstancia')
-        ->where('instancias.cdInstancia', '=', $id)->first(['nmInstancia','nmInstituicao','instancias.cdInstituicao']);
-        
+            ->where('instancias.cdInstancia', '=', $id)->first(['nmInstancia', 'nmInstituicao', 'instancias.cdInstituicao']);
 
-        return view('contatos.listacontato', ['selecionado' => $edit, 'contatos' => $contatos, 'nome' => $nome, 'instancia' => $instancia,'bread'=>$bread]);
+
+        return view('contatos.listacontato', ['selecionado' => $edit, 'contatos' => $contatos, 'nome' => $nome, 'instancia' => $instancia, 'bread' => $bread]);
 
     }
 

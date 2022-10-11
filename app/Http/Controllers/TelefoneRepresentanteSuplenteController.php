@@ -32,7 +32,7 @@ class TelefoneRepresentanteSuplenteController extends Controller
             ->where('representante_suplentes.cdRepSup', '=', $id)
             ->get();
 
-        return view('telrepsup/telrepsup', ['telefones' => $telefones, 'events' => $events, 'selecionado' => $selecionado,'nome'=>$nome]);
+        return view('telrepsup/telrepsup', ['telefones' => $telefones, 'events' => $events, 'selecionado' => $selecionado, 'nome' => $nome]);
     }
 
     public function editTrel($id)
@@ -55,8 +55,8 @@ class TelefoneRepresentanteSuplenteController extends Controller
         $tp = $request->input('tpTelefone');
 
         DB::update('update Telefone_representante_suplentes set cdRepSup = ?, nuDDDTelefone = ?, nuTelefone = ?, tpTelefone=? where cdTelefone = ?', [$cd, $name, $nu, $tp, $id]);
-      
-        
+
+
         return redirect()->route('representantes');
     }
 

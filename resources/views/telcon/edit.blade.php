@@ -20,7 +20,7 @@
                 <div class="form-group">
                     <label for="title">DDD:</label>
                     <input type="text" class="form-control" id="nuDDDTelefone" name="nuDDDTelefone"
-                           value="{{$tel->nuDDDTelefone}}"></input>
+                           value="{{$tel->nuDDDTelefone}}"> </input>
                 </div>
                 <div class="form-group">
                     <label for="title">Nome:</label>

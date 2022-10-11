@@ -4,15 +4,16 @@
 
 @section('content')
 
-<style>
-    a{
-        text-decoration: none;
-        color: #6f42c1;
-    }
-    a:hover{
-        color: #452680;
-    }
-</style>
+    <style>
+        a {
+            text-decoration: none;
+            color: #6f42c1;
+        }
+
+        a:hover {
+            color: #452680;
+        }
+    </style>
 
     <div class="container">
         <h1>Instituições</h1>
@@ -39,7 +40,7 @@
                     </td>
                 </tr>
             @endforeach
-            
+
             </tbody>
         </table>
         {{$events->links()}}
@@ -55,7 +56,7 @@
                     <input type="submit" class="btn btn-primary" value="Buscar" id="button-addon2">
                 </div>
             </form>
-            
+
             <form action="/instituicoes/searchinsta" method="GET">
                 @csrf
                 <div class="input-group mb-3">

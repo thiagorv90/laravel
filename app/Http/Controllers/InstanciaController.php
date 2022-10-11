@@ -10,6 +10,7 @@ use App\Exports\InstanciaPorVigenciaExport;
 use App\Exports\InstanciasPorIdExport;
 use Illuminate\Http\Request;
 use App\Models\Instancia;
+use App\Models\Agenda_anexo;
 use App\Models\Instancia_anexo;
 use App\Models\Representacoe;
 use App\Models\Tema_representacoe;
@@ -40,7 +41,8 @@ class InstanciaController extends Controller
         $event->dsObservacao = $request->dsObservacao;
         $event->dsAtoNormativo = $request->dsAtoNormativo;
         $event->boCaraterDaInstancia = $request->boCaraterDaInstancia;
-       
+        $event->dsSite = $request->dsSite;
+
 
         $event->save();
         if ($request->has('nmAnexo')) {
@@ -101,11 +103,10 @@ class InstanciaController extends Controller
         $insta = Instancia::join('tema_representacoes', 'instancias.cdTema', '=', 'tema_representacoes.cdTema')
             ->join('instituicoes', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
             ->leftjoin('representacoes', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
-            
             ->where('instancias.cdInstituicao', '=', $id)->get(['instancias.cdInstancia', 'nmInstancia', 'nmTema',
-             'instancias.cdInstituicao', 'instancias.stAtivo']);
+                'instancias.cdInstituicao', 'instancias.stAtivo']);
 
-        return view('instancias.instancias', ['instancias' => $insta, 'temas' => $temas, 'instituicaos' => $instituicaos,'bread'=>$bread]);
+        return view('instancias.instancias', ['instancias' => $insta, 'temas' => $temas, 'instituicaos' => $instituicaos, 'bread' => $bread]);
     }
 
 
@@ -115,7 +116,7 @@ class InstanciaController extends Controller
             ->join('instituicoes', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
             ->where('instancias.cdinstancia', '=', $cdInstancia)
             ->get();
-        $tema=DB::table('tema_representacoes')->get();
+        $tema = DB::table('tema_representacoes')->get();
         $lista = Instancia::orderBy('nmInstancia')
             ->get();
 
@@ -140,14 +141,69 @@ class InstanciaController extends Controller
         $manda = $request->input('dsMandato');
         $carater = $request->input('boCaraterDaInstancia');
         $ato = $request->input('dsAtoNormativo');
-      
+        $site = $request->input('dsSite');
 
 
         DB::update('update instancias set cdInstituicao = ?, cdTema = ?, nmInstancia = ?, tpFederalDistrital = ?, tpPublicoPrivado = ?, dsMandato = ?,
-            stAtivo = ?, dsObjetivo = ?, tpPrioridade = ?, dsAmeacas = ?, dsOportunidades = ?, dsObservacao=?, boCaraterDaInstancia=?,dsAtoNormativo=?
-            where cdInstancia = ?', [$cd, $tema, $name, $fed, $pub, $mand, $ativo, $obj, $pri, $ame, $opor, $manda, $carater, $ato, $id]);
+            stAtivo = ?, dsObjetivo = ?, tpPrioridade = ?, dsAmeacas = ?, dsOportunidades = ?, dsObservacao=?, boCaraterDaInstancia=?,dsAtoNormativo=?, dsSite=?
+            where cdInstancia = ?', [$cd, $tema, $name, $fed, $pub, $mand, $ativo, $obj, $pri, $ame, $opor, $manda, $carater, $ato, $site, $id]);
 
         return redirect()->route('instancias', ['id' => $cd]);
+    }
+    public function deleteInsta($id)
+        {
+           DB::table('representacao_representantes')
+            ->join('representacoes','representacao_representantes.cdRepresentacao','=','representacoes.cdRepresentacao')
+            ->join('instancias','instancias.cdInstancia','=','representacoes.cdInstancia')
+            ->where('instancias.cdInstancia','=',$id)->delete();
+ 
+        $links = Agenda_anexo::join('agendas','agendas.cdAgenda','=','agenda_anexos.cdAgenda')
+        ->join('representacoes','representacoes.cdRepresentacao','=','agendas.cdRepresentacao')
+        ->join('instancias','instancias.cdInstancia','=','representacoes.cdInstancia')
+        ->where('instancias.cdInstancia', $id)->get();
+
+        foreach ($links as $link) {
+            unlink(public_path() . "/storage/files/$link->nmAnexo");
+        }
+        Agenda_anexo::join('agendas','agendas.cdAgenda','=','agenda_anexos.cdAgenda')
+        ->join('representacoes','representacoes.cdRepresentacao','=','agendas.cdRepresentacao')
+        ->join('instancias','instancias.cdInstancia','=','representacoes.cdInstancia')
+        ->where('instancias.cdInstancia', $id)->delete();
+        DB::table('agendas')->join('representacoes','representacoes.cdRepresentacao','=','agendas.cdRepresentacao')
+        ->join('instancias','instancias.cdInstancia','=','representacoes.cdInstancia')
+        ->where('instancias.cdInstancia', $id)->delete();
+        
+        $anexoRepre = DB::table('representacoes_anexos')->join('representacoes', 'representacoes.cdRepresentacao','=','representacoes_anexos.cdRepresentacao')
+        ->join('instancias','instancias.cdInstancia','=','representacoes.cdInstancia')
+        ->where('instancias.cdInstancia', $id)->get();
+        foreach ($anexoRepre as $anexo) {
+            unlink(public_path() . "/storage/files/$anexo->nmAnexo");
+        }
+       DB::table('representacoes_anexos')->join('representacoes', 'representacoes.cdRepresentacao','=','representacoes_anexos.cdRepresentacao')
+        ->join('instancias','instancias.cdInstancia','=','representacoes.cdInstancia')
+        ->where('instancias.cdInstancia', $id)->delete();
+
+       Representacoe::join('instancias','instancias.cdInstancia','=','representacoes.cdInstancia')
+        ->where('instancias.cdInstancia', $id)->delete();
+
+        DB::table('telefone_contatos')->join('contatos','telefone_contatos.cdContatoTelefone','=','contatos.cdContato')
+        ->join('instancias','instancias.cdInstancia','=','contatos.cdInstancia')
+        ->where('instancias.cdInstancia', $id)->delete();
+
+        DB::table('contatos')->join('instancias','instancias.cdInstancia','=','contatos.cdInstancia')
+        ->where('instancias.cdInstancia', $id)->delete();
+
+        $file = Instancia_anexo::join('instancias','instancias.cdInstancia','=','instancia_anexos.cdInstancia')
+        ->where('instancias.cdInstancia', $id)->get();
+
+        foreach ($file as $files){
+        unlink(public_path() . "/storage/files/$files->nmAnexo");
+        }
+
+        Instancia_anexo::where('nmAnexo', $id)->delete();
+        Instancia::where('cdInstancia', $id)->delete();
+        // $deleted = DB::delete('delete from telefone_contatos where cdTelefone = ?', [$id]);
+        return back();
     }
 
     public function deleteInstnImg($id)

@@ -14,6 +14,17 @@
     }
 </style>
 
+<style>
+    a{
+        text-decoration: none;
+        color: #6f42c1;
+    }
+    a:hover{
+        color: #452680;
+         
+    }
+</style>
+
     <div id="event-create-container" class="container">
         <h1>Editar Representacão</h1>
        
@@ -37,22 +48,27 @@
 
                         <td scropt="row">{{$incluido->nmRepresentanteSuplente}}</td>  
 
-                        @if($incluido->stTitularidade ==1)
+                        @if($incluido->stRepresentante ==1)
                             <td>Titular</td>
                         @else
                             <td>Suplente</td>
 
                         @endif
-                        <td>
-                        </td>
-                        <td>  
-                                 <!-- Botão que chama a modal -->
-                                 <td><button class='btn btn-info viewdetails' data-id='' data-bs-target="#empModal" data-bs-toggle="modal"  >View Details</button></td>                 
-                        </td>
+                         <td>{!! date('d/m/Y', strtotime($incluido->dtInicioNomeacao)) !!}</td>
+                        
+                         @if($incluido->stTitularidade ==1)
+                            <td>Ativo</td>
+                        @else
+                            <td>Inativo</td>
+
+                        @endif
                         <td> 
-                                                                               
-                        </td>
-                        <td>                           
+                             <!-- Botão que chama a modal -->
+                             <button  class="btn btn-info edit-btn viewdetails" data-id='{{ $incluido->cdRepSup }}' data-bs-toggle="tooltip" data-bs-title="Editar">
+                                            <ion-icon name="create-outline"></ion-icon></button>     
+                                           
+                                        </a>                                                    
+                                               
                             <form action="/representacoes/edit/{{$incluido->cdRepSup}}" method="POST">
                                 @csrf
                                 @method('DELETE')
@@ -87,16 +103,17 @@
                 <div class="form-group">
                     <label for="title">Status:</label>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="stTitularidade" id="stTitularidade"
+                        <input class="form-check-input" type="radio" name="stRepresentante" id="stRepresentante"
                                value="1">
-                        <label class="form-check-label" for="stTitularidade">
+                        <label class="form-check-label" for="stRepresentante">
                             Titular
                         </label>
                     </div>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="stTitularidade" id="stTitularidade" value="0">
-                    <label class="form-check-label" for="stTitularidade">
+
+                    <input class="form-check-input" type="radio" name="stRepresentante" id="stRepresentante" value="0">
+                    <label class="form-check-label" for="stRepresentante">
                         Suplente
                     </label>
                 </div>
@@ -227,6 +244,69 @@
 
     
     </div> @endforeach
+    
+    <!-- Modal --->
+    <div class="container" >
+      <!-- Modal -->
+      <div class="modal fade" id="empModal" >
+         <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h4 class="modal-title">Representante</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+               </div>
+               <div class="modal-body"id="tblempinfo">
+                 
+               </div>
+               <div class="modal-footer">
+                   <button id="certo" type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+               </div>
+            </div>
+         </div>
+   </div>
+    
+
+    <!--Script do Modal-->
+    <script type='text/javascript'>
+        
+   $(document).ready(function(){
+
+    $('#empTable').on('click','.viewdetails',function(){
+        
+    
+        var empid = $(this).attr('data-id');
+       
+          if(empid > 0){
+             
+             // AJAX request
+             var url = "{{ route('getEmployeeDetails',[':empid']) }}";
+             url = url.replace(':empid',empid);
+            
+             // Empty modal data
+             $('#tblempinfo tbody').empty();
+             
+             $.ajax({
+                 url: url,
+                 dataType: 'json',
+                 success: function(response){
+                   
+                     // Add employee details
+                     $('#tblempinfo').html(response.html);
+                    
+                     // Display Modal
+                     $('#empModal').modal('show'); 
+                    
+                 }
+             });
+          }
+      });
+
+   });
+   </script>
+
+
 
 
 

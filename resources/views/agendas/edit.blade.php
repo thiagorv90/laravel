@@ -6,57 +6,59 @@
 
     <div id="event-create-container" class="container">
         <h1>Agenda</h1>
-        <a href="/instituicoes" >{{$bread->nmInstituicao}}</a>><a href="/instancias/{{$bread->cdInstituicao}}">{{$bread->nmInstancia}}</a>>{{$bread->nmRepresentanteSuplente}}
+        <a href="/instituicoes">{{$bread->nmInstituicao}}</a>><a
+            href="/instancias/{{$bread->cdInstituicao}}">{{$bread->nmInstancia}}</a>>{{$bread->nmRepresentanteSuplente}}
 
         <table class="table">
-                <thead>
+            <thead>
+            <tr>
+                <th scope="col">Representantes</th>
+                <th scope="col">Status</th>
+
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            @foreach($repre as $instancia)
                 <tr>
-                    <th scope="col">Representantes</th>
-                    <th scope="col">Status</th>
-                    
-                    <th scope="col"></th>
+                    <td><a>{{ $instancia->nmRepresentanteSuplente }}</a></td>
+
+
+                    @if($instancia->stTitularidade ==1)
+                        <td>Titular</td>
+                    @else
+                        <td>Suplente</td>
+                    @endif
+                    <td>
+                        <a href="/instancias/edit/" class="btn btn-info edit-btn"
+                           data-bs-toggle="tooltip" data-bs-title="Editar">
+                            <ion-icon name="create-outline"></ion-icon>
+                        </a>
+                        <a href="/contatos/listacontato/" class="btn btn-info edit-btn"
+                           data-bs-toggle="tooltip" data-bs-title="Contatos">
+                            <ion-icon name="person-outline"></ion-icon>
+                        </a>
+
+                    </td>
                 </tr>
-                </thead>
-                <tbody>
-                
-                @foreach($repre as $instancia)
-                    <tr>
-                        <td><a>{{ $instancia->nmRepresentanteSuplente }}</a></td>
-                        
-                       
-                        @if($instancia->stTitularidade ==1)
-                            <td>Titular</td>
-                        @else
-                            <td>Suplente</td>
-                        @endif
-                        <td>
-                            <a href="/instancias/edit/" class="btn btn-info edit-btn"
-                               data-bs-toggle="tooltip" data-bs-title="Editar">
-                                <ion-icon name="create-outline"></ion-icon>
-                            </a>
-                            <a href="/contatos/listacontato/" class="btn btn-info edit-btn"
-                               data-bs-toggle="tooltip" data-bs-title="Contatos">
-                                <ion-icon name="person-outline"></ion-icon>
-                            </a>
-                           
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
+            @endforeach
+            </tbody>
+        </table>
         @foreach ($selecionado as $age)
 
             <form action="/agendas/update/{{ $age->cdAgenda}}" method="POST">
                 @csrf
 
                 @method('PUT')
-               
+
                 <div class="form-group">
                     <label for="date">Data:</label>
-                    <input  type="text" placeholder="{{ $age->dtAgenda }}" onfocus="(this.type='date')" id="dtAgenda" name="dtAgenda" class="form-control" 
+                    <input type="text" placeholder="{{ $age->dtAgenda }}" onfocus="(this.type='date')" id="dtAgenda"
+                           name="dtAgenda" class="form-control"
                            @if(auth()->user()->statusadm ==0) Readonly @endif></input>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="title">Hora:</label>
                     <input type="text" class="form-control" id="hrAgenda" name="hrAgenda" value="{{$age->hrAgenda}}"
@@ -177,15 +179,15 @@
 
             <form action="/agendas/file/{{$age->cdAgenda}}" method="POST" enctype="multipart/form-data">
                 @csrf
-                
-                    <div class="form-group">
-                        <label for="title">Documento:</label>
-                        <input type="file" class="form-control" id="nmAnexo" name="nmAnexo[]" multiple>
-                    </div>
-                    <div class="container d-flex justify-content-between mt-2">
-                        <a href="/agendas/{{ $age->cdRepresentacao }}" class="btn btn-info mb-2">Voltar</a>
-                        <input type="submit" class="btn btn-primary mb-2" value="Salvar"></div>
-                
+
+                <div class="form-group">
+                    <label for="title">Documento:</label>
+                    <input type="file" class="form-control" id="nmAnexo" name="nmAnexo[]" multiple>
+                </div>
+                <div class="container d-flex justify-content-between mt-2">
+                    <a href="/agendas/{{ $age->cdRepresentacao }}" class="btn btn-info mb-2">Voltar</a>
+                    <input type="submit" class="btn btn-primary mb-2" value="Salvar"></div>
+
             </form>
     </div>
     @endforeach

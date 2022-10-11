@@ -3,16 +3,17 @@
 @section('title', 'Representantes')
 
 @section('content')
-<!--Estilo dos links do breadgrumps-->
-<style>
-    a{
-        text-decoration: none;
-        color: #6f42c1;
-    }
-    a:hover{                              
-        color: #452680;
-    }
-</style>
+    <!--Estilo dos links do breadgrumps-->
+    <style>
+        a {
+            text-decoration: none;
+            color: #6f42c1;
+        }
+
+        a:hover {
+            color: #452680;
+        }
+    </style>
     <h1>Representantes</h1>
     <div class="container mt-5">
         <table class="table">
@@ -25,20 +26,17 @@
             </tr>
             </thead>
             <tbody>
-                
-            @foreach ($events as $event)
-            
-           <?php $var = explode("/", $event->TELEFONES);
 
-           
-         
-        ?>
+            @foreach ($events as $event)
+
+                @php $var = explode("/", $event->TELEFONES); @endphp
                 <tr>
                     <td scropt="row">{{$event->nmRepresentanteSuplente}}</td>
                     <td>{{ $event->dsEmail }}</a></td>
-                    <td>@foreach($var as $va){{$va}}<br>  @endforeach </td>
-                    
-                    
+                    <td>@foreach($var as $va)
+                            {{$va}}<br>
+                        @endforeach </td>
+
 
                     <td class="d-flex ">
                         <a href="/repsup/edit/{{$event->cdRepSup}}" class="btn btn-info edit-btn"
@@ -49,28 +47,58 @@
                            data-bs-toggle="tooltip" data-bs-title="Contato">
                             <ion-icon name="call-outline"></ion-icon>
                         </a>
-                           <!-- Botão que chama a modal -->
-                           <button type="button" class="btn btn-danger delete-btn ms-1" data-bs-toggle="modal"
-                           data-bs-target="#exampleModal" >
-                            <ion-icon name="trash-outline"></ion-icon>                                  
-                          </button>    
+                        <!-- Botão que chama a modal -->
+                        <button value ="{{$event->cdRepSup}}" type="button" class="btn btn-danger delete-btn ms-1" data-bs-toggle="modal" data-bs-id="{{$event->cdRepSup}}"
+                                data-bs-target="#exampleModal">
+                            <ion-icon name="trash-outline"></ion-icon>
+                        </button>
                     </td>
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false"
+         data-bs-id="/repsup/edit/{{$event->cdRepSup}}">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="exampleModalLabel">Alerta</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+                    </button>
+                </div>
+                <div class="modal-body">
+                    A exclusão é permanente. Deseja prosseguir? {{$event->nmRepresentanteSuplente}}
+                </div>
+                <div class="modal-footer">
+                    <form action="/repsup/edit/{{$event->cdRepSup}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-danger delete-btn ms-1" data-bs-toggle="tooltip"
+                                data-bs-title="Deletar">Excluir
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
                 </tr>
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false"
+         >
+        
+    </div>
             @endforeach
             </tbody>
         </table>
-        {{$events->links()}}
+        {{$events->onEachSide(5)->links()}}
         <br>
         <form action="/repsup/search" method="GET">
-                @csrf
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" value="" name="query" id="query"
-                           placeholder="Buscar Representante..."
-                           aria-label="Buscar Representante" aria-describedby="button-addon2" required/>
-                    <input type="submit" class="btn btn-primary" value="Buscar" id="button-addon2">
-                </div>
-            </form>
-            <br>
+            @csrf
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" value="" name="query" id="query"
+                       placeholder="Buscar Representante..."
+                       aria-label="Buscar Representante" aria-describedby="button-addon2" required/>
+                <input type="submit" class="btn btn-primary" value="Buscar" id="button-addon2">
+            </div>
+        </form>
+        <br>
     </div>
     <h1>Crie Representante</h1>
 
@@ -137,32 +165,33 @@
             <div class="form-group">
                 <label for="title"> Endereço:</label>
                 <input placeholder="Endereço..." name="dsEndereco" id="dsEndereco" class="form-control"
-                         >
+                >
             </div>
-           
-            
+
+
             <div class="form-group">
                 <label for="title"> Bairo:</label>
                 <input placeholder="Bairro..." name="dsBairro" id="dsBairro" class="form-control"
-                          >
+                >
             </div>
             <div class="form-group">
                 <label for="title"> Cidade:</label>
                 <input placeholder="Cidade..." name="dsCidade" id="dsCidade" class="form-control"
-                         >
+                >
             </div>
             <div class="form-group">
                 <label for="title"> CEP:</label>
                 <input placeholder="CEP..." name="dsCEP" id="dsCEP" class="form-control"
-                          >
+                >
             </div>
 
-           
+
             <div class="form-group">
                     <label for="title">Observação:</label>
                     <textarea  type="text" rows="10" class="form-control" id="dsObservacao" name="dsObservacao" 
                            ></textarea>
                 </div>
+
             <div class="form-group">
                 <label for="title">Documentos:</label>
                 <input type="file" class="form-control" name="nmAnexo[]" multiple>
@@ -173,42 +202,20 @@
         </form>
     </div>
 
-    <!-- Modal ---> 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false" data-bs-id="{{$event->cdRepSup}}">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header bg-danger text-white">
-          <h5 class="modal-title" id="exampleModalLabel">Alerta</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                          
-          </button>
-        </div>
-        <div class="modal-body">
-          A exclusão é permanente. Deseja prosseguir? {{$event->cdRepSup}}
-        </div>
-        <div class="modal-footer">
-            <form action="/repsup/edit/{{$event->cdRepSup}}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-danger delete-btn ms-1" data-bs-toggle="tooltip"data-bs-title="Deletar" >Excluir</button>
-            </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  
+    <!-- Modal --->
+   
+
 
     <!--Script do Modal-->
-<script>
-    $('#exampleModal').on('show.bs.modal', function (event){
-        var button = $(event.relatedTarget);
-        var recipientId = button.data('id');
-        console.log(recipientId);
-
-        var modal = $(this);
-        modal.find('#repID').val(recipientId);
-    })
-</script>
+    <script>
+        $('#exampleModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var recipientId = button.data('id');
+            console.log(recipientId);
+                
+            var modal = $(this);
+            modal.find('#repID').val(recipientId);
+        })
+    </script>
 
 @endsection
