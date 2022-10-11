@@ -18,7 +18,7 @@
     <div id="event-create-container" class="container">
         <!--Alerta-->  <!--Alerta--> <!--Alerta-->
         @if (is_countable($selecionado) && count($selecionado) == 0)
-            @foreach ( $instancias as  $instancia)
+           @foreach ( $instancias as  $instancia)
                 <div class="alert alert-secondary d-flex align-items-center mt-4 mb-3 " role="alert">
                     <div>
                         <h6>Não existem representações para esta instancia.</h6>
@@ -69,7 +69,7 @@
                         </div>
                         <div class="form-group">
                             <label for="title">Nomeação Suplente:</label>
-                            <input type="text" class="form-control" id="dsNomeacao" name="dsNomeacaoSuplente">
+                            <input type="text" class="form-control" id="dsNomeacaoSuplente" name="dsNomeacaoSuplente">
                         </div>
                         <div class="form-group">
                             <label for="title">Status:</label>
@@ -171,8 +171,8 @@
                         </table>
 
                         <div class="container d-flex justify-content-between mt-2">
-                            <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
-                            <input type="submit" class="btn btn-primary mb-2" value="Criar">
+                            <a href="/instancias/{{$bread->cdInstituicao}}" class="btn btn-info mb-2">Voltar</a>
+                            
                         </div>
 
                     </div>
@@ -217,11 +217,7 @@
                                 <label for="title">Designação Suplente:</label>
                                 <input type="text" class="form-control" id="dsDesignacao" name="dsDesignacaoSuplente">
                             </div>
-                            <div class="form-group">
-                                <label for="title">Nomeação Suplente:</label>
-                                <input type="text" class="form-control" id="dsNomacaoSuplente"
-                                       name="dsNomeacaoSuplente">
-                            </div>
+                           
                             <div class="form-group">
                                 <label for="title">Status:</label>
                                 <div class="form-check">
@@ -240,10 +236,7 @@
                                         Desativado
                                     </label>
                                 </div>
-                                <div class="form-group">
-                                    <label for="title">Data de Nomeação:</label>
-                                    <input type="date" class="form-control" id="dtNomeacao" name="dtNomeacao">
-                                </div>
+                               
                                 <div class="form-group">
                                     <label for="title">Número Nomeação:</label>
                                     <input type="number" class="form-control" id="nuNomeacao" name="nuNomeacao">

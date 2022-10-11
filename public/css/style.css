@@ -39,6 +39,11 @@ body {
     background-color: #61338B;
 }
 
+.fundo-info{
+    background-color: #61338B;
+}
+
+
 .btn.btn-danger {
     background-color: #d9534f;
 }
@@ -68,4 +73,9 @@ footer {
 
 .form-group {
     margin-top: 17px;
+}
+.fundo-info{
+
+    background-color: #61338B;
+
 }

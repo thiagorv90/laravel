@@ -171,10 +171,9 @@
 
                     <a href="/instituicoes">{{$bread->nmInstituicao}}</a> /
                     <a href="/instancias/{{$bread->cdInstituicao}}">{{$bread->nmInstancia}}</a> /
-                    <a href="/repinsta/{{$bread->cdRepresentacao}}">{{$bread->nmRepresentanteSuplente}}</a>
+                    <a href="/repinsta/{{$bread->cdInstancia}}">Representações</a>
 
                     <div class="container">
-
                         <table class="table">
                             <thead>
                             <tr>
@@ -220,7 +219,6 @@
                             @endforeach
                             </tbody>
                         </table>
-
                     </div>
                     <br>
 
@@ -252,7 +250,7 @@
                                 <div class="container d-flex justify-content-between mt-2">
 
 
-                                    <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
+                                    <a href="/repinsta/{{$bread->cdInstancia}}" class="btn btn-info mb-2">Voltar</a>
 
                                 </div>
                             </div>
@@ -308,21 +306,21 @@
                                         <input type="text" class="form-control" id="dsLocal" name="dsLocal" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="title">Status Suplente:</label>
+                                        <label for="title">Participação do Suplente:</label>
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="stSuplente"
                                                    id="stSuplente"
-                                                   value="1" required>
+                                                   value="1" >
                                             <label class="form-check-label" for="stSuplente">
-                                                Ativo
+                                                Sim
                                             </label>
                                         </div>
                                     </div>
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="stSuplente" id="stSuplente"
-                                               value="0">
+                                               value="0" checked>
                                         <label class="form-check-label" for="stSuplente">
-                                            Desativado
+                                            Não
                                         </label>
                                     </div>
                                     <div class="form-group">

@@ -1,4 +1,3 @@
-@extends('layout.main')
 
 @section('title', 'Instancias')
 
@@ -19,7 +18,17 @@
 
         <div class="container">
             @foreach ($instituicaos as $instituicao)
-                <h3>Não ha instancia para a Instituição: {{$instituicao->nmInstituicao}}</h3>
+            
+                        <!--Alerta se estiver vazio-->  
+                <div class="alert alert-secondary d-flex align-items-center mt-4 mb-3 " role="alert">      
+                    <div>
+                        <h6>Não existe instância para esta instituição.</h6>  
+                        <p>Caso precise, use o formulário abaixo para criar 
+                        ou <a href="/instituicoes/" class="alert-link">clique aqui</a> para voltar ao inicio.</p>   
+                    </div>
+                    </div>
+
+
                 <h1>Crie uma instância</h1>
                 <a href="/instituicoes">{{$bread->nmInstituicao}}</a>
                 <div id="event-create-container" class="container">
@@ -240,6 +249,15 @@
                                data-bs-toggle="tooltip" data-bs-title="Representação">
                                 <ion-icon name="reader-outline"></ion-icon>
                             </a>
+                            <form action="/instancias/{{$instancia->cdInstancia}}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger delete-btn"
+                                                        data-bs-toggle="tooltip"
+                                                        data-bs-title="Deletar">
+                                                    <ion-icon name="trash-outline"></ion-icon>
+                                                </button>
+                                            </form>
                         </td>
                     </tr>
                 @endforeach
