@@ -32,10 +32,12 @@
                 @php $var = explode("/", $event->TELEFONES); @endphp
                 <tr>
                     <td scropt="row">{{$event->nmRepresentanteSuplente}}</td>
-                    <td>{{ $event->dsEmail }}</a></td>
-                    <td>@foreach($var as $va)
+                    <td><a>{{ $event->dsEmail }}</a></td>
+                    <td>
+                        @foreach($var as $va)
                             {{$va}}<br>
-                        @endforeach </td>
+                        @endforeach
+                    </td>
 
 
                     <td class="d-flex ">
@@ -203,6 +205,7 @@
     <!--Script do Modal-->
     <script>
         $('#exampleModal').on('show.bs.modal', function (event) {
+            alert("sarve");
             var button = $(event.relatedTarget);
             var recipientId = button.data('id');
             console.log(recipientId);
