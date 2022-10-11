@@ -310,7 +310,7 @@
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="stSuplente"
                                                    id="stSuplente"
-                                                   value="1" >
+                                                   value="1">
                                             <label class="form-check-label" for="stSuplente">
                                                 Sim
                                             </label>

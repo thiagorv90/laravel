@@ -50,42 +50,47 @@
                             <ion-icon name="call-outline"></ion-icon>
                         </a>
                         <!-- Botão que chama a modal -->
-                        <button value ="{{$event->cdRepSup}}" type="button" class="btn btn-danger delete-btn ms-1" data-bs-toggle="modal" data-bs-id="{{$event->cdRepSup}}"
+                        <button value="{{$event->cdRepSup}}" type="button" class="btn btn-danger delete-btn ms-1"
+                                data-bs-toggle="modal" data-bs-id="{{$event->cdRepSup}}"
                                 data-bs-target="#exampleModal">
                             <ion-icon name="trash-outline"></ion-icon>
                         </button>
                     </td>
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false"
-         data-bs-id="/repsup/edit/{{$event->cdRepSup}}">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title" id="exampleModalLabel">Alerta</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                         aria-hidden="false"
+                         data-bs-id="/repsup/edit/{{$event->cdRepSup}}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header bg-danger text-white">
+                                    <h5 class="modal-title" id="exampleModalLabel">Alerta</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 
-                    </button>
-                </div>
-                <div class="modal-body">
-                    A exclusão é permanente. Deseja prosseguir? {{$event->nmRepresentanteSuplente}}
-                </div>
-                <div class="modal-footer">
-                    <form action="/repsup/edit/{{$event->cdRepSup}}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-danger delete-btn ms-1" data-bs-toggle="tooltip"
-                                data-bs-title="Deletar">Excluir
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    A exclusão é permanente. Deseja prosseguir? {{$event->nmRepresentanteSuplente}}
+                                </div>
+                                <div class="modal-footer">
+                                    <form action="/repsup/edit/{{$event->cdRepSup}}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancelar
+                                        </button>
+                                        <button type="submit" class="btn btn-danger delete-btn ms-1"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-title="Deletar">Excluir
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </tr>
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false"
-         >
-        
-    </div>
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                     aria-hidden="false"
+                >
+
+                </div>
             @endforeach
             </tbody>
         </table>
@@ -189,10 +194,10 @@
 
 
             <div class="form-group">
-                    <label for="title">Observação:</label>
-                    <textarea  type="text" rows="10" class="form-control" id="dsObservacao" name="dsObservacao" 
-                           ></textarea>
-                </div>
+                <label for="title">Observação:</label>
+                <textarea type="text" rows="10" class="form-control" id="dsObservacao" name="dsObservacao"
+                ></textarea>
+            </div>
 
             <div class="form-group">
                 <label for="title">Documentos:</label>
@@ -205,7 +210,7 @@
     </div>
 
     <!-- Modal --->
-   
+
 
 
     <!--Script do Modal-->
@@ -215,7 +220,7 @@
             var button = $(event.relatedTarget);
             var recipientId = button.data('id');
             console.log(recipientId);
-                
+
             var modal = $(this);
             modal.find('#repID').val(recipientId);
         })

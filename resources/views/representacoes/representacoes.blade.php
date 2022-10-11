@@ -24,6 +24,7 @@
                            data-bs-toggle="tooltip" data-bs-title="Agenda">
                             <ion-icon name="book-outline"></ion-icon>
                         </a>
+                    </td>
                 </tr>
             @endforeach
             </tbody>

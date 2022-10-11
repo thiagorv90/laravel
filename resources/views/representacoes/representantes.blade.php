@@ -7,7 +7,7 @@
     <div id="event-create-container" class="container">
         <h1>Representantes</h1>
         <a href="/instituicoes">{{$bread->nmInstituicao}}</a>><a
-                            href="/instancias/{{$bread->cdInstituicao}}">{{$bread->nmInstancia}}</a>
+            href="/instancias/{{$bread->cdInstituicao}}">{{$bread->nmInstancia}}</a>
         @if ($teste <>1)
             <div class="container">
 
@@ -18,7 +18,6 @@
                         <th scope="col">Nome:</th>
                         <th scope="col">Status</th>
                         <th scope="col">Opções</th>
-
                     </tr>
                     </thead>
                     <tbody>
@@ -66,25 +65,25 @@
                 </select>
             </div>
             <div class="form-group">
-                    <label for="title">Status:</label>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="stTitularidade" id="stTitularidade"
-                               value="1">
-                        <label class="form-check-label" for="stTitularidade">
-                            Titular
-                        </label>
-                    </div>
-                </div>
+                <label for="title">Status:</label>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="stTitularidade" id="stTitularidade" value="0">
+                    <input class="form-check-input" type="radio" name="stTitularidade" id="stTitularidade"
+                           value="1">
                     <label class="form-check-label" for="stTitularidade">
-                        Suplente
+                        Titular
                     </label>
                 </div>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="stTitularidade" id="stTitularidade" value="0">
+                <label class="form-check-label" for="stTitularidade">
+                    Suplente
+                </label>
+            </div>
             <div class="form-group">
-                                    <label for="title">Data de Nomeação:</label>
-                                    <input type="date" class="form-control" id="dtInicioNomeacao" name="dtInicioNomeacao">
-                                </div>
+                <label for="title">Data de Nomeação:</label>
+                <input type="date" class="form-control" id="dtInicioNomeacao" name="dtInicioNomeacao">
+            </div>
             <div class="form-group" style="display:none">
 
                 <input type="text" class="form-control" id="cdRepresentacao" value="{{$event->cdRepresentacao}}"
