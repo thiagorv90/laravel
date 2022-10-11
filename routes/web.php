@@ -123,6 +123,8 @@ Route::middleware('auth')->group(function () {
         Route::delete('/representacoes/files/{id}', [RepresentacoesController::class, 'deleteRepreImg']);
         Route::post('/representacoes/representantes/{id}', [RepresentacoesController::class, 'createrep']);
         Route::delete('/representacoes/representantes/{id}', [RepresentacoesController::class, 'deleterep']);
+        Route::get('/getEmployeeDetails/{empid}', [RepresentacoesController::class, 'repreinfo'])->name('getEmployeeDetails');
+
 
         Route::post('repsup', [RepresentanteSuplenteController::class, 'repsupstore']);
         Route::get('repsup', [RepresentanteSuplenteController::class, 'repsupcreate'])->name('representantes');

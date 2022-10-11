@@ -252,7 +252,9 @@
                 </div>
             </div>
         </form>
+
         <br>
+        
         @if(auth()->user()->statusadm ==1)
             <h1>Agenda</h1>
             

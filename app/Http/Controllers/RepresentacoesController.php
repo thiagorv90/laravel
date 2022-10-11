@@ -29,7 +29,7 @@ class RepresentacoesController extends Controller
         $event->dsDesignacao = $request->dsDesignacao;
         $event->dsNomeacao = $request->dsNomeacao;
         $event->stAtivo = $request->stAtivo;
-        $event->dtNomeacao = $request->dtNomeacao;
+       
         $event->nuNomeacao = $request->nuNomeacao;
         $event->dsNomeacaoSuplente = $request->dsNomeacaoSuplente;
         $event->dsDesignacaoSuplente = $request->dsDesignacaoSuplente;
@@ -194,7 +194,7 @@ $representantes = DB::table('representante_suplentes')->whereNotIn('cdRepSup', $
             ->where('representacoes.cdRepresentacao', '=', $id)
             ->get(['representacoes.cdRepresentacao', 'dtInicioVigencia', 
                 'representacoes.cdInstancia', 'nmInstancia', 'representacoes.stAtivo', 'dtInicioVigencia',
-                'dtFimVigencia', 'dsDesignacao', 'dsNomeacao', 'dtNomeacao', 'nuNomeacao', 'fnNomeacao','dsDesignacaoSuplente','dsNomeacaoSuplente']);
+                'dtFimVigencia', 'dsDesignacao', 'dsNomeacao',  'nuNomeacao', 'fnNomeacao','dsDesignacaoSuplente','dsNomeacaoSuplente']);
         
                 $representantes = Representacao_representante::join('representante_suplentes','representante_suplentes.cdRepSup','=','representacao_representantes.cdRepSup')
                 ->where('cdRepresentacao', '=', $id)
@@ -233,7 +233,7 @@ $representantes = DB::table('representante_suplentes')->whereNotIn('cdRepSup', $
         ->where('representacoes.cdRepresentacao', '=', $id)
         ->get(['representacoes.cdRepresentacao', 'dtInicioVigencia', 
             'representacoes.cdInstancia', 'nmInstancia', 'representacoes.stAtivo', 'dtInicioVigencia',
-            'dtFimVigencia', 'dsDesignacao', 'dsNomeacao', 'dtNomeacao', 'nuNomeacao', 'fnNomeacao','dsDesignacaoSuplente','dsNomeacaoSuplente']);
+            'dtFimVigencia', 'dsDesignacao', 'dsNomeacao',  'nuNomeacao', 'fnNomeacao','dsDesignacaoSuplente','dsNomeacaoSuplente']);
     
             $representantes = Representacao_representante::join('representante_suplentes','representante_suplentes.cdRepSup','=','representacao_representantes.cdRepSup')
             ->where('cdRepresentacao', '=', $id)
@@ -277,7 +277,7 @@ return view('representacoes.edit', ['selecionado' => $edit, 'lista' => $insta,  
         ->where('representacoes.cdRepresentacao', '=', $id)
         ->get(['representacoes.cdRepresentacao', 'dtInicioVigencia', 
             'representacoes.cdInstancia', 'nmInstancia', 'representacoes.stAtivo', 'dtInicioVigencia',
-            'dtFimVigencia', 'dsDesignacao', 'dsNomeacao', 'dtNomeacao', 'nuNomeacao', 'fnNomeacao','dsDesignacaoSuplente','dsNomeacaoSuplente']);
+            'dtFimVigencia', 'dsDesignacao', 'dsNomeacao',  'nuNomeacao', 'fnNomeacao','dsDesignacaoSuplente','dsNomeacaoSuplente']);
     
             $representantes = Representacao_representante::join('representante_suplentes','representante_suplentes.cdRepSup','=','representacao_representantes.cdRepSup')
             ->where('cdRepresentacao', '=', $id)
@@ -400,4 +400,69 @@ return back()->withInput(['selecionado' => $edit, 'lista' => $insta,  'anexo' =>
 
         return view('exportsView/representacoesNumero', ['instancias' => $instancias]);
     }
+public function repreinfo($empid = 0){
+
+
+
+        $employee = Representacao_representante::join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
+
+        ->find($empid);
+
+  dd($employee);
+
+        $html = "";
+
+        if(!empty($employee)){
+
+           $html = "<tr>
+
+                <td width='30%'><b>ID:</b></td>
+
+                <td width='70%'> ".$employee->nmRepresentanteSuplente."</td>
+
+             </tr>
+
+             <tr>
+
+                <td width='30%'><b>Username:</b></td>
+
+                <td width='70%'> ".$employee->stRepresentante."</td>
+
+             </tr>
+
+             <tr>
+
+                <td width='30%'><b>Name:</b></td>
+
+                <td width='70%'> ".$employee->stTitularidade."</td>
+
+             </tr>
+
+             <tr>
+
+                <td width='30%'><b>Email:</b></td>
+
+                <td width='70%'> ".$employee->dtFimNomeacao."</td>
+
+             </tr>
+
+             <tr>
+
+                <td width='30%'><b>Age:</b></td>
+
+                <td width='70%'> ".$employee->dtInicioNomeacao."</td>
+
+             </tr>";
+
+        }
+
+        $response['html'] = $html;
+
+ 
+
+        return response()->json($response);
+
+     }
+  
+    
 }

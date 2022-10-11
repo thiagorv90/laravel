@@ -14,7 +14,7 @@
                 <div class="form-group">
                     <label for="title">Nome:</label>
                     <input type="text" class="form-control" id="nmInstancia" name="nmInstancia"
-                           value="{{$instituicao->nmInstancia}}"></input>
+                           value="{{$instituicao->nmInstancia}}">
                 </div>
                 <div class="form-group" style="display:none">
                     <label for="title">Instituição: </label>

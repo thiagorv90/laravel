@@ -22,7 +22,7 @@
                 <div>
                     <h6>Não existem representações para esta instancia.</h6>  
                     <p>Caso precise, use o formulário abaixo para criar 
-                    ou <a href="../instituicoes/instituicoes." class="alert-link">clique aqui</a> para voltar ao inicio.</p>   
+                    ou <a href="/instituicoes/" class="alert-link">clique aqui</a> para voltar ao inicio.</p>   
                 </div>
                  </div>
 

@@ -55,11 +55,13 @@
                            data-bs-toggle="tooltip" data-bs-title="Contato">
                             <ion-icon name="call-outline"></ion-icon>
                         </a>
+                        
                         <!-- Botão que chama a modal -->
                         <button type="button" class="btn btn-danger delete-btn ms-1" data-bs-toggle="modal"
                         data-bs-target="#exampleModal" >
                          <ion-icon name="trash-outline"></ion-icon>                                  
-                       </button>                           
+                       </button>
+
                     </td>
                 </tr>
             @endforeach
@@ -67,7 +69,7 @@
         </table>
 </div>
 
-<!-- Modal ---> 
+<!-- Modal--->  
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false" data-bs-id="/repsup/edit/{{$event->cdRepSup}}">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -91,6 +93,23 @@
       </div>
     </div>
   </div>
+
+
+
+<div>
+    <a href="" wire:click.prevent="showModal" class="px-5 py-2 bg-red-600 text-white rounded">
+        Cancelar
+    </a>
+</div>
+
+<x-jet-confirmation-modal wire:model="showJetstream">
+
+
+
+
+
+
+
 
 
 <!--Script do Modal-->

@@ -3,180 +3,197 @@
 @section('title', 'Editando Representações')
 
 @section('content')
-
+<style>
+    a{
+        text-decoration: none;
+        color: #6f42c1;
+    }
+    a:hover{
+        color: #452680;
+         
+    }
+</style>
 
     <div id="event-create-container" class="container">
         <h1>Editar Representacão</h1>
-        <a href="/instituicoes" >{{$bread->nmInstituicao}}</a>><a href="/instancias/{{$bread->cdInstituicao}}">{{$bread->nmInstancia}}</a>
+       
         <div class="container">
-                           
 
-                           <table class="table">
-                               <thead>
-                               <tr>
-                                   <th scope="col">Nome:</th>
-                                   <th scope="col">Status</th>
-                                   <th scope="col">Opções</th>
-   
-                               </tr>
-                               </thead>
-                               <tbody>
-                               
-                               @foreach ($representantes as $incluido)
-                                   <tr>
-                                   
-                                       <td scropt="row">{{$incluido->nmRepresentanteSuplente}}</td>
-                                       
-                                       @if($incluido->stTitularidade ==1)
-                                           <td>Titular</td>
-                                       @else
-                                           <td>Suplente</td>
-                                       
-                                       @endif
-   
-                                       <td>
-                                       <form action="/representacoes/edit/{{$incluido->cdRepSup}}" method="POST">
-                                       @csrf
-                                       @method('DELETE')
-                                       <button type="submit" class="btn btn-danger delete-btn" data-bs-toggle="tooltip"
-                                               data-bs-title="Deletar">
-                                           <ion-icon name="trash-outline"></ion-icon>
-                                       </button>
-                                   </form>
-                                       </td>
-                                   </tr>
-                               @endforeach
-                              
-                               </tbody>
-                           </table>
-   </div>
-   @foreach ($selecionado as $age)
-   <form action="/representacoes/edit/{{$age->cdRepresentacao}}" method="POST"
-                  enctype='multipart/form-data'>
-                                  @csrf
-@endforeach
-          <div class="form-group" >
-          <label for="cdRepSup">Representante: </label>
-           <select name="cdRepSup" id="cdRepSup" class="form-select">
-           @foreach($titulares as $representante) 
-           <option value="{{$representante->cdRepSup}}"> {{$representante->nmRepresentanteSuplente}}</option>
-           @endforeach
-              </select>
-          </div>
-          <div class="form-group">
-                            <label for="title">Status:</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="stTitularidade" id="stTitularidade"
-                                       value="1">
-                                <label class="form-check-label" for="stTitularidade">
-                                    Representante
-                                </label>
-                            </div>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="stTitularidade" id="stTitularidade" value="0">
-                            <label class="form-check-label" for="stTitularidade">
-                                Suplente
-                            </label>
-                        </div>
-                       
-                        <input type="submit" class="btn btn-primary mb-2" value="Incluir">
-</form>
 
+            <table class="table"  id='empTable'>
+                <thead>
+                <tr>
+                    <th scope="col">Nome:</th>
+                    <th scope="col">Tiluridade</th>
+                    <th scope="col">Inicio Nomeação</th>
+                    <th scope="col">Ativo</th>
+                    <th scope="col">Opções</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                @foreach ($representantes as $incluido)
+                    <tr>
+
+                        <td scropt="row">{{$incluido->nmRepresentanteSuplente}}</td>  
+
+                        @if($incluido->stTitularidade ==1)
+                            <td>Titular</td>
+                        @else
+                            <td>Suplente</td>
+
+                        @endif
+                        <td>
+                        </td>
+                        <td>  
+                                 <!-- Botão que chama a modal -->
+                                 <td><button class='btn btn-info viewdetails' data-id='' data-bs-target="#empModal" data-bs-toggle="modal"  >View Details</button></td>                 
+                        </td>
+                        <td> 
+                                                                               
+                        </td>
+                        <td>                           
+                            <form action="/representacoes/edit/{{$incluido->cdRepSup}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger delete-btn ml-2" data-bs-toggle="tooltip"
+                                        data-bs-title="Deletar">
+                                    <ion-icon name="trash-outline"></ion-icon>
+                                </button>
+                            </form>
+
+                            
+                        </td>
+                    </tr>
+                @endforeach
+
+                </tbody>
+            </table>
+        </div>
         @foreach ($selecionado as $age)
-
-            <form action="/representacoes/update/{{ $age->cdRepresentacao}}" method="POST"
+            <form action="/representacoes/edit/{{$age->cdRepresentacao}}" method="POST"
                   enctype='multipart/form-data'>
                 @csrf
-
-                @method('PUT')
-                <div class="form-group" style="display:none">
-                    <label for="title">Inicio Vigencia:</label>
-                    <input type="text" class="form-control" id="cdRepresentacao" name="cdRepresentacao"
-                           value="{{$age->cdRepresentacao}}">
-                </div>
-                <div class="form-group" style="display:none">
-                    <label for="title">Instancias:</label>
-                    <select id="cdInstancia" name="cdInstancia" class="form-select">
-                        @foreach($lista as $i)
-                            <option value="{{$i->cdInstancia}}"
-                                    @if ($age->cdInstancia == $i->cdInstancia) selected @endif >
-                                {{ $i->nmInstancia }}
-                            </option>
+                @endforeach
+                <div class="form-group">
+                    <label for="cdRepSup">Representante: </label>
+                    <select name="cdRepSup" id="cdRepSup" class="form-select">
+                        @foreach($titulares as $representante)
+                            <option
+                                value="{{$representante->cdRepSup}}"> {{$representante->nmRepresentanteSuplente}}</option>
                         @endforeach
                     </select>
                 </div>
-               
-                <div class="form-group">
-                    <label for="title">Inicio Vigencia:</label>
-                    <input type="text" class="form-control" id="dtInicioVigencia" name="dtInicioVigencia"
-                           value="{{$age->dtInicioVigencia}}">
-                </div>
-
-                <div class="form-group">
-                    <label for="title">Fim Vigencia:</label>
-                    <input type="text" class="form-control" id="dtFimVigencia" name="dtFimVigencia"
-                           value="{{$age->dtFimVigencia}}">
-                </div>
-                
                 <div class="form-group">
                     <label for="title">Status:</label>
                     <div class="form-check">
-
-                        <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="1"
-                               @if($age->stAtivo ==1) checked @endif >
-                        <label class="form-check-label" for="stAtivo">
-                            Ativo
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="0"
-                               @if($age->stAtivo ==0) checked @endif >
-                        <label class="form-check-label" for="stAtivo">
-                            Desativado
+                        <input class="form-check-input" type="radio" name="stTitularidade" id="stTitularidade"
+                               value="1">
+                        <label class="form-check-label" for="stTitularidade">
+                            Titular
                         </label>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="title">Designação:</label>
-                    <input type="text" class="form-control" id="dsDesignacao" name="dsDesignacao"
-                           value="{{$age->dsDesignacao}}">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="stTitularidade" id="stTitularidade" value="0">
+                    <label class="form-check-label" for="stTitularidade">
+                        Suplente
+                    </label>
                 </div>
                 <div class="form-group">
-                    <label for="title">Nomeacao: </label>
-                    <input type="textarea" class="form-control" id="dsNomeacao" name="dsNomeacao"
-                           value="{{$age->dsNomeacao}}">
-                </div>
-                <div class="form-group">
-                            <label for="title">Designação Suplente:</label>
-                            <input type="text" class="form-control" id="dsDesignacao" name="dsDesignacaoSuplente"  value="{{$age->dsDesignacaoSuplente}}">
-                        </div>
-                        <div class="form-group">
-                            <label for="title">Nomeação Suplente:</label>
-                            <input type="text" class="form-control" id="dsNomeacao" name="dsNomacaoSuplente"  value="{{$age->dsNomacaoSuplente}}">
-                        </div>
-                <div class="form-group">
-                    <label for="title">Data de Nomeação:</label>
-                    <input type="text" class="form-control" id="dtNomeacao" name="dtNomeacao"
-                           value="{{$age->dtNomeacao}}">
-                </div>
-                <div class="form-group">
-                    <label for="title"> Número Nomeação:</label>
-                    <input type="number" class="form-control" id="nuNomeacao" name="nuNomeacao"
-                           value="{{$age->nuNomeacao}}">
-                </div>
-
-
-                
-
-                <div class="container d-flex justify-content-between mt-2">
-                    <a href="/repinsta/ {{ $age->cdInstancia }}" class="btn btn-info mb-2">Voltar</a>
-                    <input type="submit" class="btn btn-primary mb-2" value="Salvar">
-                </div>
+                                    <label for="title">Data de Nomeação:</label>
+                                    <input type="date" class="form-control" id="dtInicioNomeacao" name="dtInicioNomeacao">
+                                </div>
+<br>
+                <input type="submit" class="btn btn-primary mb-2" value="Incluir">
             </form>
+
+            @foreach ($selecionado as $age)
+
+                <form action="/representacoes/update/{{ $age->cdRepresentacao}}" method="POST"
+                      enctype='multipart/form-data'>
+                    @csrf
+
+                    @method('PUT')
+                    <div class="form-group" style="display:none">
+                        <label for="title">Inicio Vigencia:</label>
+                        <input type="text" class="form-control" id="cdRepresentacao" name="cdRepresentacao"
+                               value="{{$age->cdRepresentacao}}">
+                    </div>
+                    <div class="form-group" style="display:none">
+                        <label for="title">Instancias:</label>
+                        <select id="cdInstancia" name="cdInstancia" class="form-select">
+                            @foreach($lista as $i)
+                                <option value="{{$i->cdInstancia}}"
+                                        @if ($age->cdInstancia == $i->cdInstancia) selected @endif >
+                                    {{ $i->nmInstancia }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="title">Inicio Vigencia:</label>
+                        <input type="text" class="form-control" id="dtInicioVigencia" name="dtInicioVigencia"
+                               value="{{$age->dtInicioVigencia}}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="title">Fim Vigencia:</label>
+                        <input type="text" class="form-control" id="dtFimVigencia" name="dtFimVigencia"
+                               value="{{$age->dtFimVigencia}}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="title">Status:</label>
+                        <div class="form-check">
+
+                            <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="1"
+                                   @if($age->stAtivo ==1) checked @endif >
+                            <label class="form-check-label" for="stAtivo">
+                                Ativo
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="0"
+                                   @if($age->stAtivo ==0) checked @endif >
+                            <label class="form-check-label" for="stAtivo">
+                                Desativado
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Designação:</label>
+                        <input type="text" class="form-control" id="dsDesignacao" name="dsDesignacao"
+                               value="{{$age->dsDesignacao}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Nomeação: </label>
+                        <input type="textarea" class="form-control" id="dsNomeacao" name="dsNomeacao"
+                               value="{{$age->dsNomeacao}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Designação Suplente:</label>
+                        <input type="text" class="form-control" id="dsDesignacao" name="dsDesignacaoSuplente"
+                               value="{{$age->dsDesignacaoSuplente}}">
+                    </div>
+                    
+                  
+                    <div class="form-group">
+                        <label for="title"> Número Nomeação:</label>
+                        <input type="number" class="form-control" id="nuNomeacao" name="nuNomeacao"
+                               value="{{$age->nuNomeacao}}">
+                    </div>
+
+
+                    <div class="container d-flex justify-content-between mt-2">
+                        <a href="/repinsta/ {{ $age->cdInstancia }}" class="btn btn-info mb-2">Voltar</a>
+                        <input type="submit" class="btn btn-primary mb-2" value="Salvar">
+                    </div>
+                </form>
     </div>
     <h1>Documentos da Representação</h1>
-    @foreach ($anexo as $ane)
+    @foreach ($anexo as $ane)0
 
         <form action="/representacoes/files/{{$ane->nmAnexo}}" method="POST">
             @csrf
@@ -207,6 +224,70 @@
             <a href="/representacoes/{{$age->cdInstancia}}" class="btn btn-info mb-2">Voltar</a>
             <input type="submit" class="btn btn-primary mb-2" value="Incluir"></div>
     </form>
+
+    
     </div> @endforeach
+
+
+
+      <!-- Modal -->
+      <div class="modal fade" id="empModal"  aria-labelledby="exampleModalLabel" aria-hidden="false"  >
+         <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h4 class="modal-title">Editar Representante</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+               </div>
+               <div class="modal-body">
+                
+                <table class="w-100" id="tblempinfo">
+                    <tbody></tbody>
+                 </table>
+
+               </div>
+               <div class="modal-footer">
+                   <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+               </div>
+            </div>
+         </div>
+   </div>
+ 
+
+    <!--Script do Modal-->
+    <script type='text/javascript'>
+   $(document).ready(function(){
+
+      $('#empModal').on('click','.viewdetails',function(){
+          var empid = $(this).attr('data-id');
+
+          if(empid > 0){
+
+             // AJAX request
+             var url = "{{ route('getEmployeeDetails',[':empid']) }}";
+             url = url.replace(':empid',empid);
+
+             // Empty modal data
+             $('#tblempinfo tbody').empty();
+
+             $.ajax({
+                 url: url,
+                 dataType: 'json',
+                 success: function(response){
+
+                     // Add employee details
+                     $('#tblempinfo tbody').html(response.html);
+
+                     // Display Modal
+                     $('#empModal').modal('show'); 
+                 }
+             });
+          }
+      });
+
+   });
+   </script>
+
+
 
 @endsection
