@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Exports\RepresentacoesExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Auth\Access\Response;
-use App\Models\Vw_representacoe;
+use Carbon\Carbon;
 
 class RepresentacoesController extends Controller
 {
@@ -30,7 +30,7 @@ class RepresentacoesController extends Controller
         $event->dsDesignacao = $request->dsDesignacao;
         $event->dsNomeacao = $request->dsNomeacao;
         $event->stAtivo = $request->stAtivo;
-        $event->dtNomeacao = $request->dtNomeacao;
+        
         $event->nuNomeacao = $request->nuNomeacao;
         $event->dsNomeacaoSuplente = $request->dsNomeacaoSuplente;
         $event->dsDesignacaoSuplente = $request->dsDesignacaoSuplente;
@@ -67,18 +67,26 @@ class RepresentacoesController extends Controller
 
     public function createrep(Request $request, $id)
     {
+        
         $idcontracts = array();
         $teste = '0';
         $event = new Representacao_representante;
         $event->cdRepSup = $request->cdRepSup;
+        $event->dtInicioNomeacao = $request->dtInicioNomeacao;
+        $event->stRepresentante = '1';
 
         $event->cdRepresentacao = $request->cdRepresentacao;
         $event->stTitularidade = $request->stTitularidade;
         $event->save();
 
+        $bread = DB::table('instituicoes')->leftjoin('instancias', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
+        ->join('representacoes', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
+        ->join('representacao_representantes','representacao_representantes.cdRepresentacao','=','representacoes.cdRepresentacao')
+        ->where('representacao_representantes.cdRepresentacao', '=', $event->cdRepresentacao)->first(['instancias.cdInstancia','nmInstituicao', 'nmInstancia', 'instancias.cdInstituicao']);
 
         $incluidos = Representacao_representante::join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
-            ->where('representacao_representantes.cdRepresentacao', '=', $event->cdRepresentacao)->get(['nmRepresentanteSuplente', 'stRepresentante', 'representante_suplentes.cdRepSup']);
+        ->join('representacoes','representacao_representantes.cdRepresentacao','=','representacoes.cdRepresentacao')
+            ->where('representacao_representantes.cdRepresentacao', '=', $event->cdRepresentacao)->get(['nmRepresentanteSuplente', 'stRepresentante', 'representante_suplentes.cdRepSup','stTitularidade','representacoes.cdInstancia']);
 
         $cdRepSUp = Representacao_representante::join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
             ->where('representacao_representantes.cdRepresentacao', '=', $event->cdRepresentacao)->get(['representante_suplentes.cdRepSup']);
@@ -91,21 +99,27 @@ class RepresentacoesController extends Controller
 
         $representantes = DB::table('representante_suplentes')->whereNotIn('cdRepSup', $idcontracts)->get();
 
-        return view('representacoes/representantes', ['event' => $event, 'representantes' => $representantes, 'incluidos' => $incluidos, 'teste' => $teste]);
+        return view('representacoes/representantes', ['event' => $event, 'representantes' => $representantes, 'incluidos' => $incluidos, 'teste' => $teste, 'bread'=>$bread]);
     }
 
     public function deleterep(Request $request, $id)
     {
         $event = Representacoe::join('representacao_representantes', 'representacao_representantes.cdRepresentacao', '=', 'representacoes.cdRepresentacao')
             ->where('representacao_representantes.cdRepSup', '=', $id)->first();
-
+            $bread = DB::table('instituicoes')->leftjoin('instancias', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
+            ->leftjoin('representacoes', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
+            ->join('representacao_representantes','representacao_representantes.cdRepresentacao','=','representacoes.cdRepresentacao')
+            ->where('representacao_representantes.cdRepSup', '=', $id)->first(['nmInstituicao', 'nmInstancia', 'instancias.cdInstituicao','instancias.cdInstancia']);
 
         $idcontracts = array();
         $teste = '0';
         Representacao_representante::where('cdRepSup', $id)->delete();
 
+        
+
         $incluidos = Representacao_representante::join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
-            ->where('representacao_representantes.cdRepresentacao', '=', $event->cdRepresentacao)->get(['nmRepresentanteSuplente', 'stRepresentante', 'representante_suplentes.cdRepSup']);
+        ->join('representacoes','representacao_representantes.cdRepresentacao','=','representacoes.cdRepresentacao')
+            ->where('representacao_representantes.cdRepresentacao', '=', $event->cdRepresentacao)->get(['nmRepresentanteSuplente', 'stRepresentante', 'representante_suplentes.cdRepSup','stTitularidade','representacoes.cdInstancia']);
 
         $cdRepSUp = Representacao_representante::join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
             ->where('representacao_representantes.cdRepresentacao', '=', $event->cdRepresentacao)->get(['representante_suplentes.cdRepSup']);
@@ -118,7 +132,7 @@ class RepresentacoesController extends Controller
 
         $representantes = DB::table('representante_suplentes')->whereNotIn('cdRepSup', $idcontracts)->get();
 
-        return view('representacoes/representantes', ['representantes' => $representantes, 'incluidos' => $incluidos, 'teste' => $teste, 'event' => $event]);
+        return view('representacoes/representantes', ['representantes' => $representantes, 'incluidos' => $incluidos, 'teste' => $teste, 'event' => $event, 'bread'=>$bread]);
     }
 
 
@@ -185,11 +199,11 @@ class RepresentacoesController extends Controller
             ->where('representacoes.cdRepresentacao', '=', $id)
             ->get(['representacoes.cdRepresentacao', 'dtInicioVigencia',
                 'representacoes.cdInstancia', 'nmInstancia', 'representacoes.stAtivo', 'dtInicioVigencia',
-                'dtFimVigencia', 'dsDesignacao', 'dsNomeacao', 'dtNomeacao', 'nuNomeacao', 'fnNomeacao', 'dsDesignacaoSuplente', 'dsNomeacaoSuplente']);
+                'dtFimVigencia', 'dsDesignacao', 'dsNomeacao',  'nuNomeacao', 'fnNomeacao', 'dsDesignacaoSuplente', 'dsNomeacaoSuplente']);
 
         $representantes = Representacao_representante::join('representante_suplentes', 'representante_suplentes.cdRepSup', '=', 'representacao_representantes.cdRepSup')
             ->where('cdRepresentacao', '=', $id)
-            ->get(['nmRepresentanteSuplente', 'representacao_representantes.stRepresentante', 'stTitularidade', 'representacao_representantes.cdRepSup']);
+            ->get(['nmRepresentanteSuplente', 'representacao_representantes.stRepresentante', 'stTitularidade', 'representacao_representantes.cdRepSup','dtFimNomeacao','dtInicioNomeacao','stRepresentante' ]);
 
         $cdRepSUp = Representacao_representante::join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
             ->where('representacao_representantes.cdRepresentacao', '=', $id)->get(['representante_suplentes.cdRepSup']);
@@ -215,23 +229,25 @@ class RepresentacoesController extends Controller
         $idcontracts = array();
         $bread = DB::table('instituicoes')->leftjoin('instancias', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
             ->leftjoin('representacoes', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')->where('representacoes.cdRepresentacao', '=', $id)->first(['nmInstituicao', 'nmInstancia', 'instancias.cdInstituicao']);
+       
+
         $event = new Representacao_representante;
         $event->cdRepSup = $request->cdRepSup;
-
+        $event->dtInicioNomeacao = $request->dtInicioNomeacao;
         $event->cdRepresentacao = $id;
-        $event->stTitularidade = $request->stTitularidade;
+        $event->stRepresentante = $request->stRepresentante;
+        $event->stTitularidade ='1' ;
         $event->save();
 
         $edit = Representacoe::join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
             ->where('representacoes.cdRepresentacao', '=', $id)
             ->get(['representacoes.cdRepresentacao', 'dtInicioVigencia',
                 'representacoes.cdInstancia', 'nmInstancia', 'representacoes.stAtivo', 'dtInicioVigencia',
-                'dtFimVigencia', 'dsDesignacao', 'dsNomeacao', 'dtNomeacao', 'nuNomeacao', 'fnNomeacao', 'dsDesignacaoSuplente', 'dsNomeacaoSuplente']);
+                'dtFimVigencia', 'dsDesignacao', 'dsNomeacao',  'nuNomeacao', 'fnNomeacao', 'dsDesignacaoSuplente', 'dsNomeacaoSuplente']);
 
-        $representantes = Representacao_representante::join('representante_suplentes', 'representante_suplentes.cdRepSup', '=', 'representacao_representantes.cdRepSup')
-            ->where('cdRepresentacao', '=', $id)
-            ->get(['nmRepresentanteSuplente', 'representacao_representantes.stRepresentante', 'stTitularidade', 'representacao_representantes.cdRepSup']);
-
+                $representantes = Representacao_representante::join('representante_suplentes', 'representante_suplentes.cdRepSup', '=', 'representacao_representantes.cdRepSup')
+                ->where('cdRepresentacao', '=', $id)
+                ->get(['nmRepresentanteSuplente', 'representacao_representantes.stRepresentante', 'stTitularidade', 'representacao_representantes.cdRepSup','dtFimNomeacao','dtInicioNomeacao','stRepresentante' ]);
 
         $incluidos = Representacao_representante::join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
             ->where('representacao_representantes.cdRepresentacao', '=', $id)->get(['nmRepresentanteSuplente', 'stRepresentante', 'representante_suplentes.cdRepSup']);
@@ -256,7 +272,7 @@ class RepresentacoesController extends Controller
 
         $titulares = DB::table('representante_suplentes')->whereNotIn('cdRepSup', $idcontracts)->get();
 
-        return view('representacoes.edit', ['selecionado' => $edit, 'lista' => $insta, 'anexo' => $anexo, 'representantes' => $representantes, 'titulares' => $titulares, 'cod' => $cod, 'bread' => $bread]);
+        return view('representacoes.edit', ['selecionado' => $edit, 'lista' => $insta, 'anexo' => $anexo, 'representantes' => $representantes, 'titulares' => $titulares, 'cod' => $cod, 'bread' => $bread,'incluidos'=>$incluidos]);
     }
 
     public function delrepre(Request $request, $id)
@@ -270,11 +286,11 @@ class RepresentacoesController extends Controller
             ->where('representacoes.cdRepresentacao', '=', $id)
             ->get(['representacoes.cdRepresentacao', 'dtInicioVigencia',
                 'representacoes.cdInstancia', 'nmInstancia', 'representacoes.stAtivo', 'dtInicioVigencia',
-                'dtFimVigencia', 'dsDesignacao', 'dsNomeacao', 'dtNomeacao', 'nuNomeacao', 'fnNomeacao', 'dsDesignacaoSuplente', 'dsNomeacaoSuplente']);
+                'dtFimVigencia', 'dsDesignacao', 'dsNomeacao',  'nuNomeacao', 'fnNomeacao', 'dsDesignacaoSuplente', 'dsNomeacaoSuplente']);
 
-        $representantes = Representacao_representante::join('representante_suplentes', 'representante_suplentes.cdRepSup', '=', 'representacao_representantes.cdRepSup')
-            ->where('cdRepresentacao', '=', $id)
-            ->get(['nmRepresentanteSuplente', 'representacao_representantes.stRepresentante', 'stTitularidade', 'representacao_representantes.cdRepSup']);
+                $representantes = Representacao_representante::join('representante_suplentes', 'representante_suplentes.cdRepSup', '=', 'representacao_representantes.cdRepSup')
+                ->where('cdRepresentacao', '=', $id)
+                ->get(['nmRepresentanteSuplente', 'representacao_representantes.stRepresentante', 'stTitularidade', 'representacao_representantes.cdRepSup','dtFimNomeacao','dtInicioNomeacao','stRepresentante' ]);
 
 
         $incluidos = Representacao_representante::join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
@@ -330,6 +346,77 @@ class RepresentacoesController extends Controller
 
         return redirect()->route('repre', ['id' => $caminho]);
     }
+    public function editrepre(Request $request, $id)
+    {
+
+        $cd = $request->input('stTitularidade');
+        $name = $request->input('dtInicioNomeacao');
+        if($cd == 1){
+            $fim = NULL;
+        }
+        if($cd == 0){
+            $fim =  Carbon::now();
+        }
+
+
+
+        DB::update('update representacao_representantes set stTitularidade = ?, dtInicioNomeacao = ?,dtFimNomeacao= ?  where cdRepSup = ?', [$cd, $name,$fim, $id]);
+
+      
+        return back();
+    }
+
+    public function repreinfo($empid = 0){
+
+        $representantes = Representacao_representante::join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
+        ->find($empid);
+        
+        $html = "";
+        if(!empty($representantes)){
+           $html = '<form action="/representacoes/representantes/add/'.$representantes->cdRepSup.'" method="post">
+           '.csrf_field().'
+           
+         
+           <div class="mb-3">
+                <label for="disabledTextInput" class="form-label" disabled >Nome</label>
+                <input class="form-control" type="text" aria-label="Disabled input example" disabled placeholder='.$representantes->nmRepresentanteSuplente.'>
+            </div>
+  
+            <div class="form-group">
+                    <label for="title">Data de Nomeação:</label>
+                    <input type="text" class="form-control" id="dtInicioNomeacao" name="dtInicioNomeacao" value='.$representantes->dtInicioNomeacao.'>
+            </div>
+            <br>
+            <div class="form-check">
+                    <input class="form-check-input" type="radio" name="stTitularidade" id="stTitularidade" value="1"
+                        ';
+            if ($representantes->stTitularidade ==1) {
+                $html.= ' checked ';
+            }
+            $html.=' >
+                    <label class="form-check-label" for="stTitularidade">
+                        Ativo
+                    </label>
+            </div>
+  
+            <div class="form-check">
+                    <input class="form-check-input" type="radio" name="stTitularidade" id="stTitularidade" value="0"
+                    ';if ($representantes->stTitularidade ==0) {
+                        $html.= ' checked ';
+                    }
+                    $html.='  >
+                    <label class="form-check-label" for="stTitularidade">
+                        Desativado
+                    </label>
+            </div>
+            <input type="submit" class="btn btn-primary mb-2" value="Salvar">
+            </form>';
+        }
+        $response['html'] = $html;
+  
+        return response()->json($response);
+     }
+
 
     public function instareprescreate($id)
     {

@@ -6,6 +6,8 @@
 
     <div id="event-create-container" class="container">
         <h1>Representantes</h1>
+        <a href="/instituicoes">{{$bread->nmInstituicao}}</a>><a
+                            href="/instancias/{{$bread->cdInstituicao}}">{{$bread->nmInstancia}}</a>
         @if ($teste <>1)
             <div class="container">
 
@@ -33,7 +35,7 @@
                             @endif
 
                             <td>
-                                <form action="/representacoes/representantes/{{$event->cdRepSup}}" method="POST">
+                                <form action="/representacoes/representantes/{{$incluido->cdRepSup}}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger delete-btn" data-bs-toggle="tooltip"
@@ -64,21 +66,25 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="title">Status:</label>
+                    <label for="title">Status:</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="stTitularidade" id="stTitularidade"
+                               value="1">
+                        <label class="form-check-label" for="stTitularidade">
+                            Titular
+                        </label>
+                    </div>
+                </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="stTitularidade" id="stTitularidade"
-                           value="1">
+                    <input class="form-check-input" type="radio" name="stTitularidade" id="stTitularidade" value="0">
                     <label class="form-check-label" for="stTitularidade">
-                        Representante
+                        Suplente
                     </label>
                 </div>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="stTitularidade" id="stTitularidade" value="0">
-                <label class="form-check-label" for="stTitularidade">
-                    Suplente
-                </label>
-            </div>
+            <div class="form-group">
+                                    <label for="title">Data de Nomeação:</label>
+                                    <input type="date" class="form-control" id="dtInicioNomeacao" name="dtInicioNomeacao">
+                                </div>
             <div class="form-group" style="display:none">
 
                 <input type="text" class="form-control" id="cdRepresentacao" value="{{$event->cdRepresentacao}}"
@@ -86,7 +92,7 @@
             </div>
             <input type="submit" class="btn btn-primary mb-2" value="Incluir">
         </form>
-        <input type="submit" class="btn btn-primary mb-2" value="Salvar">
+        <a href="/repinsta/{{$bread->cdInstancia}}" class="btn btn-info mb-2">Voltar</a>
 
 
     </div>
