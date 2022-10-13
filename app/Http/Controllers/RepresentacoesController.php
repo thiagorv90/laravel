@@ -434,8 +434,10 @@ class RepresentacoesController extends Controller
 
     public function represcreate()
     {
-        $representantes = DB::table('representante_suplentes')->join('representacoes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
-            ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
+        $representantes = DB::table('representacoes')
+        ->join('representacao_representantes', 'representacoes.cdRepresentacao', '=', 'representacao_representantes.cdRepresentacao')
+        ->join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
+        ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
             ->where('dsEmail', '=', auth()->user()->email)->get();
 
 
@@ -482,7 +484,46 @@ class RepresentacoesController extends Controller
         return view('exportsView/representacoesNumero', ['instancias' => $instancias]);
     }
 
+    public function delinfo($empid = 0)
+    {
 
 
+        $employee = Representacao_representante::join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
+            ->find($empid);
 
+       
+
+        $html = "";
+
+        if (!empty($employee)) {
+
+            $html = '  
+                   <div class="modal-body">
+                       A exclusão é permanente. Deseja prosseguir? '.$employee->nmRepresentanteSuplente.'
+                   </div>
+                   <div class="modal-footer">
+                       <form action="/representacoes/edit/'.$employee->cdRepSup.'" method="POST">
+                       ' . csrf_field() . '
+                       '.method_field('DELETE').'
+                           
+                           <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancelar
+                           </button>
+                           <button type="submit" class="btn btn-danger delete-btn ms-1"
+                                   data-bs-toggle="tooltip"
+                                   data-bs-title="Deletar">Excluir
+                           </button>
+                       </form>
+                   </div>
+               </div>
+           </div>
+       </div>';
+
+        }
+
+        $response['html'] = $html;
+
+
+        return response()->json($response);
+
+    }
 }

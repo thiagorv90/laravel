@@ -115,8 +115,10 @@
 
                             </div>
                             <div class="form-group">
+
                                 <label for="dsObjetivo">Descrição Objetivo:</label>
                                 <textarea placeholder="Descrição Objetivo..." name="dsObjetivo" rows="10" id="dsObjetivo"
+
                                           class="form-control"></textarea>
                             </div>
 
@@ -215,7 +217,7 @@
         <h1>Instâncias</h1>
         <a href="/instituicoes">{{$bread->nmInstituicao}}</a>
         <div>
-            <table class="table">
+            <table class="table" id="empTable">
                 <thead>
                 <tr>
                     <th scope="col">Nome</th>
@@ -250,15 +252,11 @@
                                data-bs-toggle="tooltip" data-bs-title="Representação">
                                 <ion-icon name="reader-outline"></ion-icon>
                             </a>
-                            <form action="/instancias/{{$instancia->cdInstancia}}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger delete-btn"
-                                        data-bs-toggle="tooltip"
-                                        data-bs-title="Deletar">
-                                    <ion-icon name="trash-outline"></ion-icon>
-                                </button>
-                            </form>
+                             
+                            <button class="btn btn-danger delete-btn ml-2 deldetails" data-id='{{ $instancia->cdInstancia}}'
+                                    data-bs-toggle="tooltip" data-bs-title="Deletar">
+                                <ion-icon name="trash-outline"></ion-icon>
+                            </button>
                         </td>
                     </tr>
                 @endforeach
@@ -466,5 +464,60 @@
         </div>
 
     @endif
+    <!-- Modal --->
+  <div class="container">
+        <!-- Modal Delete-->
+        <div class="modal fade" id="empModaldel">
+            <div class="modal-dialog">
 
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Exclusão</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body" id="tblempinfodel">
+
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+          <!--Script do Modal delete-->
+          <script type='text/javascript'>
+
+$(document).ready(function () {
+
+    $('#empTable').on('click', '.deldetails', function () {
+        $('#empModaldel').modal('show');
+
+        var empid = $(this).attr('data-id');
+
+        if (empid > 0) {
+
+            // AJAX request
+            var url = "{{ route('delinstacia',[':empid']) }}";
+            url = url.replace(':empid', empid);
+
+            // Empty modal data
+            $('#tblempinfodel').empty();
+
+            $.ajax({
+                url: url,
+                dataType: 'json',
+                success: function (response) {
+
+                    // Add employee details
+                    $('#tblempinfodel').html(response.html);
+
+                    // Display Modal
+                    $('#empModaldel').modal('show');
+
+                }
+            });
+        }
+    });
+
+});
+</script>
 @endsection
