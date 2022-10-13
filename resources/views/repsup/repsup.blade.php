@@ -13,10 +13,13 @@
         a:hover {
             color: #452680;
         }
+        .modal-header{
+            color: white;
+        }
     </style>
     <h1>Representantes</h1>
     <div class="container mt-5">
-        <table class="table">
+        <table class="table" id="empTable">
             <thead>
             <tr>
                 <th scope="col">Nome</th>
@@ -49,48 +52,17 @@
                            data-bs-toggle="tooltip" data-bs-title="Contato">
                             <ion-icon name="call-outline"></ion-icon>
                         </a>
-                        <!-- Botão que chama a modal -->
-                        <button value="{{$event->cdRepSup}}" type="button" class="btn btn-danger delete-btn ms-1"
-                                data-bs-toggle="modal" data-bs-id="{{$event->cdRepSup}}"
-                                data-bs-target="#exampleModal">
-                            <ion-icon name="trash-outline"></ion-icon>
-                        </button>
+
+                           <!-- Botão que chama a modal -->
+                           <button class="btn btn-danger edit-btn ms-1 viewdetails" data-id='{{ $event->cdRepSup }}'
+                             data-bs-toggle="tooltip" data-bs-title="Excluir">
+                             <ion-icon name="trash-outline"></ion-icon>
+                           </button>
+
+
                     </td>
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                         aria-hidden="false"
-                         data-bs-id="/repsup/edit/{{$event->cdRepSup}}">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header bg-danger text-white">
-                                    <h5 class="modal-title" id="exampleModalLabel">Alerta</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    A exclusão é permanente. Deseja prosseguir? {{$event->nmRepresentanteSuplente}}
-                                </div>
-                                <div class="modal-footer">
-                                    <form action="/repsup/edit/{{$event->cdRepSup}}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancelar
-                                        </button>
-                                        <button type="submit" class="btn btn-danger delete-btn ms-1"
-                                                data-bs-toggle="tooltip"
-                                                data-bs-title="Deletar">Excluir
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </tr>
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                     aria-hidden="false"
-                >
-
-                </div>
+                </tr>  
+                            
             @endforeach
             </tbody>
         </table>
@@ -107,7 +79,7 @@
         </form>
         <br>
     </div>
-    <h1>Crie Representante</h1>
+    <h1>Criar Representante</h1>
 
     <div id="event-create-container" class="container">
         <form action="/repsup" method="POST" enctype="multipart/form-data">
@@ -209,21 +181,56 @@
         </form>
     </div>
 
-    <!-- Modal --->
+        <!-- Modal --->
+        <div class="container">
+            <!-- Modal -->
+            <div class="modal fade" id="empModal">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header bg-danger ">
+                            <h3 class="modal-title">Atenção!</h3>
+                        </div>
+                        <div class="modal-body" id="tblempinfo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <!--Script do Modal-->
+        <script type='text/javascript'>
+            $(document).ready(function () {
 
+                $('#empTable').on('click', '.viewdetails', function () {
+                    var empid = $(this).attr('data-id');
 
-    <!--Script do Modal-->
-    <script>
-        $('#exampleModal').on('show.bs.modal', function (event) {
-            alert("sarve");
-            var button = $(event.relatedTarget);
-            var recipientId = button.data('id');
-            console.log(recipientId);
+                    if (empid > 0) {
 
-            var modal = $(this);
-            modal.find('#repID').val(recipientId);
-        })
-    </script>
+                        // AJAX request
+                        var url = "{{route('getRepreEmployeeDetails',[':empid'])}}";
+                        url = url.replace(':empid', empid);
+
+                        // Empty modal data
+                        $('#tblempinfo').empty();
+
+                        $.ajax({
+                            url: url,
+                            dataType: 'json',
+                            success: function (response) {
+
+                                // Add employee details
+                                $('#tblempinfo').html(response.html);
+
+                                // Display Modal
+                                $('#empModal').modal('show');
+                            }
+                        });
+                    }
+                });
+
+            });
+        </script>
+
 
 @endsection

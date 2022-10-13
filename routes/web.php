@@ -125,7 +125,9 @@ Route::middleware('auth')->group(function () {
         Route::post('/representacoes/representantes/{id}', [RepresentacoesController::class, 'createrep']);
         Route::delete('/representacoes/representantes/{id}', [RepresentacoesController::class, 'deleterep']);
         Route::get('/getEmployeeDetails/{empid}', [RepresentacoesController::class, 'repreinfo'])->name('getEmployeeDetails');
+
         Route::get('/delgetEmployeeDetails/{empid}', [RepresentacoesController::class, 'delinfo'])->name('delEmployeeDetails');
+
 
         Route::post('/representacoes/representantes/add/{id}', [RepresentacoesController::class, 'editrepre']);
 
@@ -139,12 +141,14 @@ Route::middleware('auth')->group(function () {
         Route::post('/repsup/file/{id}', [RepresentanteSuplenteController::class, 'repsupfile']);
         Route::delete('/repsup/files/{id}', [RepresentanteSuplenteController::class, 'deleteRepImg']);
         Route::get('/repsup/search', [RepresentanteSuplenteController::class, 'search']);
+        Route::get('/getRepreEmployeeDetails/{empid}', [RepresentanteSuplenteController::class, 'delrepre'])->name('getRepreEmployeeDetails'); // Rota do delete no representante
 
         Route::post('/telcon/{id}', [TelefoneContatosController::class, 'telconstore']);
         Route::get('/telcon/{id}', [TelefoneContatosController::class, 'telconcreate'])->name('telcon');
         Route::PUT('/telcon/update/{id}', [TelefoneContatosController::class, 'updateTel']);
         Route::get('/telcon/edit/{id}', [TelefoneContatosController::class, 'editTel']);
         Route::delete('/telcon/edit/{id}', [TelefoneContatosController::class, 'deleteTel']);
+        Route::get('/getEmployeeTelefoneContato/{empid}',[TelefoneRepresentanteSuplenteController::class, 'deltelCon'])->name('getEmployeeTelefoneContato');// Rota do delete no telefoneContato
 
 
         Route::post('/telrepsup/{id}', [TelefoneRepresentanteSuplenteController::class, 'telrepsupstore']);
@@ -153,6 +157,7 @@ Route::middleware('auth')->group(function () {
         Route::get('telrepsup/edit/{id}', [TelefoneRepresentanteSuplenteController::class, 'editTrel']);
         Route::PUT('telrepsup/update/{id}', [TelefoneRepresentanteSuplenteController::class, 'updateTrel']);
         Route::delete('/telrepsup/edit/{id}', [TelefoneRepresentanteSuplenteController::class, 'deleteTrel']);
+        Route::get('/getEmployeeTelefone/{empid}',[TelefoneRepresentanteSuplenteController::class, 'delTel'])->name('getEmployeeTelefone');// Rota do delete no telefone
 
         Route::post('temarep', [TemaRepresentacoesController::class, 'temarepstore']);
         Route::get('temarep', [TemaRepresentacoesController::class, 'temarepindex']);

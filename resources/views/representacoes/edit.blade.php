@@ -72,12 +72,10 @@
                             </button>
 
 
-                            
                             <button class="btn btn-danger delete-btn ml-2 deldetails" data-id='{{ $incluido->cdRepSup }}'
                                     data-bs-toggle="tooltip" data-bs-title="Deletar">
                                 <ion-icon name="trash-outline"></ion-icon>
                             </button>
-
                         </td>
                     </tr>
                 @endforeach

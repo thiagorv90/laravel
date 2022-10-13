@@ -66,4 +66,35 @@ class TelefoneRepresentanteSuplenteController extends Controller
         // $deleted = DB::delete('delete from telefone_contatos where cdTelefone = ?', [$id]);
         return back();
     }
+
+    public function delTel($empid = 0)
+    {
+        $employee = Telefone_representante_suplente::find($empid);
+        $html = "";
+        if (!empty($employee)) {
+
+            $html = '  
+                   <div class="modal-body ">
+                      <h5>A Exclusão é permanente. Deseja prosseguir?<h5>
+                   </div>
+                   <div class="modal-footer">
+                       <form action="/telrepsup/edit/'. $employee->cdTelefone.'" method="POST">
+                       '.csrf_field() .'
+                       '.method_field('DELETE') .'
+                           <button type="button" class="btn btn-info" data-bs-dismiss="modal">Cancelar</button>
+
+                           <button type="submit" class="btn btn-danger delete-btn ms-1"
+                                   data-bs-toggle="tooltip"
+                                   data-bs-title="Deletar">Excluir
+                           </button>
+                       </form>
+                   </div>
+               </div>
+           </div>
+       </div>';
+        }
+        $response['html'] = $html;
+        return response()->json($response);
+    }
+
 }

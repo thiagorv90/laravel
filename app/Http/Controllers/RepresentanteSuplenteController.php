@@ -185,4 +185,33 @@ class RepresentanteSuplenteController extends Controller
         return view('repsup.selerepsup', ['events' => $events, 'dados' => $dados, 'empresas' => $empresas, 'escolaridades' => $escolaridades, 'selecionado' => $selecionado]);
     }
 
+    public function delrepre($empid = 0)
+    {
+        $employee = Representante_suplente::find($empid);
+        $html = "";
+        if (!empty($employee)) {
+
+            $html = '  
+                   <div class="modal-body">
+                      <h5>A exclusão do(a) representante é permanente. Deseja prosseguir?<h5>
+                   </div>
+                   <div class="modal-footer">
+                       <form action="/repsup/edit/'. $employee->cdRepSup.'" method="POST">
+                       '.csrf_field() .'
+                       '.method_field('DELETE') .'
+                           <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancelar</button>
+
+                           <button type="submit" class="btn btn-danger delete-btn ms-1"
+                                   data-bs-toggle="tooltip"
+                                   data-bs-title="Deletar">Excluir
+                           </button>
+                       </form>
+                   </div>
+               </div>
+           </div>
+       </div>';
+        }
+        $response['html'] = $html;
+        return response()->json($response);
+    }
 }

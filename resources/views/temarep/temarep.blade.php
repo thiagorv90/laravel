@@ -43,7 +43,7 @@
         @endif
         <br>
 
-        <h1>Crie Tema</h1>
+        <h1>Criar Tema</h1>
 
         <form action="/temarep" method="POST">
             @csrf

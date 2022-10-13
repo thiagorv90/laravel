@@ -61,7 +61,7 @@
         <h1>Contatos de {{$nome->nmRepresentanteSuplente}}</h1>
         <div class="container">
 
-            <table class="table">
+            <table class="table" id="empTable">
                 <thead>
                 <tr>
 
@@ -72,24 +72,21 @@
                 <tbody>
 
                 @foreach ($selecionado as $event)
-
                     <tr>
-
                         <td><a>{{ $event->nuTelefone }}</a></td>
                         <td class="d-flex">
                             <a href="/telrepsup/edit/{{$event->cdTelefone}}" class="btn btn-info edit-btn me-2"
                                data-bs-toggle="tooltip" data-bs-title="Editar">
                                 <ion-icon name="create-outline"></ion-icon>
                             </a>
-                            <form action="/telrepsup/edit/{{ $event->cdTelefone }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger delete-btn show_confirm" title='Delete'
-                                        id="del"
-                                        data-bs-toggle="tooltip">
-                                    <ion-icon name="trash-outline"></ion-icon>
-                                </button>
-                            </form>
+
+                             <!-- Botão que chama a modal -->
+                           <button class="btn btn-danger edit-btn ms-1 viewdetails" data-id='{{ $event->cdTelefone }}'
+                                data-bs-toggle="tooltip" data-bs-title="Excluir">
+                            <ion-icon name="trash-outline"></ion-icon>
+                          </button>
+
+                          
                         </td>
                     </tr>
 
@@ -97,8 +94,60 @@
 
 
                 </tbody>
-            </table>
+    
+     <!-- Modal --->
+        <div class="container">
+            <!-- Modal -->
+            <div class="modal fade" id="empModal">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header bg-danger ">
+                            <h3 class="modal-title text-white">Atenção!</h3>
+                        </div>
+                        <div class="modal-body" id="tblempinfo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <!--Script do Modal-->
+        <script type='text/javascript'>
+            $(document).ready(function () {
+
+                $('#empTable').on('click', '.viewdetails', function () {
+                    var empid = $(this).attr('data-id');
+
+                    if (empid > 0) {
+
+                        // AJAX request
+                        var url = "{{route('getEmployeeTelefone',[':empid'])}}";
+                        url = url.replace(':empid', empid);
+
+                        // Empty modal data
+                        $('#tblempinfo').empty();
+
+                        $.ajax({
+                            url: url,
+                            dataType: 'json',
+                            success: function (response) {
+
+                                // Add employee details
+                                $('#tblempinfo').html(response.html);
+
+                                // Display Modal
+                                $('#empModal').modal('show');
+                            }
+                        });
+                    }
+                });
+
+            });
+        </script>
+
+
+            </table>
         </div>
 
         <h1>Crie telefone</h1>

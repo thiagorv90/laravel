@@ -115,8 +115,10 @@
 
                             </div>
                             <div class="form-group">
-                                <label for="dsObjetivo">Objetivo/Atribuição:</label>
-                                <textarea placeholder="Descrição Objetivo..." name="dsObjetivo" id="dsObjetivo"
+
+                                <label for="dsObjetivo">Descrição Objetivo:</label>
+                                <textarea placeholder="Descrição Objetivo..." name="dsObjetivo" rows="10" id="dsObjetivo"
+
                                           class="form-control"></textarea>
                             </div>
 
@@ -159,13 +161,13 @@
                             </div>
                             <div class="form-group">
                                 <label for="dsObservacao">Observação:</label>
-                                <textarea placeholder="Observações..." type="text" class="form-control"
+                                <textarea placeholder="Observações..." rows="10" type="text" class="form-control"
                                           id="dsObservacao"
                                           name="dsObservacao"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="dsAtoNormativo">Ato Normativo:</label>
-                                <textarea placeholder="Observações..." type="text" class="form-control"
+                                <textarea rows="10" placeholder="Observações..." type="text" class="form-control"
                                           id="dsAtoNormativo"
                                           name="dsAtoNormativo"></textarea>
                             </div>
@@ -365,7 +367,7 @@
                     </div>
                     <div class="form-group">
                         <label for="title">Descrição Objetivo:</label>
-                        <textarea placeholder="Descrição Objetivo..." name="dsObjetivo" id="dsObjetivo"
+                        <textarea rows="10" placeholder="Descrição Objetivo..." name="dsObjetivo" id="dsObjetivo"
                                   class="form-control"></textarea>
                     </div>
 
@@ -412,12 +414,12 @@
                     </div>
                     <div class="form-group">
                         <label for="title">Observação:</label>
-                        <textarea placeholder="Observações..." type="text" class="form-control" id="dsObservacao"
+                        <textarea rows="10" placeholder="Observações..." type="text" class="form-control" id="dsObservacao"
                                   name="dsObservacao"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="title">Ato Normativo:</label>
-                        <textarea placeholder="Observações..." type="text" class="form-control" id="dsAtoNormativo"
+                        <textarea rows="10" placeholder="Observações..." type="text" class="form-control" id="dsAtoNormativo"
                                   name="dsAtoNormativo"></textarea>
                     </div>
                     <div class="form-group">

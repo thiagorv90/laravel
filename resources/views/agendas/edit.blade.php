@@ -4,6 +4,18 @@
 
 @section('content')
 
+
+<style>
+    a {
+        text-decoration: none;
+        color: #6f42c1;
+    }
+
+    a:hover {
+        color: #452680;
+    }
+</style>
+
     <div id="event-create-container" class="container">
         <h1>Agenda</h1>
         <a href="/instituicoes">{{$bread->nmInstituicao}}</a>><a

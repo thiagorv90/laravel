@@ -105,7 +105,7 @@
 
                 <div class="form-group">
                     <label for="title">Observação:</label>
-                    <textarea type="text" class="form-control" id="dsObservacao" name="dsObservacao"
+                    <textarea type="text" rows="10" class="form-control" id="dsObservacao" name="dsObservacao"
                     >{{$age->dsObservacao}}</textarea>
                 </div>
                 <br>
