@@ -71,17 +71,12 @@
                                 <ion-icon name="create-outline"></ion-icon>
                             </button>
 
-                            </a>
 
-                            <form action="/representacoes/edit/{{$incluido->cdRepSup}}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger delete-btn ml-2" data-bs-toggle="tooltip"
-                                        data-bs-title="Deletar">
-                                    <ion-icon name="trash-outline"></ion-icon>
-                                </button>
-                            </form>
-
+                            
+                            <button class="btn btn-danger delete-btn ml-2 deldetails" data-id='{{ $incluido->cdRepSup }}'
+                                    data-bs-toggle="tooltip" data-bs-title="Deletar">
+                                <ion-icon name="trash-outline"></ion-icon>
+                            </button>
 
                         </td>
                     </tr>
@@ -215,7 +210,7 @@
     </div>
     <h1>Documentos da Representação</h1>
     @foreach ($anexo as $ane)
-        0
+        
 
         <form action="/representacoes/files/{{$ane->nmAnexo}}" method="POST">
             @csrf
@@ -271,6 +266,62 @@
                 </div>
             </div>
         </div>
+  <!-- Modal --->
+  <div class="container">
+        <!-- Modal Delete-->
+        <div class="modal fade" id="empModaldel">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Exclusão</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body" id="tblempinfodel">
+
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+          <!--Script do Modal delete-->
+          <script type='text/javascript'>
+
+$(document).ready(function () {
+
+    $('#empTable').on('click', '.deldetails', function () {
+
+
+        var empid = $(this).attr('data-id');
+
+        if (empid > 0) {
+
+            // AJAX request
+            var url = "{{ route('delEmployeeDetails',[':empid']) }}";
+            url = url.replace(':empid', empid);
+
+            // Empty modal data
+            $('#tblempinfodel').empty();
+
+            $.ajax({
+                url: url,
+                dataType: 'json',
+                success: function (response) {
+
+                    // Add employee details
+                    $('#tblempinfodel').html(response.html);
+
+                    // Display Modal
+                    $('#empModaldel').modal('show');
+
+                }
+            });
+        }
+    });
+
+});
+</script>
 
 
         <!--Script do Modal-->
@@ -290,7 +341,7 @@
                         url = url.replace(':empid', empid);
 
                         // Empty modal data
-                        $('#tblempinfo tbody').empty();
+                        $('#tblempinfo').empty();
 
                         $.ajax({
                             url: url,
@@ -312,62 +363,6 @@
         </script>
 
 
-        <!-- Modal -->
-        <div class="modal fade" id="empModal" aria-labelledby="exampleModalLabel" aria-hidden="false">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Editar Representante</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-
-                        <table class="w-100" id="tblempinfo">
-                            <tbody></tbody>
-                        </table>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <!--Script do Modal-->
-        <script type='text/javascript'>
-            $(document).ready(function () {
-
-                $('#empModal').on('click', '.viewdetails', function () {
-                    var empid = $(this).attr('data-id');
-
-                    if (empid > 0) {
-
-                        // AJAX request
-                        var url = "{{ route('getEmployeeDetails',[':empid']) }}";
-                        url = url.replace(':empid', empid);
-
-                        // Empty modal data
-                        $('#tblempinfo tbody').empty();
-
-                        $.ajax({
-                            url: url,
-                            dataType: 'json',
-                            success: function (response) {
-
-                                // Add employee details
-                                $('#tblempinfo tbody').html(response.html);
-
-                                // Display Modal
-                                $('#empModal').modal('show');
-                            }
-                        });
-                    }
-                });
-
-            });
-        </script>
+     
 
 @endsection

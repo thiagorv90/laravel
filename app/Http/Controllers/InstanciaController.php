@@ -388,4 +388,45 @@ class InstanciaController extends Controller
     {
         return (new InstanciaPorData)->download('instanciaPorData.xlsx');
     }
+    public function delinfo($empid = 0)
+    {
+
+
+        $employee = Instancia::find($empid);
+
+       
+
+        $html = "";
+
+        if (!empty($employee)) {
+
+            $html = '  
+                   <div class="modal-body">
+                       A exclusão é permanente. Deseja prosseguir? '.$employee->nmInstancia.'
+                   </div>
+                   <div class="modal-footer">
+                       <form action="/instancias/'.$employee->cdInstancia.'" method="POST">
+                       ' . csrf_field() . '
+                       '.method_field('DELETE').'
+                           
+                           <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancelar
+                           </button>
+                           <button type="submit" class="btn btn-danger delete-btn ms-1"
+                                   data-bs-toggle="tooltip"
+                                   data-bs-title="Deletar">Excluir
+                           </button>
+                       </form>
+                   </div>
+               </div>
+           </div>
+       </div>';
+
+        }
+
+        $response['html'] = $html;
+
+
+        return response()->json($response);
+
+    }
 }
