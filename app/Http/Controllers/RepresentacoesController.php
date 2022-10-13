@@ -434,8 +434,10 @@ class RepresentacoesController extends Controller
 
     public function represcreate()
     {
-        $representantes = DB::table('representante_suplentes')->join('representacoes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
-            ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
+        $representantes = DB::table('representacoes')
+        ->join('representacao_representantes', 'representacoes.cdRepresentacao', '=', 'representacao_representantes.cdRepresentacao')
+        ->join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
+        ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
             ->where('dsEmail', '=', auth()->user()->email)->get();
 
 
@@ -482,58 +484,39 @@ class RepresentacoesController extends Controller
         return view('exportsView/representacoesNumero', ['instancias' => $instancias]);
     }
 
-    public function repreinfo($empid = 0)
+    public function delinfo($empid = 0)
     {
 
 
         $employee = Representacao_representante::join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
             ->find($empid);
 
-        dd($employee);
+       
 
         $html = "";
 
         if (!empty($employee)) {
 
-            $html = "<tr>
-
-                <td width='30%'><b>ID:</b></td>
-
-                <td width='70%'> " . $employee->nmRepresentanteSuplente . "</td>
-
-             </tr>
-
-             <tr>
-
-                <td width='30%'><b>Username:</b></td>
-
-                <td width='70%'> " . $employee->stRepresentante . "</td>
-
-             </tr>
-
-             <tr>
-
-                <td width='30%'><b>Name:</b></td>
-
-                <td width='70%'> " . $employee->stTitularidade . "</td>
-
-             </tr>
-
-             <tr>
-
-                <td width='30%'><b>Email:</b></td>
-
-                <td width='70%'> " . $employee->dtFimNomeacao . "</td>
-
-             </tr>
-
-             <tr>
-
-                <td width='30%'><b>Age:</b></td>
-
-                <td width='70%'> " . $employee->dtInicioNomeacao . "</td>
-
-             </tr>";
+            $html = '  
+                   <div class="modal-body">
+                       A exclusão é permanente. Deseja prosseguir? '.$employee->nmRepresentanteSuplente.'
+                   </div>
+                   <div class="modal-footer">
+                       <form action="/representacoes/edit/'.$employee->cdRepSup.'" method="POST">
+                       ' . csrf_field() . '
+                       '.method_field('DELETE').'
+                           
+                           <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancelar
+                           </button>
+                           <button type="submit" class="btn btn-danger delete-btn ms-1"
+                                   data-bs-toggle="tooltip"
+                                   data-bs-title="Deletar">Excluir
+                           </button>
+                       </form>
+                   </div>
+               </div>
+           </div>
+       </div>';
 
         }
 

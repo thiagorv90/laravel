@@ -82,6 +82,7 @@ Route::middleware('auth')->group(function () {
         Route::delete('/instancias/{id}', [InstanciaController::class, 'deleteInsta']);
         Route::delete('/instancias/files/{id}', [InstanciaController::class, 'deleteInstnImg']);
         Route::get('/dashboard/export/{id}', [InstanciaController::class, 'export'])->name('excel');
+        Route::get('/delinstacia/{empid}', [InstanciaController::class, 'delinfo'])->name('delinstacia');
 
         Route::get('/contatos/{id}/search', [ContatoController::class, 'search'])->name('searchco');
         Route::post('contatos/listacontato/{id}', [ContatoController::class, 'contastore']);
@@ -124,6 +125,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/representacoes/representantes/{id}', [RepresentacoesController::class, 'createrep']);
         Route::delete('/representacoes/representantes/{id}', [RepresentacoesController::class, 'deleterep']);
         Route::get('/getEmployeeDetails/{empid}', [RepresentacoesController::class, 'repreinfo'])->name('getEmployeeDetails');
+        Route::get('/delgetEmployeeDetails/{empid}', [RepresentacoesController::class, 'delinfo'])->name('delEmployeeDetails');
 
         Route::post('/representacoes/representantes/add/{id}', [RepresentacoesController::class, 'editrepre']);
 

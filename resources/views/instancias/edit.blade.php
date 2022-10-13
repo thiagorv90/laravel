@@ -35,7 +35,7 @@
                     </select>
                 </div>
                 <div class="form-group" id="Mandato">
-                    <label for="dsSite">Mandato:</label>
+                    <label for="dsSite">Site:</label>
                     <input placeholder="Site..." type="text" class="form-control" id="dsSite"
                            value="{{$instituicao->dsSite}}"
                            name="dsSite">
@@ -102,8 +102,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="title">Descrição Objetivo:</label>
-                        <textarea name="dsObjetivo" id="dsObjetivo" class="form-control"
+                        <label for="title">Objetivo/Atribuição:</label>
+                        <textarea name="dsObjetivo" id="dsObjetivo" class="form-control" 
                         >{{$instituicao->dsObjetivo}}</textarea>
                     </div>
 
