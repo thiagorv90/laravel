@@ -87,7 +87,6 @@
                     <input placeholder="Nome Instituição..." type="text" class="form-control" id="nmInstituicao"
                            name="nmInstituicao" aria-label="Nome Instituicao" aria-describedby="button-addon2"
                            required/>
-
                     <input type="submit" class="btn btn-primary" value="Criar" id="button-addon2">
                 </div>
             </div>

@@ -103,7 +103,7 @@
 
                     <div class="form-group">
                         <label for="title">Descrição Objetivo:</label>
-                        <textarea name="dsObjetivo" id="dsObjetivo" class="form-control"
+                        <textarea rows="10" name="dsObjetivo" id="dsObjetivo" class="form-control"
                         >{{$instituicao->dsObjetivo}}</textarea>
                     </div>
 
@@ -146,12 +146,12 @@
                 </div>
                 <div class="form-group">
                     <label for="dsObservacao">Observação:</label>
-                    <textarea type="text" class="form-control" id="dsObservacao" name="dsObservacao"
+                    <textarea rows="10" type="text" class="form-control" id="dsObservacao" name="dsObservacao"
                     >{{$instituicao->dsObservacao}}</textarea>
                 </div>
                 <div class="form-group">
                     <label for="dsAtoNormativo">Ato Normativo:</label>
-                    <textarea placeholder="Observações..." type="text" class="form-control" id="dsAtoNormativo"
+                    <textarea  rows="10" placeholder="Observações..." type="text" class="form-control" id="dsAtoNormativo"
                               name="dsAtoNormativo">{{$instituicao->dsAtoNormativo}}</textarea>
                 </div>
                 <div class="form-group">

@@ -4,6 +4,18 @@
 
 @section('content')
 
+
+<style>
+    a {
+        text-decoration: none;
+        color: #6f42c1;
+    }
+
+    a:hover {
+        color: #452680;
+    }
+</style>
+
     <div id="event-create-container" class="col-md-6 offset-md-3">
         <h1>Contatos</h1>
         @if ($events->isEmpty())

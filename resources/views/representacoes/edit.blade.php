@@ -71,17 +71,7 @@
                                 <ion-icon name="create-outline"></ion-icon>
                             </button>
 
-                            </a>
-
-                            <form action="/representacoes/edit/{{$incluido->cdRepSup}}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger delete-btn ml-2" data-bs-toggle="tooltip"
-                                        data-bs-title="Deletar">
-                                    <ion-icon name="trash-outline"></ion-icon>
-                                </button>
-                            </form>
-
+                  
 
                         </td>
                     </tr>

@@ -37,7 +37,7 @@
         @endif
         <br>
 
-        <h1>Crie Tipo das instancias</h1>
+        <h1>Criar tipo de instancia</h1>
 
         <form action="/tipoinsta" method="POST">
             @csrf
