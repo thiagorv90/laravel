@@ -18,9 +18,10 @@
 
     <div id="event-create-container" class="container">
         <h1>Representantes</h1>
+        
+        @if ($teste <>1)
         <a href="/instituicoes">{{$bread->nmInstituicao}}</a>><a
             href="/instancias/{{$bread->cdInstituicao}}">{{$bread->nmInstancia}}</a>
-        @if ($teste <>1)
             <div class="container">
 
 
@@ -103,8 +104,9 @@
             </div>
             <input type="submit" class="btn btn-primary mb-2" value="Incluir">
         </form>
+        @if ($teste <>1)
         <a href="/repinsta/{{$bread->cdInstancia}}" class="btn btn-info mb-2">Voltar</a>
-
+    @endif
 
     </div>
 

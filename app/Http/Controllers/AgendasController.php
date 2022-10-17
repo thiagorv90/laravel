@@ -106,7 +106,7 @@ class AgendasController extends Controller
             ->join('representacao_representantes', 'representacoes.cdRepresentacao', '=', 'representacao_representantes.cdRepresentacao')
             ->join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
             ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')->whereBetween('dtAgenda',
-                [Carbon::now()->startOfWeek(carbon::MONDAY), Carbon::now()->endOfWeek(carbon::FRIDAY)]
+                [Carbon::now('America/Sao_Paulo')->startOfWeek(), Carbon::now('America/Sao_Paulo')->endOfWeek()]
             )
             ->get();
 

@@ -58,23 +58,25 @@
             </tbody>
         </table>
         @foreach ($selecionado as $age)
-
+        
             <form action="/agendas/update/{{ $age->cdAgenda}}" method="POST">
                 @csrf
 
                 @method('PUT')
+                <div class="form-group" style="display:none">
+                        <label for="title">cdRepresentacao:</label>
+                        <input type="text" class="form-control" id="cdRepresentacao" name="cdRepresentacao"
+                               value="{{$age->cdRepresentacao}}">
+                    </div>
 
                 <div class="form-group">
                     <label for="date">Data:</label>
-                    <input type="text" placeholder="{{ $age->dtAgenda }}" onfocus="(this.type='date')" id="dtAgenda"
-                           name="dtAgenda" class="form-control"
-                           @if(auth()->user()->statusadm ==0) Readonly @endif></input>
+                    <input type="date"   class="form-control" id="dtAgenda" name="dtAgenda" value={{$age->dtAgenda}}> </input>
                 </div>
 
                 <div class="form-group">
                     <label for="title">Hora:</label>
-                    <input type="text" class="form-control" id="hrAgenda" name="hrAgenda" value="{{$age->hrAgenda}}"
-                           @if(auth()->user()->statusadm ==0) Readonly @endif>
+                    <input type="time" class="form-control" id="hrAgenda" name="hrAgenda" value={{date('h:i:s', strtotime($age->hrAgenda))}}></input>
                 </div>
                 <div class="form-group">
                     <label for="title">Assunto:</label>

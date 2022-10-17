@@ -48,14 +48,14 @@ class AutoAvisoAgenda extends Command
         ->join('representacao_representantes', 'representacoes.cdRepresentacao', '=', 'representacao_representantes.cdRepresentacao')
         ->join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
         ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
-        
-        ->get(['representante_suplentes.nmRepresentanteSuplente as representante','representante_suplentes.dsEmail as emailrepre','s.nmRepresentanteSuplente',
-        's.dsEmail','instancias.nmInstancia','agendas.dtAgenda','agendas.hrAgenda','agendas.dsAssunto','agendas.dsLocal','agendas.dsPauta','agendas.dsResumo']);
+        ->get(['nmRepresentanteSuplente',
+        'dsEmail','instancias.nmInstancia','agendas.dtAgenda','agendas.hrAgenda','agendas.dsAssunto','agendas.dsLocal','agendas.dsPauta','agendas.dsResumo']);
 
        
         
         foreach($mails as $mail){
-            if(Carbon::parse($mail->dtAgenda)->diffForHumans(Carbon::now('America/Sao_Paulo')) == 2){ 
+           
+            if(Carbon::parse($mail->dtAgenda)->diffInDays(Carbon::now('America/Sao_Paulo')) == 2){ 
                 mail::send( new \App\Mail\AvisoAgenda($mail));
                 $this->info('auto:avisoagenda deu certo!');
             }

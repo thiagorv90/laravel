@@ -53,7 +53,7 @@
                         <div class="form-group">
                             <label for="title">Fim da Vigência:</label>
                             <input type="date" class="form-control" id="dtFimVigencia" name="dtFimVigencia"
-                                   required>
+                                   >
                         </div>
                         <div class="form-group">
                             <label for="title">Designação:</label>

@@ -3,6 +3,7 @@
 @section('title', 'Editando Representações')
 
 @section('content')
+
     <style>
         a {
             text-decoration: none;
@@ -29,7 +30,7 @@
 
     <div id="event-create-container" class="container">
         <h1>Editar Representacão</h1>
-
+      
         <div class="container">
 
 
@@ -39,6 +40,7 @@
                     <th scope="col">Nome:</th>
                     <th scope="col">Tiluridade</th>
                     <th scope="col">Inicio Nomeação</th>
+                    <th scope="col">Fim Nomeação</th>
                     <th scope="col">Ativo</th>
                     <th scope="col">Opções</th>
                 </tr>
@@ -56,8 +58,17 @@
                             <td>Suplente</td>
 
                         @endif
+                        @if ($incluido->dtInicioNomeacao == '') 
+                        <td> </td>
+                        @else
                         <td>{!! date('d/m/Y', strtotime($incluido->dtInicioNomeacao)) !!}</td>
+                        @endif
+                        @if ($incluido->dtFimNomeacao == '') 
+                            <td> </td>
+                       @else
 
+                        <td>{!! date('d/m/Y', strtotime($incluido->dtFimNomeacao)) !!}</td>
+                        @endif
                         @if($incluido->stTitularidade ==1)
                             <td>Ativo</td>
                         @else
@@ -121,14 +132,15 @@
                 <br>
                 <input type="submit" class="btn btn-primary mb-2" value="Incluir">
             </form>
-
+            
             @foreach ($selecionado as $age)
-
+           
                 <form action="/representacoes/update/{{ $age->cdRepresentacao}}" method="POST"
                       enctype='multipart/form-data'>
                     @csrf
 
                     @method('PUT')
+                    
                     <div class="form-group" style="display:none">
                         <label for="title">Inicio Vigencia:</label>
                         <input type="text" class="form-control" id="cdRepresentacao" name="cdRepresentacao"
@@ -145,17 +157,17 @@
                             @endforeach
                         </select>
                     </div>
-
+                       
                     <div class="form-group">
                         <label for="title">Inicio Vigencia:</label>
-                        <input type="text" class="form-control" id="dtInicioVigencia" name="dtInicioVigencia"
-                               value="{{$age->dtInicioVigencia}}">
+                        <input type="date" class="form-control" id="dtInicioVigencia" name="dtInicioVigencia" 
+                               value={{$age->dtInicioVigencia}}>
                     </div>
 
                     <div class="form-group">
                         <label for="title">Fim Vigencia:</label>
-                        <input type="text" class="form-control" id="dtFimVigencia" name="dtFimVigencia"
-                               value="{{$age->dtFimVigencia}}">
+                        <input type="date" class="form-control" id="dtFimVigencia" name="dtFimVigencia"
+                               value={{$age->dtFimVigencia}}>
                     </div>
 
                     <div class="form-group">
