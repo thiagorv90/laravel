@@ -29,7 +29,7 @@ class AvisoAgenda extends Mailable
     public function build()
     {
         $this->subject('SGR - Lembrete Reunião');
-        $this->to($this->mail->emailrepre);
+        
         $this->to($this->mail->dsEmail);
 
         return $this->markdown('mail.avisoAgenda', ['mail' => $this->mail]);

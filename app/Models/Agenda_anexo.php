@@ -12,7 +12,7 @@ class Agenda_anexo extends Model
 
     protected $guarded = [];
     public $timestamps = false;
-
+    protected $casts = ['hrAgenda'=>'time'];
 
     public function representacoe()
     {

@@ -12,8 +12,8 @@ class Representacoe extends Model
 
     protected $guarded = [];
     public $timestamps = false;
-    protected $dates = ['dtInicioVigencia'];
-    protected $dateend = ['dtFimVigencia'];
+    protected $dates = ['dtInicioVigencia','dtFimVigencia'];
+  
     protected $casts = [
         'items' => 'array'
     ];
