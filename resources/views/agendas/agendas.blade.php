@@ -13,6 +13,16 @@
         a:hover {
             color: #452680;
         }
+        .welcomediv {
+            color: white;
+            background: rgb(153, 114, 187);
+            background: linear-gradient(90deg, rgba(156, 104, 203, 1) 35%, rgba(182, 154, 233, 1) 100%);
+            border: 2px solid rgb(255, 255, 255);
+            box-shadow: #ebe9e9 1px 1px 4px 3px;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 1.5s;
+            padding: 3px;
+        }
     </style>
 
     @if (is_countable($selecionado) && count($selecionado) == 0)
@@ -27,7 +37,9 @@
                 </div>
             </div>
 
-            <h1>Criar Agenda</h1>
+            <div class="container my-3 ps-3 welcomediv">
+                <h1 class="mt-1">Criar agenda</h1>
+            </div>
 
             <div class="container">
 

@@ -3,19 +3,33 @@
 @section('title', 'Contatos Instancia')
 
 @section('content')
-<style>
-    a{
-        text-decoration: none;
-        color: #6f42c1;
-    }
-    a:hover{
-        color: #452680;
-         
-    }
-</style>
+
+    <style>
+        a{
+            text-decoration: none;
+            color: #6f42c1;
+        }
+        a:hover{
+            color: #452680;
+            
+        }
+        .welcomediv{
+                color: white;
+                background: rgb(156,104,203);
+                background: linear-gradient(90deg, rgba(156,104,203,1) 35%, rgba(182,154,233,1) 100%);
+                border: 2px solid rgb(255, 255, 255);
+                box-shadow: #cccccc 1px 1px 4px 3px; 
+                font-family: 'Montserrat', sans-serif;
+                transition: all 1.5s;
+            }
+    </style>
+
+
     @if (isset($selecionado) && $selecionado->count() > 0)
         @foreach ($nome as $name)
-            <h1>Contatos da Instancia: {{$name->nmInstancia}}</h1>
+        <div class="container mt-3 mb-3 welcomediv">
+            <h1 class="mt-1">Contatos da instância: {{$name->nmInstancia}}</h1>
+        </div>
         @endforeach
         <a href="/instituicoes">{{$bread->nmInstituicao}}</a>><a
             href="/instancias/{{$bread->cdInstituicao}}">{{$bread->nmInstancia}}</a>
@@ -62,7 +76,11 @@
             <br> <br>
         </div>
         <br>
-        <h1> Criar Contatos da Instância: {{$name->nmInstancia}}</h1>
+
+        <div class="container mt-3 mb-3 welcomediv">
+            <h1 class="mt-1">Criar contato para a Instância: {{$name->nmInstancia}}</h1>
+        </div>
+
         <div id="event-create-container" class="container">
 
             <form action="listacontatos/" method="POST">
