@@ -13,6 +13,15 @@
         a:hover {
             color: #452680;
         }
+        .welcomediv{
+            color: white;
+            background: rgb(156,104,203);
+            background: linear-gradient(90deg, rgba(156,104,203,1) 35%, rgba(182,154,233,1) 100%);
+            border: 2px solid rgb(255, 255, 255);
+            box-shadow: #cccccc 1px 1px 4px 3px; 
+            font-family: 'Montserrat', sans-serif;
+            transition: all 1.5s;
+        }
     </style>
 
     @if (is_countable($instancias) && count($instancias) == 0)
@@ -30,7 +39,10 @@
                 </div>
 
 
-                <h1>Crie uma instância</h1>
+                <div class="container mt-3 mb-3 welcomediv">
+                    <h1 class="mt-1">Crie uma instância</h1>
+                </div>
+
                 <a href="/instituicoes">{{$bread->nmInstituicao}}</a>
                 <div id="event-create-container" class="container">
                     <form action="instancias" method="POST" enctype="multipart/form-data">
@@ -214,7 +226,9 @@
         </div>
         @endforeach
     @else
-        <h1>Instâncias</h1>
+        <div class="container mt-3 mb-3 welcomediv">
+            <h1 class="mt-1">Instância</h1>
+        </div>
         <a href="/instituicoes">{{$bread->nmInstituicao}}</a>
         <div>
             <table class="table" id="empTable">
@@ -276,8 +290,9 @@
                 <a href="/instituicoes" class="btn btn-info mb-2">Voltar</a>
             </div>
             <br>
-            <h1>Crie uma instância</h1>
-            <form action="instancias" method="POST" enctype="multipart/form-data">
+            <div class="container mt-3 mb-3 welcomediv">
+                <h1 class="mt-1">Crie uma instância</h1>
+            </div>            <form action="instancias" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="title">Nome:</label>
@@ -457,7 +472,7 @@
                     <br>
                     <div class="container d-flex justify-content-between mt-2">
                         <a href="javascript:history.back()" class="btn btn-info mb-2">Voltar</a>
-                        <input type="submit" class="btn btn-primary mb-2" value="criar">
+                        <input type="submit" class="btn btn-primary mb-2" value="Criar">
                     </div>
             </form>
         </div>

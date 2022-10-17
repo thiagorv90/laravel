@@ -57,93 +57,91 @@
                             <th scope="col">Opções</th>
                         </tr>
                     </thead>
-                
-                        @foreach ($selecionado as $event)
-                            <tr>
-                                <td scropt="row">{{ $event->cdTelefone }}</td>
-                                <td><a>{{ $event->nuTelefone }}</a></td>
 
-                                <td class="d-flex">
-                                    <a href="/telcon/edit/{{ $event->cdTelefone }}" class="btn btn-info edit-btn me-2"
-                                        data-bs-toggle="tooltip" data-bs-title="Editar">
-                                        <ion-icon name="create-outline"></ion-icon>
+                    @foreach ($selecionado as $event)
+                    <tbody>
+                        <tr>
+                            <td scope="row">{{ $event->cdTelefone }}</td>
+                            <td><a>{{ $event->nuTelefone }}</a></td>
 
-                                    </a>
+                            <td class="d-flex">
+                                <a href="/telcon/edit/{{ $event->cdTelefone }}" class="btn btn-info edit-btn me-2"
+                                    data-bs-toggle="tooltip" data-bs-title="Editar">
+                                    <ion-icon name="create-outline"></ion-icon>
+                                </a>
 
-                                    <!-- Botão que chama a modal -->
-                                    <button class="btn btn-danger edit-btn ms-1 viewdetails"
-                                        data-id='{{ $event->cdTelefone }}' data-bs-toggle="tooltip" data-bs-title="Excluir">
-                                        <ion-icon name="trash-outline"></ion-icon>
-                                    </button>
+                                <!-- Botão que chama a modal -->
+                                <button class="btn btn-danger edit-btn ms-1 viewdetails" data-id='{{$event->cdTelefone }}'
+                                    data-bs-toggle="tooltip" data-bs-title="Excluir">
+                                    <ion-icon name="trash-outline"></ion-icon>
+                                </button>
 
-                                </td>
-                            </tr>
-            
-        @endforeach
-
-
-
-        <!-- Modal --->
-        <div class="container">
-            <!-- Modal -->
-            <div class="modal fade" id="empModal">
-                <div class="modal-dialog">
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header bg-danger ">
-                            <h3 class="modal-title text-white">Atenção!</h3>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+       
+                    <!-- Modal --->
+                    <div class="container">
+                        <!-- Modal -->
+                        <div class="modal fade" id="empModal">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header bg-danger ">
+                                        <h3 class="modal-title text-white">Atenção!</h3> 
+                                    </div>
+                                    <div class="modal-body" id="tblempinfo"> 
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="modal-body" id="tblempinfo"></div>
                     </div>
-                </div>
-            </div>
-        </div>
+                </table>
+                   <!--Script do Modal-->
+                   <script type='text/javascript'>
+                    $(document).ready(function() {
 
-        <!--Script do Modal-->
-        <script type='text/javascript'>
-            $(document).ready(function() {
+                        $('#empTable').on('click', '.viewdetails', function() {
+                            var empid = $(this).attr('data-id');
 
-                $('#empTable').on('click', '.viewdetails', function() {
-                    var empid = $(this).attr('data-id');
+                            if (empid > 0) {
 
-                    if (empid > 0) {
+                                // AJAX request
+                                var url = "{{ route('getEmployeeTelefoneContato', [':empid']) }}";
+                                url = url.replace(':empid', empid);
 
-                        // AJAX request
-                        var url = "{{ route('getEmployeeTelefoneContato', [':empid']) }}";
-                        url = url.replace(':empid', empid);
+                                // Empty modal data
+                                $('#tblempinfo').empty();
 
-                        // Empty modal data
-                        $('#tblempinfo').empty();
+                                $.ajax({
+                                    url: url,
+                                    dataType: 'json',
+                                    success: function(response) {
 
-                        $.ajax({
-                            url: url,
-                            dataType: 'json',
-                            success: function(response) {
+                                        // Add employee details
+                                        $('#tblempinfo').html(response.html);
 
-                                // Add employee details
-                                $('#tblempinfo').html(response.html);
-
-                                // Display Modal
-                                $('#empModal').modal('show');
+                                        // Display Modal
+                                        $('#empModal').modal('show');
+                                    }
+                                });
                             }
                         });
-                    }
-                });
 
-            });
-        </script>
-        </table>
-    </div>
+                    });
+                </script>
+            </div>
 
-        <div class="container d-flex justify-content-between mt-2">
-            <a href="/contatos/listacontato/{{ $event->cdInstancia }}" class="btn btn-info mb-2">Voltar</a>
-        </div>
+            <div class="container d-flex justify-content-between mt-2">
+                <a href="/contatos/listacontato/{{ $event->cdInstancia }}" class="btn btn-info mb-2">Voltar</a>
+            </div>
     </div>
     <br>
     <br>
     <br>
 
-    <h1>Crie Contato Telefonico para o(a): {{ $event->nmContato }}</h1>
+    <h1>Criar Contato Telefonico para o(a): {{ $event->nmContato }}</h1>
 
     <div id="event-create-container" class="container">
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Telefone_contato;
 use DB;
 use App\Models\Contato;
+use App\Models\Telefone_representante_suplente;
 
 class TelefoneContatosController extends Controller
 {
@@ -68,16 +69,16 @@ class TelefoneContatosController extends Controller
 
     public function deltelCon($empid = 0)
     {
-        Telefone_contato::find($empid);
+        $employee= Telefone_contato::find($empid);
         $html = "";
         if (!empty($employee)) {
 
             $html = '  
                    <div class="modal-body ">
-                      <h5>A Exclusão é permanente. Deseja prosseguir?<h5>
+                      <h5>A Exclusão é permanente. Deseja prosseguir?'.$employee->nuTelefone.' <h5>
                    </div>
                    <div class="modal-footer">
-                       <form action="/telcon/edit/'. $employee->cdTelefone.'" method="POST">
+                       <form action="/telcon/edit/'.$employee->cdTelefone.'" method="POST">
                        '.csrf_field() .'
                        '.method_field('DELETE') .'
                            <button type="button" class="btn btn-info" data-bs-dismiss="modal">Cancelar</button>
