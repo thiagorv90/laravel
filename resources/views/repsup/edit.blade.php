@@ -4,29 +4,29 @@
 
 @section('content')
 
-<style>
-    
-.welcomediv {
-    color: white;
-    background: rgb(153, 114, 187);
-    background: linear-gradient(90deg, rgb(186, 143, 223) 35%, rgba(182, 154, 233, 1) 100%);
-    border: 2px solid rgb(255, 255, 255);
-    box-shadow: #ebe9e9 1px 1px 4px 3px;
-    font-family: 'Montserrat', sans-serif;
-    transition: all 1.5s;
-    padding: 3px;
-}
+    <style>
 
-</style>
+        .welcomediv {
+            color: white;
+            background: rgb(153, 114, 187);
+            background: linear-gradient(90deg, rgb(186, 143, 223) 35%, rgba(182, 154, 233, 1) 100%);
+            border: 2px solid rgb(255, 255, 255);
+            box-shadow: #ebe9e9 1px 1px 4px 3px;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 1.5s;
+            padding: 3px;
+        }
+
+    </style>
 
     @foreach ($selecionado as $age)
         <div id="event-create-container" class="container">
 
             <div class="container my-3 ps-3 welcomediv bg-seconday">
                 <h1>Editar dados</h1>
-           
 
-            <h5>Representante: {{$age->nmRepresentanteSuplente}}</h5>
+
+                <h5>Representante: {{$age->nmRepresentanteSuplente}}</h5>
             </div>
 
             <form action="/repsup/update/{{ $age->cdRepSup}}" method="POST">
@@ -137,9 +137,9 @@
 
                 </div>
             </form>
-           
+
             <div id="" class="container my-3 ps-3 welcomediv">
-            <h1>Documentos do(a) Representante</h1>
+                <h1>Documentos do(a) Representante</h1>
             </div>
             @foreach ($anexo as $ane)
 

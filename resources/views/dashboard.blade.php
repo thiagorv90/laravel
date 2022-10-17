@@ -64,26 +64,27 @@
         .slider.round:before {
             border-radius: 50%;
         }
-        /* 
+
+        /*
         .welcomediv{
             background: #f7f5f5;
-            box-shadow: #e0e0e0 1px 1px 5px 4px; 
+            box-shadow: #e0e0e0 1px 1px 5px 4px;
             padding: 10px;
         }*/
-        .welcomediv{
-            background: #b69ae9; 
-            box-shadow: #ebe0fd 1px 1px 5px 4px; 
+        .welcomediv {
+            background: #b69ae9;
+            box-shadow: #ebe0fd 1px 1px 5px 4px;
             color: rgb(255, 255, 255);
             font-family: 'Montserrat', sans-serif;
             overflow: hidden;
-            padding:35px;
-            box-sizing:border-box;
+            padding: 35px;
+            box-sizing: border-box;
             color: #fff;
-            border-radius:8px;
+            border-radius: 8px;
             position: relative;
         }
 
-        .welcomediv3{
+        .welcomediv3 {
             width: 160%;
             height: 316px;
             opacity: .1;
@@ -95,21 +96,22 @@
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto:wght@300&display=swap"
+          rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
 
     <div class="container mt-3 welcomediv">
         <h1>Bem vindos ao SGR</h1>
-            <h3 id="sem">Agendas da Semana</h3> 
-            <h3 id="me" style="display:none">Agendas do Mês</h3>
-            <label class="switch"><input type="checkbox"><span class="slider round hide-off"></span></label>
-                <div class="welcomediv3"> 
-                </div>   
-    </div>  
+        <h3 id="sem">Agendas da Semana</h3>
+        <h3 id="me" style="display:none">Agendas do Mês</h3>
+        <label class="switch"><input type="checkbox"><span class="slider round hide-off"></span></label>
+        <div class="welcomediv3">
+        </div>
+    </div>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </div>
     <div id="semana" class="container mt-5">
 

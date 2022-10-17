@@ -13,12 +13,13 @@
         a:hover {
             color: #452680;
         }
-        .welcomediv{
+
+        .welcomediv {
             color: white;
-            background: rgb(156,104,203);
-            background: linear-gradient(90deg, rgba(156,104,203,1) 35%, rgba(182,154,233,1) 100%);
+            background: rgb(156, 104, 203);
+            background: linear-gradient(90deg, rgba(156, 104, 203, 1) 35%, rgba(182, 154, 233, 1) 100%);
             border: 2px solid rgb(255, 255, 255);
-            box-shadow: #cccccc 1px 1px 4px 3px; 
+            box-shadow: #cccccc 1px 1px 4px 3px;
             font-family: 'Montserrat', sans-serif;
             transition: all 1.5s;
         }
@@ -129,7 +130,8 @@
                             <div class="form-group">
 
                                 <label for="dsObjetivo">Descrição Objetivo:</label>
-                                <textarea placeholder="Descrição Objetivo..." name="dsObjetivo" rows="10" id="dsObjetivo"
+                                <textarea placeholder="Descrição Objetivo..." name="dsObjetivo" rows="10"
+                                          id="dsObjetivo"
 
                                           class="form-control"></textarea>
                             </div>
@@ -266,8 +268,9 @@
                                data-bs-toggle="tooltip" data-bs-title="Representação">
                                 <ion-icon name="reader-outline"></ion-icon>
                             </a>
-                             
-                            <button class="btn btn-danger delete-btn ml-2 deldetails" data-id='{{ $instancia->cdInstancia}}'
+
+                            <button class="btn btn-danger delete-btn ml-2 deldetails"
+                                    data-id='{{ $instancia->cdInstancia}}'
                                     data-bs-toggle="tooltip" data-bs-title="Deletar">
                                 <ion-icon name="trash-outline"></ion-icon>
                             </button>
@@ -292,7 +295,8 @@
             <br>
             <div class="container mt-3 mb-3 welcomediv">
                 <h1 class="mt-1">Crie uma instância</h1>
-            </div>            <form action="instancias" method="POST" enctype="multipart/form-data">
+            </div>
+            <form action="instancias" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="title">Nome:</label>
@@ -429,12 +433,14 @@
                     </div>
                     <div class="form-group">
                         <label for="title">Observação:</label>
-                        <textarea rows="10" placeholder="Observações..." type="text" class="form-control" id="dsObservacao"
+                        <textarea rows="10" placeholder="Observações..." type="text" class="form-control"
+                                  id="dsObservacao"
                                   name="dsObservacao"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="title">Ato Normativo:</label>
-                        <textarea rows="10" placeholder="Observações..." type="text" class="form-control" id="dsAtoNormativo"
+                        <textarea rows="10" placeholder="Observações..." type="text" class="form-control"
+                                  id="dsAtoNormativo"
                                   name="dsAtoNormativo"></textarea>
                     </div>
                     <div class="form-group">
@@ -480,7 +486,7 @@
 
     @endif
     <!-- Modal --->
-  <div class="container">
+    <div class="container">
         <!-- Modal Delete-->
         <div class="modal fade" id="empModaldel">
             <div class="modal-dialog">
@@ -494,45 +500,45 @@
                     <div class="modal-body" id="tblempinfodel">
 
                     </div>
-                    
+
                 </div>
             </div>
         </div>
-          <!--Script do Modal delete-->
-          <script type='text/javascript'>
+        <!--Script do Modal delete-->
+        <script type='text/javascript'>
 
-$(document).ready(function () {
+            $(document).ready(function () {
 
-    $('#empTable').on('click', '.deldetails', function () {
-        $('#empModaldel').modal('show');
-
-        var empid = $(this).attr('data-id');
-
-        if (empid > 0) {
-
-            // AJAX request
-            var url = "{{ route('delinstacia',[':empid']) }}";
-            url = url.replace(':empid', empid);
-
-            // Empty modal data
-            $('#tblempinfodel').empty();
-
-            $.ajax({
-                url: url,
-                dataType: 'json',
-                success: function (response) {
-
-                    // Add employee details
-                    $('#tblempinfodel').html(response.html);
-
-                    // Display Modal
+                $('#empTable').on('click', '.deldetails', function () {
                     $('#empModaldel').modal('show');
 
-                }
-            });
-        }
-    });
+                    var empid = $(this).attr('data-id');
 
-});
-</script>
+                    if (empid > 0) {
+
+                        // AJAX request
+                        var url = "{{ route('delinstacia',[':empid']) }}";
+                        url = url.replace(':empid', empid);
+
+                        // Empty modal data
+                        $('#tblempinfodel').empty();
+
+                        $.ajax({
+                            url: url,
+                            dataType: 'json',
+                            success: function (response) {
+
+                                // Add employee details
+                                $('#tblempinfodel').html(response.html);
+
+                                // Display Modal
+                                $('#empModaldel').modal('show');
+
+                            }
+                        });
+                    }
+                });
+
+            });
+        </script>
 @endsection

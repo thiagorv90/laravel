@@ -73,14 +73,14 @@ class TelefoneRepresentanteSuplenteController extends Controller
         $html = "";
         if (!empty($employee)) {
 
-            $html = '  
+            $html = '
                    <div class="modal-body ">
                       <h5>A Exclusão é permanente. Deseja prosseguir?<h5>
                    </div>
                    <div class="modal-footer">
-                       <form action="/telrepsup/edit/'. $employee->cdTelefone.'" method="POST">
-                       '.csrf_field() .'
-                       '.method_field('DELETE') .'
+                       <form action="/telrepsup/edit/' . $employee->cdTelefone . '" method="POST">
+                       ' . csrf_field() . '
+                       ' . method_field('DELETE') . '
                            <button type="button" class="btn btn-info" data-bs-dismiss="modal">Cancelar</button>
 
                            <button type="submit" class="btn btn-danger delete-btn ms-1"

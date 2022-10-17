@@ -13,6 +13,7 @@
         a:hover {
             color: #452680;
         }
+
         .welcomediv {
             color: white;
             background: rgb(153, 114, 187);

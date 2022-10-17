@@ -4,35 +4,34 @@
 
 @section('content')
 
+    <style>
+        a {
+            text-decoration: none;
+            color: #6f42c1;
+        }
 
-<style>
-    a {
-        text-decoration: none;
-        color: #6f42c1;
-    }
+        a:hover {
+            color: #452680;
+        }
 
-    a:hover {
-        color: #452680;
-    }
-
-    .welcomediv{
-    color: white;
-    background: rgb(153, 114, 187);
-    background: linear-gradient(90deg, rgba(156,104,203,1) 35%, rgba(182,154,233,1) 100%);
-    border: 2px solid rgb(255, 255, 255);
-    box-shadow: #ebe9e9 1px 1px 4px 3px; 
-    font-family: 'Montserrat', sans-serif;
-    transition: all 1.5s;
-    padding: 3px;
-    }
-</style>
+        .welcomediv {
+            color: white;
+            background: rgb(153, 114, 187);
+            background: linear-gradient(90deg, rgba(156, 104, 203, 1) 35%, rgba(182, 154, 233, 1) 100%);
+            border: 2px solid rgb(255, 255, 255);
+            box-shadow: #ebe9e9 1px 1px 4px 3px;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 1.5s;
+            padding: 3px;
+        }
+    </style>
 
     <div id="event-create-container" class="container">
-        
+
         <div class="container my-3 ps-2 welcomediv">
-        <h1>Agenda</h1>
+            <h1>Agenda</h1>
         </div>
-        
+
         <a href="/instituicoes">{{$bread->nmInstituicao}}</a>><a
             href="/instancias/{{$bread->cdInstituicao}}">{{$bread->nmInstancia}}</a>>{{$bread->nmRepresentanteSuplente}}
 
@@ -73,25 +72,27 @@
             </tbody>
         </table>
         @foreach ($selecionado as $age)
-        
+
             <form action="/agendas/update/{{ $age->cdAgenda}}" method="POST">
                 @csrf
 
                 @method('PUT')
                 <div class="form-group" style="display:none">
-                        <label for="title">cdRepresentacao:</label>
-                        <input type="text" class="form-control" id="cdRepresentacao" name="cdRepresentacao"
-                               value="{{$age->cdRepresentacao}}">
-                    </div>
+                    <label for="title">cdRepresentacao:</label>
+                    <input type="text" class="form-control" id="cdRepresentacao" name="cdRepresentacao"
+                           value="{{$age->cdRepresentacao}}">
+                </div>
 
                 <div class="form-group">
                     <label for="date">Data:</label>
-                    <input type="date"   class="form-control" id="dtAgenda" name="dtAgenda" value={{$age->dtAgenda}}> </input>
+                    <input type="date" class="form-control" id="dtAgenda" name="dtAgenda"
+                           value={{$age->dtAgenda}}> </input>
                 </div>
 
                 <div class="form-group">
                     <label for="title">Hora:</label>
-                    <input type="time" class="form-control" id="hrAgenda" name="hrAgenda" value={{date('h:i:s', strtotime($age->hrAgenda))}}></input>
+                    <input type="time" class="form-control" id="hrAgenda" name="hrAgenda"
+                           value={{date('h:i:s', strtotime($age->hrAgenda))}}></input>
                 </div>
                 <div class="form-group">
                     <label for="title">Assunto:</label>
@@ -186,7 +187,7 @@
                 </div>
             </form>
             <div class="container my-3 ps-2 welcomediv">
-            <h1>Documentos da Agenda</h1>
+                <h1>Documentos da Agenda</h1>
             </div>
             @foreach ($anexo as $ane)
 

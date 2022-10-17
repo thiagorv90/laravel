@@ -29,13 +29,14 @@
                 <div class="form-group">
                     <label for="nmInstituicao">Nome:</label>
                     <input type="text" class="form-control" id="nmInstituicao" name="nmInstituicao"
-                        value="{{ $inst->nmInstituicao }}"></input>
+                           value="{{ $inst->nmInstituicao }}"></input>
                 </div>
                 <div class="form-group">
                     <label for="cdTipoInstituicao">Tipo:</label>
                     <select id="cdTipoInstituicao" name="cdTipoInstituicao" class="form-select">
                         @foreach ($lista as $i)
-                            <option value="{{ $i->cdTipoInstancia }}" @if ($inst->cdTipoInstituicao == $i->cdTipoInstancia) selected @endif>
+                            <option value="{{ $i->cdTipoInstancia }}"
+                                    @if ($inst->cdTipoInstituicao == $i->cdTipoInstancia) selected @endif>
                                 {{ $i->dsTipoInstancia }}
                             </option>
                         @endforeach

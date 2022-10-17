@@ -4,24 +4,23 @@
 
 @section('content')
 
+    <style>
+        a {
+            text-decoration: none;
+            color: #6f42c1;
+        }
 
-<style>
-    a {
-        text-decoration: none;
-        color: #6f42c1;
-    }
-
-    a:hover {
-        color: #452680;
-    }
-</style>
+        a:hover {
+            color: #452680;
+        }
+    </style>
 
     <div id="event-create-container" class="container">
         <h1>Representantes</h1>
-        
+
         @if ($teste <>1)
-        <a href="/instituicoes">{{$bread->nmInstituicao}}</a>><a
-            href="/instancias/{{$bread->cdInstituicao}}">{{$bread->nmInstancia}}</a>
+            <a href="/instituicoes">{{$bread->nmInstituicao}}</a>><a
+                href="/instancias/{{$bread->cdInstituicao}}">{{$bread->nmInstancia}}</a>
             <div class="container">
 
 
@@ -105,8 +104,8 @@
             <input type="submit" class="btn btn-primary mb-2" value="Incluir">
         </form>
         @if ($teste <>1)
-        <a href="/repinsta/{{$bread->cdInstancia}}" class="btn btn-info mb-2">Voltar</a>
-    @endif
+            <a href="/repinsta/{{$bread->cdInstancia}}" class="btn btn-info mb-2">Voltar</a>
+        @endif
 
     </div>
 

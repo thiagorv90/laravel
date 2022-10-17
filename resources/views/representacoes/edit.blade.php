@@ -30,7 +30,7 @@
 
     <div id="event-create-container" class="container">
         <h1>Editar Representacão</h1>
-      
+
         <div class="container">
 
 
@@ -58,16 +58,16 @@
                             <td>Suplente</td>
 
                         @endif
-                        @if ($incluido->dtInicioNomeacao == '') 
-                        <td> </td>
+                        @if ($incluido->dtInicioNomeacao == '')
+                            <td></td>
                         @else
-                        <td>{!! date('d/m/Y', strtotime($incluido->dtInicioNomeacao)) !!}</td>
+                            <td>{!! date('d/m/Y', strtotime($incluido->dtInicioNomeacao)) !!}</td>
                         @endif
-                        @if ($incluido->dtFimNomeacao == '') 
-                            <td> </td>
-                       @else
+                        @if ($incluido->dtFimNomeacao == '')
+                            <td></td>
+                        @else
 
-                        <td>{!! date('d/m/Y', strtotime($incluido->dtFimNomeacao)) !!}</td>
+                            <td>{!! date('d/m/Y', strtotime($incluido->dtFimNomeacao)) !!}</td>
                         @endif
                         @if($incluido->stTitularidade ==1)
                             <td>Ativo</td>
@@ -83,7 +83,8 @@
                             </button>
 
 
-                            <button class="btn btn-danger delete-btn ml-2 deldetails" data-id='{{ $incluido->cdRepSup }}'
+                            <button class="btn btn-danger delete-btn ml-2 deldetails"
+                                    data-id='{{ $incluido->cdRepSup }}'
                                     data-bs-toggle="tooltip" data-bs-title="Deletar">
                                 <ion-icon name="trash-outline"></ion-icon>
                             </button>
@@ -132,15 +133,15 @@
                 <br>
                 <input type="submit" class="btn btn-primary mb-2" value="Incluir">
             </form>
-            
+
             @foreach ($selecionado as $age)
-           
+
                 <form action="/representacoes/update/{{ $age->cdRepresentacao}}" method="POST"
                       enctype='multipart/form-data'>
                     @csrf
 
                     @method('PUT')
-                    
+
                     <div class="form-group" style="display:none">
                         <label for="title">Inicio Vigencia:</label>
                         <input type="text" class="form-control" id="cdRepresentacao" name="cdRepresentacao"
@@ -157,10 +158,10 @@
                             @endforeach
                         </select>
                     </div>
-                       
+
                     <div class="form-group">
                         <label for="title">Inicio Vigencia:</label>
-                        <input type="date" class="form-control" id="dtInicioVigencia" name="dtInicioVigencia" 
+                        <input type="date" class="form-control" id="dtInicioVigencia" name="dtInicioVigencia"
                                value={{$age->dtInicioVigencia}}>
                     </div>
 
@@ -220,7 +221,6 @@
     </div>
     <h1>Documentos da Representação</h1>
     @foreach ($anexo as $ane)
-        
 
         <form action="/representacoes/files/{{$ane->nmAnexo}}" method="POST">
             @csrf
@@ -276,103 +276,100 @@
                 </div>
             </div>
         </div>
-  <!-- Modal --->
-  <div class="container">
-        <!-- Modal Delete-->
-        <div class="modal fade" id="empModaldel">
-            <div class="modal-dialog">
+        <!-- Modal --->
+        <div class="container">
+            <!-- Modal Delete-->
+            <div class="modal fade" id="empModaldel">
+                <div class="modal-dialog">
 
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Exclusão</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body" id="tblempinfodel">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Exclusão</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body" id="tblempinfodel">
+
+                        </div>
 
                     </div>
-                    
                 </div>
             </div>
-        </div>
-          <!--Script do Modal delete-->
-          <script type='text/javascript'>
+            <!--Script do Modal delete-->
+            <script type='text/javascript'>
 
-$(document).ready(function () {
+                $(document).ready(function () {
 
-    $('#empTable').on('click', '.deldetails', function () {
-
-
-        var empid = $(this).attr('data-id');
-
-        if (empid > 0) {
-
-            // AJAX request
-            var url = "{{ route('delEmployeeDetails',[':empid']) }}";
-            url = url.replace(':empid', empid);
-
-            // Empty modal data
-            $('#tblempinfodel').empty();
-
-            $.ajax({
-                url: url,
-                dataType: 'json',
-                success: function (response) {
-
-                    // Add employee details
-                    $('#tblempinfodel').html(response.html);
-
-                    // Display Modal
-                    $('#empModaldel').modal('show');
-
-                }
-            });
-        }
-    });
-
-});
-</script>
+                    $('#empTable').on('click', '.deldetails', function () {
 
 
-        <!--Script do Modal-->
-        <script type='text/javascript'>
+                        var empid = $(this).attr('data-id');
 
-            $(document).ready(function () {
+                        if (empid > 0) {
 
-                $('#empTable').on('click', '.viewdetails', function () {
+                            // AJAX request
+                            var url = "{{ route('delEmployeeDetails',[':empid']) }}";
+                            url = url.replace(':empid', empid);
 
+                            // Empty modal data
+                            $('#tblempinfodel').empty();
 
-                    var empid = $(this).attr('data-id');
+                            $.ajax({
+                                url: url,
+                                dataType: 'json',
+                                success: function (response) {
 
-                    if (empid > 0) {
+                                    // Add employee details
+                                    $('#tblempinfodel').html(response.html);
 
-                        // AJAX request
-                        var url = "{{ route('getEmployeeDetails',[':empid']) }}";
-                        url = url.replace(':empid', empid);
+                                    // Display Modal
+                                    $('#empModaldel').modal('show');
 
-                        // Empty modal data
-                        $('#tblempinfo').empty();
+                                }
+                            });
+                        }
+                    });
 
-                        $.ajax({
-                            url: url,
-                            dataType: 'json',
-                            success: function (response) {
-
-                                // Add employee details
-                                $('#tblempinfo').html(response.html);
-
-                                // Display Modal
-                                $('#empModal').modal('show');
-
-                            }
-                        });
-                    }
                 });
-
-            });
-        </script>
+            </script>
 
 
-     
+            <!--Script do Modal-->
+            <script type='text/javascript'>
+
+                $(document).ready(function () {
+
+                    $('#empTable').on('click', '.viewdetails', function () {
+
+
+                        var empid = $(this).attr('data-id');
+
+                        if (empid > 0) {
+
+                            // AJAX request
+                            var url = "{{ route('getEmployeeDetails',[':empid']) }}";
+                            url = url.replace(':empid', empid);
+
+                            // Empty modal data
+                            $('#tblempinfo').empty();
+
+                            $.ajax({
+                                url: url,
+                                dataType: 'json',
+                                success: function (response) {
+
+                                    // Add employee details
+                                    $('#tblempinfo').html(response.html);
+
+                                    // Display Modal
+                                    $('#empModal').modal('show');
+
+                                }
+                            });
+                        }
+                    });
+
+                });
+            </script>
 
 @endsection

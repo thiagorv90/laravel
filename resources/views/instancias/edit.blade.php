@@ -5,12 +5,12 @@
 @section('content')
 
     <style>
-      .welcomediv{
+        .welcomediv {
             color: white;
-            background: rgb(156,104,203);
-            background: linear-gradient(90deg, rgba(156,104,203,1) 35%, rgba(182,154,233,1) 100%);
+            background: rgb(156, 104, 203);
+            background: linear-gradient(90deg, rgba(156, 104, 203, 1) 35%, rgba(182, 154, 233, 1) 100%);
             border: 2px solid rgb(255, 255, 255);
-            box-shadow: #cccccc 1px 1px 4px 3px; 
+            box-shadow: #cccccc 1px 1px 4px 3px;
             font-family: 'Montserrat', sans-serif;
             transition: all 1.5s;
         }
@@ -22,7 +22,7 @@
             <h1 class="mt-1">Editar</h1>
         </div>
 
-              @foreach ($edit as $instituicao)
+        @foreach ($edit as $instituicao)
             <form action="/instancias/update/{{ $instituicao->cdInstancia}}" method="POST">
 
                 @csrf
@@ -169,7 +169,8 @@
                 </div>
                 <div class="form-group">
                     <label for="dsAtoNormativo">Ato Normativo:</label>
-                    <textarea  rows="10" placeholder="Observações..." type="text" class="form-control" id="dsAtoNormativo"
+                    <textarea rows="10" placeholder="Observações..." type="text" class="form-control"
+                              id="dsAtoNormativo"
                               name="dsAtoNormativo">{{$instituicao->dsAtoNormativo}}</textarea>
                 </div>
                 <div class="form-group">
@@ -208,10 +209,10 @@
                 @endforeach
 
             </form>
-        <div class="container mt-3 mb-3 welcomediv">
-            <h1 class="mt-1">Documento da Instância</h1>
-        </div>           
-         @foreach ($anexo as $ane)
+            <div class="container mt-3 mb-3 welcomediv">
+                <h1 class="mt-1">Documento da Instância</h1>
+            </div>
+            @foreach ($anexo as $ane)
 
                 <form action="/instancias/files/{{$ane->nmAnexo}}" method="POST">
                     @csrf

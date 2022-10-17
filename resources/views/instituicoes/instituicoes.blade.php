@@ -13,23 +13,24 @@
         a:hover {
             color: #452680;
         }
-        .welcomediv{
+
+        .welcomediv {
             color: white;
-            background: rgb(156,104,203);
-            background: linear-gradient(90deg, rgba(156,104,203,1) 35%, rgba(182,154,233,1) 100%);
+            background: rgb(156, 104, 203);
+            background: linear-gradient(90deg, rgba(156, 104, 203, 1) 35%, rgba(182, 154, 233, 1) 100%);
             border: 2px solid rgb(255, 255, 255);
-            box-shadow: #cccccc 1px 1px 4px 3px; 
+            box-shadow: #cccccc 1px 1px 4px 3px;
             font-family: 'Montserrat', sans-serif;
             transition: all 1.5s;
         }
     </style>
-    
+
     <div class="container">
 
         <div class="container mt-3 mb-3 welcomediv">
             <h1 class="mt-1">Instituições</h1>
         </div>
-        
+
         <table class="table">
             <thead>
             <tr>

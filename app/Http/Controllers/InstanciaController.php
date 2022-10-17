@@ -388,27 +388,27 @@ class InstanciaController extends Controller
     {
         return (new InstanciaPorData)->download('instanciaPorData.xlsx');
     }
+
     public function delinfo($empid = 0)
     {
 
 
         $employee = Instancia::find($empid);
 
-       
 
         $html = "";
 
         if (!empty($employee)) {
 
-            $html = '  
+            $html = '
                    <div class="modal-body">
-                       A exclusão é permanente. Deseja prosseguir? '.$employee->nmInstancia.'
+                       A exclusão é permanente. Deseja prosseguir? ' . $employee->nmInstancia . '
                    </div>
                    <div class="modal-footer">
-                       <form action="/instancias/'.$employee->cdInstancia.'" method="POST">
+                       <form action="/instancias/' . $employee->cdInstancia . '" method="POST">
                        ' . csrf_field() . '
-                       '.method_field('DELETE').'
-                           
+                       ' . method_field('DELETE') . '
+
                            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancelar
                            </button>
                            <button type="submit" class="btn btn-danger delete-btn ms-1"

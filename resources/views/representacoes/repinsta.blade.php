@@ -44,7 +44,6 @@
                             </select>
                         </div>
 
-                    
 
                         <div class="form-group">
                             <label for="title">Inicio da Vigência3:</label>
@@ -55,7 +54,7 @@
                         <div class="form-group">
                             <label for="title">Fim da Vigência:</label>
                             <input type="date" class="form-control" id="dtFimVigencia" name="dtFimVigencia"
-                                   >
+                            >
                         </div>
                         <div class="form-group">
                             <label for="title">Designação:</label>

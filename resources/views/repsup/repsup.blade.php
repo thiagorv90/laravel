@@ -13,7 +13,8 @@
         a:hover {
             color: #452680;
         }
-        .modal-header{
+
+        .modal-header {
             color: white;
         }
 
@@ -27,12 +28,12 @@
             transition: all 1.5s;
             padding: 3px;
         }
-   
+
     </style>
 
-<div class="container my-3 ps-3 welcomediv bg-seconday">
-    <h1>Representantes</h1>
-</div>
+    <div class="container my-3 ps-3 welcomediv bg-seconday">
+        <h1>Representantes</h1>
+    </div>
 
 
     <div class="container mt-5">
@@ -70,16 +71,16 @@
                             <ion-icon name="call-outline"></ion-icon>
                         </a>
 
-                           <!-- Botão que chama a modal -->
-                           <button class="btn btn-danger edit-btn ms-1 viewdetails" data-id='{{ $event->cdRepSup }}'
-                             data-bs-toggle="tooltip" data-bs-title="Excluir">
-                             <ion-icon name="trash-outline"></ion-icon>
-                           </button>
+                        <!-- Botão que chama a modal -->
+                        <button class="btn btn-danger edit-btn ms-1 viewdetails" data-id='{{ $event->cdRepSup }}'
+                                data-bs-toggle="tooltip" data-bs-title="Excluir">
+                            <ion-icon name="trash-outline"></ion-icon>
+                        </button>
 
 
                     </td>
-                </tr>  
-                            
+                </tr>
+
             @endforeach
             </tbody>
         </table>
@@ -202,56 +203,55 @@
         </form>
     </div>
 
-        <!-- Modal --->
-        <div class="container">
-            <!-- Modal -->
-            <div class="modal fade" id="empModal">
-                <div class="modal-dialog">
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header bg-danger ">
-                            <h3 class="modal-title">Atenção!</h3>
-                        </div>
-                        <div class="modal-body" id="tblempinfo">
-                        </div>
+    <!-- Modal --->
+    <div class="container">
+        <!-- Modal -->
+        <div class="modal fade" id="empModal">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header bg-danger ">
+                        <h3 class="modal-title">Atenção!</h3>
+                    </div>
+                    <div class="modal-body" id="tblempinfo">
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!--Script do Modal-->
-        <script type='text/javascript'>
-            $(document).ready(function () {
+    <!--Script do Modal-->
+    <script type='text/javascript'>
+        $(document).ready(function () {
 
-                $('#empTable').on('click', '.viewdetails', function () {
-                    var empid = $(this).attr('data-id');
+            $('#empTable').on('click', '.viewdetails', function () {
+                var empid = $(this).attr('data-id');
 
-                    if (empid > 0) {
+                if (empid > 0) {
 
-                        // AJAX request
-                        var url = "{{route('getRepreEmployeeDetails',[':empid'])}}";
-                        url = url.replace(':empid', empid);
+                    // AJAX request
+                    var url = "{{route('getRepreEmployeeDetails',[':empid'])}}";
+                    url = url.replace(':empid', empid);
 
-                        // Empty modal data
-                        $('#tblempinfo').empty();
+                    // Empty modal data
+                    $('#tblempinfo').empty();
 
-                        $.ajax({
-                            url: url,
-                            dataType: 'json',
-                            success: function (response) {
+                    $.ajax({
+                        url: url,
+                        dataType: 'json',
+                        success: function (response) {
 
-                                // Add employee details
-                                $('#tblempinfo').html(response.html);
+                            // Add employee details
+                            $('#tblempinfo').html(response.html);
 
-                                // Display Modal
-                                $('#empModal').modal('show');
-                            }
-                        });
-                    }
-                });
-
+                            // Display Modal
+                            $('#empModal').modal('show');
+                        }
+                    });
+                }
             });
-        </script>
 
+        });
+    </script>
 
 @endsection

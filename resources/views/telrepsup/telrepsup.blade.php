@@ -34,12 +34,12 @@
                     <div class="form-group">
                         <label for="title">DDD:</label>
                         <input placeholder="DDD..." type="text" class="form-control" id="nuDDDTelefone"
-                            name="nuDDDTelefone">
+                               name="nuDDDTelefone">
                     </div>
                     <div class="form-group">
                         <label for="title">Telefone:</label>
                         <input placeholder="Telefone..." type="text" class="form-control" id="nuTelefone"
-                            name="nuTelefone">
+                               name="nuTelefone">
                     </div>
 
 
@@ -82,33 +82,33 @@
 
             <table class="table" id="empTable">
                 <thead>
-                    <tr>
+                <tr>
 
-                        <th scope="col">Telefone</th>
-                        <th scope="col">Opções</th>
-                    </tr>
+                    <th scope="col">Telefone</th>
+                    <th scope="col">Opções</th>
+                </tr>
                 </thead>
                 <tbody>
 
-                    @foreach ($selecionado as $event)
-                        <tr>
-                            <td><a>{{ $event->nuTelefone }}</a></td>
-                            <td class="d-flex">
-                                <a href="/telrepsup/edit/{{ $event->cdTelefone }}" class="btn btn-info edit-btn me-2"
-                                    data-bs-toggle="tooltip" data-bs-title="Editar">
-                                    <ion-icon name="create-outline"></ion-icon>
-                                </a>
+                @foreach ($selecionado as $event)
+                    <tr>
+                        <td><a>{{ $event->nuTelefone }}</a></td>
+                        <td class="d-flex">
+                            <a href="/telrepsup/edit/{{ $event->cdTelefone }}" class="btn btn-info edit-btn me-2"
+                               data-bs-toggle="tooltip" data-bs-title="Editar">
+                                <ion-icon name="create-outline"></ion-icon>
+                            </a>
 
-                                <!-- Botão que chama a modal -->
-                                <button class="btn btn-danger edit-btn ms-1 viewdetails" data-id='{{ $event->cdTelefone }}'
+                            <!-- Botão que chama a modal -->
+                            <button class="btn btn-danger edit-btn ms-1 viewdetails" data-id='{{ $event->cdTelefone }}'
                                     data-bs-toggle="tooltip" data-bs-title="Excluir">
-                                    <ion-icon name="trash-outline"></ion-icon>
-                                </button>
+                                <ion-icon name="trash-outline"></ion-icon>
+                            </button>
 
 
-                            </td>
-                        </tr>
-                    @endforeach
+                        </td>
+                    </tr>
+                @endforeach
 
 
                 </tbody>
@@ -132,9 +132,9 @@
 
                 <!--Script do Modal-->
                 <script type='text/javascript'>
-                    $(document).ready(function() {
+                    $(document).ready(function () {
 
-                        $('#empTable').on('click', '.viewdetails', function() {
+                        $('#empTable').on('click', '.viewdetails', function () {
                             var empid = $(this).attr('data-id');
 
                             if (empid > 0) {
@@ -149,7 +149,7 @@
                                 $.ajax({
                                     url: url,
                                     dataType: 'json',
-                                    success: function(response) {
+                                    success: function (response) {
 
                                         // Add employee details
                                         $('#tblempinfo').html(response.html);
@@ -178,7 +178,7 @@
                 <div class="form-group">
                     <label for="title">DDD:</label>
                     <input placeholder="DDD..." type="text" class="form-control" id="nuDDDTelefone"
-                        name="nuDDDTelefone" />
+                           name="nuDDDTelefone"/>
                 </div>
 
                 <div class="form-group">
@@ -198,14 +198,14 @@
                     <label for="title">Tipo:</label>
                     <div class="form-check">
                         <input class="form-check-input" required type="radio" name="tpTelefone" id="tpTelefone"
-                            value="1">
+                               value="1">
                         <label class="form-check-label" for="tpTelefone">
                             Celular
                         </label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="tpTelefone" id="tpTelefone"
-                            value="0">
+                               value="0">
                         <label class="form-check-label" for="tpTelefone">
                             Fixo
                         </label>
@@ -225,17 +225,17 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
     <script type="text/javascript">
-        $('#show_confirm').click(function(event) {
+        $('#show_confirm').click(function (event) {
             var form = $(this).closest('#del');
             var name = $(this).data("name");
             event.preventDefault();
             swal({
-                    title: `Are you sure you want to delete this record?`,
-                    text: "If you delete this, it will be gone forever.",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                })
+                title: `Are you sure you want to delete this record?`,
+                text: "If you delete this, it will be gone forever.",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
                 .then((willDelete) => {
                     if (willDelete) {
                         form.submit();

@@ -191,14 +191,14 @@ class RepresentanteSuplenteController extends Controller
         $html = "";
         if (!empty($employee)) {
 
-            $html = '  
+            $html = '
                    <div class="modal-body">
                       <h5>A exclusão do(a) representante é permanente. Deseja prosseguir?<h5>
                    </div>
                    <div class="modal-footer">
-                       <form action="/repsup/edit/'. $employee->cdRepSup.'" method="POST">
-                       '.csrf_field() .'
-                       '.method_field('DELETE') .'
+                       <form action="/repsup/edit/' . $employee->cdRepSup . '" method="POST">
+                       ' . csrf_field() . '
+                       ' . method_field('DELETE') . '
                            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancelar</button>
 
                            <button type="submit" class="btn btn-danger delete-btn ms-1"

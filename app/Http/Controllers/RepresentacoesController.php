@@ -213,9 +213,6 @@ class RepresentacoesController extends Controller
         $cod = Representacoe::where('cdRepresentacao', '=', $id)->first(['cdRepresentacao']);
         $titulares = DB::table('representante_suplentes')->whereNotIn('cdRepSup', $idcontracts)->get();
 
-  
-    
-    
 
         $anexo = Representacoe::join('representacoes_anexos', 'representacoes.cdRepresentacao', '=', 'representacoes_anexos.cdRepresentacao')->get();
         // $insta = Instituicoe::join('tipo_instancias', 'tipo_instancias.cdTipoInstancia', '=','instituicoes.cdTipoInstituicao')->get();
@@ -389,7 +386,7 @@ class RepresentacoesController extends Controller
             <label for="title">Data de Nomeação:</label>
             <input type="date" class="form-control" id="dtNomeacao" name="dtNomeacao" value=' . $representantes->dtInicioNomeacao . '>
     </div>
-            
+
             <br>
             <div class="form-check">
                     <input class="form-check-input" type="radio" name="stTitularidade" id="stTitularidade" value="1"
@@ -440,9 +437,9 @@ class RepresentacoesController extends Controller
     public function represcreate()
     {
         $representantes = DB::table('representacoes')
-        ->join('representacao_representantes', 'representacoes.cdRepresentacao', '=', 'representacao_representantes.cdRepresentacao')
-        ->join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
-        ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
+            ->join('representacao_representantes', 'representacoes.cdRepresentacao', '=', 'representacao_representantes.cdRepresentacao')
+            ->join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
+            ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
             ->where('dsEmail', '=', auth()->user()->email)->get();
 
 
@@ -496,21 +493,20 @@ class RepresentacoesController extends Controller
         $employee = Representacao_representante::join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
             ->find($empid);
 
-       
 
         $html = "";
 
         if (!empty($employee)) {
 
-            $html = '  
+            $html = '
                    <div class="modal-body">
-                       A exclusão é permanente. Deseja prosseguir? '.$employee->nmRepresentanteSuplente.'
+                       A exclusão é permanente. Deseja prosseguir? ' . $employee->nmRepresentanteSuplente . '
                    </div>
                    <div class="modal-footer">
-                       <form action="/representacoes/edit/'.$employee->cdRepSup.'" method="POST">
+                       <form action="/representacoes/edit/' . $employee->cdRepSup . '" method="POST">
                        ' . csrf_field() . '
-                       '.method_field('DELETE').'
-                           
+                       ' . method_field('DELETE') . '
+
                            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancelar
                            </button>
                            <button type="submit" class="btn btn-danger delete-btn ms-1"
