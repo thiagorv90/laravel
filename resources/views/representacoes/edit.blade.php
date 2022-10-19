@@ -42,7 +42,8 @@
         <div class="container my-3 ps-3 welcomediv bg-seconday">
             <h1>Editar Representantes</h1>
         </div>
-
+        <a href="/instituicoes">{{$bread->nmInstituicao}}</a>><a
+                            href="/instancias/{{$bread->cdInstituicao}}">{{$bread->nmInstancia}}</a>
         <div class="container">
 
 
@@ -143,6 +144,17 @@
                     <label for="title">Data de Nomeação:</label>
                     <input type="date" class="form-control" id="dtInicioNomeacao" name="dtInicioNomeacao">
                 </div>
+                <div class="form-group">
+                                <label for="dsAmeacas">Designação:</label>
+                                <input placeholder="Designação..." type="text" class="form-control" id="dsDesiginacao"
+                                       name="dsDesiginacao">
+                            </div>
+                            <div class="form-group">
+                                <label for="dsOportunidades">Nomeação:</label>
+                                <input placeholder="Nomeação..." type="text" class="form-control"
+                                       id="dsNomeacao"
+                                       name="dsNomeacao">
+                            </div>
                 <br>
                 <input type="submit" class="btn btn-primary mb-2" value="Incluir">
             </form>
@@ -207,28 +219,12 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="title">Designação:</label>
-                        <input type="text" class="form-control" id="dsDesignacao" name="dsDesignacao"
-                               value="{{$age->dsDesignacao}}">
-                    </div>
-                    <div class="form-group">
-                        <label for="title">Nomeação: </label>
-                        <input type="textarea" class="form-control" id="dsNomeacao" name="dsNomeacao"
-                               value="{{$age->dsNomeacao}}">
-                    </div>
-                    <div class="form-group">
-                        <label for="title">Designação Suplente:</label>
-                        <input type="text" class="form-control" id="dsDesignacao" name="dsDesignacaoSuplente"
-                               value="{{$age->dsDesignacaoSuplente}}">
-                    </div>
+                            <label for="title">Obsvervação:</label>
+                            <textarea placeholder="Observação..." name="dsObservacao" rows="10"
+                                          id="dsObservacao"
 
-
-                    <div class="form-group">
-                        <label for="title"> Número Nomeação:</label>
-                        <input type="number" class="form-control" id="nuNomeacao" name="nuNomeacao"
-                               value="{{$age->nuNomeacao}}">
-                    </div>
-
+                                          class="form-control">{{$age->dsObservacao}}</textarea>
+                        </div>
 
                     <div class="container d-flex justify-content-between mt-2">
                         <a href="/repinsta/ {{ $age->cdInstancia }}" class="btn btn-info mb-2">Voltar</a>
