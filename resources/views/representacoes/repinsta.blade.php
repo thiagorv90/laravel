@@ -27,7 +27,8 @@
                             inicio.</p>
                     </div>
                 </div>
-
+                <a href="/instituicoes">{{$bread->nmInstituicao}}</a>><a
+                            href="/instancias/{{$bread->cdInstituicao}}">{{$bread->nmInstancia}}</a>
 
 
                 <div id="event-create-container" class="container">
@@ -46,7 +47,7 @@
 
 
                         <div class="form-group">
-                            <label for="title">Inicio da Vigência3:</label>
+                            <label for="title">Inicio da Vigência:</label>
                             <input type="date" class="form-control" id="dtInicioVigencia" name="dtInicioVigencia"
                                    required>
                         </div>
@@ -56,22 +57,7 @@
                             <input type="date" class="form-control" id="dtFimVigencia" name="dtFimVigencia"
                             >
                         </div>
-                        <div class="form-group">
-                            <label for="title">Designação:</label>
-                            <input type="text" class="form-control" id="dsDesignacao" name="dsDesignacao">
-                        </div>
-                        <div class="form-group">
-                            <label for="title">Nomeação:</label>
-                            <input type="text" class="form-control" id="dsNomeacao" name="dsNomeacao">
-                        </div>
-                        <div class="form-group">
-                            <label for="title">Designação Suplente:</label>
-                            <input type="text" class="form-control" id="dsDesignacao" name="dsDesignacaoSuplente">
-                        </div>
-                        <div class="form-group">
-                            <label for="title">Nomeação Suplente:</label>
-                            <input type="text" class="form-control" id="dsNomeacaoSuplente" name="dsNomeacaoSuplente">
-                        </div>
+                       
                         <div class="form-group">
                             <label for="title">Status:</label>
                             <div class="form-check">
@@ -98,8 +84,11 @@
                             <input type="number" class="form-control" id="nuNomeacao" name="nuNomeacao">
                         </div>
                         <div class="form-group">
-                            <label for="title">Detalhes Nomeação:</label>
-                            <input type="text" class="form-control" id="fnNomeacao" name="fnNomeacao">
+                            <label for="title">Obsvervação:</label>
+                            <textarea placeholder="Observação..." name="dsObservacao" rows="10"
+                                          id="dsObservacao"
+
+                                          class="form-control"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="title">Documentos:</label>

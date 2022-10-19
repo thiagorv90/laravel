@@ -115,6 +115,7 @@ Route::middleware('auth')->group(function () {
 
 
         Route::post('repinsta/{id}', [RepresentacoesController::class, 'representacoesstore']);
+        Route::delete('repinsta/{id}', [RepresentacoesController::class, 'delrepresentacoes']);
         Route::get('repinsta/{id}', [RepresentacoesController::class, 'instareprescreate'])->name('repre');
         Route::PUT('representacoes/update/{id}', [RepresentacoesController::class, 'updateRep']);
         Route::get('representacoes/edit/{id}', [RepresentacoesController::class, 'editRep'])->name('editrepre');
@@ -125,7 +126,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/representacoes/representantes/{id}', [RepresentacoesController::class, 'createrep']);
         Route::delete('/representacoes/representantes/{id}', [RepresentacoesController::class, 'deleterep']);
         Route::get('/getEmployeeDetails/{empid}', [RepresentacoesController::class, 'repreinfo'])->name('getEmployeeDetails');
-
+        Route::get('/delaEmployeeDetails/{empid}', [RepresentacoesController::class, 'repredelinfo'])->name('delgetEmployeeDetails');
         Route::get('/delgetEmployeeDetails/{empid}', [RepresentacoesController::class, 'delinfo'])->name('delEmployeeDetails');
 
 
