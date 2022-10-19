@@ -13,6 +13,16 @@
             color: #452680;
 
         }
+        .welcomediv {
+        color: white;
+        background: rgb(153, 114, 187);
+        background: linear-gradient(90deg, rgb(186, 143, 223) 35%, rgba(182, 154, 233, 1) 100%);
+        border: 2px solid rgb(255, 255, 255);
+        box-shadow: #ebe9e9 1px 1px 4px 3px;
+        font-family: 'Montserrat', sans-serif;
+        transition: all 1.5s;
+        padding: 3px;
+    }
     </style>
 
     <div id="event-create-container" class="container">
@@ -32,7 +42,9 @@
 
 
                 <div id="event-create-container" class="container">
-                    <h1>Crie sua Representação</h1>
+                    <div class="container my-3 ps-3 welcomediv bg-seconday">
+                        <h1>Crie sua Representação</h1>
+                    </div>
                     <form action="repinsta" method="POST" enctype='multipart/form-data'>
                         @csrf
                         <div class="form-group" style="display:none">
@@ -105,7 +117,9 @@
                 @else
 
                     <div class="container">
-                        <h1>Representações</h1>
+                        <div class="container my-3 ps-3 welcomediv bg-seconday">
+                            <h1>Representação</h1>
+                        </div>
                         <a href="/instituicoes">{{$bread->nmInstituicao}}</a>><a
                             href="/instancias/{{$bread->cdInstituicao}}">{{$bread->nmInstancia}}</a>
 
@@ -169,7 +183,9 @@
 
                     <div id="event-create-container" class="container mt-5">
 
-                        <h1>Crie sua Representação</h1>
+                        <div class="container my-3 ps-3 welcomediv bg-seconday">
+                            <h1>Crie sua Representação</h1>
+                        </div>
                         <form action="repinsta" method="POST" enctype='multipart/form-data'>
                             @csrf
                             <div class="form-group" style="display:none">
@@ -251,9 +267,8 @@
                     </div>
                     </form>
     </div>
-    </div>
-    </div>
-    </div>
+    
+
 
     @endif
 
