@@ -30,6 +30,7 @@
 
         @if(auth()->user()->statusadm ==1)
 
+     
             <!--Alerta-->
             <div class="alert alert-secondary d-flex align-items-center mt-4 mb-3" role="alert">
                 <div>
@@ -37,7 +38,7 @@
                     <p>Caso precise, use o formulário abaixo para criar.
                 </div>
             </div>
-
+          
             <div class="container my-3 ps-3 welcomediv">
                 <h1 class="mt-1">Criar agenda</h1>
             </div>
@@ -180,7 +181,9 @@
                         </div>
                     </div>
 
-                    <h1>Agendas da representação:</h1>
+                    <div class="container my-3 ps-3 welcomediv bg-seconday">
+                        <h1>Agendas da Representação</h1>
+                    </div>
 
                     <a href="/instituicoes">{{$bread->nmInstituicao}}</a> /
                     <a href="/instancias/{{$bread->cdInstituicao}}">{{$bread->nmInstancia}}</a> /
@@ -271,7 +274,9 @@
                     </form>
                     <br>
                     @if(auth()->user()->statusadm ==1)
+                    <div class="container my-3 ps-3 welcomediv bg-seconday">
                         <h1>Agenda</h1>
+                    </div>
 
                         <div id="event-create-container" class="container">
                             <form action="agendas" method="POST" enctype="multipart/form-data">
@@ -356,7 +361,7 @@
                                 </div>
                             </form>
                         </div>
-
+                    </div>           
         @endif
 
     @endif

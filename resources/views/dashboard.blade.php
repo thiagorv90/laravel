@@ -77,7 +77,7 @@
             color: rgb(255, 255, 255);
             font-family: 'Montserrat', sans-serif;
             overflow: hidden;
-            padding: 35px;
+            padding: 20px;
             box-sizing: border-box;
             color: #fff;
             border-radius: 8px;
@@ -102,10 +102,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
 
-    <div class="container mt-3 welcomediv">
-        <h1>Bem vindos ao SGR</h1>
-        <h3 id="sem">Agendas da Semana</h3>
-        <h3 id="me" style="display:none">Agendas do Mês</h3>
+    <div class="container mt-2 welcomediv">
+        <h2>Bem vindos ao SGR</h2>
+        <h4 id="sem">Agendas da Semana</h4>
+        <h4 id="me" style="display:none">Agendas do Mês</h4>
         <label class="switch"><input type="checkbox"><span class="slider round hide-off"></span></label>
         <div class="welcomediv3">
         </div>

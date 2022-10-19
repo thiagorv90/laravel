@@ -20,27 +20,27 @@
     <div class="container">
         <div class="container my-3 ps-3 welcomediv bg-seconday">
             <h1>Criar Escolaridade</h1>
-        </div>
+            </div>
         <table class="table">
             <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Nome</th>
-            </tr>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nome</th>
+                </tr>
             </thead>
             <tbody>
-            @foreach ($escolaridade as $event)
-                <tr>
-                    <td scropt="row">{{ $event->cdEscolaridade }}</td>
-                    <td><a>{{ $event->dsEscolaridade }}</a></td>
-                    <td>
-                        <a href="/escolaridade/edit/{{ $event->cdEscolaridade }}" class="btn btn-info edit-btn"
-                           data-bs-toggle="tooltip" data-bs-title="Editar">
-                            <ion-icon name="create-outline"></ion-icon>
-                        </a>
-                    </td>
-                </tr>
-            @endforeach
+                @foreach ($escolaridade as $event)
+                    <tr>
+                        <td scropt="row">{{ $event->cdEscolaridade }}</td>
+                        <td><a>{{ $event->dsEscolaridade }}</a></td>
+                        <td>
+                            <a href="/escolaridade/edit/{{ $event->cdEscolaridade }}" class="btn btn-info edit-btn"
+                                data-bs-toggle="tooltip" data-bs-title="Editar">
+                                <ion-icon name="create-outline"></ion-icon>
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
 
@@ -50,13 +50,14 @@
                 @csrf
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" value="" name="query" id="query"
-                           placeholder="Buscar Escolaridade..." aria-label="Buscar Escolaridade"
-                           aria-describedby="button-addon2" required/>
+                        placeholder="Buscar Escolaridade..." aria-label="Buscar Escolaridade"
+                        aria-describedby="button-addon2" required />
                     <input type="submit" class="btn btn-primary" value="Buscar" id="button-addon2">
                 </div>
             </form>
         @endif
         <br>
+       
         <div class="container my-3 ps-3 welcomediv bg-seconday">
             <h1>Escolaridade</h1>
         </div>
@@ -65,7 +66,7 @@
             @csrf
             <div class="input-group mb-3">
                 <input placeholder="Criar Escolaridade..." type="text" class="form-control" id="dsEscolaridade"
-                       name="dsEscolaridade" aria-label="Criar Escolaridade" aria-describedby="button-addon2" required/>
+                    name="dsEscolaridade" aria-label="Criar Escolaridade" aria-describedby="button-addon2" required />
                 <input type="submit" class="btn btn-primary" value="Criar" id="button-addon2">
             </div>
         </form>
