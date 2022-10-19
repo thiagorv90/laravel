@@ -13,16 +13,17 @@
             color: #452680;
 
         }
+
         .welcomediv {
-        color: white;
-        background: rgb(153, 114, 187);
-        background: linear-gradient(90deg, rgb(186, 143, 223) 35%, rgba(182, 154, 233, 1) 100%);
-        border: 2px solid rgb(255, 255, 255);
-        box-shadow: #ebe9e9 1px 1px 4px 3px;
-        font-family: 'Montserrat', sans-serif;
-        transition: all 1.5s;
-        padding: 3px;
-    }
+            color: white;
+            background: rgb(153, 114, 187);
+            background: linear-gradient(90deg, rgb(186, 143, 223) 35%, rgba(182, 154, 233, 1) 100%);
+            border: 2px solid rgb(255, 255, 255);
+            box-shadow: #ebe9e9 1px 1px 4px 3px;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 1.5s;
+            padding: 3px;
+        }
     </style>
 
     <div id="event-create-container" class="container">
@@ -38,7 +39,7 @@
                     </div>
                 </div>
                 <a href="/instituicoes">{{$bread->nmInstituicao}}</a>><a
-                            href="/instancias/{{$bread->cdInstituicao}}">{{$bread->nmInstancia}}</a>
+                    href="/instancias/{{$bread->cdInstituicao}}">{{$bread->nmInstancia}}</a>
 
 
                 <div id="event-create-container" class="container">
@@ -69,7 +70,7 @@
                             <input type="date" class="form-control" id="dtFimVigencia" name="dtFimVigencia"
                             >
                         </div>
-                       
+
                         <div class="form-group">
                             <label for="title">Status:</label>
                             <div class="form-check">
@@ -98,9 +99,9 @@
                         <div class="form-group">
                             <label for="title">Obsvervação:</label>
                             <textarea placeholder="Observação..." name="dsObservacao" rows="10"
-                                          id="dsObservacao"
+                                      id="dsObservacao"
 
-                                          class="form-control"></textarea>
+                                      class="form-control"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="title">Documentos:</label>
@@ -267,7 +268,7 @@
                     </div>
                     </form>
     </div>
-    
+
 
 
     @endif

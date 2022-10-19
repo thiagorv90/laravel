@@ -45,20 +45,19 @@ class AutoAvisoAgenda extends Command
     public function handle()
     {
         $mails = Agenda::join('representacoes', 'representacoes.cdRepresentacao', '=', 'agendas.cdRepresentacao')
-        ->join('representacao_representantes', 'representacoes.cdRepresentacao', '=', 'representacao_representantes.cdRepresentacao')
-        ->join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
-        ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')->where('dtAgenda','=', Carbon::now()->addDays(2))
-        ->get(['nmRepresentanteSuplente',
-        'dsEmail','instancias.nmInstancia','agendas.dtAgenda','agendas.hrAgenda','agendas.dsAssunto','agendas.dsLocal','agendas.dsPauta','agendas.dsResumo']);
-        
-       
-        
-        foreach($mails as $mail){
-           
-            mail::send( new \App\Mail\AvisoAgenda($mail));
-                $this->info('auto:avisoagenda deu certo!');
-            
-      
+            ->join('representacao_representantes', 'representacoes.cdRepresentacao', '=', 'representacao_representantes.cdRepresentacao')
+            ->join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
+            ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')->where('dtAgenda', '=', Carbon::now()->addDays(2))
+            ->get(['nmRepresentanteSuplente',
+                'dsEmail', 'instancias.nmInstancia', 'agendas.dtAgenda', 'agendas.hrAgenda', 'agendas.dsAssunto', 'agendas.dsLocal', 'agendas.dsPauta', 'agendas.dsResumo']);
+
+
+        foreach ($mails as $mail) {
+
+            mail::send(new \App\Mail\AvisoAgenda($mail));
+            $this->info('auto:avisoagenda deu certo!');
+
+
+        }
     }
-}
 }

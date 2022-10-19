@@ -102,7 +102,6 @@ class AgendasController extends Controller
     public function dashboard()
     {
 
-       
 
         $selecionado = Agenda::join('representacoes', 'representacoes.cdRepresentacao', '=', 'agendas.cdRepresentacao')
             ->join('representacao_representantes', 'representacoes.cdRepresentacao', '=', 'representacao_representantes.cdRepresentacao')

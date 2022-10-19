@@ -27,7 +27,7 @@ class RepresentacoesController extends Controller
         $event->dsObservacao = $request->dsObservacao;
         $event->dtInicioVigencia = $request->dtInicioVigencia;
         $event->dtFimVigencia = $request->dtFimVigencia;
-       
+
         $event->stAtivo = $request->stAtivo;
 
 
@@ -60,7 +60,8 @@ class RepresentacoesController extends Controller
         $representantes = Representante_suplente::orderby('nmRepresentanteSuplente')->get(['cdRepSup', 'nmRepresentanteSuplente']);
         return view('representacoes/representantes', ['event' => $event, 'representantes' => $representantes, 'teste' => $teste]);
     }
-    public function  delrepresentacoes($id)
+
+    public function delrepresentacoes($id)
     {
         DB::table('representacao_representantes')
             ->join('representacoes', 'representacao_representantes.cdRepresentacao', '=', 'representacoes.cdRepresentacao')
@@ -96,7 +97,7 @@ class RepresentacoesController extends Controller
         Representacoe::join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
             ->where('representacoes.cdRepresentacao', $id)->delete();
 
-      
+
         // $deleted = DB::delete('delete from telefone_contatos where cdTelefone = ?', [$id]);
         return back();
     }
@@ -111,7 +112,7 @@ class RepresentacoesController extends Controller
         $event->cdRepSup = $request->cdRepSup;
         $event->dtInicioNomeacao = $request->dtInicioNomeacao;
         $event->stRepresentante = '1';
-        $event->dsDesiginacao= $request->dsDesiginacao;
+        $event->dsDesiginacao = $request->dsDesiginacao;
         $event->dsNomeacao = $request->dsNomeacao;
         $event->cdRepresentacao = $request->cdRepresentacao;
         $event->stTitularidade = $request->stTitularidade;
@@ -281,7 +282,7 @@ class RepresentacoesController extends Controller
             ->where('representacoes.cdRepresentacao', '=', $id)
             ->get(['representacoes.cdRepresentacao', 'dtInicioVigencia',
                 'representacoes.cdInstancia', 'nmInstancia', 'representacoes.stAtivo', 'dtInicioVigencia',
-                'dtFimVigencia','representacoes.dsObservacao']);
+                'dtFimVigencia', 'representacoes.dsObservacao']);
 
         $representantes = Representacao_representante::join('representante_suplentes', 'representante_suplentes.cdRepSup', '=', 'representacao_representantes.cdRepSup')
             ->where('cdRepresentacao', '=', $id)->orderby('nmRepresentanteSuplente')
@@ -390,9 +391,9 @@ class RepresentacoesController extends Controller
 
         $cd = $request->input('stTitularidade');
         $name = $request->input('dtInicioNomeacao');
-              $data = $request->input('dtInicioNomeacao');
-          $obs= $request->input('dsDesiginacao');
-          $nom= $request->input('dsNomeacao');
+        $data = $request->input('dtInicioNomeacao');
+        $obs = $request->input('dsDesiginacao');
+        $nom = $request->input('dsNomeacao');
         if ($cd == 1) {
             $fim = NULL;
         }
@@ -401,7 +402,7 @@ class RepresentacoesController extends Controller
         }
 
 
-        DB::update('update representacao_representantes set stTitularidade = ?, dtInicioNomeacao = ?,dtFimNomeacao= ?,dsDesiginacao = ?, dsNomeacao =?  where cdRepSup = ?', [$cd, $name, $data,$obs,$nom, $fim, $id]);
+        DB::update('update representacao_representantes set stTitularidade = ?, dtInicioNomeacao = ?,dtFimNomeacao= ?,dsDesiginacao = ?, dsNomeacao =?  where cdRepSup = ?', [$cd, $name, $data, $obs, $nom, $fim, $id]);
 
 
         return back();
@@ -578,6 +579,7 @@ class RepresentacoesController extends Controller
         return response()->json($response);
 
     }
+
     public function repredelinfo($empid = 0)
     {
 
