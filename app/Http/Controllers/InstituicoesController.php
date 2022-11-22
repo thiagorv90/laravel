@@ -13,7 +13,7 @@ use Illuminate\Pagination\Paginator;
 
 class InstituicoesController extends Controller
 {
-
+    //função de search da instituição
     public function search(Request $request)
     {
         $request->validate([
@@ -30,7 +30,7 @@ class InstituicoesController extends Controller
     }
 
     public function insta(Request $request)
-    {
+    {//search das instancias na instituição
         $request->validate([
             'query' => 'required',
         ]);
@@ -45,7 +45,7 @@ class InstituicoesController extends Controller
     }
 
     public function instituicoesstore(Request $request)
-    {
+    {// Salva as Instituções  
         $events = new Instituicoe;
         $events->nmInstituicao = $request->nmInstituicao;
         $events->cdTipoInstituicao = $request->cdTipoInstituicao;
@@ -55,14 +55,14 @@ class InstituicoesController extends Controller
     }
 
     public function instituicoescreate()
-    {
+    {//select para criação de instituições
         $instituicoes = DB::table('tipo_instancias')->get();
         $events = DB::table('instituicoes')->join('tipo_instancias', 'tipo_instancias.cdTipoInstancia', '=', 'instituicoes.cdTipoInstituicao')->orderby('nmInstituicao')->simplepaginate(10);
         return view('instituicoes/instituicoes', compact('instituicoes', 'events'));
     }
 
     public function updateInst(Request $request, $id)
-    {
+    {//updante na instituições 
         $cd = $request->input('cdTipoInstituicao');
         $name = $request->input('nmInstituicao');
 

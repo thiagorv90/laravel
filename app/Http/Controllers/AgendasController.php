@@ -20,7 +20,7 @@ use App\Exports\AgendaFiltradaExport;
 
 class AgendasController extends Controller
 {
-
+/*Salvar arquivos na agenda  */
     public function agendastore(Request $request, $id)
     {
         $event = new Agenda;
@@ -36,7 +36,7 @@ class AgendasController extends Controller
         $event->stSuplente = $request->stSuplente;
 
         $event->save();
-
+        /* Importa documentos para o sistema e grava o nome original e ficticio no banco*/
         if ($request->has('nmAnexo')) {
 
             for ($i = 0; $i < count($request->allFiles()['nmAnexo']); $i++) {
@@ -60,7 +60,7 @@ class AgendasController extends Controller
             }
 
         }
-
+/*Envia e-mail quando cria uma agenda */
         /*$mail = Agenda::join('representacoes', 'representacoes.cdRepresentacao', '=', 'agendas.cdRepresentacao')
         ->join('representante_suplentes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
         ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
@@ -76,7 +76,7 @@ class AgendasController extends Controller
     public function agendafile(Request $request, $id)
     {
 
-
+  /* Importa documentos para o sistema e grava o nome original e ficticio no banco*/
         for ($i = 0; $i < count($request->allFiles()['nmAnexo']); $i++) {
 
 
@@ -102,7 +102,7 @@ class AgendasController extends Controller
     public function dashboard()
     {
 
-
+/* Select das agendas do mês e da semana */
         $selecionado = Agenda::join('representacoes', 'representacoes.cdRepresentacao', '=', 'agendas.cdRepresentacao')
             ->join('representacao_representantes', 'representacoes.cdRepresentacao', '=', 'representacao_representantes.cdRepresentacao')
             ->join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
@@ -125,6 +125,7 @@ class AgendasController extends Controller
 
     public function agendacreate($id)
     {
+        /* Select de todos os dados na pagina de criação de agenda*/
         $bread = DB::table('instituicoes')->leftjoin('instancias', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
             ->leftjoin('representacoes', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
             ->join('representacao_representantes', 'representacao_representantes.cdRepresentacao', '=', 'representacoes.cdRepresentacao')
@@ -148,6 +149,7 @@ class AgendasController extends Controller
 
     public function editAgen($id)
     {
+        /*Select dos dados da agenda selecionada  */
         $bread = DB::table('instituicoes')->leftjoin('instancias', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
             ->leftjoin('representacoes', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
             ->join('representacao_representantes', 'representacao_representantes.cdRepresentacao', '=', 'representacoes.cdRepresentacao')
@@ -173,6 +175,7 @@ class AgendasController extends Controller
 
     public function updateAgen(Request $request, $id)
     {
+        /*Update da agenda */
         $cd = $request->input('cdRepresentacao');
         $agenda = $request->input('dtAgenda');
         $hora = $request->input('hrAgenda');
@@ -191,7 +194,7 @@ class AgendasController extends Controller
 
     public function downloadAgen(Request $request, $id)
     {
-
+        /* Download dos documentos da agenda*/
         //return response()->download('prjsgr1/storage/app/files/'.$id);
 
         $file = public_path() . "/storage/files/$id";
@@ -202,6 +205,7 @@ class AgendasController extends Controller
 
     public function deleteAgenImg($id)
     {
+        /* Deletar documentos da agenda , tanto no banco quanto no sistema */
         $file = Agenda_anexo::where('nmAnexo', $id);
 
 
@@ -218,6 +222,7 @@ class AgendasController extends Controller
 
     public function deleteAgen($id)
     {
+        /*Deleta uma agenda e os anexos da mesma  */
         $links = Agenda_anexo::where('cdAgenda', $id)->get();
 
         foreach ($links as $link) {
@@ -231,6 +236,7 @@ class AgendasController extends Controller
 
     public function search(Request $request, $id)
     {
+        /* Search de uma agenda atraves de duas opções */
         $request->validate([
             'query' => 'required', 'busca' => 'required',
         ]);

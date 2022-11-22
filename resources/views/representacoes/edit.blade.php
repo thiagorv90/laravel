@@ -38,6 +38,10 @@
             padding: 3px;
         }
     </style>
+           @php 
+$teste = App\Models\Representante_suplente::get()
+@endphp
+
 
     <div id="event-create-container" class="container">
         <div class="container my-3 ps-3 welcomediv bg-seconday">
@@ -104,62 +108,18 @@
                             </button>
                         </td>
                     </tr>
-                @endforeach
-
+            
+    @endforeach
                 </tbody>
             </table>
         </div>
-
-        @foreach ($selecionado as $age)
-            <form action="/representacoes/edit/{{$age->cdRepresentacao}}" method="POST"
-                  enctype='multipart/form-data'>
-                @csrf
-                @endforeach
-                <div class="form-group">
-                    <label for="cdRepSup">Representante: </label>
-                    <select name="cdRepSup" id="cdRepSup" class="form-select">
-                        @foreach($titulares as $representante)
-                            <option
-                                value="{{$representante->cdRepSup}}"> {{$representante->nmRepresentanteSuplente}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="title">Status:</label>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="stRepresentante" id="stRepresentante"
-                               value="1">
-                        <label class="form-check-label" for="stRepresentante">
-                            Titular
-                        </label>
-                    </div>
-                </div>
-                <div class="form-check">
-
-                    <input class="form-check-input" type="radio" name="stRepresentante" id="stRepresentante" value="0">
-                    <label class="form-check-label" for="stRepresentante">
-                        Suplente
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label for="title">Data de Nomeação:</label>
-                    <input type="date" class="form-control" id="dtInicioNomeacao" name="dtInicioNomeacao">
-                </div>
-                <div class="form-group">
-                    <label for="dsAmeacas">Designação:</label>
-                    <input placeholder="Designação..." type="text" class="form-control" id="dsDesiginacao"
-                           name="dsDesiginacao">
-                </div>
-                <div class="form-group">
-                    <label for="dsOportunidades">Nomeação:</label>
-                    <input placeholder="Nomeação..." type="text" class="form-control"
-                           id="dsNomeacao"
-                           name="dsNomeacao">
-                </div>
-                <br>
-                <input type="submit" class="btn btn-primary mb-2" value="Incluir">
-            </form>
-
+        <!-- Botão que chama a modal de Adiconar Representante-->
+        <button type="button" class="btn btn-info delete-btn ms-1" data-bs-toggle="modal" data-id='{{ $bread->cdRepresentacao }}'
+                             data-bs-target="#exampleModal" >
+                                 Adicionar Representante   
+                            </button>     
+     
+           
             <div class="container my-3 ps-3 welcomediv bg-seconday">
                 <h1>Editar Representação</h1>
             </div>
@@ -212,7 +172,7 @@
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="0"
+                            <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="0" 
                                    @if($age->stAtivo ==0) checked @endif >
                             <label class="form-check-label" for="stAtivo">
                                 Desativado
@@ -221,10 +181,10 @@
                     </div>
                     <div class="form-group">
                         <label for="title">Obsvervação:</label>
-                        <textarea placeholder="Observação..." name="dsObservacao" rows="10"
+                        <textarea placeholder="Observação..." name="dsObservacao" rows="10" 
                                   id="dsObservacao"
 
-                                  class="form-control">{{$age->dsObservacao}}</textarea>
+                                  class="form-control">{{$age->dsObservacao  }}</textarea>
                     </div>
 
                     <div class="container d-flex justify-content-between mt-2">
@@ -264,16 +224,17 @@
             <input type="file" class="form-control" id="nmAnexo" name="nmAnexo[]" multiple>
         </div>
         <div class="container d-flex justify-content-between mt-2">
-            <a href="/representacoes/{{$age->cdInstancia}}" class="btn btn-info mb-2">Voltar</a>
+            <a href="/repinsta/ {{ $age->cdInstancia }}" class="btn btn-info mb-2">Voltar</a>
             <input type="submit" class="btn btn-primary mb-2" value="Incluir"></div>
     </form>
 
 
     </div> @endforeach
+   
 
     <!-- Modal --->
     <div class="container">
-        <!-- Modal -->
+        <!-- Modal de Update-->
         <div class="modal fade" id="empModal">
             <div class="modal-dialog">
 
@@ -292,6 +253,7 @@
                 </div>
             </div>
         </div>
+    </div>
         <!-- Modal --->
         <div class="container">
             <!-- Modal Delete-->
@@ -311,6 +273,109 @@
                     </div>
                 </div>
             </div>
+    
+            <!-- Modal de adicionar Representante ---> 
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false"  data-bs-id="/repsup/edit/{{$bread->cdRepresentacao}}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header fundo-info text-white">
+          <h5 class="modal-title" id="exampleModalLabel">Editar Representação</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">                         
+          </button>
+        </div>
+
+        <div class="modal-body">
+
+        <form action="/representacoes/edit/{{$bread->cdRepresentacao}}" method="POST">
+        @csrf
+        <div class="form-group">
+ 
+                    <label for="title">Representante:</label>
+                    <select id="cdRepSup" name="cdRepSup" class="form-select">
+                        @foreach($teste as $e)
+                            <option value="{{$e->cdRepSup}}"
+                                  >
+                                {{ $e->nmRepresentanteSuplente }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="title">Status:</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="stRepresentante" id="stRepresentante"
+                               value="1">
+                        <label class="form-check-label" for="stRepresentante">
+                            Titular
+                        </label>
+                    </div>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="stRepresentante" id="stRepresentante" value="0">
+
+                    <label class="form-check-label" for="stRepresentante">
+                        Suplente
+                    </label>
+                </div>
+            <div class="form-group">
+                    <label for="title">Data de Nomeação:</label>
+                    <input type="date" class="form-control" id="dtInicioNomeacao" name="dtInicioNomeacao" >
+            </div>
+            <br>
+            <div class="form-check">
+                    <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="1"
+                          >
+                    <label class="form-check-label" for="stAtivo">
+                        Ativo
+                    </label>
+            </div>
+
+            <div class="form-check">
+                    <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="0"
+                           >
+                    <label class="form-check-label" for="stAtivo">
+                        Desativado
+                    </label>
+            </div>
+            <div class="form-group">
+                            <label for="title">Nomeação:</label>
+                            <input type="text" class="form-control" id="dsNomeacao" name="dsNomeacao"  
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label for="title">Designação:</label>
+                            <input type="text" class="form-control" id="dsDesiginacao" name="dsDesiginacao" >
+                        </div>
+                        <div class="modal-footer">
+            <div>
+            <button  class="btn btn-secondary " data-bs-dismiss="modal">Cancelar</button>
+            <input type="submit" class="btn btn-success ms-1">
+            </div>
+        </div>
+        </form>    
+
+        
+
+      </div>
+    </div>
+  </div>
+    </div>
+
+
+    <!--Script do Modal de Adiconar-->
+<script>
+    $('#exampleModal').on('show.bs.modal', function (event){
+        var button = $(event.relatedTarget);
+        var recipientId = button.data('id');
+        console.log(recipientId);
+
+        var modal = $(this);
+        modal.find('#repID').val(recipientId);
+    })
+</script>
+            
+</script>
+
             <!--Script do Modal delete-->
             <script type='text/javascript'>
 

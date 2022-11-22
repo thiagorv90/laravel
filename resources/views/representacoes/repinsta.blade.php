@@ -114,7 +114,7 @@
                         </div>
                     </form>
                 </div>
-
+    
                 @else
 
                     <div class="container">
@@ -124,11 +124,12 @@
                         <a href="/instituicoes">{{$bread->nmInstituicao}}</a>><a
                             href="/instancias/{{$bread->cdInstituicao}}">{{$bread->nmInstancia}}</a>
 
-                        <table class="table">
+                        <table class="table" id='empTable'>
                             <thead>
                             <tr>
-                                <th scope="col">Nome Titular</th>
+                               
                                 <th scope="col">Incio Vigencia</th>
+                                <th scope="col">Fim Vigencia</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Opções</th>
 
@@ -138,20 +139,13 @@
                             @foreach ($selecionado as $event)
                                 <tr>
 
-                                    <?php $var = explode("/", $event->representantes);
-
-
-
-
-
-
-
-                                    ?>
-
-                                    <td scropt="row">@foreach($var as $va)
-                                            {{$va}}<br>
-                                        @endforeach </td>
+                                  
                                     <td><a>{!! date('d/m/Y', strtotime($event->dtInicioVigencia)) !!}</a></td>
+                                    @if ($event->dtFimVigencia == '')
+                                    <td><a>Indeterminado</a></td>
+                                    @else
+                                    <td><a>{!! date('d/m/Y', strtotime($event->dtFimVigencia)) !!}</a></td>
+                                    @endif
                                     @if($event->stAtivo ==1)
                                         <td>Ativo</td>
                                     @else
@@ -169,6 +163,11 @@
                                            data-bs-toggle="tooltip" data-bs-title="Agenda">
                                             <ion-icon name="book-outline"></ion-icon>
                                         </a>
+                                        <button class="btn btn-danger delete-btn ml-2 deldetails"
+                                    data-id='{{ $event->cdRepresentacao }}'
+                                    data-bs-toggle="tooltip" data-bs-title="Deletar">
+                                <ion-icon name="trash-outline"></ion-icon>
+                            </button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -212,18 +211,7 @@
                                 <input type="date" class="form-control" id="dtFimVigencia" name="dtFimVigencia"
                                 >
                             </div>
-                            <div class="form-group">
-                                <label for="title">Designação:</label>
-                                <input type="text" class="form-control" id="dsDesignacao" name="dsDesignacao">
-                            </div>
-                            <div class="form-group">
-                                <label for="title">Nomeação:</label>
-                                <input type="text" class="form-control" id="dsNomeacao" name="dsNomeacao">
-                            </div>
-                            <div class="form-group">
-                                <label for="title">Designação Suplente:</label>
-                                <input type="text" class="form-control" id="dsDesignacao" name="dsDesignacaoSuplente">
-                            </div>
+                          
 
                             <div class="form-group">
                                 <label for="title">Status:</label>
@@ -245,19 +233,17 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="title">Número Nomeação:</label>
-                                    <input type="number" class="form-control" id="nuNomeacao" name="nuNomeacao">
-                                </div>
-                                <div class="form-group">
-                                    <label for="title">Detalhes Nomeação:</label>
-                                    <input type="text" class="form-control" id="fnNomeacao" name="fnNomeacao">
-                                </div>
-                                <div class="form-group">
-                                    <label for="title">Documentos:</label>
-                                    <input type="file" class="form-control" name="nmAnexo[]" multiple>
-                                </div>
+                        <label for="title">Obsvervação:</label>
+                        <textarea placeholder="Observação..." name="dsObservacao" rows="10"
+                                  id="dsObservacao"
 
-                            </div>
+                                  class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                            <label for="title">Documentos:</label>
+                            <input type="file" class="form-control" name="nmAnexo[]" multiple>
+                        </div>
+
                             <br>
                     </div>
 
@@ -272,5 +258,62 @@
 
 
     @endif
+     <!-- Modal --->
+     <div class="container">
+            <!-- Modal Delete-->
+            <div class="modal fade" id="empModaldel">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Exclusão</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body" id="tblempinfodel">
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!--Script do Modal delete-->
+            <script type='text/javascript'>
+
+                $(document).ready(function () {
+
+                    $('#empTable').on('click', '.deldetails', function () {
+
+
+                        var empid = $(this).attr('data-id');
+
+                        if (empid > 0) {
+
+                            // AJAX request
+                            var url = "{{ route('delgetEmployeeDetails',[':empid']) }}";
+                            url = url.replace(':empid', empid);
+
+                            // Empty modal data
+                            $('#tblempinfodel').empty();
+
+                            $.ajax({
+                                url: url,
+                                dataType: 'json',
+                                success: function (response) {
+
+                                    // Add employee details
+                                    $('#tblempinfodel').html(response.html);
+
+                                    // Display Modal
+                                    $('#empModaldel').modal('show');
+
+                                }
+                            });
+                        }
+                    });
+
+                });
+            </script>
+
 
 @endsection
