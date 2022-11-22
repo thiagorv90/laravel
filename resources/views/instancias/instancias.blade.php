@@ -504,6 +504,7 @@
                 </div>
             </div>
         </div>
+    </div>
         <!--Script do Modal delete-->
         <script type='text/javascript'>
 

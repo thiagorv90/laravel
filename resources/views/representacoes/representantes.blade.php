@@ -24,7 +24,7 @@
             <div class="container">
 
 
-                <table class="table">
+                <table class="table" id='empTable'>
                     <thead>
                     <tr>
                         <th scope="col">Nome:</th>
@@ -46,6 +46,10 @@
                             @endif
 
                             <td>
+                            <button class="btn btn-info edit-btn viewdetails" data-id='{{ $incluido->cdRepSup }}'
+                                    data-bs-toggle="tooltip" data-bs-title="Editar">
+                                <ion-icon name="create-outline"></ion-icon>
+                            </button>
                                 <form action="/representacoes/representantes/{{$incluido->cdRepSup}}" method="POST">
                                     @csrf
                                     @method('DELETE')
@@ -101,6 +105,17 @@
                 <input type="text" class="form-control" id="cdRepresentacao" value="{{$event->cdRepresentacao}}"
                        name="cdRepresentacao">
             </div>
+            <div class="form-group">
+                    <label for="dsAmeacas">Designação:</label>
+                    <input placeholder="Designação..." type="text" class="form-control" id="dsDesiginacao"
+                           name="dsDesiginacao">
+                </div>
+                <div class="form-group">
+                    <label for="dsOportunidades">Nomeação:</label>
+                    <input placeholder="Nomeação..." type="text" class="form-control"
+                           id="dsNomeacao"
+                           name="dsNomeacao">
+                </div>
             <input type="submit" class="btn btn-primary mb-2" value="Incluir">
         </form>
         @if ($teste <>1)
@@ -108,5 +123,63 @@
         @endif
 
     </div>
+     <!-- Modal --->
+     <div class="container">
+        <!-- Modal -->
+        <div class="modal fade" id="empModal">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Representante</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body" id="tblempinfo">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button id="certo" type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+          <!--Script do Modal-->
+          <script type='text/javascript'>
+
+$(document).ready(function () {
+
+    $('#empTable').on('click', '.viewdetails', function () {
+
+
+        var empid = $(this).attr('data-id');
+
+        if (empid > 0) {
+
+            // AJAX request
+            var url = "{{ route('getEmployeeDetails',[':empid']) }}";
+            url = url.replace(':empid', empid);
+
+            // Empty modal data
+            $('#tblempinfo').empty();
+
+            $.ajax({
+                url: url,
+                dataType: 'json',
+                success: function (response) {
+
+                    // Add employee details
+                    $('#tblempinfo').html(response.html);
+
+                    // Display Modal
+                    $('#empModal').modal('show');
+
+                }
+            });
+        }
+    });
+
+});
+</script>
 
 @endsection

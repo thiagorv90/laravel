@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
+    //select para informações da empresas na tela de edit
     public function editEmp($emp)
     {
         //$events = Empresas::all();
@@ -20,6 +21,7 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
+        // gravar novas empresas
         $event = new Empresa;
         $event->nmEmpresa = $request->nmEmpresa;
         $event->save();
@@ -29,6 +31,7 @@ class EventController extends Controller
 
     public function updateEmp(Request $request, $emp)
     {
+        // dar update nas empresas 
         $name = $request->input('nmEmpresa');
         DB::update('update empresas set nmEmpresa = ? where cdEmpresa = ?', [$name, $emp]);
 
@@ -43,7 +46,7 @@ class EventController extends Controller
     }
 
     public function search(Request $request)
-    {
+    {//search das empresas 
         $request->validate([
             'query' => 'required',
         ]);

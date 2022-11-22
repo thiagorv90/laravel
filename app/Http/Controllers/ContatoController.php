@@ -9,7 +9,7 @@ use App\Models\Instancia;
 
 class ContatoController extends Controller
 {
-
+    /*Criação de um novo contato */
 
     public function contastore(Request $request, $id)
     {
@@ -29,6 +29,7 @@ class ContatoController extends Controller
 
     public function contacreate()
     {
+        /* Select dos dados das tabelas da instancias e contatos , para criar um contato */
         $contatos = DB::table('instancias')->get();
         $events = Contato::all();
 
@@ -37,6 +38,7 @@ class ContatoController extends Controller
 
     public function contalista($id)
     {
+        /*Select da lista de contatos  */
         $contatos = DB::table('instancias')->join('contatos', 'contatos.cdInstancia', '=', 'instancias.cdInstancia')->where('instancias.cdInstancia', '=', $id)->get();
         $edit = Contato::join('instancias', 'contatos.cdInstancia', '=', 'instancias.cdInstancia')->join('instituicoes', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
             ->where('contatos.cdInstancia', '=', $id)
@@ -53,6 +55,7 @@ class ContatoController extends Controller
 
     public function editCon($id)
     {
+        /* Select dos contatos para editar*/
         $edit = contato::join('instancias', 'contatos.cdInstancia', '=', 'instancias.cdInstancia')
             ->where('cdContato', '=', $id)
             ->get(['nmContato', 'contatos.cdInstancia', 'dsEmail', 'nmInstancia', 'contatos.stAtivo', 'tpContatoRepresentante', 'dsEmailAlternativo', 'contatos.cdContato']);
@@ -62,6 +65,7 @@ class ContatoController extends Controller
 
     public function updateCon(Request $request, $id)
     {
+        /* Update dos contatos  */
         $cd = $request->input('cdInstancia');
         $con = $request->input('tpContatoRepresentante');
         $name = $request->input('nmContato');
@@ -77,6 +81,7 @@ class ContatoController extends Controller
 
     public function search(Request $request, $id)
     {
+        /*Search dos contatos  */
         $request->validate([
             'query' => 'required',
         ]);

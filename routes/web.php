@@ -128,6 +128,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/getEmployeeDetails/{empid}', [RepresentacoesController::class, 'repreinfo'])->name('getEmployeeDetails');
         Route::get('/delaEmployeeDetails/{empid}', [RepresentacoesController::class, 'repredelinfo'])->name('delgetEmployeeDetails');
         Route::get('/delgetEmployeeDetails/{empid}', [RepresentacoesController::class, 'delinfo'])->name('delEmployeeDetails');
+        Route::get('/addgetEmployeeDetails/{empid}', [RepresentacoesController::class, 'addinfo'])->name('addEmployeeDetails');
 
 
         Route::post('/representacoes/representantes/add/{id}', [RepresentacoesController::class, 'editrepre']);
