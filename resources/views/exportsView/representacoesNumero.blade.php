@@ -1,6 +1,6 @@
 @extends('layout.main')
 
-@section('title', 'Relatório de Instancias')
+@section('title', 'Relatório de Representacao em Numeros')
 
 @section('content')
     <h2>Relatório de Representacao em Numeros</h2>

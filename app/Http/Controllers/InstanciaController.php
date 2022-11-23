@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ExpRelInstancias;
 use App\Exports\InstanciaAtivaExport;
 use App\Exports\InstanciaPorData;
 use App\Exports\InstanciaPorPrioridadeExport;
@@ -437,18 +438,24 @@ class InstanciaController extends Controller
 
     }
 
-    public function instanciasPorVigenciaView()
+    public function relInstanciasExportView()
     {
-        $instancias = Instancia::join('representacoes as r', 'r.cdInstancia', '=', 'instancias.cdInstancia')
+        $instancias = DB::table('instancias')
+            ->join('instituicoes', 'instancias.cdInstituicao', '=', 'instituicoes.cdInstituicao')
+            ->join('contatos', 'contatos.cdInstancia', '=', 'instancias.cdInstancia')
+            ->join('representacoes', 'representacoes.cdInstancia', '=', 'instancias.cdInstancia')
+            ->join('representacao_representantes', 'representacoes.cdRepresentacao', '=', 'representacao_representantes.cdRepresentacao')
+            ->join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
+            ->select(DB::raw('instituicoes.nmInstituicao, instancias.nmInstancia, contatos.nmContato, representante_suplentes.nmRepresentanteSuplente,
+            representacao_representantes.dsDesiginacao, representacao_representantes.dsNomeacao, representacoes.dtInicioVigencia,
+            representacoes.dtFimVigencia, instancias.stAtivo, instancias.dsOBjetivo'))
             ->get();
 
-        return view('exportsView/instanciasPorVigencia/instanciasPorVigencia', ['instancias' => $instancias]);
+        return view('exportsView/relPorInstancia', ['instancias' => $instancias]);
     }
 
-    public function instanciasPorStatusExportView()
+    public function expInsta()
     {
-        $instancias = Instancia::all();
-
-        return view('exportsView/instanciasPorStatus', ['instancias' => $instancias]);
+        return (new ExpRelInstancias)->download('expRelInstancias.xlsx');
     }
 }
