@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ExpRepresentacaoEmNumeros;
 use App\Exports\RepresentacaoNumerosExport;
 use Illuminate\Http\Request;
 use App\Models\Representacoe;
@@ -320,7 +321,7 @@ class RepresentacoesController extends Controller
     public function delrepre(Request $request, $id)
     {
         $idcontracts = array();
-      
+
         Representacao_representante::where('cdRepSup', $id)->where('cdRepresentacao',$request->cdRepresentacao)->delete();
         $bread = DB::table('instituicoes')->leftjoin('instancias', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
             ->leftjoin('representacoes', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')->where('representacoes.cdRepresentacao', '=', $id)->first(['nmInstituicao', 'nmInstancia', 'instancias.cdInstituicao','representacoes.cdRepresentacao']);
@@ -329,12 +330,12 @@ class RepresentacoesController extends Controller
             ->get(['representacoes.cdRepresentacao', 'dtInicioVigencia',
                 'representacoes.cdInstancia', 'nmInstancia', 'representacoes.stAtivo', 'dtInicioVigencia',
                 'dtFimVigencia', 'representacoes.dsObservacao']);
- 
+
         $representantes = Representacao_representante::join('representante_suplentes', 'representante_suplentes.cdRepSup', '=', 'representacao_representantes.cdRepSup')
             ->where('cdRepresentacao', '=', $id)
             ->get(['nmRepresentanteSuplente', 'representacao_representantes.stRepresentante', 'stTitularidade', 'representacao_representantes.cdRepSup', 'dtFimNomeacao', 'dtInicioNomeacao', 'stRepresentante']);
 
- 
+
         $incluidos = Representacao_representante::join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
             ->where('representacao_representantes.cdRepresentacao', '=', $id)->orderby('nmRepresentanteSuplente')->get(['nmRepresentanteSuplente', 'stRepresentante', 'representante_suplentes.cdRepSup']);
 
@@ -394,7 +395,7 @@ class RepresentacoesController extends Controller
         $rep = $request->input('cdRepSup');
         $cd = $request->input('stTitularidade');
         $data = $request->input('dtInicioNomeacao');
-        
+
         $obs = $request->input('dsDesiginacao');
         $nom = $request->input('dsNomeacao');
         if ($cd == 1) {
@@ -430,12 +431,12 @@ class RepresentacoesController extends Controller
                  foreach( $rep as $re){
                     $html .= '
                            <option value="'.$re->cdRepSup.'"> '.$re->nmRepresentanteSuplente.'</option>
-                           
+
                  ';}
                  $html .= '
-                 
+
                 </select>
-           
+
             </div>
 
             <div class="form-group">
@@ -484,7 +485,7 @@ class RepresentacoesController extends Controller
 
         return response()->json($response);
     }
-  
+
     public function instareprescreate($id)
     {
         $bread = DB::table('instituicoes')->leftjoin('instancias', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
@@ -522,27 +523,6 @@ class RepresentacoesController extends Controller
         return \Response::download($file);
     }
 
-
-    public function export()
-    {
-        return (new RepresentacoesExport)->download('representacoes.xlsx');
-    }
-
-    public function exportRepEmNumeros()
-    {
-        return (new RepresentacaoNumerosExport)->download('repEmNumeros.xlsx');
-    }
-
-    public function representacoesExportView()
-    {
-        $representacoes = Representante_suplente::leftjoin('representacoes', 'representante_suplentes.cdRepSup', '=', 'representacoes.cdTitular')
-            ->leftjoin('instancias', 'representacoes.cdInstancia', '=', 'instancias.cdInstancia')
-            ->get();
-
-
-        return view('exportsView/representacoes', ['representacoes' => $representacoes]);
-    }
-
     public function representacoesPorNumeroExportView()
     {
         $instancias = Instancia::join('tema_representacoes', 'tema_representacoes.cdTema', '=', 'instancias.cdTema')
@@ -573,7 +553,7 @@ class RepresentacoesController extends Controller
                        ' . method_field('DELETE') . '
                        <div class="form-group" >
 
-                  
+
                        <input style="display:none" type="text" class="form-control" id="cdRepresentacao"
                               name="cdRepresentacao" value="'.$employee->cdRepresentacao.'"
                        >
@@ -637,5 +617,43 @@ class RepresentacoesController extends Controller
 
         return response()->json($response);
 
+    }
+
+    public function export()
+    {
+        return (new RepresentacoesExport)->download('representacoes.xlsx');
+    }
+
+    public function exportRepEmNumeros()
+    {
+        return (new RepresentacaoNumerosExport)->download('repEmNumeros.xlsx');
+    }
+
+    public function representacoesExportView()
+    {
+        $representacoes = Representante_suplente::leftjoin('representacoes', 'representante_suplentes.cdRepSup', '=', 'representacoes.cdTitular')
+            ->leftjoin('instancias', 'representacoes.cdInstancia', '=', 'instancias.cdInstancia')
+            ->get();
+
+
+        return view('exportsView/representacoes', ['representacoes' => $representacoes]);
+    }
+
+    public function representacaoEmNumeroExportView()
+    {
+        $representacoes = DB::table('representacoes')
+            ->join('instancias', 'representacoes.cdInstancia', '=', 'instancias.cdInstancia')
+            ->join('tema_representacoes', 'tema_representacoes.cdTema', '=', 'instancias.cdTema')
+            ->select(DB::raw('count(instancias.cdInstancia) as inst_count,
+                count(representacoes.cdRepresentacao) as rep_count, tema_representacoes.nmTema'))
+            ->groupBy("tema_representacoes.nmTema")
+            ->get();
+
+        return view('exportsView/representacaoEmNumeros', ['representacoes' => $representacoes]);
+    }
+
+    public function expRepEmNum()
+    {
+        return (new ExpRepresentacaoEmNumeros())->download('expRepEmNum.xlsx');
     }
 }

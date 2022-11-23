@@ -46,7 +46,7 @@ class InstanciaController extends Controller
 
         $event->save();
         if ($request->has('nmAnexo')) {
-//upload dos arquivos da instancia 
+//upload dos arquivos da instancia
             for ($i = 0; $i < count($request->allFiles()['nmAnexo']); $i++) {
 
                 $file = $request->allfiles()['nmAnexo'][$i];
@@ -97,7 +97,7 @@ class InstanciaController extends Controller
 
     public function instacreate($id)
     {
-        //select dos dados para a criação da instancia 
+        //select dos dados para a criação da instancia
         $bread = DB::table('instituicoes')->leftjoin('instancias', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')->where('instituicoes.cdInstituicao', '=', $id)->first();
         $instituicaos = DB::table('instituicoes')->where('instituicoes.cdInstituicao', '=', $id)->get();
         $temas = DB::table('tema_representacoes')->get();
@@ -155,21 +155,21 @@ class InstanciaController extends Controller
     }
 
     public function deleteInsta($id)
-    {   //deleta da tabela de representantes , ligado a instancia selecionada 
+    {   //deleta da tabela de representantes , ligado a instancia selecionada
         DB::table('representacao_representantes')
             ->join('representacoes', 'representacao_representantes.cdRepresentacao', '=', 'representacoes.cdRepresentacao')
             ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
             ->where('instancias.cdInstancia', '=', $id)->delete();
-//deleta da tabela de anexos das agendas , ligado a instancia selecionada 
+//deleta da tabela de anexos das agendas , ligado a instancia selecionada
         $links = Agenda_anexo::join('agendas', 'agendas.cdAgenda', '=', 'agenda_anexos.cdAgenda')
             ->join('representacoes', 'representacoes.cdRepresentacao', '=', 'agendas.cdRepresentacao')
             ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
             ->where('instancias.cdInstancia', $id)->get();
-//deleta os arquivos da instancia 
+//deleta os arquivos da instancia
         foreach ($links as $link) {
             unlink(public_path() . "/storage/files/$link->nmAnexo");
         }
-        //deleta da tabela de agendas , ligado a instancia selecionada 
+        //deleta da tabela de agendas , ligado a instancia selecionada
         Agenda_anexo::join('agendas', 'agendas.cdAgenda', '=', 'agenda_anexos.cdAgenda')
             ->join('representacoes', 'representacoes.cdRepresentacao', '=', 'agendas.cdRepresentacao')
             ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
@@ -177,35 +177,35 @@ class InstanciaController extends Controller
         DB::table('agendas')->join('representacoes', 'representacoes.cdRepresentacao', '=', 'agendas.cdRepresentacao')
             ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
             ->where('instancias.cdInstancia', $id)->delete();
-        //deleta os anexos da tabela de representações , ligado a instancia selecionada 
+        //deleta os anexos da tabela de representações , ligado a instancia selecionada
         $anexoRepre = DB::table('representacoes_anexos')->join('representacoes', 'representacoes.cdRepresentacao', '=', 'representacoes_anexos.cdRepresentacao')
             ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
             ->where('instancias.cdInstancia', $id)->get();
         foreach ($anexoRepre as $anexo) {
             unlink(public_path() . "/storage/files/$anexo->nmAnexo");
         }
-        //deleta da tabela de representações_anexo , ligado a instancia selecionada 
+        //deleta da tabela de representações_anexo , ligado a instancia selecionada
         DB::table('representacoes_anexos')->join('representacoes', 'representacoes.cdRepresentacao', '=', 'representacoes_anexos.cdRepresentacao')
             ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
             ->where('instancias.cdInstancia', $id)->delete();
-        //deleta da tabela de representações , ligado a instancia selecionada 
+        //deleta da tabela de representações , ligado a instancia selecionada
         Representacoe::join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
             ->where('instancias.cdInstancia', $id)->delete();
-            //deleta da tabela de telefone_contatos , ligado a instancia selecionada 
+        //deleta da tabela de telefone_contatos , ligado a instancia selecionada
         DB::table('telefone_contatos')->join('contatos', 'telefone_contatos.cdContatoTelefone', '=', 'contatos.cdContato')
             ->join('instancias', 'instancias.cdInstancia', '=', 'contatos.cdInstancia')
             ->where('instancias.cdInstancia', $id)->delete();
-        //deleta da tabela de contatos , ligado a instancia selecionada 
+        //deleta da tabela de contatos , ligado a instancia selecionada
         DB::table('contatos')->join('instancias', 'instancias.cdInstancia', '=', 'contatos.cdInstancia')
             ->where('instancias.cdInstancia', $id)->delete();
-//deleta os anexos da instancia , ligado a instancia selecionada 
+//deleta os anexos da instancia , ligado a instancia selecionada
         $file = Instancia_anexo::join('instancias', 'instancias.cdInstancia', '=', 'instancia_anexos.cdInstancia')
             ->where('instancias.cdInstancia', $id)->get();
 
         foreach ($file as $files) {
             unlink(public_path() . "/storage/files/$files->nmAnexo");
         }
-        //deleta da tabela instancias , ligado a instancia selecionada 
+        //deleta da tabela instancias , ligado a instancia selecionada
         Instancia_anexo::where('nmAnexo', $id)->delete();
         Instancia::where('cdInstancia', $id)->delete();
         // $deleted = DB::delete('delete from telefone_contatos where cdTelefone = ?', [$id]);
@@ -230,7 +230,7 @@ class InstanciaController extends Controller
 
     public function search(Request $request, $id)
     {
-        //Função de search 
+        //Função de search
         $request->validate([
             'query' => 'required',
         ]);
@@ -251,7 +251,7 @@ class InstanciaController extends Controller
     }
 
     function action(request $request)
-    { 
+    {
         $data = $request->all();
 
         $query = $data['query'];
@@ -435,5 +435,20 @@ class InstanciaController extends Controller
 
         return response()->json($response);
 
+    }
+
+    public function instanciasPorVigenciaView()
+    {
+        $instancias = Instancia::join('representacoes as r', 'r.cdInstancia', '=', 'instancias.cdInstancia')
+            ->get();
+
+        return view('exportsView/instanciasPorVigencia/instanciasPorVigencia', ['instancias' => $instancias]);
+    }
+
+    public function instanciasPorStatusExportView()
+    {
+        $instancias = Instancia::all();
+
+        return view('exportsView/instanciasPorStatus', ['instancias' => $instancias]);
     }
 }
