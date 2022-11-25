@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\ExpRepresentacaoEmNumeros;
+use App\Exports\ExpRepresentantes;
 use App\Exports\RepresentacaoNumerosExport;
 use Illuminate\Http\Request;
 use App\Models\Representacoe;
@@ -655,5 +656,27 @@ class RepresentacoesController extends Controller
     public function expRepEmNum()
     {
         return (new ExpRepresentacaoEmNumeros())->download('expRepEmNum.xlsx');
+    }
+
+    public function relRepresentantesExportView()
+    {
+        $representacoes = DB::table('instancias')
+            ->join('representacoes', 'representacoes.cdInstancia', '=', 'instancias.cdInstancia')
+            ->join('representacao_representantes', 'representacao_representantes.cdRepresentacao', '=', 'representacao_representantes.cdRepresentacao')
+            ->join('representante_suplentes', 'representante_suplentes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
+            ->select(DB::raw('representante_suplentes.nmRepresentanteSuplente, instancias.nmInstancia'))
+//            ->select(DB::raw('representante_suplentes.nmRepresentanteSuplente, instancias.nmInstancia, representacao_representantes.dsDesiginacao,
+//            representacao_representantes.dsNomeacao, representacoes.dtInicioVigencia, representacoes.dtFimVigencia, instancias.stAtivo'))
+            ->distinct('instancias.nmInstancia')
+            ->where('representacao_representantes.stRepresentante', '1')
+            ->orderBy('representante_suplentes.nmRepresentanteSuplente')
+            ->get();
+
+        return view('exportsView/relRepresentantes', ['representacoes' => $representacoes]);
+    }
+
+    public function expRepresentantes()
+    {
+        return (new ExpRepresentantes)->download('expRepresentantes.xlsx');
     }
 }
