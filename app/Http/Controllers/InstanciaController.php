@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\ExpRelInstancias;
+use App\Exports\ExpRelInstituicoesInstancias;
 use App\Exports\InstanciaAtivaExport;
 use App\Exports\InstanciaPorData;
 use App\Exports\InstanciaPorPrioridadeExport;
@@ -457,5 +458,24 @@ class InstanciaController extends Controller
     public function expInsta()
     {
         return (new ExpRelInstancias)->download('expRelInstancias.xlsx');
+    }
+
+    public function relInstituicoesInstanciaExportView()
+    {
+        $instancias = DB::table('instituicoes')
+            ->join('instancias','instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
+            ->join('representacoes', 'representacoes.cdInstancia', '=', 'instancias.cdInstancia')
+            ->join('representacao_representantes', 'representacoes.cdRepresentacao', '=', 'representacao_representantes.cdRepresentacao')
+            ->join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
+            ->select(DB::raw('instituicoes.nmInstituicao, instancias.nmInstancia, representante_suplentes.nmRepresentanteSuplente, instancias.stAtivo'))
+            ->orderBy('instituicoes.nmInstituicao')
+            ->get();
+
+        return view('exportsView/relInstituicaoInstancia', ['instancias' => $instancias]);
+    }
+
+    public function expInstituicao()
+    {
+        return (new ExpRelInstituicoesInstancias())->download('expRelInstituicoesInstancias.xlsx');
     }
 }

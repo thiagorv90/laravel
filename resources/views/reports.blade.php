@@ -37,6 +37,7 @@
             <a href="{{route('expViewRepNum')}}" class="list-group-item list-group-item-action">1. -- Representação em
                 Números --</a>
             <a href="{{route('expViewRelInsta')}}" class="list-group-item list-group-item-action">2. -- Relatório por Instância --</a>
+            <a href="{{route('expViewRelInstiInsta')}}" class="list-group-item list-group-item-action">3. -- Relatório de Instituições por Instância --</a>
         </div>
     </div>
 
