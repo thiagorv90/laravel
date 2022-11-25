@@ -204,6 +204,8 @@ Route::middleware('auth')->group(function () {
         Route::get('export/expRelInstituicaoInstancias', [InstanciaController::class, 'expInstituicao'])->name('expInstituicao');
         Route::get('exportView/relTipoInstancia/', [InstanciaController::class, 'relTipoInstanciaExportView'])->name('expViewRelTipoInsta');
         Route::get('export/expRelTipoInstancias', [InstanciaController::class, 'expTipoInstancia'])->name('expTipoInstancia');
+        Route::get('exportView/relInstanciaVigencia/', [InstanciaController::class, 'relInstanciaVigenciaExportView'])->name('expViewRelInstaVig');
+        Route::get('export/expRelTipoInstancias', [InstanciaController::class, 'expTipoInstancia'])->name('expTipoInstancia');
 
         Route::get('exportView/instanciasPorVigenciaFiltrada/', [InstanciaController::class, 'relatorioFiltrado'])->name('filtradoInstanciaPorVigencia');
         Route::get('exportView/agendaFiltrada/', [AgendasController::class, 'relatorioFiltrado'])->name('filtradoAgenda');

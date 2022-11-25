@@ -497,4 +497,23 @@ class InstanciaController extends Controller
     {
         return (new ExpRelTipoInstancias)->download('expRelInstituicoesInstancias.xlsx');
     }
+
+    public function relInstanciaVigenciaExportView()
+    {
+        $instancias = DB::table('instancias')
+            ->join('instituicoes', 'instancias.cdInstituicao', '=', 'instituicoes.cdInstituicao')
+            ->join('representacoes', 'representacoes.cdInstancia', '=', 'instancias.cdInstancia')
+            ->join('representacao_representantes', 'representacoes.cdRepresentacao', '=', 'representacao_representantes.cdRepresentacao')
+            ->join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
+            ->select(DB::raw('instituicoes.nmInstituicao, instancias.nmInstancia, representante_suplentes.nmRepresentanteSuplente, representacao_representantes.dsDesiginacao,
+            representacao_representantes.dsNomeacao, representacoes.dtInicioVigencia, representacoes.dtFimVigencia, instancias.stAtivo'))
+            ->get();
+
+        return view('exportsView/relInstanciaVigencia', ['instancias' => $instancias]);
+    }
+
+    public function expInstanciaVigencia()
+    {
+        return (new ExpRelTipoInstancias)->download('expRelInstituicoesInstancias.xlsx');
+    }
 }

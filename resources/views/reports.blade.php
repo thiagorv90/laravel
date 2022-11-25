@@ -39,6 +39,8 @@
             <a href="{{route('expViewRelInsta')}}" class="list-group-item list-group-item-action">2. -- Relatório por Instância --</a>
             <a href="{{route('expViewRelInstiInsta')}}" class="list-group-item list-group-item-action">3. -- Relatório de Instituições por Instância --</a>
             <a href="{{route('expViewRelTipoInsta')}}" class="list-group-item list-group-item-action">4. -- Relatório de Tipo Instância --</a>
+            <a href="{{route('expViewRelInstaVig')}}" class="list-group-item list-group-item-action">5. -- Relatório de Instâncias por Vigência --</a>
+
         </div>
     </div>
 
