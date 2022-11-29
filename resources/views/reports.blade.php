@@ -30,6 +30,19 @@
             <a href="{{route('agendaReuniao')}}" class="list-group-item list-group-item-action">10. -- Agenda Reunioes
                 --</a>
         </div>
+
+
+        <h1>Relatórios Novos</h1>
+        <div class="list-group">
+            <a href="{{route('expViewRepNum')}}" class="list-group-item list-group-item-action">1. -- Representação em
+                Números --</a>
+            <a href="{{route('expViewRelInsta')}}" class="list-group-item list-group-item-action">2. -- Relatório por Instância --</a>
+            <a href="{{route('expViewRelInstiInsta')}}" class="list-group-item list-group-item-action">3. -- Relatório de Instituições por Instância --</a>
+            <a href="{{route('expViewRelTipoInsta')}}" class="list-group-item list-group-item-action">4. -- Relatório de Tipo Instância --</a>
+            <a href="{{route('expViewRelInstaVig')}}" class="list-group-item list-group-item-action">5. -- Relatório de Instâncias por Vigência --</a>
+            <a href="{{route('expViewRelRepresentantes')}}" class="list-group-item list-group-item-action">6. -- Relatório de Representantes --</a>
+
+        </div>
     </div>
 
 @endsection
