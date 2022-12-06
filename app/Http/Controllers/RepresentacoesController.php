@@ -662,8 +662,8 @@ class RepresentacoesController extends Controller
     {
         $representacoes = DB::table('instancias')
             ->join('representacoes', 'representacoes.cdInstancia', '=', 'instancias.cdInstancia')
-            ->join('representacao_representantes', 'representacao_representantes.cdRepresentacao', '=', 'representacao_representantes.cdRepresentacao')
-            ->join('representante_suplentes', 'representante_suplentes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
+            ->leftjoin('representacao_representantes', 'representacao_representantes.cdRepresentacao', '=', 'representacao_representantes.cdRepresentacao')
+            ->leftjoin('representante_suplentes', 'representante_suplentes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
             ->select(DB::raw('representante_suplentes.nmRepresentanteSuplente, instancias.nmInstancia, representacao_representantes.dsDesiginacao'))
 //            ->select(DB::raw('representante_suplentes.nmRepresentanteSuplente, instancias.nmInstancia, representacao_representantes.dsDesiginacao,
 //            representacao_representantes.dsNomeacao, representacoes.dtInicioVigencia, representacoes.dtFimVigencia, instancias.stAtivo'))
