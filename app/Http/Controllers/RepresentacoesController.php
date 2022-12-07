@@ -660,16 +660,21 @@ class RepresentacoesController extends Controller
 
     public function relRepresentantesExportView()
     {
+//          SELECT DISTINCT RS.nmRepresentanteSuplente AS REPRESENTANTE, I.nmInstancia AS INSTANCIA, RR.dsDesiginacao AS DESIGNACAO,
+//          RR.dsNomeacao AS NOMEACAO, R.dtInicioVigencia AS INI_VIG, R.dtFimVigencia AS FIM_VIG, I.stAtivo AS STATUS
+//          FROM INSTANCIAS I
+//          JOIN REPRESENTACOES R ON R.cdInstancia = I.cdInstancia
+//          JOIN REPRESENTACAO_REPRESENTANTES RR ON R.cdRepresentacao = RR.cdRepresentacao
+//          JOIN REPRESENTANTE_SUPLENTES RS ON RR.cdRepSup = RS.cdRepSup
+//          WHERE RR.stTitularidade = 1;
         $representacoes = DB::table('instancias')
             ->join('representacoes', 'representacoes.cdInstancia', '=', 'instancias.cdInstancia')
-            ->leftjoin('representacao_representantes', 'representacao_representantes.cdRepresentacao', '=', 'representacao_representantes.cdRepresentacao')
-            ->leftjoin('representante_suplentes', 'representante_suplentes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
-            ->select(DB::raw('representante_suplentes.nmRepresentanteSuplente, instancias.nmInstancia, representacao_representantes.dsDesiginacao'))
-//            ->select(DB::raw('representante_suplentes.nmRepresentanteSuplente, instancias.nmInstancia, representacao_representantes.dsDesiginacao,
-//            representacao_representantes.dsNomeacao, representacoes.dtInicioVigencia, representacoes.dtFimVigencia, instancias.stAtivo'))
-            ->distinct('instancias.nmInstancia')
-            ->where('representacao_representantes.stRepresentante', '1')
-            ->orderBy('representante_suplentes.nmRepresentanteSuplente')
+            ->join('representacao_representantes', 'representacoes.cdRepresentacao', '=', 'representacao_representantes.cdRepresentacao')
+            ->join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
+            ->select(DB::raw('representante_suplentes.nmRepresentanteSuplente, instancias.nmInstancia, representacao_representantes.dsDesiginacao,
+            representacao_representantes.dsNomeacao, representacoes.dtInicioVigencia, representacoes.dtFimVigencia, instancias.stAtivo'))
+            ->distinct()
+            ->where('representacao_representantes.stTitularidade', '=', 1)
             ->get();
 
         return view('exportsView/relRepresentantes', ['representacoes' => $representacoes]);

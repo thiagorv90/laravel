@@ -26,10 +26,10 @@
                 <td>{{ $representacao->nmRepresentanteSuplente }}</td>
                 <td>{{ $representacao->nmInstancia }}</td>
                 <td>@php echo $representacao->dsDesiginacao != null ?  $representacao->dsDesiginacao : "--" @endphp</td>
-{{--                <td>@php echo $representacao->dsNomeacao != null ? $representacao->dsNomeacao : "--" @endphp</td>--}}
-{{--                <td>{!! date('d/m/Y', strtotime($representacao->dtInicioVigencia ))!!}</td>--}}
-{{--                <td>{!! date('d/m/Y', strtotime($representacao->dtFimVigencia ))!!}</td>--}}
-{{--                <td>@php echo $representacao->stAtivo == 1 ? "Ativo" : "Desativo" @endphp</td>--}}
+                <td>@php echo $representacao->dsNomeacao != null ? $representacao->dsNomeacao : "--" @endphp</td>
+                <td>{!! date('d/m/Y', strtotime($representacao->dtInicioVigencia ))!!}</td>
+                <td>{!! date('d/m/Y', strtotime($representacao->dtFimVigencia ))!!}</td>
+                <td>@php echo $representacao->stAtivo == 1 ? "Ativo" : "Desativo" @endphp</td>
             </tr>
         @endforeach
         </tbody>

@@ -22,13 +22,14 @@ class ExpRepresentantes implements FromView, ShouldAutoSize, WithDrawings
     public function view(): View
     {
         return view('exports.expRepresentantes', [
-            'representacoes' => DB::table('representacoes')
-                ->join('instancias', 'representacoes.cdInstancia', '=', 'instancias.cdInstancia')
-                ->join('representacao_representantes', 'representacao_representantes.cdRepresentacao', '=', 'representacao_representantes.cdRepresentacao')
-                ->join('representante_suplentes', 'representante_suplentes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
+            'representacoes' => DB::table('instancias')
+                ->join('representacoes', 'representacoes.cdInstancia', '=', 'instancias.cdInstancia')
+                ->join('representacao_representantes', 'representacoes.cdRepresentacao', '=', 'representacao_representantes.cdRepresentacao')
+                ->join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
                 ->select(DB::raw('representante_suplentes.nmRepresentanteSuplente, instancias.nmInstancia, representacao_representantes.dsDesiginacao,
-                representacao_representantes.dsNomeacao, representacoes.dtInicioVigencia, representacoes.dtFimVigencia, instancias.stAtivo'))
-                ->distinct('instancias.nmInstancia')
+            representacao_representantes.dsNomeacao, representacoes.dtInicioVigencia, representacoes.dtFimVigencia, instancias.stAtivo'))
+                ->distinct()
+                ->where('representacao_representantes.stTitularidade', '=', 1)
                 ->get()
         ]);
     }
