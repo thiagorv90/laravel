@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ExpAniversarios;
 use App\Exports\ExpRepresentacaoEmNumeros;
 use App\Exports\ExpInstaRepresentantes;
 use App\Exports\ExpRepresentantes;
@@ -694,5 +695,20 @@ class RepresentacoesController extends Controller
     public function expRepresentantes()
     {
         return (new ExpRepresentantes)->download('expRepresentantes.xlsx');
+    }
+
+    public function relAniversarioRepresentante()
+    {
+        $representantes = DB::table('representante_suplentes')
+            ->select(DB::raw('representante_suplentes.nmRepresentanteSuplente, representante_suplentes.dtNascimento'))
+            ->orderBy('representante_suplentes.nmRepresentanteSuplente')
+            ->get();
+
+        return view('exportsView/relAniversarios', ['representantes' => $representantes]);
+    }
+
+    public function expAniversarios()
+    {
+        return (new ExpAniversarios)->download('expAniversarios.xlsx');
     }
 }

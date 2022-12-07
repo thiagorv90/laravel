@@ -42,7 +42,7 @@
             <a href="{{route('expViewRelInstaVig')}}" class="list-group-item list-group-item-action">5. -- Relatório de Instâncias por Vigência --</a>
             <a href="{{route('expViewRelInstaRepresentantes')}}" class="list-group-item list-group-item-action">6. -- Relatório de Instâncias por Representantes --</a>
             <a href="{{route('expViewRelRepresentantes')}}" class="list-group-item list-group-item-action">7. -- Relatório de Representantes --</a>
-
+            <a href="{{route('expViewRelAniversarios')}}" class="list-group-item list-group-item-action">8. -- Relatório de Aniversariantes --</a>
         </div>
     </div>
 
