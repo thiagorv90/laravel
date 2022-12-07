@@ -212,6 +212,8 @@ Route::middleware('auth')->group(function () {
         Route::get('export/expRepresentantes', [RepresentacoesController::class, 'expRepresentantes'])->name('expRepresentantes');
         Route::get('exportView/relAniversarios/', [RepresentacoesController::class, 'relAniversarioRepresentante'])->name('expViewRelAniversarios');
         Route::get('export/expAniversarios', [RepresentacoesController::class, 'expAniversarios'])->name('expAniversarios');
+        Route::get('exportView/relReunioesMensais/', [InstanciaController::class, 'relReunioesMensais'])->name('expViewRelReunioesMensais');
+        Route::get('export/expReunioesMensais', [InstanciaController::class, 'expReunioesMensais'])->name('expReunioesMensais');
 
         Route::get('exportView/instanciasPorVigenciaFiltrada/', [InstanciaController::class, 'relatorioFiltrado'])->name('filtradoInstanciaPorVigencia');
         Route::get('exportView/agendaFiltrada/', [AgendasController::class, 'relatorioFiltrado'])->name('filtradoAgenda');
