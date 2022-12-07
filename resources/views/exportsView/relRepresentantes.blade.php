@@ -1,9 +1,10 @@
 @extends('layout.main')
 
-@section('title', 'Relatório de Representantes')
+@section('title', 'Relatório de Instâncias por Representantes')
 
 @section('content')
-    <h2>Relatório de Representantes</h2>
+    {{ dd($repre) }}
+    <h2>Relatório de Instâncias por Representantes</h2>
     <a href="{{route('expRepresentantes')}}" class="btn btn-primary"
        data-bs-toggle="tooltip" data-bs-title="Download">
         <ion-icon name="arrow-down-outline"></ion-icon>

@@ -10,24 +10,22 @@
     <thead>
     <tr>
         <th scope="col"><strong>Representante</strong></th>
-        <th scope="col"><strong>Instância</strong></th>
-        <th scope="col"><strong>Designação</strong></th>
-        <th scope="col"><strong>Nomeação</strong></th>
-        <th scope="col"><strong>Início</strong></th>
-        <th scope="col"><strong>Fim</strong></th>
-        <th scope="col"><strong>Status</strong></th>
+        <th scope="col"><strong>Data De Nascimento</strong></th>
+        <th scope="col"><strong>Escolaridade</strong></th>
+        <th scope="col"><strong>Endereço</strong></th>
+        <th scope="col"><strong>Telefone</strong></th>
+        <th scope="col"><strong>E-mail</strong></th>
     </tr>
     </thead>
     <tbody>
-    @foreach($representacoes as $representacao)
+    @foreach($representantes as $representante)
         <tr>
-            <td>{{ $representacao->nmRepresentanteSuplente }}</td>
-            <td>{{ $representacao->nmInstancia }}</td>
-            <td>@php echo $representacao->dsDesiginacao != null ?  $representacao->dsDesiginacao : "--" @endphp</td>
-            <td>@php echo $representacao->dsNomeacao != null ? $representacao->dsNomeacao : "--" @endphp</td>
-            <td>{!! date('d/m/Y', strtotime($representacao->dtInicioVigencia ))!!}</td>
-            <td>{!! date('d/m/Y', strtotime($representacao->dtFimVigencia ))!!}</td>
-            <td>@php echo $representacao->stAtivo == 1 ? "Ativo" : "Desativo" @endphp</td>
+            <td>{{ $representante->nmRepresentanteSuplente }}</td>
+            <td>{!! date('d/m/Y', strtotime($representante->dtNascimento ))!!}</td>
+            <td>{{ $representante->dsEscolaridade }}</td>
+            <td>{{ $representante->dsEndereco }}</td>
+            <td>({{ $representante->nuDDDTelefone }}) {{ $representante->nuTelefone }}</td>
+            <td>{{ $representante->dsEmail }}</td>
         </tr>
     @endforeach
     </tbody>

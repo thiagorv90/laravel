@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\ExpRepresentacaoEmNumeros;
+use App\Exports\ExpInstaRepresentantes;
 use App\Exports\ExpRepresentantes;
 use App\Exports\RepresentacaoNumerosExport;
 use Illuminate\Http\Request;
@@ -658,15 +659,8 @@ class RepresentacoesController extends Controller
         return (new ExpRepresentacaoEmNumeros())->download('expRepEmNum.xlsx');
     }
 
-    public function relRepresentantesExportView()
+    public function relInstaRepresentantesExportView()
     {
-//          SELECT DISTINCT RS.nmRepresentanteSuplente AS REPRESENTANTE, I.nmInstancia AS INSTANCIA, RR.dsDesiginacao AS DESIGNACAO,
-//          RR.dsNomeacao AS NOMEACAO, R.dtInicioVigencia AS INI_VIG, R.dtFimVigencia AS FIM_VIG, I.stAtivo AS STATUS
-//          FROM INSTANCIAS I
-//          JOIN REPRESENTACOES R ON R.cdInstancia = I.cdInstancia
-//          JOIN REPRESENTACAO_REPRESENTANTES RR ON R.cdRepresentacao = RR.cdRepresentacao
-//          JOIN REPRESENTANTE_SUPLENTES RS ON RR.cdRepSup = RS.cdRepSup
-//          WHERE RR.stTitularidade = 1;
         $representacoes = DB::table('instancias')
             ->join('representacoes', 'representacoes.cdInstancia', '=', 'instancias.cdInstancia')
             ->join('representacao_representantes', 'representacoes.cdRepresentacao', '=', 'representacao_representantes.cdRepresentacao')
@@ -678,6 +672,23 @@ class RepresentacoesController extends Controller
             ->get();
 
         return view('exportsView/relRepresentantes', ['representacoes' => $representacoes]);
+    }
+
+    public function expInstaRepresentantes()
+    {
+        return (new ExpInstaRepresentantes)->download('expInstaRepresentantes.xlsx');
+    }
+
+    public function relRepresentanteExportView()
+    {
+        $representantes = DB::table('representante_suplentes')
+            ->join('telefone_representante_suplentes', 'telefone_representante_suplentes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
+            ->join('escolaridades', 'escolaridades.cdEscolaridade', '=', 'representante_suplentes.cdEscolaridade')
+            ->select(DB::raw('representante_suplentes.nmRepresentanteSuplente, representante_suplentes.dtNascimento , escolaridades.dsEscolaridade,
+            representante_suplentes.dsEndereco,  telefone_representante_suplentes.nuDDDTelefone, telefone_representante_suplentes.nuTelefone, representante_suplentes.dsEmail'))
+            ->get();
+
+        return view( 'exportsView/relRepresentante', ['representantes' => $representantes]);
     }
 
     public function expRepresentantes()
