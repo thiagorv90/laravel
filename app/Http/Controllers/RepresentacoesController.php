@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ExpAniversarios;
 use App\Exports\ExpRepresentacaoEmNumeros;
+use App\Exports\ExpInstaRepresentantes;
 use App\Exports\ExpRepresentantes;
 use App\Exports\RepresentacaoNumerosExport;
 use Illuminate\Http\Request;
@@ -658,25 +660,55 @@ class RepresentacoesController extends Controller
         return (new ExpRepresentacaoEmNumeros())->download('expRepEmNum.xlsx');
     }
 
-    public function relRepresentantesExportView()
+    public function relInstaRepresentantesExportView()
     {
         $representacoes = DB::table('instancias')
             ->join('representacoes', 'representacoes.cdInstancia', '=', 'instancias.cdInstancia')
-            ->leftjoin('representacao_representantes', 'representacao_representantes.cdRepresentacao', '=', 'representacao_representantes.cdRepresentacao')
-            ->leftjoin('representante_suplentes', 'representante_suplentes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
-            ->select(DB::raw('representante_suplentes.nmRepresentanteSuplente, instancias.nmInstancia, representacao_representantes.dsDesiginacao'))
-//            ->select(DB::raw('representante_suplentes.nmRepresentanteSuplente, instancias.nmInstancia, representacao_representantes.dsDesiginacao,
-//            representacao_representantes.dsNomeacao, representacoes.dtInicioVigencia, representacoes.dtFimVigencia, instancias.stAtivo'))
-            ->distinct('instancias.nmInstancia')
-            ->where('representacao_representantes.stRepresentante', '1')
-            ->orderBy('representante_suplentes.nmRepresentanteSuplente')
+            ->join('representacao_representantes', 'representacoes.cdRepresentacao', '=', 'representacao_representantes.cdRepresentacao')
+            ->join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
+            ->select(DB::raw('representante_suplentes.nmRepresentanteSuplente, instancias.nmInstancia, representacao_representantes.dsDesiginacao,
+            representacao_representantes.dsNomeacao, representacoes.dtInicioVigencia, representacoes.dtFimVigencia, instancias.stAtivo'))
+            ->distinct()
+            ->where('representacao_representantes.stTitularidade', '=', 1)
             ->get();
 
         return view('exportsView/relRepresentantes', ['representacoes' => $representacoes]);
     }
 
+    public function expInstaRepresentantes()
+    {
+        return (new ExpInstaRepresentantes)->download('expInstaRepresentantes.xlsx');
+    }
+
+    public function relRepresentanteExportView()
+    {
+        $representantes = DB::table('representante_suplentes')
+            ->join('telefone_representante_suplentes', 'telefone_representante_suplentes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
+            ->join('escolaridades', 'escolaridades.cdEscolaridade', '=', 'representante_suplentes.cdEscolaridade')
+            ->select(DB::raw('representante_suplentes.nmRepresentanteSuplente, representante_suplentes.dtNascimento , escolaridades.dsEscolaridade,
+            representante_suplentes.dsEndereco,  telefone_representante_suplentes.nuDDDTelefone, telefone_representante_suplentes.nuTelefone, representante_suplentes.dsEmail'))
+            ->get();
+
+        return view( 'exportsView/relRepresentante', ['representantes' => $representantes]);
+    }
+
     public function expRepresentantes()
     {
         return (new ExpRepresentantes)->download('expRepresentantes.xlsx');
+    }
+
+    public function relAniversarioRepresentante()
+    {
+        $representantes = DB::table('representante_suplentes')
+            ->select(DB::raw('representante_suplentes.nmRepresentanteSuplente, representante_suplentes.dtNascimento'))
+            ->orderBy('representante_suplentes.nmRepresentanteSuplente')
+            ->get();
+
+        return view('exportsView/relAniversarios', ['representantes' => $representantes]);
+    }
+
+    public function expAniversarios()
+    {
+        return (new ExpAniversarios)->download('expAniversarios.xlsx');
     }
 }

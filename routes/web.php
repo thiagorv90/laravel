@@ -206,8 +206,14 @@ Route::middleware('auth')->group(function () {
         Route::get('export/expRelTipoInstancias', [InstanciaController::class, 'expTipoInstancia'])->name('expTipoInstancia');
         Route::get('exportView/relInstanciaVigencia/', [InstanciaController::class, 'relInstanciaVigenciaExportView'])->name('expViewRelInstaVig');
         Route::get('export/expRelTipoInstancias', [InstanciaController::class, 'expTipoInstancia'])->name('expTipoInstancia');
-        Route::get('exportView/relRepresentantes/', [RepresentacoesController::class, 'relRepresentantesExportView'])->name('expViewRelRepresentantes');
+        Route::get('exportView/relRepresentantes/', [RepresentacoesController::class, 'relInstaRepresentantesExportView'])->name('expViewRelInstaRepresentantes');
+        Route::get('export/expInstaRepresentantes', [RepresentacoesController::class, 'expInstaRepresentantes'])->name('expInstaRepresentantes');
+        Route::get('exportView/relInstaRepresentantes/', [RepresentacoesController::class, 'relRepresentanteExportView'])->name('expViewRelRepresentantes');
         Route::get('export/expRepresentantes', [RepresentacoesController::class, 'expRepresentantes'])->name('expRepresentantes');
+        Route::get('exportView/relAniversarios/', [RepresentacoesController::class, 'relAniversarioRepresentante'])->name('expViewRelAniversarios');
+        Route::get('export/expAniversarios', [RepresentacoesController::class, 'expAniversarios'])->name('expAniversarios');
+        Route::get('exportView/relReunioesMensais/', [InstanciaController::class, 'relReunioesMensais'])->name('expViewRelReunioesMensais');
+        Route::get('export/expReunioesMensais', [InstanciaController::class, 'expReunioesMensais'])->name('expReunioesMensais');
 
         Route::get('exportView/instanciasPorVigenciaFiltrada/', [InstanciaController::class, 'relatorioFiltrado'])->name('filtradoInstanciaPorVigencia');
         Route::get('exportView/agendaFiltrada/', [AgendasController::class, 'relatorioFiltrado'])->name('filtradoAgenda');

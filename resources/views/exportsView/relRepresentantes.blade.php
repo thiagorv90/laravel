@@ -1,9 +1,10 @@
 @extends('layout.main')
 
-@section('title', 'Relatório de Representantes')
+@section('title', 'Relatório de Instâncias por Representantes')
 
 @section('content')
-    <h2>Relatório de Representantes</h2>
+    {{ dd($repre) }}
+    <h2>Relatório de Instâncias por Representantes</h2>
     <a href="{{route('expRepresentantes')}}" class="btn btn-primary"
        data-bs-toggle="tooltip" data-bs-title="Download">
         <ion-icon name="arrow-down-outline"></ion-icon>
@@ -26,10 +27,10 @@
                 <td>{{ $representacao->nmRepresentanteSuplente }}</td>
                 <td>{{ $representacao->nmInstancia }}</td>
                 <td>@php echo $representacao->dsDesiginacao != null ?  $representacao->dsDesiginacao : "--" @endphp</td>
-{{--                <td>@php echo $representacao->dsNomeacao != null ? $representacao->dsNomeacao : "--" @endphp</td>--}}
-{{--                <td>{!! date('d/m/Y', strtotime($representacao->dtInicioVigencia ))!!}</td>--}}
-{{--                <td>{!! date('d/m/Y', strtotime($representacao->dtFimVigencia ))!!}</td>--}}
-{{--                <td>@php echo $representacao->stAtivo == 1 ? "Ativo" : "Desativo" @endphp</td>--}}
+                <td>@php echo $representacao->dsNomeacao != null ? $representacao->dsNomeacao : "--" @endphp</td>
+                <td>{!! date('d/m/Y', strtotime($representacao->dtInicioVigencia ))!!}</td>
+                <td>{!! date('d/m/Y', strtotime($representacao->dtFimVigencia ))!!}</td>
+                <td>@php echo $representacao->stAtivo == 1 ? "Ativo" : "Desativo" @endphp</td>
             </tr>
         @endforeach
         </tbody>

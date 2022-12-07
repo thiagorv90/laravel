@@ -11,7 +11,7 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 
-class ExpRepresentantes implements FromView, ShouldAutoSize, WithDrawings
+class ExpAniversarios implements FromView, ShouldAutoSize, WithDrawings
 {
     use Exportable;
 
@@ -22,11 +22,8 @@ class ExpRepresentantes implements FromView, ShouldAutoSize, WithDrawings
     public function view(): View
     {
         return view('exports.expRepresentantes', [
-            'representantes' => DB::table('representante_suplentes')
-                ->join('telefone_representante_suplentes', 'telefone_representante_suplentes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
-                ->join('escolaridades', 'escolaridades.cdEscolaridade', '=', 'representante_suplentes.cdEscolaridade')
-                ->select(DB::raw('representante_suplentes.nmRepresentanteSuplente, representante_suplentes.dtNascimento , escolaridades.dsEscolaridade,
-            representante_suplentes.dsEndereco,  telefone_representante_suplentes.nuDDDTelefone, telefone_representante_suplentes.nuTelefone, representante_suplentes.dsEmail'))
+            'representantes' =>DB::table('representante_suplentes')
+                ->select(DB::raw('representante_suplentes.nmRepresentanteSuplente, representante_suplentes.dtNascimento'))
                 ->get()
         ]);
     }
