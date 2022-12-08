@@ -20,7 +20,7 @@ use App\Exports\AgendaFiltradaExport;
 
 class AgendasController extends Controller
 {
-/*Salvar arquivos na agenda  */
+    /*Salvar arquivos na agenda  */
     public function agendastore(Request $request, $id)
     {
         $event = new Agenda;
@@ -60,7 +60,7 @@ class AgendasController extends Controller
             }
 
         }
-/*Envia e-mail quando cria uma agenda */
+        /*Envia e-mail quando cria uma agenda */
         /*$mail = Agenda::join('representacoes', 'representacoes.cdRepresentacao', '=', 'agendas.cdRepresentacao')
         ->join('representante_suplentes', 'representacoes.cdTitular', '=', 'representante_suplentes.cdRepSup')
         ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
@@ -76,7 +76,7 @@ class AgendasController extends Controller
     public function agendafile(Request $request, $id)
     {
 
-  /* Importa documentos para o sistema e grava o nome original e ficticio no banco*/
+        /* Importa documentos para o sistema e grava o nome original e ficticio no banco*/
         for ($i = 0; $i < count($request->allFiles()['nmAnexo']); $i++) {
 
 
@@ -102,7 +102,7 @@ class AgendasController extends Controller
     public function dashboard()
     {
 
-/* Select das agendas do mês e da semana */
+        /* Select das agendas do mês e da semana */
         $selecionado = Agenda::join('representacoes', 'representacoes.cdRepresentacao', '=', 'agendas.cdRepresentacao')
             ->join('representacao_representantes', 'representacoes.cdRepresentacao', '=', 'representacao_representantes.cdRepresentacao')
             ->join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')

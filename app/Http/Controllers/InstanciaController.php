@@ -107,7 +107,6 @@ class InstanciaController extends Controller
         $temas = DB::table('tema_representacoes')->get();
         $insta = Instancia::join('tema_representacoes', 'instancias.cdTema', '=', 'tema_representacoes.cdTema')
             ->join('instituicoes', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
-            
             ->where('instancias.cdInstituicao', '=', $id)->get(['instancias.cdInstancia', 'nmInstancia', 'nmTema',
                 'instancias.cdInstituicao', 'instancias.stAtivo']);
 
@@ -465,7 +464,7 @@ class InstanciaController extends Controller
     public function relInstituicoesInstanciaExportView()
     {
         $instancias = DB::table('instituicoes')
-            ->join('instancias','instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
+            ->join('instancias', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
             ->join('representacoes', 'representacoes.cdInstancia', '=', 'instancias.cdInstancia')
             ->join('representacao_representantes', 'representacoes.cdRepresentacao', '=', 'representacao_representantes.cdRepresentacao')
             ->join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')

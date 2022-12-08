@@ -9,7 +9,8 @@ use DB;
 class EscolaridadeController extends Controller
 {
     public function escolaridadeindex()
-    {// lista de escolaridades
+    {
+        // lista de escolaridades
         $events = Escolaridade::all();
         //$events = DB::table('contatos')->gets();
 
@@ -18,7 +19,7 @@ class EscolaridadeController extends Controller
 
     public function escolaridadestore(Request $request)
     {
-        //para salvar uma escolaridade 
+        //para salvar uma escolaridade
         $events = new Escolaridade;
         $events->dsEscolaridade = $request->dsEscolaridade;
         $events->save();
@@ -37,7 +38,7 @@ class EscolaridadeController extends Controller
 
     public function editEsc($id)
     {
-        //select das escolaridades para 
+        //select das escolaridades para
         $events = escolaridade::find($id);
         //$events = DB::table('contatos')->gets();
 

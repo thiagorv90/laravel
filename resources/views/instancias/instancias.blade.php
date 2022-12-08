@@ -505,41 +505,41 @@
             </div>
         </div>
     </div>
-        <!--Script do Modal delete-->
-        <script type='text/javascript'>
+    <!--Script do Modal delete-->
+    <script type='text/javascript'>
 
-            $(document).ready(function () {
+        $(document).ready(function () {
 
-                $('#empTable').on('click', '.deldetails', function () {
-                    $('#empModaldel').modal('show');
+            $('#empTable').on('click', '.deldetails', function () {
+                $('#empModaldel').modal('show');
 
-                    var empid = $(this).attr('data-id');
+                var empid = $(this).attr('data-id');
 
-                    if (empid > 0) {
+                if (empid > 0) {
 
-                        // AJAX request
-                        var url = "{{ route('delinstacia',[':empid']) }}";
-                        url = url.replace(':empid', empid);
+                    // AJAX request
+                    var url = "{{ route('delinstacia',[':empid']) }}";
+                    url = url.replace(':empid', empid);
 
-                        // Empty modal data
-                        $('#tblempinfodel').empty();
+                    // Empty modal data
+                    $('#tblempinfodel').empty();
 
-                        $.ajax({
-                            url: url,
-                            dataType: 'json',
-                            success: function (response) {
+                    $.ajax({
+                        url: url,
+                        dataType: 'json',
+                        success: function (response) {
 
-                                // Add employee details
-                                $('#tblempinfodel').html(response.html);
+                            // Add employee details
+                            $('#tblempinfodel').html(response.html);
 
-                                // Display Modal
-                                $('#empModaldel').modal('show');
+                            // Display Modal
+                            $('#empModaldel').modal('show');
 
-                            }
-                        });
-                    }
-                });
-
+                        }
+                    });
+                }
             });
-        </script>
+
+        });
+    </script>
 @endsection

@@ -21,7 +21,6 @@
         <h1 class="mt-1">Empresas</h1>
     </div>
 
-
     <div class="container">
         <table class="table">
             <thead>

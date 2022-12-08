@@ -152,11 +152,12 @@
                             </div>
                             <div class="form-group">
                                 <label for="title">Pauta:</label>
-                                <input type="textarea" class="form-control" id="dsPauta" rows="10" name="dsPauta" required >
+                                <input type="textarea" class="form-control" id="dsPauta" rows="10" name="dsPauta"
+                                       required>
                             </div>
                             <div class="form-group">
                                 <label for="title">Resumo:</label>
-                                <input type="textarea" class="form-control" id="dsResumo"  rows="10" name="dsResumo" >
+                                <input type="textarea" class="form-control" id="dsResumo" rows="10" name="dsResumo">
                             </div>
                             <div class="form-group">
                                 <label for="title">Documentos:</label>
