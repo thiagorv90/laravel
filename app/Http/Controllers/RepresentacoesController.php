@@ -126,7 +126,7 @@ class RepresentacoesController extends Controller
 
         $incluidos = Representacao_representante::join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
             ->join('representacoes', 'representacao_representantes.cdRepresentacao', '=', 'representacoes.cdRepresentacao')
-            ->where('representacao_representantes.cdRepresentacao', '=', $event->cdRepresentacao)->get(['nmRepresentanteSuplente', 'stRepresentante', 'representante_suplentes.cdRepSup', 'stTitularidade', 'representacoes.cdInstancia']);
+            ->where('representacao_representantes.cdRepresentacao', '=', $event->cdRepresentacao)->get(['nmRepresentanteSuplente', 'stRepresentante', 'representante_suplentes.cdRepSup', 'stTitularidade', 'representacoes.cdInstancia','cdRepRep']);
 
         $cdRepSUp = Representacao_representante::join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
             ->where('representacao_representantes.cdRepresentacao', '=', $event->cdRepresentacao)->get(['representante_suplentes.cdRepSup']);
@@ -158,7 +158,7 @@ class RepresentacoesController extends Controller
 
         $incluidos = Representacao_representante::join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
             ->join('representacoes', 'representacao_representantes.cdRepresentacao', '=', 'representacoes.cdRepresentacao')
-            ->where('representacao_representantes.cdRepresentacao', '=', $event->cdRepresentacao)->get(['nmRepresentanteSuplente', 'stRepresentante', 'representante_suplentes.cdRepSup', 'stTitularidade', 'representacoes.cdInstancia']);
+            ->where('representacao_representantes.cdRepresentacao', '=', $event->cdRepresentacao)->get(['nmRepresentanteSuplente', 'stRepresentante', 'representante_suplentes.cdRepSup', 'stTitularidade', 'representacoes.cdInstancia','cdRepRep']);
 
         $cdRepSUp = Representacao_representante::join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
             ->where('representacao_representantes.cdRepresentacao', '=', $event->cdRepresentacao)->get(['representante_suplentes.cdRepSup']);
@@ -242,7 +242,7 @@ class RepresentacoesController extends Controller
 
         $representantes = Representacao_representante::join('representante_suplentes', 'representante_suplentes.cdRepSup', '=', 'representacao_representantes.cdRepSup')
             ->where('cdRepresentacao', '=', $id)->orderby('nmRepresentanteSuplente')
-            ->get(['nmRepresentanteSuplente', 'representacao_representantes.stRepresentante', 'stTitularidade', 'representacao_representantes.cdRepSup', 'dtFimNomeacao', 'dtInicioNomeacao', 'stRepresentante','cdRepresentacao']);
+            ->get(['nmRepresentanteSuplente', 'representacao_representantes.stRepresentante', 'stTitularidade', 'representacao_representantes.cdRepSup', 'dtFimNomeacao', 'dtInicioNomeacao', 'stRepresentante','cdRepresentacao','cdRepRep']);
 
         $cdRepSUp = Representacao_representante::join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
             ->where('representacao_representantes.cdRepresentacao', '=', $id)->get(['representante_suplentes.cdRepSup']);
@@ -289,10 +289,10 @@ class RepresentacoesController extends Controller
 
         $representantes = Representacao_representante::join('representante_suplentes', 'representante_suplentes.cdRepSup', '=', 'representacao_representantes.cdRepSup')
             ->where('cdRepresentacao', '=', $id)->orderby('nmRepresentanteSuplente')
-            ->get(['nmRepresentanteSuplente', 'representacao_representantes.stRepresentante', 'stTitularidade', 'representacao_representantes.cdRepSup', 'dtFimNomeacao', 'dtInicioNomeacao', 'stRepresentante','cdRepresentacao']);
+            ->get(['nmRepresentanteSuplente', 'representacao_representantes.stRepresentante', 'stTitularidade', 'representacao_representantes.cdRepSup', 'dtFimNomeacao', 'dtInicioNomeacao', 'stRepresentante','cdRepresentacao','cdRepRep']);
 
         $incluidos = Representacao_representante::join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
-            ->where('representacao_representantes.cdRepresentacao', '=', $id)->get(['nmRepresentanteSuplente', 'stRepresentante', 'representante_suplentes.cdRepSup']);
+            ->where('representacao_representantes.cdRepresentacao', '=', $id)->get(['nmRepresentanteSuplente', 'stRepresentante', 'representante_suplentes.cdRepSup','cdRepRep']);
 
         $cdRepSUp = Representacao_representante::join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
             ->where('representacao_representantes.cdRepresentacao', '=', $id)->get(['representante_suplentes.cdRepSup']);
@@ -319,9 +319,10 @@ class RepresentacoesController extends Controller
 
     public function delrepre(Request $request, $id)
     {
+        $repre = Representacao_representante::where('cdRepRep', '=', $id)->first('cdRepSup');
         $idcontracts = array();
       
-        Representacao_representante::where('cdRepSup', $id)->where('cdRepresentacao',$request->cdRepresentacao)->delete();
+        Representacao_representante::where('cdRepRep', $id)->where('cdRepresentacao',$request->cdRepresentacao)->delete();
         $bread = DB::table('instituicoes')->leftjoin('instancias', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
             ->leftjoin('representacoes', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')->where('representacoes.cdRepresentacao', '=', $id)->first(['nmInstituicao', 'nmInstancia', 'instancias.cdInstituicao','representacoes.cdRepresentacao']);
         $edit = Representacoe::join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
@@ -331,12 +332,12 @@ class RepresentacoesController extends Controller
                 'dtFimVigencia', 'representacoes.dsObservacao']);
  
         $representantes = Representacao_representante::join('representante_suplentes', 'representante_suplentes.cdRepSup', '=', 'representacao_representantes.cdRepSup')
-            ->where('cdRepresentacao', '=', $id)
-            ->get(['nmRepresentanteSuplente', 'representacao_representantes.stRepresentante', 'stTitularidade', 'representacao_representantes.cdRepSup', 'dtFimNomeacao', 'dtInicioNomeacao', 'stRepresentante']);
+            ->where('cdRepresentacao', '=', $repre->cdRepSup)
+            ->get(['nmRepresentanteSuplente', 'representacao_representantes.stRepresentante', 'stTitularidade', 'representacao_representantes.cdRepSup', 'dtFimNomeacao', 'dtInicioNomeacao', 'stRepresentante','cdRepRep']);
 
  
         $incluidos = Representacao_representante::join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
-            ->where('representacao_representantes.cdRepresentacao', '=', $id)->orderby('nmRepresentanteSuplente')->get(['nmRepresentanteSuplente', 'stRepresentante', 'representante_suplentes.cdRepSup']);
+            ->where('representacao_representantes.cdRepresentacao', '=', $id)->orderby('nmRepresentanteSuplente')->get(['nmRepresentanteSuplente', 'stRepresentante', 'representante_suplentes.cdRepSup','cdRepRep']);
 
         $cdRepSUp = Representacao_representante::join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
             ->where('representacao_representantes.cdRepresentacao', '=', $id)->get(['representante_suplentes.cdRepSup']);
@@ -392,21 +393,19 @@ class RepresentacoesController extends Controller
     public function editrepre(Request $request, $id)
     {
         $rep = $request->input('cdRepSup');
+        $new=$request->input('cdRepRep');
         $cd = $request->input('stTitularidade');
         $data = $request->input('dtInicioNomeacao');
-        
+        $titu =$request->input('stRepresentante');
         $obs = $request->input('dsDesiginacao');
         $nom = $request->input('dsNomeacao');
-        if ($cd == 1) {
-            $fim = NULL;
-        }
-        if ($cd == 0) {
-            $fim = Carbon::now();
-        }
+      
+            $fim =$request->input('dtFimNomeacao');
+        
 
 
-        DB::update('update representacao_representantes set cdRepSup=?, stTitularidade = ?, dtInicioNomeacao = ?,dsDesiginacao = ?, dsNomeacao =? ,dtFimNomeacao= ? where cdRepSup = ?',
-         [$rep,$cd, $data, $obs, $nom, $fim, $id]);
+        DB::update('update representacao_representantes set cdRepSup=?, stTitularidade = ?, dtInicioNomeacao = ?,dsDesiginacao = ?, dsNomeacao =? ,dtFimNomeacao= ?, stRepresentante = ? where cdRepRep = ?',
+         [$rep,$cd, $data, $obs, $nom, $fim,$titu, $id]);
 
 
         return back();
@@ -416,11 +415,13 @@ class RepresentacoesController extends Controller
     {
 
         $representantes = Representacao_representante::join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
+        
             ->find($empid);
-        $rep = DB::table('representante_suplentes')->where('cdRepSup','<>',$representantes->cdRepSup)->get(['cdRepSup','nmRepresentanteSuplente']);
+        $rep = DB::table('representante_suplentes')->where('cdRepSup','<>',$representantes->cdRepSup)->orderby('nmRepresentanteSuplente')->get(['cdRepSup','nmRepresentanteSuplente']);
+        
         $html = "";
         if (!empty($representantes)) {
-            $html = '<form action="/representacoes/representantes/add/'.$representantes->cdRepSup.'" method="post">
+            $html = '<form action="/representacoes/representantes/add/'.$representantes->cdRepRep.'" method="post">
            ' . csrf_field() . '
 
            <div class="mb-3">
@@ -437,11 +438,39 @@ class RepresentacoesController extends Controller
                 </select>
            
             </div>
-
+            <label for="title">Titularidade:</label>
+            <div class="form-check">
+            
+            <input class="form-check-input" type="radio" name="stRepresentante" id="stRepresentante" value="1"
+                ';
+    if ($representantes->stRepresentante == 1) {
+        $html .= ' checked ';
+    }
+    $html .= ' >
+            <label class="form-check-label" for="stRepresentante">
+                Titular
+            </label>
+    </div>
+    <div class="form-check">
+    <input class="form-check-input" type="radio" name="stRepresentante" id="stRepresentante" value="0"
+    ';
+if ($representantes->stRepresentante == 0) {
+$html .= ' checked ';
+}
+$html .= '  >
+    <label class="form-check-label" for="stRepresentante">
+        Suplente
+    </label>
+</div>
             <div class="form-group">
-            <label for="title">Data de Nomeação:</label>
+            <label for="title">Início da Representação:</label>
             <input type="date" class="form-control" id="dtInicioNomeacao" name="dtInicioNomeacao" value='.$representantes->dtInicioNomeacao.'>
     </div>
+    <div class="form-group">
+            <label for="title">Fim da Representação:</label>
+            <input type="date" class="form-control" id="dtFimNomeacao" name="dtFimNomeacao" value='.$representantes->dtFimNomeacao.'>
+    </div>
+
 
             <br>
             <div class="form-check">
@@ -464,7 +493,7 @@ class RepresentacoesController extends Controller
             }
             $html .= '  >
                     <label class="form-check-label" for="stTitularidade">
-                        Desativado
+                        Inativo
                     </label>
             </div>
             <div class="form-group">
@@ -555,10 +584,8 @@ class RepresentacoesController extends Controller
     {
 
 
-        $employee = Representacao_representante::join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')->get(['cdRepresentacao','nmRepresentanteSuplente','representante_suplentes.cdRepSup'])
-            ->find($empid);
-
-
+        $employee = Representacao_representante::join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')->find($empid);
+            
         $html = "";
 
         if (!empty($employee)) {
@@ -568,7 +595,7 @@ class RepresentacoesController extends Controller
                        A exclusão é permanente. Deseja prosseguir? ' . $employee->nmRepresentanteSuplente . '
                    </div>
                    <div class="modal-footer">
-                       <form action="/representacoes/edit/' . $employee->cdRepSup . '" method="POST">
+                       <form action="/representacoes/edit/' . $employee->cdRepRep . '" method="POST">
                        ' . csrf_field() . '
                        ' . method_field('DELETE') . '
                        <div class="form-group" >

@@ -103,7 +103,7 @@ class InstanciaController extends Controller
         $temas = DB::table('tema_representacoes')->get();
         $insta = Instancia::join('tema_representacoes', 'instancias.cdTema', '=', 'tema_representacoes.cdTema')
             ->join('instituicoes', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
-            ->leftjoin('representacoes', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
+            
             ->where('instancias.cdInstituicao', '=', $id)->get(['instancias.cdInstancia', 'nmInstancia', 'nmTema',
                 'instancias.cdInstituicao', 'instancias.stAtivo']);
 

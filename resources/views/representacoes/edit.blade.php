@@ -57,8 +57,8 @@ $teste = App\Models\Representante_suplente::get()
                 <tr>
                     <th scope="col">Nome:</th>
                     <th scope="col">Tiluridade</th>
-                    <th scope="col">Inicio Nomeação</th>
-                    <th scope="col">Fim Nomeação</th>
+                    <th scope="col">Inicio Representação</th>
+                    <th scope="col">Fim da Representação</th>
                     <th scope="col">Ativo</th>
                     <th scope="col">Opções</th>
                 </tr>
@@ -94,15 +94,16 @@ $teste = App\Models\Representante_suplente::get()
 
                         @endif
                         <td>
+                           
                             <!-- Botão que chama a modal -->
-                            <button class="btn btn-info edit-btn viewdetails" data-id='{{ $incluido->cdRepSup }}'
+                            <button class="btn btn-info edit-btn viewdetails" data-id='{{ $incluido->cdRepRep}}'
                                     data-bs-toggle="tooltip" data-bs-title="Editar">
                                 <ion-icon name="create-outline"></ion-icon>
                             </button>
 
 
                             <button class="btn btn-danger delete-btn ml-2 deldetails"
-                                    data-id='{{ $incluido->cdRepSup }}'
+                                    data-id='{{ $incluido->cdRepRep }}'
                                     data-bs-toggle="tooltip" data-bs-title="Deletar">
                                 <ion-icon name="trash-outline"></ion-icon>
                             </button>
@@ -175,7 +176,7 @@ $teste = App\Models\Representante_suplente::get()
                             <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="0" 
                                    @if($age->stAtivo ==0) checked @endif >
                             <label class="form-check-label" for="stAtivo">
-                                Desativado
+                                Inativo
                             </label>
                         </div>
                     </div>
@@ -318,7 +319,7 @@ $teste = App\Models\Representante_suplente::get()
                     </label>
                 </div>
             <div class="form-group">
-                    <label for="title">Data de Nomeação:</label>
+                    <label for="title">Inicio Representação:</label>
                     <input type="date" class="form-control" id="dtInicioNomeacao" name="dtInicioNomeacao" >
             </div>
             <br>
