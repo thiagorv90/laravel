@@ -84,7 +84,7 @@
                                 <input class="form-check-input" type="radio" name="stAtivo" id="stAtivo" value="0"
                                 >
                                 <label class="form-check-label" for="stAtivo">
-                                    Desativado
+                                    Inativo
                                 </label>
                             </div>
                         </div>
@@ -92,10 +92,7 @@
                             <label for="title">Data de Nomeação:</label>
                             <input type="date" class="form-control" id="dtNomeacao" name="dtNomeacao">
                         </div>
-                        <div class="form-group">
-                            <label for="title">Número Nomeação:</label>
-                            <input type="number" class="form-control" id="nuNomeacao" name="nuNomeacao">
-                        </div>
+                       
                         <div class="form-group">
                             <label for="title">Obsvervação:</label>
                             <textarea placeholder="Observação..." name="dsObservacao" rows="10"
@@ -128,8 +125,8 @@
                             <thead>
                             <tr>
                                
-                                <th scope="col">Incio Vigencia</th>
-                                <th scope="col">Fim Vigencia</th>
+                                <th scope="col">Incio Representação</th>
+                                <th scope="col">Fim Representção</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Opções</th>
 
@@ -149,7 +146,7 @@
                                     @if($event->stAtivo ==1)
                                         <td>Ativo</td>
                                     @else
-                                        <td>Desativado</td>
+                                        <td>Inativo</td>
                                     @endif
 
                                     <td>
@@ -228,7 +225,7 @@
                                            value="0"
                                     >
                                     <label class="form-check-label" for="stAtivo">
-                                        Desativado
+                                        Inativo
                                     </label>
                                 </div>
 
