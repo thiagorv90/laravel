@@ -1,26 +1,28 @@
 @extends('layout.main')
 
-@section('title', 'Relatório de Representacao em Numeros')
+@section('title', 'Relatório de Representacoes Em Número')
 
 @section('content')
+
     <h2>Relatório de Representacao em Numeros</h2>
-    <a href="{{route('repEmNumeros')}}" class="btn btn-primary"
+    <a href="{{route('expRepNum')}}" class="btn btn-primary"
        data-bs-toggle="tooltip" data-bs-title="Download">
         <ion-icon name="arrow-down-outline"></ion-icon>
     </a>
     <table class="table">
         <thead>
         <tr>
-            <th scope="col"><strong>Tema</strong></th>
+            <th scope="col"><strong>Temas</strong></th>
             <th scope="col"><strong>totInstancias</strong></th>
-            <th scope="col">{{ $instancias->count() }}</th>
+            <th scope="col"><strong>totRepresentacoes</strong></th>
         </tr>
         </thead>
         <tbody>
-        @foreach($instancias as $instancia)
+        @foreach($representacoes as $representacao)
             <tr>
-                <td>{{ $instancia->nmTema }}</td>
-                <td>{{ $instancia->nmInstancia }}</td>
+                <td>{{ $representacao->nmTema }}</td>
+                <td>{{ $representacao->inst_count }}</td>
+                <td>{{ $representacao->rep_count }}</td>
             </tr>
         @endforeach
         </tbody>

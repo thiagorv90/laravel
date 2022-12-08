@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ExpAniversarios;
+use App\Exports\ExpRepresentacaoEmNumeros;
+use App\Exports\ExpInstaRepresentantes;
+use App\Exports\ExpRepresentantes;
 use App\Exports\RepresentacaoNumerosExport;
 use Illuminate\Http\Request;
 use App\Models\Representacoe;
@@ -321,8 +325,9 @@ class RepresentacoesController extends Controller
     {
         $repre = Representacao_representante::where('cdRepRep', '=', $id)->first('cdRepSup');
         $idcontracts = array();
-      
+        
         Representacao_representante::where('cdRepRep', $id)->where('cdRepresentacao',$request->cdRepresentacao)->delete();
+
         $bread = DB::table('instituicoes')->leftjoin('instancias', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
             ->leftjoin('representacoes', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')->where('representacoes.cdRepresentacao', '=', $id)->first(['nmInstituicao', 'nmInstancia', 'instancias.cdInstituicao','representacoes.cdRepresentacao']);
         $edit = Representacoe::join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
@@ -330,12 +335,12 @@ class RepresentacoesController extends Controller
             ->get(['representacoes.cdRepresentacao', 'dtInicioVigencia',
                 'representacoes.cdInstancia', 'nmInstancia', 'representacoes.stAtivo', 'dtInicioVigencia',
                 'dtFimVigencia', 'representacoes.dsObservacao']);
- 
+
         $representantes = Representacao_representante::join('representante_suplentes', 'representante_suplentes.cdRepSup', '=', 'representacao_representantes.cdRepSup')
             ->where('cdRepresentacao', '=', $repre->cdRepSup)
             ->get(['nmRepresentanteSuplente', 'representacao_representantes.stRepresentante', 'stTitularidade', 'representacao_representantes.cdRepSup', 'dtFimNomeacao', 'dtInicioNomeacao', 'stRepresentante','cdRepRep']);
 
- 
+
         $incluidos = Representacao_representante::join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
             ->where('representacao_representantes.cdRepresentacao', '=', $id)->orderby('nmRepresentanteSuplente')->get(['nmRepresentanteSuplente', 'stRepresentante', 'representante_suplentes.cdRepSup','cdRepRep']);
 
@@ -396,7 +401,9 @@ class RepresentacoesController extends Controller
         $new=$request->input('cdRepRep');
         $cd = $request->input('stTitularidade');
         $data = $request->input('dtInicioNomeacao');
+
         $titu =$request->input('stRepresentante');
+
         $obs = $request->input('dsDesiginacao');
         $nom = $request->input('dsNomeacao');
       
@@ -431,12 +438,12 @@ class RepresentacoesController extends Controller
                  foreach( $rep as $re){
                     $html .= '
                            <option value="'.$re->cdRepSup.'"> '.$re->nmRepresentanteSuplente.'</option>
-                           
+
                  ';}
                  $html .= '
-                 
+
                 </select>
-           
+
             </div>
             <label for="title">Titularidade:</label>
             <div class="form-check">
@@ -513,7 +520,7 @@ $html .= '  >
 
         return response()->json($response);
     }
-  
+
     public function instareprescreate($id)
     {
         $bread = DB::table('instituicoes')->leftjoin('instancias', 'instituicoes.cdInstituicao', '=', 'instancias.cdInstituicao')
@@ -551,27 +558,6 @@ $html .= '  >
         return \Response::download($file);
     }
 
-
-    public function export()
-    {
-        return (new RepresentacoesExport)->download('representacoes.xlsx');
-    }
-
-    public function exportRepEmNumeros()
-    {
-        return (new RepresentacaoNumerosExport)->download('repEmNumeros.xlsx');
-    }
-
-    public function representacoesExportView()
-    {
-        $representacoes = Representante_suplente::leftjoin('representacoes', 'representante_suplentes.cdRepSup', '=', 'representacoes.cdTitular')
-            ->leftjoin('instancias', 'representacoes.cdInstancia', '=', 'instancias.cdInstancia')
-            ->get();
-
-
-        return view('exportsView/representacoes', ['representacoes' => $representacoes]);
-    }
-
     public function representacoesPorNumeroExportView()
     {
         $instancias = Instancia::join('tema_representacoes', 'tema_representacoes.cdTema', '=', 'instancias.cdTema')
@@ -600,7 +586,7 @@ $html .= '  >
                        ' . method_field('DELETE') . '
                        <div class="form-group" >
 
-                  
+
                        <input style="display:none" type="text" class="form-control" id="cdRepresentacao"
                               name="cdRepresentacao" value="'.$employee->cdRepresentacao.'"
                        >
@@ -664,5 +650,95 @@ $html .= '  >
 
         return response()->json($response);
 
+    }
+
+    public function export()
+    {
+        return (new RepresentacoesExport)->download('representacoes.xlsx');
+    }
+
+    public function exportRepEmNumeros()
+    {
+        return (new RepresentacaoNumerosExport)->download('repEmNumeros.xlsx');
+    }
+
+    public function representacoesExportView()
+    {
+        $representacoes = Representante_suplente::leftjoin('representacoes', 'representante_suplentes.cdRepSup', '=', 'representacoes.cdTitular')
+            ->leftjoin('instancias', 'representacoes.cdInstancia', '=', 'instancias.cdInstancia')
+            ->get();
+
+
+        return view('exportsView/representacoes', ['representacoes' => $representacoes]);
+    }
+
+    public function representacaoEmNumeroExportView()
+    {
+        $representacoes = DB::table('representacoes')
+            ->join('instancias', 'representacoes.cdInstancia', '=', 'instancias.cdInstancia')
+            ->join('tema_representacoes', 'tema_representacoes.cdTema', '=', 'instancias.cdTema')
+            ->select(DB::raw('count(instancias.cdInstancia) as inst_count,
+                count(representacoes.cdRepresentacao) as rep_count, tema_representacoes.nmTema'))
+            ->groupBy("tema_representacoes.nmTema")
+            ->get();
+
+        return view('exportsView/representacaoEmNumeros', ['representacoes' => $representacoes]);
+    }
+
+    public function expRepEmNum()
+    {
+        return (new ExpRepresentacaoEmNumeros())->download('expRepEmNum.xlsx');
+    }
+
+    public function relInstaRepresentantesExportView()
+    {
+        $representacoes = DB::table('instancias')
+            ->join('representacoes', 'representacoes.cdInstancia', '=', 'instancias.cdInstancia')
+            ->join('representacao_representantes', 'representacoes.cdRepresentacao', '=', 'representacao_representantes.cdRepresentacao')
+            ->join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
+            ->select(DB::raw('representante_suplentes.nmRepresentanteSuplente, instancias.nmInstancia, representacao_representantes.dsDesiginacao,
+            representacao_representantes.dsNomeacao, representacoes.dtInicioVigencia, representacoes.dtFimVigencia, instancias.stAtivo'))
+            ->distinct()
+            ->where('representacao_representantes.stTitularidade', '=', 1)
+            ->get();
+
+        return view('exportsView/relRepresentantes', ['representacoes' => $representacoes]);
+    }
+
+    public function expInstaRepresentantes()
+    {
+        return (new ExpInstaRepresentantes)->download('expInstaRepresentantes.xlsx');
+    }
+
+    public function relRepresentanteExportView()
+    {
+        $representantes = DB::table('representante_suplentes')
+            ->join('telefone_representante_suplentes', 'telefone_representante_suplentes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
+            ->join('escolaridades', 'escolaridades.cdEscolaridade', '=', 'representante_suplentes.cdEscolaridade')
+            ->select(DB::raw('representante_suplentes.nmRepresentanteSuplente, representante_suplentes.dtNascimento , escolaridades.dsEscolaridade,
+            representante_suplentes.dsEndereco,  telefone_representante_suplentes.nuDDDTelefone, telefone_representante_suplentes.nuTelefone, representante_suplentes.dsEmail'))
+            ->get();
+
+        return view( 'exportsView/relRepresentante', ['representantes' => $representantes]);
+    }
+
+    public function expRepresentantes()
+    {
+        return (new ExpRepresentantes)->download('expRepresentantes.xlsx');
+    }
+
+    public function relAniversarioRepresentante()
+    {
+        $representantes = DB::table('representante_suplentes')
+            ->select(DB::raw('representante_suplentes.nmRepresentanteSuplente, representante_suplentes.dtNascimento'))
+            ->orderBy('representante_suplentes.nmRepresentanteSuplente')
+            ->get();
+
+        return view('exportsView/relAniversarios', ['representantes' => $representantes]);
+    }
+
+    public function expAniversarios()
+    {
+        return (new ExpAniversarios)->download('expAniversarios.xlsx');
     }
 }

@@ -196,6 +196,25 @@ Route::middleware('auth')->group(function () {
         Route::get('exportView/representantes/', [RepresentacoesController::class, 'representacoesExportView'])->name('exportViewRepresentacoes');
         Route::get('exportView/representacoesEmNumero/', [RepresentacoesController::class, 'representacoesPorNumeroExportView'])->name('exportViewRepresentacoesNum');
 
+        Route::get('exportView/representacaoEmNumeros/', [RepresentacoesController::class, 'representacaoEmNumeroExportView'])->name('expViewRepNum');
+        Route::get('export/expRepresentacaoEmNumeros', [RepresentacoesController::class, 'expRepEmNum'])->name("expRepNum");
+        Route::get('exportView/relPorInstancia/', [InstanciaController::class, 'relInstanciasExportView'])->name('expViewRelInsta');
+        Route::get('export/expRelInstancias', [InstanciaController::class, 'expInsta'])->name('expInsta');
+        Route::get('exportView/relInstituicaoInstancia/', [InstanciaController::class, 'relInstituicoesInstanciaExportView'])->name('expViewRelInstiInsta');
+        Route::get('export/expRelInstituicaoInstancias', [InstanciaController::class, 'expInstituicao'])->name('expInstituicao');
+        Route::get('exportView/relTipoInstancia/', [InstanciaController::class, 'relTipoInstanciaExportView'])->name('expViewRelTipoInsta');
+        Route::get('export/expRelTipoInstancias', [InstanciaController::class, 'expTipoInstancia'])->name('expTipoInstancia');
+        Route::get('exportView/relInstanciaVigencia/', [InstanciaController::class, 'relInstanciaVigenciaExportView'])->name('expViewRelInstaVig');
+        Route::get('export/expRelTipoInstancias', [InstanciaController::class, 'expTipoInstancia'])->name('expTipoInstancia');
+        Route::get('exportView/relRepresentantes/', [RepresentacoesController::class, 'relInstaRepresentantesExportView'])->name('expViewRelInstaRepresentantes');
+        Route::get('export/expInstaRepresentantes', [RepresentacoesController::class, 'expInstaRepresentantes'])->name('expInstaRepresentantes');
+        Route::get('exportView/relInstaRepresentantes/', [RepresentacoesController::class, 'relRepresentanteExportView'])->name('expViewRelRepresentantes');
+        Route::get('export/expRepresentantes', [RepresentacoesController::class, 'expRepresentantes'])->name('expRepresentantes');
+        Route::get('exportView/relAniversarios/', [RepresentacoesController::class, 'relAniversarioRepresentante'])->name('expViewRelAniversarios');
+        Route::get('export/expAniversarios', [RepresentacoesController::class, 'expAniversarios'])->name('expAniversarios');
+        Route::get('exportView/relReunioesMensais/', [InstanciaController::class, 'relReunioesMensais'])->name('expViewRelReunioesMensais');
+        Route::get('export/expReunioesMensais', [InstanciaController::class, 'expReunioesMensais'])->name('expReunioesMensais');
+
         Route::get('exportView/instanciasPorVigenciaFiltrada/', [InstanciaController::class, 'relatorioFiltrado'])->name('filtradoInstanciaPorVigencia');
         Route::get('exportView/agendaFiltrada/', [AgendasController::class, 'relatorioFiltrado'])->name('filtradoAgenda');
 
