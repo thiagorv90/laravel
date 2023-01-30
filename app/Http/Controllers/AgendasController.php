@@ -72,8 +72,13 @@ class AgendasController extends Controller
         // mail::send( new \App\Mail\AgendaMail($mail));
         return back();
     }
+    public function deleteagen($id){
+        DB::table('agendas')->where('cdAgenda', $id)->delete();
+        return back();
 
-    public function agendafile(Request $request, $id)
+    }
+
+    public function agendafile(Request $request, $id)titulo pagina joomla 3.11
     {
 
         /* Importa documentos para o sistema e grava o nome original e ficticio no banco*/
@@ -108,7 +113,7 @@ class AgendasController extends Controller
             ->join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
             ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')->whereBetween('dtAgenda',
                 [Carbon::now('America/Sao_Paulo')->startOfWeek(), Carbon::now('America/Sao_Paulo')->endOfWeek()]
-            )
+            )->where('representacoes.stAtivo','=',1)
             ->get();
 
         $mes = Agenda::join('representacoes', 'representacoes.cdRepresentacao', '=', 'agendas.cdRepresentacao')
@@ -116,7 +121,7 @@ class AgendasController extends Controller
             ->join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
             ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')->whereBetween('dtAgenda',
                 [Carbon::now('America/Sao_Paulo')->startOfMonth(), Carbon::now('America/Sao_Paulo')->endOfMonth()]
-            )
+            )->where('representacoes.stAtivo','=',1)
             ->get(['nmRepresentanteSuplente', 'nmInstancia', 'dtAgenda', 'hrAgenda', 'dsAssunto', 'cdAgenda', 'agendas.cdRepresentacao']);
 
 
@@ -155,7 +160,7 @@ class AgendasController extends Controller
             ->join('representacao_representantes', 'representacao_representantes.cdRepresentacao', '=', 'representacoes.cdRepresentacao')
             ->join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
             ->leftjoin('agendas', 'agendas.cdRepresentacao', '=', 'representacoes.cdRepresentacao')->where('agendas.cdAgenda', '=', $id)
-            ->first(['nmInstituicao', 'nmInstancia', 'instancias.cdInstituicao', 'nmRepresentanteSuplente']);
+            ->first(['nmInstituicao', 'nmInstancia', 'instancias.cdInstituicao', 'nmRepresentanteSuplente','instancias.cdInstancia']);
         //$events=Instituicoe::find($id);
         $edit = agenda::join('representacoes', 'representacoes.cdRepresentacao', '=', 'agendas.cdRepresentacao')
             ->join('instancias', 'instancias.cdInstancia', '=', 'representacoes.cdInstancia')
@@ -164,7 +169,8 @@ class AgendasController extends Controller
         // $insta = Instituicoe::join('tipo_instancias', 'tipo_instancias.cdTipoInstancia', '=','instituicoes.cdTipoInstituicao')->get();
         $repre = agenda::join('representacoes', 'representacoes.cdRepresentacao', '=', 'agendas.cdRepresentacao')
             ->join('representacao_representantes', 'representacoes.cdRepresentacao', '=', 'representacao_representantes.cdRepresentacao')
-            ->join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')
+            ->join('representante_suplentes', 'representacao_representantes.cdRepSup', '=', 'representante_suplentes.cdRepSup')->where('representacoes.stAtivo','=',1)
+            ->where('representacao_representantes.stTitularidade','=',1)->where('agendas.cdAgenda', '=', $id)
             ->get();
         $insta = Representacoe::orderBy('cdRepresentacao')
             ->get();
@@ -236,7 +242,7 @@ class AgendasController extends Controller
 
     public function search(Request $request, $id)
     {
-        /* Search de uma agenda atraves de duas opções */
+        /* Search de uma agenda atraves de duas opções   */
         $request->validate([
             'query' => 'required', 'busca' => 'required',
         ]);
